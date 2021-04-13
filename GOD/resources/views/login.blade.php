@@ -24,6 +24,7 @@
         min-height: 100vh;
         background-color: #fff;/* es gay*/
         background-color: #000;
+        /*sss*/
       }
 
       .navbar
