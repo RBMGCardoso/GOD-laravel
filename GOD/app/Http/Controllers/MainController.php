@@ -10,4 +10,9 @@ class MainController extends Controller
  {
      return view('login');
  }
+
+ public function OcorrenciaPage()
+ {
+     return view('ocorrencia');
+ }
 }

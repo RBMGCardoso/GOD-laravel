@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/login', [MainController::Class, 'LoginPage']);
+
+Route::get('/ocorrencia', [MainController::Class, 'OcorrenciaPage']);
