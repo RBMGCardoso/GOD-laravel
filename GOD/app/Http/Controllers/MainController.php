@@ -8,6 +8,6 @@ class MainController extends Controller
 {
  public function LoginPage()
  {
-     return view('login');
+     return view('dashboard');
  }
 }
