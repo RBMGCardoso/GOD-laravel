@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.82.0">
-    <title>Sidebars · Bootstrap v5.0</title>
+    <title>Dashboard</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
@@ -24,6 +24,26 @@
         min-height: 100vh;
       }
 
+      #btn
+      {
+        position: relative;
+        z-index: 0;
+        color: #000;
+      }
+
+      .profile
+      {
+        position: relative;
+        height: 100vh;
+        width: 250px;
+      }
+
+      .dropup
+      {
+        position: absolute;
+        bottom:0px;
+      }
+
       .navbar
       {
         width:250px;
@@ -33,17 +53,26 @@
         transition: 0.4s;
       }
 
-      .nav-link
+      .nav-item
+      {
+        border-bottom: 1px solid #555;
+      }
+
+       .nav-link
       {
         font-size: 1.25em;
+        width:250px;
+        height: 48px;
+        position: relative;
       }
 
       .nav-link:active,
       .nav-link:focus,
       .nav-link:hover
       {
-        background-color: rgba(121, 255, 255, 1);
-        -webkit-text-fill-color: black;
+        background-color: rgb(121,253,255);
+        -webkit-text-fill-color: #333;
+        font-weight: 500;
       }
 
       .bd-placeholder-img {
@@ -63,9 +92,9 @@
       #menu-btn
       {
         transition: 0.4s;    
+        fill: #222;
       }
-
-      
+   
       .active-nav
       {
         margin-left:0;
@@ -75,7 +104,8 @@
       {
         margin-left: 250px;
       }
-      
+
+
       #menu-btn:hover
       {
         fill: rgba(121, 255, 255, 1);
@@ -118,21 +148,43 @@
   </head>
   <body>
       <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
-        <a href="#" class="navbar-brand text-light">
-          <div class="display-5 font-weight-bold">
-            <div class="row">
-              <div class="col">
-              GOD
-              </div>
-            </div>       
+          <a href="#" class="navbar-brand text-light">
+            <div class="display-5 font-weight-bold">
+              <div class="row">
+                <div class="col">
+                GOD
+                </div>
+              </div>       
+            </div>
+          </a>
+          <hr style="width:100%;text-align:left;margin-left:0;margin-bottom:0;color:#fff">
+          <ul class="nav-pills navbar-nav d-flex flex-column w-100">
+            <li class="nav-item w-100">
+              <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Início</a>
+            </li>
+            <li class="nav-item w-100">
+              <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Criar Ocorrência</a>
+            </li>
+            <li class="nav-item w-100">
+              <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Pesquisar</a>
+            </li>
+          </ul>
+
+        <div class="profile">
+          <div class="dropup ms-3">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
+              <strong>mdo</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+              <li><a class="dropdown-item" href="#">New project...</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
           </div>
-        </a>
-        <hr style="width:100%;text-align:left;margin-left:0;margin-bottom:0;color:#fff">
-        <ul class="navbar-nav d-flex flex-column w-100">
-          <li class="nav-item w-100">
-            <a href="#" class="nav-link text-light ps-3">Criar Ocorrência</a>
-          </li>
-        </ul>
+        </div>
       </nav>
 
     <button class="btn text-dark shadow-none" id="menu-btn" style="position:relative;left:250px;width:50px;height:50px" onclick="closeSidebar()">
@@ -146,57 +198,7 @@
     </svg>
     </button>
 
-    <!--
-      <div class="d-flex flex-column p-3 text-white bg-dark h-100 vh-100" style="width: 280px;">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-          <span class="fs-4">G.O.D</span>
-        </a>
 
-        <button type="button" class="navbar-toggler border-0" data-toggle="collapse" data-target="#nav">a</button>
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
-          <li class="nav-item nav-item-dark">
-            <a href="#" class="nav-link text-white hoverChanger" style="font-weight:bold">
-              • Home
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link text-white hoverChanger">
-              Dashboard
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link text-white hoverChanger">
-              Orders
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link text-white hoverChanger">
-              Products
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link text-white hoverChanger">
-              Customers
-            </a>
-          </li>
-        </ul>
-        <hr>
-        <div class="dropup">
-          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-            <strong>mdo</strong>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-          </ul>
-        </div>
-      </div>
-    -->
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
       <script src="./js/sidebars.js"></script>
