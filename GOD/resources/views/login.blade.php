@@ -22,7 +22,7 @@
       body
       {
         min-height: 100vh;
-        background-color: #ffffff;
+        background-color: #fff;/* es gay*/
       }
 
       .navbar
