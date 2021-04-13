@@ -22,8 +22,7 @@
       body
       {
         min-height: 100vh;
-        background-color: #ffffff;
-        background-color: #000;
+        /*aaa*/
       }
 
       .navbar
