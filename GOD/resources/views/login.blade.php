@@ -22,16 +22,8 @@
       body
       {
         min-height: 100vh;
-<<<<<<< HEAD
         /*aaa*/
-=======
-        background-color: #fff;/* es gay*/
-        background-color: #000;
-<<<<<<< HEAD
         /*sss*/
-=======
->>>>>>> main
->>>>>>> main
       }
 
       .navbar
