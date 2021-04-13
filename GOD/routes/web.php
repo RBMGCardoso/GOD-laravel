@@ -18,4 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', [MainController::Class, 'DashboardPage']);
+
 Route::get('/login', [MainController::Class, 'LoginPage']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

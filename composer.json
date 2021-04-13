@@ -1,2 +1,5 @@
 {
+    "require": {
+        "laravel/ui": "^3.2"
+    }
 }
