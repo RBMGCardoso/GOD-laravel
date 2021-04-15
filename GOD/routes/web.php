@@ -21,7 +21,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [MainController::Class, 'DashboardPage'])->name('dashboardPage');
 
-Route::get('/ocorrencia', [MainController::Class, 'OcorrenciaPage']);
+Route::get('/ocorrencia', [MainController::Class, 'OcorrenciaPage'])->name('ocorrenciaPage');
+
+Route::post('/criarOcorrencia', [MainController::Class, 'criarOcorrencia'])->name('ocorrencia.criar');
 
 Route::get('/registar', [MainController::Class, 'RegisterPage'])->name('registerPage');
 
