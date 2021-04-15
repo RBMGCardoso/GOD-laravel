@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\UserAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [MainController::Class, 'DashboardPage']);
+Route::get('/dashboard', [MainController::Class, 'DashboardPage'])->name('dashboardPage');
 
-Route::get('/login', [MainController::Class, 'LoginPage']);
+Route::get('/registar', [MainController::Class, 'RegisterPage'])->name('registerPage');
 
-Auth::routes();
+//Route::get('/login', [MainController::Class, 'LoginPage']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/login', [UserAuthController::Class, 'Login'])->name('login');
+
+Route::get('/logout', [UserAuthController::Class, 'logout'])->name('logout');
+
+Route::post('check', [UserAuthController::Class, 'check'])->name('auth.check');
