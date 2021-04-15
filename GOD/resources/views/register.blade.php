@@ -1,25 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.82.0">
-    <title>Dashboard</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
-    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registar</title>
     
-
     <!-- Bootstrap core CSS -->
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-
-    <style>
     
+    <style>
       body
       {
         min-height: 100vh;
@@ -120,7 +113,7 @@
       }
       </style>
 
-      <script>
+    <script>
         function closeSidebar()
         {
           var sidebar = document.getElementById("sidebar");
@@ -143,57 +136,62 @@
             button.style.transform = "translateX(-250px) rotate(180Deg)";
           }
         }
-      </script>
-    
-  </head>
-  <body>
-      <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
-          <a href="#" class="navbar-brand text-light">
-            <div class="display-5 font-weight-bold">
-              <div class="row">
-                <div class="col">
-                GOD
+    </script>
+
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
+            <a href="#" class="navbar-brand text-light">
+                <div class="display-5 font-weight-bold">
+                <div class="row">
+                    <div class="col">
+                    GOD
+                    </div>
+                </div>       
                 </div>
-              </div>       
-            </div>
-          </a>
-          <hr style="width:100%;text-align:left;margin-left:0;margin-bottom:0;color:#fff">
-          <ul class="nav-pills navbar-nav d-flex flex-column w-100">
-            <li class="nav-item w-100">
-              <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Início</a>
-            </li>
-
-            <li class="nav-item w-100">
-              <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Criar Ocorrência</a>
-            </li>
-
-            <li class="nav-item w-100">
-              <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Pesquisar</a>
-            </li>
-
-            <li class="nav-item w-100">
-              <a href="{{ route('registerPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Registar</a>
-            </li>
-          </ul>
-
-        <div class="profile">
-          <div class="dropup ms-3">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-              <strong>{{ session('LoggedUser')->name }}</strong>
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-              <li><a class="dropdown-item" href="#">New project...</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+            <hr style="width:100%;text-align:left;margin-left:0;margin-bottom:0;color:#fff">
+            <ul class="nav-pills navbar-nav d-flex flex-column w-100">
+                <li class="nav-item w-100">
+                <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Início</a>
+                </li>
 
-    <button class="btn text-dark shadow-none" id="menu-btn" style="position:relative;left:250px;width:50px;height:50px" onclick="closeSidebar()">
+                <li class="nav-item w-100">
+                <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Criar Ocorrência</a>
+                </li>
+
+                <li class="nav-item w-100">
+                <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Pesquisar</a>
+                </li>
+
+                <li class="nav-item w-100">
+                <a class="nav-link rounded-0 text-light ps-3" id="btn">Registar</a>
+                </li>
+            </ul>
+
+            <div class="profile">
+            <div class="dropup ms-3">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
+                <strong>{{ session('LoggedUser')->name }}</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                <li><a class="dropdown-item" href="#">New project...</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
+                </ul>
+            </div>
+            </div>
+        </nav>
+    </div>
+
+      <div>
+      </div>
+
+      <button class="btn text-dark shadow-none" id="menu-btn" style="position:relative;left:250px;width:50px;height:50px" onclick="closeSidebar()">
     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	    width="30px" height="30px" viewBox="0 0 451.846 451.847" style="enable-background:new 0 0 451.846 451.847;">
       <g>
@@ -204,9 +202,6 @@
     </svg>
     </button>
 
-
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
-      <script src="./js/sidebars.js"></script>
-  </body>
+    
+</body>
 </html>
