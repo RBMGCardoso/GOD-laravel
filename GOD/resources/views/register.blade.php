@@ -111,6 +111,15 @@
         transition-delay: 0.2s;
         transition: 0.2s;
       }
+
+      #boxtext{
+        width: 20vw;
+    height: 20px;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+      }
       </style>
 
     <script>
@@ -202,6 +211,21 @@
     </svg>
     </button>
 
-    
+    <div class="container d-flex justify-content-center" id="registo">
+      <form>
+        <input type="text" name="name"  id="boxtext" placeholder="Nome"><br>
+        <input type="text" name="email" id="boxtext" placeholder="Email"><br>
+        <input type="password" name="password" id="boxtext" placeholder="Password">
+        <br/>
+        <br/>
+        <div class="info">
+            <p>Cargo do Utilizador:</p>
+            <input type="radio" id="Opc1" name="cargoUser"><label for="Opc1">Diretor</label>
+            <input type="radio" id="Opc2" name="cargoUser"><label for="Opc2">Professor</label>
+            <input type="radio" id="Opc3" name="cargoUser"><label for="Opc3">Secretaria</label>
+            <input type="radio" id="Opc4" name="cargoUser"><label for="Opc4">Diretor de Turma</label>
+          </div>
+      </form>
+    </div>
 </body>
 </html>
