@@ -149,8 +149,7 @@
 
 </head>
 <body>
-    <div>
-        <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
+    <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
             <a href="#" class="navbar-brand text-light">
                 <div class="display-5 font-weight-bold">
                 <div class="row">
@@ -195,10 +194,6 @@
             </div>
             </div>
         </nav>
-    </div>
-
-      <div>
-      </div>
 
       <button class="btn text-dark shadow-none" id="menu-btn" style="position:relative;left:250px;width:50px;height:50px" onclick="closeSidebar()">
     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

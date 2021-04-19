@@ -120,7 +120,7 @@
       }
       </style>
 
-      <script>
+    <script>
         function closeSidebar()
         {
           var sidebar = document.getElementById("sidebar");
@@ -143,7 +143,7 @@
             button.style.transform = "translateX(-250px) rotate(180Deg)";
           }
         }
-      </script>
+    </script>
     
   </head>
   <body>
@@ -164,7 +164,7 @@
             </li>
 
             <li class="nav-item w-100">
-              <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Criar Ocorrência</a>
+              <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Criar Ocorrência</a>
             </li>
 
             <li class="nav-item w-100">
