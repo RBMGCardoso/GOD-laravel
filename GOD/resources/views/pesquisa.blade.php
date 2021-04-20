@@ -281,6 +281,7 @@
     </script>
     <body>
 
+
     <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
           <a href="#" class="navbar-brand text-light">
             <div class="display-5 font-weight-bold">
@@ -294,7 +295,7 @@
           <hr style="width:100%;text-align:left;margin-left:0;margin-bottom:0;color:#fff">
           <ul class="nav-pills navbar-nav d-flex flex-column w-100">
             <li class="nav-item w-100">
-              <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Início</a>
+              <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Início</a>
             </li>
 
             <li class="nav-item w-100">
@@ -343,180 +344,9 @@
     </button>
 
     <div id="content" class="content" style="position:absolute; left:250px" align="center">
-        <h1>Registo de Ocorrência / Participação Disciplinar</h1>
-        <form method="POST" action="{{ route('ocorrencia.criar') }}">
-          <div class="info">
-            <input type="text" id="fname" name="nome" placeholder="Nome do Aluno">
-            <input type="text" id="num" name="numero" placeholder="Nmr aluno">
-            <input type="text" id="anoturma" name="numero" placeholder="Ano e Turma">
-            <br>
-            <input type="text" id="disciplina" name="disciplina" placeholder="Disciplina">
-            <input type="datetime-local" name="data" id="data" placeholder="Data da Ocorrência">
-          </div>
-          <br/>
-          <br/>
-          <div class="opc_in">
-            <table>
-            <tr>
-              <td>
-                <input type="checkbox" id="Opc1" class="checkmark">
-                <label for="Opc1">Desobedeceu a uma ordem</label>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <input type="checkbox" id="Opc2" class="checkmark">
-                <label for="Opc2">Recusou participar nas atividades da aula</label>
-              </td>
-            </tr>
-
-            <tr>             
-              <td>
-                <input type="checkbox" id="Opc3" class="checkmark">
-                <label for="Opc3">Fez gestos impróprios ao professor</label>
-              </td>
-            </tr>
-
-            <tr>        
-              <td>
-                <input type="checkbox" id="Opc4" class="checkmark">
-                <label for="Opc4">Fez comentários inadequados e desrespeitadores</label>
-              </td>
-            </tr>
-
-            <tr>      
-              <td>
-                <input type="checkbox" id="Opc5" class="checkmark">
-                <label for="Opc5">Perturbou a realização dos trabalhos dos seus colegas</label>
-              </td>
-            </tr>
-
-            <tr>     
-              <td>
-                <input type="checkbox" id="Opc6" class="checkmark">
-                <label for="Opc6">Continuou a conversar com colegas, mesmo depois da chamada de atenção do professor</label>
-              </td>
-            </tr>
-
-            <tr>              
-              <td>
-                <input type="checkbox" id="Opc7" class="checkmark">
-                <label for="Opc7">Pôs em causa a autoridade do professor</label>
-              </td>
-            </tr>
-            
-            <tr>              
-              <td>
-                <input type="checkbox" id="Opc8" class="checkmark">  
-                <label for="Opc8">Falou muito alto, emitiu sons e/ou provocou ruídos</label>
-              </td>
-            </tr>
-
-            <tr>              
-              <td>
-                <input type="checkbox" id="Opc9" class="checkmark">
-                <label for="Opc9">Ausentou-se do seu lugar sem autorização</label>
-              </td>
-            </tr>
-
-            <tr>              
-              <td>
-                <input type="checkbox" id="Opc10" class="checkmark">
-                <label for="Opc10">Interrompeu, de forma persistente e inadequada, a comunicação professor/alunos</label>
-              </td>
-            </tr>
-
-            <tr>             
-              <td>
-                <input type="checkbox" id="Opc11" class="checkmark">
-                <label for="Opc11">Fez gestos impróprios a colegas</label>
-              </td>
-            </tr>
-
-            <tr>            
-              <td>
-                <input type="checkbox" id="Opc12" class="checkmark">
-                <label for="Opc12">Agrediu fisicamente um colega</label>
-              </td>
-            </tr>
-
-            <tr>              
-              <td>
-                <input type="checkbox" id="Opc13" class="checkmark">
-                <label for="Opc13">Insultou colega(s)</label>
-              </td>
-            </tr>
-
-            <tr>              
-              <td>
-                <input type="checkbox" id="Opc14" class="checkmark">
-                <label for="Opc14">Tirou objeto(s) a colega(s) sem a sua autorização</label>
-              </td>
-            </tr>
-
-            <tr>             
-              <td>
-                <input type="checkbox" id="Opc15" class="checkmark">
-                <label for="Opc15">Usou, indevidamente, telemóvel ou outro aparelho eletrónico</label>
-              </td>
-            </tr>
-
-            <tr>             
-              <td>
-                <input type="checkbox" id="Opc16" class="checkmark">
-                <label for="Opc16">Danificou materiais e/ou espaços escolares</label>
-              </td>
-            </tr>
-
-            <tr>             
-              <td>
-                <input type="checkbox" id="Opc17" class="checkmark">
-                <label for="Opc17">Outros</label>
-              </td>
-            </tr>
-            </table>
-            <br/>
-            <br/>
-          </div>
-
-          <div class="textBoxes" style="width:61%">
-            <p>Descrição da Ocorrência:</p>
-            <textarea maxlength="350" oninput="CharsCounterDesc()" name="textADesc" id="textADesc" style="font-size: 20px; width:100%"></textarea>
-            <br/>
-            <span id="charsRemainDesc" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
-            <br/>
-            <br/>
-            <p>Em consequência disso, tomei a seguinte decisão:</p>
-            <textarea maxlength="350" oninput="CharsCounterDec()" name="textADec" id="textADec" style="font-size: 20px; width:100%"></textarea>
-            <br/>
-            <span id="charsRemainDec" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
-            <br/>
-          </div>
-
-          <div class="info">
-            <p>O comportamento observou-se neste aluno:</p>
-            <input type="radio" id="Opc18" name="frequenciaComport" value="Primeira Vez"><label for="Opc18">Pela 1ª vez</label>
-            <input type="radio" id="Opc19" name="frequenciaComport" value="Reincidente"><label for="Opc19">De forma reincidente (pouco frequente)</label>
-            <input type="radio" id="Opc20" name="frequenciaComport" value="Com frequência"><label for="Opc20">Com frequência</label>
-            <br/>
-            <br/>
-            <p>O aluno já demonstrou outros comportamentos incorretos?</p>
-            <input type="radio" id="Opc21" name="quantidadeComport" value="Sim"><label for="Opc21">Sim</label>
-            <input type="radio" id="Opc22" name="quantidadeComport" value="Não"><label for="Opc22">Não</label>
-            <input type="radio" id="Opc23" name="quantidadeComport" value="Poucas vezes"><label for="Opc23">Poucas vezes</label>
-            <input type="radio" id="Opc24" name="quantidadeComport" value="Com frequência"><label for="Opc24">Com frequência</label>
-          </div>
-
-          <br/>
-          <br/>
-          <br/>
-          <button class="bt_sub" value="submit">SUBMETER</button>
-          <br/>
-          <br/>
-          <br/>
-          </div>
-        </form>
-        </div>
+    @foreach($alunos as $aluno)
+    <h1>{{ $aluno->nome }}</h1>
+    @endforeach
+    </div>
     </body>
 <html>

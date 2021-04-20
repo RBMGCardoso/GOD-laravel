@@ -15,13 +15,15 @@ class CreateOcorrenciasTable extends Migration
     {
         Schema::create('ocorrencias', function (Blueprint $table) {
             $table->id();
+            $table->integer('cod_a')->unsigned();
             $table->dateTime('data');
             $table->string('descricao');
             $table->string('decisao');
             $table->string('frequencia');
             $table->string('comport_inc');
-            $table->string('cod_a');
             $table->string('cod_p');
+
+            $table->foreign('cod_a')->references('id')->on('alunos');
             $table->timestamps();
         });
     }
