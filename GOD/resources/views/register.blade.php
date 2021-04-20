@@ -182,13 +182,10 @@
 
                 <li class="nav-item w-100">
                 <a href="{{ route('registerPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Registar</a>
-<<<<<<< Updated upstream
-=======
                 </li>
 
                 <li class="nav-item w-100">
                 <a href="{{ route('registerAlunoPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Registar aluno</a>
->>>>>>> Stashed changes
                 </li>
             </ul>
 
