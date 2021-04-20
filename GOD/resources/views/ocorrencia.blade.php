@@ -287,7 +287,6 @@
     </script>
     <body>
 
-
     <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
           <a href="#" class="navbar-brand text-light">
             <div class="display-5 font-weight-bold">
@@ -301,7 +300,7 @@
           <hr style="width:100%;text-align:left;margin-left:0;margin-bottom:0;color:#fff">
           <ul class="nav-pills navbar-nav d-flex flex-column w-100">
             <li class="nav-item w-100">
-              <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Início</a>
+              <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Início</a>
             </li>
 
             <li class="nav-item w-100">

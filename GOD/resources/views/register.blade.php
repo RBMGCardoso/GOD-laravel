@@ -113,12 +113,16 @@
       }
 
       #boxtext{
-        width: 20vw;
-    height: 20px;
-    padding: 12px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+        width: 40vw;
+        height: 30px;
+        padding: 12px;
+        margin-top: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .container{
+        transition:0.4s;
       }
       </style>
 
@@ -128,6 +132,7 @@
           var sidebar = document.getElementById("sidebar");
           var sidebar2 = document.getElementById("sidebar2");
           var button = document.getElementById("menu-btn");
+          var content = document.getElementById("registo");
 
           if(sidebar.style.marginLeft == "-250px")
           {        
@@ -135,7 +140,7 @@
             sidebar.style.marginLeft = "0px";
             button.style.transform.transitionDuration = "2s";
             button.style.transform = "translateX(0px)";
-            
+            content.style.left = "250px";
           }
           else
           {
@@ -143,7 +148,9 @@
             sidebar.style.marginLeft = "-250px";
             button.style.transform.transitionDuration = "2s";
             button.style.transform = "translateX(-250px) rotate(180Deg)";
+            content.style.left = "0px";
           }
+
         }
     </script>
 
@@ -166,7 +173,7 @@
                 </li>
 
                 <li class="nav-item w-100">
-                <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Criar Ocorrência</a>
+                <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Criar Ocorrência</a>
                 </li>
 
                 <li class="nav-item w-100">
@@ -174,7 +181,7 @@
                 </li>
 
                 <li class="nav-item w-100">
-                <a class="nav-link rounded-0 text-light ps-3" id="btn">Registar</a>
+                <a href="{{ route('registerPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Registar</a>
                 </li>
             </ul>
 
@@ -206,20 +213,24 @@
     </svg>
     </button>
 
-    <div class="container d-flex justify-content-center" id="registo">
+    <div class="container" style="position:absolute; left:250px" id="registo">
       <form>
+        <h1>Registar Utilizador</h1><br>
         <input type="text" name="name"  id="boxtext" placeholder="Nome"><br>
         <input type="text" name="email" id="boxtext" placeholder="Email"><br>
-        <input type="password" name="password" id="boxtext" placeholder="Password">
+        <input type="password" name="password" id="boxtext" placeholder="Password"><br>
+        <input type="text" name="telef_p" id="boxtext" placeholder="Numero Telemovel/Telefone">
         <br/>
         <br/>
-        <div class="info">
-            <p>Cargo do Utilizador:</p>
-            <input type="radio" id="Opc1" name="cargoUser"><label for="Opc1">Diretor</label>
-            <input type="radio" id="Opc2" name="cargoUser"><label for="Opc2">Professor</label>
-            <input type="radio" id="Opc3" name="cargoUser"><label for="Opc3">Secretaria</label>
-            <input type="radio" id="Opc4" name="cargoUser"><label for="Opc4">Diretor de Turma</label>
-          </div>
+          <h5>Cargo que ocupa</h5>
+          <input type="radio" id="Opc1" name="cargoUser">
+          <label for="Opc1">Diretor</label>
+          <input type="radio" id="Opc2" name="cargoUser"> 
+          <label for="Opc2">Professor</label>
+          <input type="radio" id="Opc4" name="cargoUser">
+          <label for="Opc4">Diretor de Turma</label>
+          <input type="radio" id="Opc3" name="cargoUser">         
+          <label for="Opc3">Secretaria</label>                       
       </form>
     </div>
 </body>
