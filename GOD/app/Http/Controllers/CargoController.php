@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Aluno;
+use App\Models\Cargo;
 use Illuminate\Http\Request;
 
-class AlunosController extends Controller
+class CargoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +14,7 @@ class AlunosController extends Controller
      */
     public function index()
     {
+        //
     }
 
     /**
@@ -40,20 +41,21 @@ class AlunosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Aluno  $aluno
+     * @param  \App\Models\Cargo  $cargo
      * @return \Illuminate\Http\Response
      */
-    public function show(Aluno $aluno)
+    public function show(Cargo $cargo)
     {
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Aluno  $aluno
+     * @param  \App\Models\Cargo  $cargo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Aluno $aluno)
+    public function edit(Cargo $cargo)
     {
         //
     }
@@ -62,10 +64,10 @@ class AlunosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Aluno  $aluno
+     * @param  \App\Models\Cargo  $cargo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Aluno $aluno)
+    public function update(Request $request, Cargo $cargo)
     {
         //
     }
@@ -73,10 +75,10 @@ class AlunosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Aluno  $aluno
+     * @param  \App\Models\Cargo  $cargo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Aluno $aluno)
+    public function destroy(Cargo $cargo)
     {
         //
     }

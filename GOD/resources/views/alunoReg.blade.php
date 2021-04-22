@@ -114,13 +114,13 @@
 
       #boxtext{
         width: 20vw;
-    height: 20px;
-    padding: 12px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-      }
-      </style>
+      height: 20px;
+      padding: 12px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+        }
+    </style>
 
     <script>
         function closeSidebar()

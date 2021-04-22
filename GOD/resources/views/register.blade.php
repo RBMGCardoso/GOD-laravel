@@ -124,7 +124,7 @@
       .container{
         transition:0.4s;
       }
-      </style>
+    </style>
 
     <script>
         function closeSidebar()
@@ -217,7 +217,8 @@
     </svg>
     </button>
 
-    <div class="container" style="position:absolute; left:250px" id="registo">
+    <div class="container" style="position:absolute; left:250px" id="registo" align="center">
+    <table>
       <form>
         <h1>Registar Utilizador</h1><br>
         <input type="text" name="name"  id="boxtext" placeholder="Nome"><br>
@@ -236,6 +237,7 @@
           <input type="radio" id="Opc3" name="cargoUser">         
           <label for="Opc3">Secretaria</label>                       
       </form>
+      </table>
     </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <meta charset="utf-8">
+    <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
             <!-- Bootstrap core CSS -->
@@ -343,10 +343,27 @@
     </svg>
     </button>
 
-    <div id="content" class="content" style="position:absolute; left:250px" align="center">
-    @foreach($alunos as $aluno)
-    <h1>{{ $aluno->nome }}</h1>
-    @endforeach
+    <div id="content" class="content" style="position:absolute; left:250px;" align="center">
+    <table style="height:0px; border: none; box-shadow: none">
+    </table>
+      @foreach($ocorrencias as $occ)
+          <div class="card w-75 mt-5 mb-5" style="background-color: #ddd">
+            <div class="card-body">
+              <h5 class="card-title">{{ $occ->aluno->nome }}</h5>
+              <p class="card-text">{{ $occ->descricao }}</p>
+                <div class="d-flex justify-content-start">
+                  <ul>
+                    @forelse ($occ->motivos as $motivo)
+                      <li>{{ $motivo->motivo }}</li>
+                    @empty
+                      
+                    @endforelse
+                  </ul>
+                </div>
+              <a href="#" class="btn btn-primary">Ver ocorrência</a>
+            </div>
+          </div>
+      @endforeach
     </div>
     </body>
 <html>

@@ -3,9 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.82.0">
     <title>Dashboard</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
@@ -168,7 +165,7 @@
             </li>
 
             <li class="nav-item w-100">
-              <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Pesquisar</a>
+              <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Pesquisar</a>
             </li>
 
             <li class="nav-item w-100">
@@ -187,7 +184,13 @@
               <strong>{{ session('LoggedUser')->name }}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-              <li><a class="dropdown-item" href="#">New project...</a></li>
+              <li><a class="dropdown-item" href="#">
+                @forelse (session('LoggedUser')->cargos as $cargo)
+                  {{ $cargo->cargo }}
+                @empty
+                  Nenhum cargo atribuido
+                @endforelse             
+              </a></li>
               <li><a class="dropdown-item" href="#">Settings</a></li>
               <li><a class="dropdown-item" href="#">Profile</a></li>
               <li><hr class="dropdown-divider"></li>

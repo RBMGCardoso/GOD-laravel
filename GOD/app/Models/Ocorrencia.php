@@ -11,6 +11,11 @@ class Ocorrencia extends Model
 
     public function aluno()
     {
-        return $this->belongsTo('App\Models\Aluno');
+        return $this->belongsTo(Aluno::class);
+    }
+
+    public function motivos()
+    {
+        return $this->belongsToMany(Motivo::Class);
     }
 }

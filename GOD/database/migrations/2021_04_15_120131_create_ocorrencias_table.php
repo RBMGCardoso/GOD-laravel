@@ -14,8 +14,8 @@ class CreateOcorrenciasTable extends Migration
     public function up()
     {
         Schema::create('ocorrencias', function (Blueprint $table) {
-            $table->id();
-            $table->integer('cod_a')->unsigned();
+            $table->increments('id')->unsigned();
+            $table->integer('aluno_id')->unsigned();
             $table->dateTime('data');
             $table->string('descricao');
             $table->string('decisao');
@@ -23,7 +23,7 @@ class CreateOcorrenciasTable extends Migration
             $table->string('comport_inc');
             $table->string('cod_p');
 
-            $table->foreign('cod_a')->references('id')->on('alunos');
+            $table->foreign('aluno_id')->references('id')->on('alunos');
             $table->timestamps();
         });
     }

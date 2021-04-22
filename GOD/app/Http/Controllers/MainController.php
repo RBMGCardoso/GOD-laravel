@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Aluno;
 use App\Models\User;
 use App\Models\Ocorrencia;
+use App\Models\MotivoOcorrencia;
 
 class MainController extends Controller
 {
@@ -44,36 +45,22 @@ class MainController extends Controller
         return view('alunoReg');
     }
 
-    public function RegisterAluno(Request $request)
+    public function RegisterAluno(Request $req)
     {
-        $ano = $request->input('ano');
-        $turma = $request->input('turma');
-        $nome = $request->input('nome');
-        $datanasc = $request->input('datanasc');
-        $email = $request->input('email');
-        $nif = $request->input('nif');
-        $telef = $request->input('telef');
-        $morada = $request->input('morada');
-        $concelho = $request->input('concelho');
-        $codpost = $request->input('codpost');
-        $cc = $request->input('cc');
-
-
-        \DB::insert("INSERT INTO alunos (ano, turma, nome, datanasc, email, nif, telef, morada, concelho, codpost, cc)
-        VALUES (
-            '$ano',
-            '$turma',
-            '$nome',
-            '$datanasc',
-            '$email',
-            '$nif',
-            '$telef',
-            '$morada',
-            '$concelho',
-            '$codpost',
-            '$cc'
-        )");
-
+      
+        Aluno::insert([
+            'ano' =>  $req->ano,
+            'turma' =>  $req->turma,
+            'nome' =>  $req->nome,
+            'datanasc' =>  $req->datanasc,
+            'email' =>  $req->email,
+            'nif' =>  $req->nif,
+            'telef' =>  $req->telef,
+            'morada' =>  $req->morada,
+            'concelho' =>  $req->concelho,
+            'codpost' =>  $req->codpost,
+            'cc' =>  $req->cc
+        ]);
     }
 
     public function OcorrenciaPage()
@@ -81,29 +68,36 @@ class MainController extends Controller
         return view('ocorrencia');
     }
 
-    public function criarOcorrencia(Request $request)
-    {    
-        $data = $request->input('data');
-        $descricao = $request->input('textADesc');
-        $decisao = $request->input('textADec');
-        $frequencia = $request->input('frequenciaComport');
-        $comport_inc = $request->input('quantidadeComport');
-        $cod_a = Aluno::where('nome', '=', $request->input('nome'))->first()->id;
-        $cod_p = session('LoggedUser')->id;
+    public function criarOcorrencia(Request $req, Ocorrencia $ocorrencia, MotivoOcorrencia $motivoOcorrencia)
+    {   
+        $motivos = $req->input('motivos');
+
+        if(Aluno::where('nome', '=', $req->input('nome'))->first() !== null)
+        {
+            Ocorrencia::insert([
+                'data' =>  $req->data,
+                'descricao' =>  $req->textADesc,
+                'decisao' =>  $req->textADec,
+                'frequencia' =>  $req->frequenciaComport,
+                'comport_inc' =>  $req->quantidadeComport,
+                'aluno_id' =>  Aluno::where('nome', '=', $req->input('nome'))->first()->id,
+                'cod_p' =>  session('LoggedUser')->id
+            ]);
+        }
+
         
-        \DB::insert("INSERT INTO ocorrencias (data, descricao, decisao, frequencia, comport_inc, cod_a, cod_p) 
-        VALUES (
-            '$data',
-            '$descricao',
-            '$decisao',
-            '$frequencia',
-            '$comport_inc',
-            '$cod_a',
-            '$cod_p'
-            )");
+        foreach ($motivos as $motivo) {
+            MotivoOcorrencia::insert([
+                'motivo_id' => $motivo,
+                'ocorrencia_id' => Ocorrencia::all()->first()->id
+                ]);
+        }
+
+        return view('dashboard');
+
     }
 
-    public function pesquisar()
+    public function pesquisar(Ocorrencia $ocorrencia)
     {
         $ocorrencias = Ocorrencia::all()->pluck('cod_a');
 

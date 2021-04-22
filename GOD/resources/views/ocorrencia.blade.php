@@ -348,7 +348,7 @@
           <div class="info">
             <input type="text" id="fname" name="nome" placeholder="Nome do Aluno">
             <input type="text" id="num" name="numero" placeholder="Nmr aluno">
-            <input type="text" id="anoturma" name="numero" placeholder="Ano e Turma">
+            <input type="text" id="anoturma" name="anoturma" placeholder="Ano e Turma">
             <br>
             <input type="text" id="disciplina" name="disciplina" placeholder="Disciplina">
             <input type="datetime-local" name="data" id="data" placeholder="Data da Ocorrência">
@@ -359,119 +359,119 @@
             <table>
             <tr>
               <td>
-                <input type="checkbox" id="Opc1" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="1" id="Opc1" class="checkmark">
                 <label for="Opc1">Desobedeceu a uma ordem</label>
               </td>
             </tr>
 
             <tr>
               <td>
-                <input type="checkbox" id="Opc2" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="2" id="Opc2" class="checkmark">
                 <label for="Opc2">Recusou participar nas atividades da aula</label>
               </td>
             </tr>
 
             <tr>             
               <td>
-                <input type="checkbox" id="Opc3" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="3" id="Opc3" class="checkmark">
                 <label for="Opc3">Fez gestos impróprios ao professor</label>
               </td>
             </tr>
 
             <tr>        
               <td>
-                <input type="checkbox" id="Opc4" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="4" id="Opc4" class="checkmark">
                 <label for="Opc4">Fez comentários inadequados e desrespeitadores</label>
               </td>
             </tr>
 
             <tr>      
               <td>
-                <input type="checkbox" id="Opc5" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="5" id="Opc5" class="checkmark">
                 <label for="Opc5">Perturbou a realização dos trabalhos dos seus colegas</label>
               </td>
             </tr>
 
             <tr>     
               <td>
-                <input type="checkbox" id="Opc6" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="6" id="Opc6" class="checkmark">
                 <label for="Opc6">Continuou a conversar com colegas, mesmo depois da chamada de atenção do professor</label>
               </td>
             </tr>
 
             <tr>              
               <td>
-                <input type="checkbox" id="Opc7" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="7" id="Opc7" class="checkmark">
                 <label for="Opc7">Pôs em causa a autoridade do professor</label>
               </td>
             </tr>
             
             <tr>              
               <td>
-                <input type="checkbox" id="Opc8" class="checkmark">  
+                <input type="checkbox" name="motivos[]" value="8" id="Opc8" class="checkmark">  
                 <label for="Opc8">Falou muito alto, emitiu sons e/ou provocou ruídos</label>
               </td>
             </tr>
 
             <tr>              
               <td>
-                <input type="checkbox" id="Opc9" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="9" id="Opc9" class="checkmark">
                 <label for="Opc9">Ausentou-se do seu lugar sem autorização</label>
               </td>
             </tr>
 
             <tr>              
               <td>
-                <input type="checkbox" id="Opc10" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="10" id="Opc10" class="checkmark">
                 <label for="Opc10">Interrompeu, de forma persistente e inadequada, a comunicação professor/alunos</label>
               </td>
             </tr>
 
             <tr>             
               <td>
-                <input type="checkbox" id="Opc11" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="11" id="Opc11" class="checkmark">
                 <label for="Opc11">Fez gestos impróprios a colegas</label>
               </td>
             </tr>
 
             <tr>            
               <td>
-                <input type="checkbox" id="Opc12" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="12" id="Opc12" class="checkmark">
                 <label for="Opc12">Agrediu fisicamente um colega</label>
               </td>
             </tr>
 
             <tr>              
               <td>
-                <input type="checkbox" id="Opc13" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="13" id="Opc13" class="checkmark">
                 <label for="Opc13">Insultou colega(s)</label>
               </td>
             </tr>
 
             <tr>              
               <td>
-                <input type="checkbox" id="Opc14" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="14" id="Opc14" class="checkmark">
                 <label for="Opc14">Tirou objeto(s) a colega(s) sem a sua autorização</label>
               </td>
             </tr>
 
             <tr>             
               <td>
-                <input type="checkbox" id="Opc15" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="15" id="Opc15" class="checkmark">
                 <label for="Opc15">Usou, indevidamente, telemóvel ou outro aparelho eletrónico</label>
               </td>
             </tr>
 
             <tr>             
               <td>
-                <input type="checkbox" id="Opc16" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="16" id="Opc16" class="checkmark">
                 <label for="Opc16">Danificou materiais e/ou espaços escolares</label>
               </td>
             </tr>
 
             <tr>             
               <td>
-                <input type="checkbox" id="Opc17" class="checkmark">
+                <input type="checkbox" name="motivos[]" value="17" id="Opc17" class="checkmark">
                 <label for="Opc17">Outros</label>
               </td>
             </tr>

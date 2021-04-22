@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\AlunosController;
+use App\Http\Controllers\OcorrenciaController;
 use App\Http\Controllers\UserAuthController;
 
 /*
@@ -41,4 +43,4 @@ Route::get('/logout', [UserAuthController::Class, 'logout'])->name('logout');
 
 Route::post('check', [UserAuthController::Class, 'check'])->name('auth.check');
 
-Route::resource('alunos', 'AlunosController');
+Route::get('ocorrencias', [OcorrenciaController::Class, 'index'])->name('mostrarOcorrencias');
