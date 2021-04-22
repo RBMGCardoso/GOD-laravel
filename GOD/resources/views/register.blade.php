@@ -121,9 +121,19 @@
         border-radius: 4px;
       }
 
-      .container{
+      .content{
         transition:0.4s;
       }
+
+      table{
+              table-layout: fixed;
+              width: 61%;
+              height: 600px;
+              border-collapse: collapse;
+              border-radius: 2px;
+              border-style: hidden; /* hide standard table (collapsed) border */
+              box-shadow: 0 0 0 2px #ccc; /* this draws the table border  */ 
+          }
     </style>
 
     <script>
@@ -132,7 +142,7 @@
           var sidebar = document.getElementById("sidebar");
           var sidebar2 = document.getElementById("sidebar2");
           var button = document.getElementById("menu-btn");
-          var content = document.getElementById("registo");
+          var content = document.getElementById("content");
 
           if(sidebar.style.marginLeft == "-250px")
           {        
@@ -217,27 +227,32 @@
     </svg>
     </button>
 
-    <div class="container" style="position:absolute; left:250px" id="registo" align="center">
-    <table>
-      <form>
-        <h1>Registar Utilizador</h1><br>
-        <input type="text" name="name"  id="boxtext" placeholder="Nome"><br>
-        <input type="text" name="email" id="boxtext" placeholder="Email"><br>
-        <input type="password" name="password" id="boxtext" placeholder="Password"><br>
-        <input type="text" name="telef_p" id="boxtext" placeholder="Numero Telemovel/Telefone">
-        <br/>
-        <br/>
-          <h5>Cargo que ocupa</h5>
-          <input type="radio" id="Opc1" name="cargoUser">
-          <label for="Opc1">Diretor</label>
-          <input type="radio" id="Opc2" name="cargoUser"> 
-          <label for="Opc2">Professor</label>
-          <input type="radio" id="Opc4" name="cargoUser">
-          <label for="Opc4">Diretor de Turma</label>
-          <input type="radio" id="Opc3" name="cargoUser">         
-          <label for="Opc3">Secretaria</label>                       
-      </form>
+    <div id="content" class="content" style="position:absolute; left:250px" align="center">
+      <table style="height:0px; border: none; box-shadow: none">
       </table>
+      <div class="d-flex justify-content-center">
+        <form>
+          <h1>Registar Utilizador</h1><br>
+          <input type="text" name="name"  id="boxtext" placeholder="Nome"><br>
+          <input type="text" name="email" id="boxtext" placeholder="Email"><br>
+          <input type="password" name="password" id="boxtext" placeholder="Password"><br>
+          <input type="text" name="telef_p" id="boxtext" placeholder="Numero Telemovel/Telefone">
+          <br/>
+          <br/>
+            <h5>Cargo que ocupa</h5><!-- Customizar o botão de submeter -->
+            <input type="radio" id="Opc1" name="cargoUser">
+            <label for="Opc1">Diretor</label>
+            <input type="radio" id="Opc2" name="cargoUser"> 
+            <label for="Opc2">Professor</label>
+            <input type="radio" id="Opc4" name="cargoUser">
+            <label for="Opc4">Diretor de Turma</label>
+            <input type="radio" id="Opc3" name="cargoUser">         
+            <label for="Opc3">Secretaria</label>
+            
+            <!-- Adicionar um botão de submeter -->
+
+        </form>
+      </div>
     </div>
 </body>
 </html>

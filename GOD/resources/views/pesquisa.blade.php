@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <style>
       body
@@ -281,7 +281,6 @@
     </script>
     <body>
 
-
     <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
           <a href="#" class="navbar-brand text-light">
             <div class="display-5 font-weight-bold">
@@ -346,6 +345,14 @@
     <div id="content" class="content" style="position:absolute; left:250px;" align="center">
     <table style="height:0px; border: none; box-shadow: none">
     </table>
+    <div class="input-group d-flex justify-content-center mt-3">
+      <div class="form-outline w-50">
+        <input type="text" id="form1" class="form-control" placeholder="Pesquisa"/>
+      </div>
+      <button type="button" class="btn btn-primary">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
       @foreach($ocorrencias as $occ)
           <div class="card w-75 mt-5 mb-5" style="background-color: #ddd">
             <div class="card-body">
