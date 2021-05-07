@@ -1,237 +1,19 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
             <!-- Bootstrap core CSS -->
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     
+    <link href="{{ url('/css/ocorrencia.css') }}" rel="stylesheet">
+    <link href="{{ url('/css/navbar.css') }}" rel="stylesheet">
     </head>
-    <style>
-      body
-      {
-        min-height: 100vh;
-      }
-
-      #btn
-      {
-        position: relative;
-        z-index: 0;
-        color: #000;
-      }
-
-      .profile
-      {
-        position: relative;
-        height: 100vh;
-        width: 250px;
-      }
-
-      .dropup
-      {
-        position: absolute;
-        bottom:0px;
-      }
-
-      .navbar
-      {
-        width:250px;
-        height:100vh;
-        position: fixed;
-        background-color: #222;
-        transition: 0.4s;
-      }
-
-      .nav-item
-      {
-        border-bottom: 1px solid #555;
-      }
-
-       .nav-link
-      {
-        font-size: 1.25em;
-        width:250px;
-        height: 48px;
-        position: relative;
-      }
-
-      .nav-link:active,
-      .nav-link:focus,
-      .nav-link:hover
-      {
-        background-color: rgb(121,253,255);
-        -webkit-text-fill-color: #333;
-        font-weight: 500;
-      }
-
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-      #menu-btn
-      {
-        position: fixed;
-        transition: 0.4s;    
-        fill: #222;
-      }
-   
-      .active-nav
-      {
-        margin-left:0;
-      }
-
-      .active-cont
-      {
-        margin-left: 250px;
-      }
-
-
-      #menu-btn:hover
-      {
-        fill: rgba(121, 255, 255, 1);
-      }
-
-      #sidebar2
-      {
-        margin-left: -180px;
-        transition-delay: 0.2s;
-        transition: 0.2s;
-      }
-
-          .info
-          {
-              width: 61%;
-          }
-
-          .container{
-              position: relative;
-              top: 2%;
-              left: 20%;
-          }
-
-          /* Table */
-          table{
-              table-layout: fixed;
-              width: 61%;
-              height: 600px;
-              border-collapse: collapse;
-              border-radius: 2px;
-              border-style: hidden; /* hide standard table (collapsed) border */
-              box-shadow: 0 0 0 2px #ccc; /* this draws the table border  */ 
-          }
-
-          td{
-              border: 2px solid #ccc;
-              border-collapse: collapse;
-              padding-left: 10px;
-              padding-right: 10px;
-          }
-
-          .checkmark{ /* Tirar a borda da checkbox*/
-              position: relative;
-              width: 25px;
-              height: 35px;
-              vertical-align: middle;
-          }
-
-          /* Descrição */
-          textarea {
-              width: 61%;
-              height: 150px;
-              padding: 12px 20px;
-              box-sizing: border-box;
-              border: 2px solid #ccc;
-              border-radius: 4px;
-              background-color: #f8f8f8;
-              resize: none;
-              word-break: break-word;
-              font-family: "Arial";
-          }
-
-          .bt_sub{
-              width: 15vw;
-              min-width: 100px;
-              height: 30px;
-              border: 0;
-              background: #2f323a;
-              border-radius: 10px;
-              color: #fff;
-              outline:none;
-          }
-
-          .bt_sub:hover
-          {
-            background-color: rgba(121, 255, 255, 1);
-          }
-
-          #fname
-          {
-              width: 71%;
-              min-width: 31%;
-              height: 20px;
-              padding: 12px;
-              border: 1px solid #ccc;
-              border-radius: 4px;
-          }
-
-          #num
-          {
-              width: calc(calc(100% - 75%) / 2);
-              min-width: 100px;
-              height: 20px;
-              padding: 12px;
-              border: 1px solid #ccc;
-              border-radius: 4px;
-          }
-
-          #anoturma
-          {
-              width: calc(calc(100% - 75%) / 2);
-              min-width: 100px;
-              height: 20px;
-              padding: 12px;
-              border: 1px solid #ccc;
-              border-radius: 4px;
-          }
-
-          #disciplina
-          {
-              width: 20vw;
-              height: 20px;
-              padding: 12px;
-              margin-top: 5px;
-              border: 1px solid #ccc;
-              border-radius: 4px;
-          }
-
-          #data
-          {
-              width: 15vw;
-              height: 20px;
-              padding: 12px;
-              border: 1px solid #ccc;
-              border-radius: 4px;
-          }
-
-          .content
-          {
-            transition:0.4s;
-          }
-    </style>
 
     <script>
       function closeSidebar()
@@ -279,10 +61,10 @@
           alertText.textContent = "Caracteres restantes: " + charsQt;       
       }
     </script>
-    <body>
-
-    <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
-          <a href="#" class="navbar-brand text-light">
+<body>
+    <div class="navbar-div">
+      <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
+          <a href="{{ route('dashboardPage') }}" class="navbar-brand text-light">
             <div class="display-5 font-weight-bold">
               <div class="row">
                 <div class="col">
@@ -294,24 +76,40 @@
           <hr style="width:100%;text-align:left;margin-left:0;margin-bottom:0;color:#fff">
           <ul class="nav-pills navbar-nav d-flex flex-column w-100">
             <li class="nav-item w-100">
-              <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Início</a>
+              <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fa fa-home"></i> Início</a>
             </li>
 
             <li class="nav-item w-100">
-              <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Criar Ocorrência</a>
+              <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fa fa-plus-square"></i> Criar Ocorrência</a>
             </li>
 
             <li class="nav-item w-100">
-              <a href="#" class="nav-link rounded-0 text-light ps-3" id="btn">Pesquisar</a>
+              <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fa fa-search"></i> Pesquisar</a>
             </li>
+            
+            <div class="dropdown nav-item w-100" onclick="mudarButton()">
+                <a class="dropdown-toggle nav-link rounded-0 text-light ps-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="row me-0">
+                    <div class="col">
+                      <i class="fas fa-user-plus"></i> 
+                      Registar 
+                    </div>
 
-            <li class="nav-item w-100">
-              <a href="{{ route('registerPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Registar</a>
-            </li>
-
-            <li class="nav-item w-100">
-                <a href="{{ route('registerAlunoPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn">Registar aluno</a>
+                    <div class="col d-flex pt-1 justify-content-end">
+                      <i class="fas fa-sort-down w-auto text-right" id="dropdown-button"></i>                
+                    </div>
+                  </div>
+                </a>
+              <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton" style="background-color: transparent;">
+                <li>
+                  <a href="{{ route('registerPage') }}" class="dropdown-item nav-link rounded-0 text-light ps-3" id="btn"><i class="fas fa-plus-square"></i> Registar Utilizador</a>
                 </li>
+
+                <li>
+                  <a href="{{ route('registerAlunoPage') }}" class="dropdown-item nav-link rounded-0 text-light ps-3" id="btn"><i class="fas fa-plus-square"></i> Registar Aluno</a>
+                </li>
+              </ul>
+            </div>
           </ul>
 
         <div class="profile">
@@ -321,7 +119,13 @@
               <strong>{{ session('LoggedUser')->name }}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-              <li><a class="dropdown-item" href="#">New project...</a></li>
+              <li><a class="dropdown-item" href="#">
+                @forelse (session('LoggedUser')->cargos as $cargo)
+                  {{ $cargo->cargo }}
+                @empty
+                  Nenhum cargo atribuido
+                @endforelse             
+              </a></li>
               <li><a class="dropdown-item" href="#">Settings</a></li>
               <li><a class="dropdown-item" href="#">Profile</a></li>
               <li><hr class="dropdown-divider"></li>
@@ -329,24 +133,40 @@
             </ul>
           </div>
         </div>
+            <!--      SCRIPTS     -->
+            <script src="{{ url('/js/navbar.js') }}"></script>
       </nav>
 
-    <button class="btn text-dark shadow-none" id="menu-btn" style="position:fixed;left:250px;width:50px;height:50px;z-index:9999" onclick="closeSidebar()">
-    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	    width="30px" height="30px" viewBox="0 0 451.846 451.847" style="enable-background:new 0 0 451.846 451.847;">
-      <g>
-        <path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
-          c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
-          c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"/>
-      </g>
-    </svg>
-    </button>
+      <button class="btn text-dark shadow-none" id="menu-btn" style="position:relative;left:250px;width:50px;height:50px" onclick="closeSidebar()">
+      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        width="30px" height="30px" viewBox="0 0 451.846 451.847" style="enable-background:new 0 0 451.846 451.847;">
+        <g>
+          <path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+            c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+            c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"/>
+        </g>
+      </svg>
+      </button>
+      <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="./js/sidebars.js"></script>
+    </div>
 
     <div id="content" class="content" style="position:absolute; left:250px" align="center">
         <h1>Registo de Ocorrência / Participação Disciplinar</h1>
         <form method="POST" action="{{ route('ocorrencia.criar') }}">
           <div class="info">
-            <input type="text" id="fname" name="nome" placeholder="Nome do Aluno">
+            <input list="nomes" name="nome" id="fname" autocomplete="off" onchange="preencherInfo()">
+
+            <script>
+              
+            </script>
+
+            <datalist id="nomes" style="width:100% !important">   
+              @foreach($alunos as $aluno)
+                <option value="{{ $aluno->nome }}">
+              @endforeach
+            </datalist>           
+
             <input type="text" id="num" name="numero" placeholder="Nmr aluno">
             <input type="text" id="anoturma" name="anoturma" placeholder="Ano e Turma">
             <br>
@@ -518,5 +338,5 @@
           </div>
         </form>
         </div>
-    </body>
+  </body>
 <html>

@@ -63,15 +63,16 @@ class MainController extends Controller
         ]);
     }
 
-    public function OcorrenciaPage()
+    public function OcorrenciaPage(Aluno $alunos)
     {
-        return view('ocorrencia');
+        $alunos = Aluno::all();
+        return view('ocorrencia', compact('alunos'));
     }
 
     public function criarOcorrencia(Request $req, Ocorrencia $ocorrencia, MotivoOcorrencia $motivoOcorrencia)
     {   
         $motivos = $req->input('motivos');
-
+        
         if(Aluno::where('nome', '=', $req->input('nome'))->first() !== null)
         {
             Ocorrencia::insert([
@@ -83,17 +84,20 @@ class MainController extends Controller
                 'aluno_id' =>  Aluno::where('nome', '=', $req->input('nome'))->first()->id,
                 'cod_p' =>  session('LoggedUser')->id
             ]);
-        }
-
         
-        foreach ($motivos as $motivo) {
-            MotivoOcorrencia::insert([
-                'motivo_id' => $motivo,
-                'ocorrencia_id' => Ocorrencia::all()->first()->id
+            foreach ($motivos as $motivo) 
+            {
+                MotivoOcorrencia::insert([
+                    'motivo_id' => $motivo,
+                    'ocorrencia_id' => Ocorrencia::all()->reverse()->first()->id
                 ]);
+            }
+            return redirect('dashboard');
         }
-
-        return view('dashboard');
+        else
+        {
+            return back();
+        }
 
     }
 

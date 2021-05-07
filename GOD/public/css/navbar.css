@@ -1,0 +1,110 @@
+body
+{
+  min-height: 100vh;
+  user-select: none;
+}
+
+#btn
+{
+  position: relative;
+  z-index: 0;
+  color: #000;
+}
+
+.profile
+{
+  position: relative;
+  height: 100vh;
+  width: 250px;
+}
+
+.dropup
+{
+  position: absolute;
+  bottom:0px;
+}
+
+.navbar
+{
+  width:250px;
+  height:100vh;
+  position: fixed;
+  background-color: #222;
+  transition: 0.4s;
+}
+
+.nav-item
+{
+  border-bottom: 1px solid #555;
+}
+
+ .nav-link
+{
+  font-size: 1.25em;
+  width:250px;
+  height: 48px;
+  position: relative;
+}
+
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover
+{
+  background-color: rgb(121,253,255);
+  -webkit-text-fill-color: #333;
+  font-weight: 500;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+#menu-btn
+{
+  transition: 0.4s;    
+  fill: #222;
+}
+
+.active-nav
+{
+  margin-left:0;
+}
+
+.active-cont
+{
+  margin-left: 250px;
+}
+
+
+#menu-btn:hover
+{
+  fill: rgba(121, 255, 255, 1);
+}
+
+#sidebar2
+{
+  margin-left: -180px;
+  transition-delay: 0.2s;
+  transition: 0.2s;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+
+
+#dropdown-button
+{
+  transition: 0.1s;
+}

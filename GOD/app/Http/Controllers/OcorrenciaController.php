@@ -20,6 +20,11 @@ class OcorrenciaController extends Controller
         return view('pesquisa', ['ocorrencias' => $ocorrencias]);  
     }
 
+    public function AtualizarInfo()
+    {
+        
+    }
+
     /**
      * Show the form for creating a new resource.
      *

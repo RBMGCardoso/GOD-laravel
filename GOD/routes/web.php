@@ -21,6 +21,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//// Página de ocorrência
+//
+Route::get('/ocorrencia', [OcorrenciaController::class, 'AtualizarInfo'])->name('fillInfoAluno');
+
+
 Route::get('/dashboard', [MainController::Class, 'DashboardPage'])->name('dashboardPage');
 
 Route::get('/ocorrencia', [MainController::Class, 'OcorrenciaPage'])->name('ocorrenciaPage');

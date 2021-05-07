@@ -1,0 +1,12 @@
+#boxtext{
+  width: 40vw;
+  height: 30px;
+  padding: 12px;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.container{
+  transition:0.4s;
+}
