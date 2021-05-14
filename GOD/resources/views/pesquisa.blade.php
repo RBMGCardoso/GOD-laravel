@@ -156,6 +156,14 @@
     <div id="content" class="content" style="position:absolute; left:250px;" align="center">
     <table style="height:0px; border: none; box-shadow: none">
     </table>
+    <div class="input-group d-flex justify-content-center mt-3">
+      <div class="form-outline w-50">
+        <input type="text" id="form1" class="form-control" placeholder="Pesquisa"/>
+      </div>
+      <button type="button" class="btn btn-primary">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
       @foreach($ocorrencias as $occ)
           <div class="card w-75 mt-5 mb-5" style="background-color: #ddd">
             <div class="card-body">
