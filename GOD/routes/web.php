@@ -5,6 +5,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\AlunosController;
 use App\Http\Controllers\OcorrenciaController;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\PesquisaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,6 @@ Route::get('/', function () {
 
 //// Página de ocorrência
 //
-Route::get('/ocorrencia', [OcorrenciaController::class, 'AtualizarInfo'])->name('fillInfoAluno');
-
 
 Route::get('/dashboard', [MainController::Class, 'DashboardPage'])->name('dashboardPage');
 
@@ -33,6 +32,10 @@ Route::get('/ocorrencia', [MainController::Class, 'OcorrenciaPage'])->name('ocor
 Route::post('/ocorrencia', [MainController::Class, 'criarOcorrencia'])->name('ocorrencia.criar');
 
 Route::get('/pesquisar', [MainController::Class, 'pesquisar'])->name('pesquisar');
+Route::get('/ocorrenciaSelecionarEscola', [PesquisaController::Class, 'SelecionarEscola'])->name('selecionar-escola');
+
+
+
 
 Route::get('/nomeAluno', [MainController::Class, 'NomeAluno'])->name('aluno.nome');
 

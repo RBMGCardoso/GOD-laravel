@@ -155,11 +155,7 @@
         <h1>Registo de Ocorrência / Participação Disciplinar</h1>
         <form method="POST" action="{{ route('ocorrencia.criar') }}">
           <div class="info">
-            <input list="nomes" name="nome" id="fname" autocomplete="off" onchange="preencherInfo()">
-
-            <script>
-              
-            </script>
+            <input list="nomes" name="nome" id="fname" autocomplete="off">
 
             <datalist id="nomes" style="width:100% !important">   
               @foreach($alunos as $aluno)

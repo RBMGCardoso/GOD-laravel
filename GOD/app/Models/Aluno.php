@@ -11,6 +11,11 @@ class Aluno extends Model
 
     public function ocorrencias()
     {
-        return $this->hasMany('App\Models\Ocorrencia');
+        return $this->hasMany(Ocorrencia::Class);
+    }
+
+    public function turma()
+    {
+        return $this->belongsToMany(Turma::Class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ocorrencia;
 use App\Models\Aluno;
+use App\Models\Escola;
 use Illuminate\Http\Request;
 
 class OcorrenciaController extends Controller
@@ -14,10 +15,11 @@ class OcorrenciaController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function index(Ocorrencia $ocorrencia)
+    public function index(Ocorrencia $ocorrencia, Escola $escola)
     {
         $ocorrencias = Ocorrencia::all()->reverse();
-        return view('pesquisa', ['ocorrencias' => $ocorrencias]);  
+        $escolas = Escola::all();
+        return view('pesquisa', ['ocorrencias' => $ocorrencias], ['escolas' => $escolas]);  
     }
 
     public function AtualizarInfo()

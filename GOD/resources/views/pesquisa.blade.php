@@ -61,6 +61,12 @@
           var alertText = document.getElementById('charsRemainDec');
           alertText.textContent = "Caracteres restantes: " + charsQt;       
       }
+
+      function SelecionarEscola()
+      {
+        window.location.href = "{{ route('selecionar-escola') }}";
+
+      }
     </script>
 
 <body>
@@ -158,12 +164,40 @@
     </table>
     <div class="input-group d-flex justify-content-center mt-3">
       <div class="form-outline w-50">
-        <input type="text" id="form1" class="form-control" placeholder="Pesquisa"/>
+        <input type="search" id="form1" class="form-control" placeholder="Pesquisa"/>
       </div>
       <button type="button" class="btn btn-primary">
         <i class="fa fa-search"></i>
       </button>
     </div>
+
+    <div class="col d-flex justify-content-center mt-2">
+      <div class="row-auto me-4" style="width: 208px">
+        <select class="form-select" aria-label="Default select example" name="selectEscola" onchange="SelecionarEscola()">
+          <option value="null" selected>Escolas</option>
+          @foreach($escolas as $escola)
+            <option value="{{ $escola->id }}">{{ $escola->morada }}</option>
+          @endforeach
+        </select>
+      </div>
+
+      <div class="row-auto ms-4" style="width: 208px">
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Turmas?</option>
+          @foreach($escolas as $escola)
+            @forelse($escola->turmas as $turma)
+                @if($turma->escola_id == $escola->id)
+                  <option selected>{{ $turma->id }}</option>
+                @endif
+              @empty
+            @endforelse
+          @endforeach
+        </select>
+      </div>
+    </div>
+
+
+
       @foreach($ocorrencias as $occ)
           <div class="card w-75 mt-5 mb-5" style="background-color: #ddd">
             <div class="card-body">
