@@ -61,12 +61,6 @@
           var alertText = document.getElementById('charsRemainDec');
           alertText.textContent = "Caracteres restantes: " + charsQt;       
       }
-
-      function SelecionarEscola()
-      {
-        window.location.href = "{{ route('selecionar-escola') }}";
-
-      }
     </script>
 
 <body>
@@ -160,20 +154,22 @@
     </div>
 
     <div id="content" class="content" style="position:absolute; left:250px;" align="center">
-    <table style="height:0px; border: none; box-shadow: none">
-    </table>
-    <div class="input-group d-flex justify-content-center mt-3">
-      <div class="form-outline w-50">
-        <input type="search" id="form1" class="form-control" placeholder="Pesquisa"/>
+      <table style="height:0px; border: none; box-shadow: none" id="responsive-table">
+      </table>
+
+    <div class="form d-flex justify-content-center mt-3">
+      <div class="form-outline">
+        <input type="search" id="search" class="form-control" placeholder="Pesquisa"/>
       </div>
-      <button type="button" class="btn btn-primary">
+
+      <button type="button" class="btn btn-secondary disabled" style="border-radius: 0;">
         <i class="fa fa-search"></i>
       </button>
     </div>
 
     <div class="col d-flex justify-content-center mt-2">
       <div class="row-auto me-4" style="width: 208px">
-        <select class="form-select" aria-label="Default select example" name="selectEscola" onchange="SelecionarEscola()">
+        <select class="form-select" aria-label="Default select example" name="selectEscola">
           <option value="null" selected>Escolas</option>
           @foreach($escolas as $escola)
             <option value="{{ $escola->id }}">{{ $escola->morada }}</option>
@@ -184,38 +180,86 @@
       <div class="row-auto ms-4" style="width: 208px">
         <select class="form-select" aria-label="Default select example">
           <option selected>Turmas?</option>
-          @foreach($escolas as $escola)
-            @forelse($escola->turmas as $turma)
-                @if($turma->escola_id == $escola->id)
-                  <option selected>{{ $turma->id }}</option>
-                @endif
-              @empty
-            @endforelse
-          @endforeach
         </select>
       </div>
     </div>
 
+    <p id="output">
+      
+    </p>
 
+        <table class="text-center" id="table-ocorrencias">
+          <tr>
+            <th>Estado</th>
+            <th>Nome do aluno</th>
+            <th>Turma</th>
+            <th>Escola</th>
+            <th>Data</th>
+          </tr>
 
-      @foreach($ocorrencias as $occ)
-          <div class="card w-75 mt-5 mb-5" style="background-color: #ddd">
-            <div class="card-body">
-              <h5 class="card-title">{{ $occ->aluno->nome }}</h5>
-              <p class="card-text">{{ $occ->descricao }}</p>
-                <div class="d-flex justify-content-start">
-                  <ul>
-                    @forelse ($occ->motivos as $motivo)
-                      <li>{{ $motivo->motivo }}</li>
-                    @empty
-                      
-                    @endforelse
-                  </ul>
-                </div>
-              <a href="#" class="btn btn-primary">Ver ocorrência</a>
-            </div>
+          @foreach($ocorrencias as $occ)
+          <tr style="height:80px">
+            <td>Pendente</td> <!--Estado ocorrencia-->
+            <td>{{ $occ->aluno->nome }}</td> <!--Nome aluno-->
+            @foreach($occ->aluno->turma as $turma)
+            <td>{{ $turma->ano }}{{ $turma->codTurma }}</td> <!--Turma-->
+            <td>{{ $turma->escola->morada }}</td> <!--Escola-->
+            @endforeach
+            <td>{{ $occ->data }}</td> <!--Data de ocorrencia-->
+          </tr>
+          @endforeach
+        </table>
+
+      <!-- @foreach($ocorrencias as $occ)
+        <div class="card w-75 mt-5 mb-5" style="background-color: #ddd">
+          <div class="card-body">
+            <h5 class="card-title">{{ $occ->aluno->nome }}</h5>
+            <p class="card-text">{{ $occ->descricao }}</p>
+              <div class="d-flex justify-content-start">
+                <ul>
+                  @forelse ($occ->motivos as $motivo)
+                    <li>{{ $motivo->motivo }}</li>
+                  @empty
+                    
+                  @endforelse
+                </ul>
+              </div>
+            <a href="#" class="btn btn-primary">Ver ocorrência</a>
           </div>
-      @endforeach
+        </div>
+      @endforeach  -->
     </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <script>
+      $(document).ready(function(){
+        $("#search").keyup(function(){
+          $.ajax({
+            type:'GET',
+            url: '{{ route("atualizarOcorrencias") }}',
+            data: { name:$('#search').val() },
+            success:function(data)
+            {
+
+              //$('#output').html(data);
+
+              var tableRow = '';
+
+              $('#table-ocorrencias').html('');
+
+              $.each(JSON.parse(data), function(index, value){
+                console.log(data.aluno.nome);
+                tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+value.aluno.nome+'</td><td>'+value.data+'</td></tr>';
+              
+                $('#table-ocorrencias').append(tableRow);
+              })
+            }
+          });
+        })
+      })
+    </script>
+
     </body>
 <html>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Aluno;
+use App\Models\Turma;
+use App\Models\AlunoTurma;
 use App\Models\User;
 use App\Models\Ocorrencia;
 use App\Models\MotivoOcorrencia;
@@ -40,17 +42,17 @@ class MainController extends Controller
         }
     }
 
-    public function RegisterAlunoPage(Request $request)
+    public function RegisterAlunoPage(Request $request, Turma $turma)
     {
-        return view('alunoReg');
+        $turmas = Turma::all();
+
+        return view('alunoReg', ['turmas' => $turmas]);
     }
 
     public function RegisterAluno(Request $req)
     {
-      
+     
         Aluno::insert([
-            'ano' =>  $req->ano,
-            'turma' =>  $req->turma,
             'nome' =>  $req->nome,
             'datanasc' =>  $req->datanasc,
             'email' =>  $req->email,
@@ -60,6 +62,11 @@ class MainController extends Controller
             'concelho' =>  $req->concelho,
             'codpost' =>  $req->codpost,
             'cc' =>  $req->cc
+        ]);
+
+        AlunoTurma::insert([
+            'aluno_id' => Aluno::all()->reverse()->first()->id,
+            'turma_id' => $req->turma
         ]);
     }
 
@@ -99,18 +106,5 @@ class MainController extends Controller
             return back();
         }
 
-    }
-
-    public function pesquisar(Ocorrencia $ocorrencia)
-    {
-        $ocorrencias = Ocorrencia::all()->pluck('cod_a');
-
-        foreach($ocorrencias as $occ)
-        {
-            $nomes[] = Aluno::all()->where('id', $occ)->pluck('nome');
-
-        }
-
-        return view('pesquisa', compact('nomes'));
     }
 }

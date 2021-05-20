@@ -136,8 +136,14 @@
         <input type="text" name="nome"  id="boxtext" placeholder="Nome"><br>
         <input type="text" name="email" id="boxtext" placeholder="Email"><br>
         <input type="text" name="telef" id="boxtext" placeholder="Telemóvel"><br>
-        <input type="text" name="turma" id="boxtext" placeholder="Turma"><br>
-        <input type="text" name="ano" id="boxtext" placeholder="Ano"><br>
+        <select name="turma" id="boxtext">
+          <option>Turma</option>
+
+          @foreach($turmas as $turma)
+            <option value="{{ $turma->id }}">{{ $turma->ano }} {{ $turma->codTurma }}</option>
+          @endforeach
+        </select>
+        <br>
         <input type="date" name="datanasc" id="boxtext" placeholder="Data Nascimento"><br>
         <input type="text" name="nif" id="boxtext" placeholder="NIF"><br>
         <input type="text" name="cc" id="boxtext" placeholder="Cartão de Cidadão"><br>

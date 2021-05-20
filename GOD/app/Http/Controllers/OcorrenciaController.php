@@ -18,12 +18,26 @@ class OcorrenciaController extends Controller
     public function index(Ocorrencia $ocorrencia, Escola $escola)
     {
         $ocorrencias = Ocorrencia::all()->reverse();
+
         $escolas = Escola::all();
         return view('pesquisa', ['ocorrencias' => $ocorrencias], ['escolas' => $escolas]);  
     }
 
-    public function AtualizarInfo()
+    public function AtualizarInfo(Request $req)
     {
+        $alunos_id = Ocorrencia::all()->reverse()->pluck('aluno_id');
+        $search = $req->name;
+
+        foreach ($alunos_id as $id) {
+            $alunos = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id'); 
+        }   
+
+        foreach ($alunos as $aluno) {
+            $ocorrencias = Ocorrencia::where('aluno_id', $aluno)->get();
+        }
+
+        return json_encode($ocorrencias);
+
         
     }
 
@@ -77,9 +91,8 @@ class OcorrenciaController extends Controller
      * @param  \App\Models\Ocorrencia  $ocorrencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ocorrencia $ocorrencia)
+    public function update(Request $req, Ocorrencia $ocorrencia)
     {
-        //
     }
 
     /**

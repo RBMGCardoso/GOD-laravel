@@ -15,7 +15,6 @@ class CreateAlunosTable extends Migration
     {
         Schema::create('alunos', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('turma_id')->unsigned();
             $table->string('nome');
             $table->date('datanasc');
             $table->string('email');
@@ -25,9 +24,8 @@ class CreateAlunosTable extends Migration
             $table->string('concelho');
             $table->string('codpost');
             $table->string('cc');
-            $table->timestamps();
 
-            $table->foreign('turma_id')->references('id')->on('turmas');
+            $table->timestamps();
         });
     }
 

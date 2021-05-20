@@ -31,10 +31,6 @@ Route::get('/ocorrencia', [MainController::Class, 'OcorrenciaPage'])->name('ocor
 
 Route::post('/ocorrencia', [MainController::Class, 'criarOcorrencia'])->name('ocorrencia.criar');
 
-Route::get('/pesquisar', [MainController::Class, 'pesquisar'])->name('pesquisar');
-Route::get('/ocorrenciaSelecionarEscola', [PesquisaController::Class, 'SelecionarEscola'])->name('selecionar-escola');
-
-
 
 
 Route::get('/nomeAluno', [MainController::Class, 'NomeAluno'])->name('aluno.nome');
@@ -52,3 +48,4 @@ Route::get('/logout', [UserAuthController::Class, 'logout'])->name('logout');
 Route::post('check', [UserAuthController::Class, 'check'])->name('auth.check');
 
 Route::get('ocorrencias', [OcorrenciaController::Class, 'index'])->name('mostrarOcorrencias');
+Route::get('ocorrenciasAtualizarInfo', [OcorrenciaController::Class, 'AtualizarInfo'])->name('atualizarOcorrencias');

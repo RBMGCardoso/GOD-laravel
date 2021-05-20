@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class AlunoTurma extends Model
 {
     use HasFactory;
+
+    protected $table = 'aluno_turma';
 }

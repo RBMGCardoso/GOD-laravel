@@ -11,6 +11,6 @@ class Escola extends Model
 
     public function turmas()
     {
-        return $this->hasMany(Turma::Class);
+        return $this->belongsToMany(Turma::Class);
     }
 }

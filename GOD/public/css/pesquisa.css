@@ -1,16 +1,5 @@
-.info
-{
-    width: 61%;
-}
-
-.container{
-    position: relative;
-    top: 2%;
-    left: 20%;
-}
-
 /* Table */
-table{
+#responsive-table{
     table-layout: fixed;
     width: 61%;
     height: 600px;
@@ -20,100 +9,30 @@ table{
     box-shadow: 0 0 0 2px #ccc; /* this draws the table border  */ 
 }
 
-td{
-    border: 2px solid #ccc;
-    border-collapse: collapse;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.checkmark{ /* Tirar a borda da checkbox*/
-    position: relative;
-    width: 25px;
-    height: 35px;
-    vertical-align: middle;
-}
-
-/* Descrição */
-textarea {
-    width: 61%;
-    height: 150px;
-    padding: 12px 20px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    resize: none;
-    word-break: break-word;
-    font-family: "Arial";
-}
-
-.bt_sub{
-    width: 15vw;
-    min-width: 100px;
-    height: 30px;
-    border: 0;
-    background: #2f323a;
-    border-radius: 10px;
-    color: #fff;
-    outline:none;
-}
-
-.bt_sub:hover
-{
-    background-color: rgba(121, 255, 255, 1);
-}
-
-#fname
-{
-    width: 71%;
-    min-width: 31%;
-    height: 20px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#num
-{
-    width: calc(calc(100% - 75%) / 2);
-    min-width: 100px;
-    height: 20px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#anoturma
-{
-    width: calc(calc(100% - 75%) / 2);
-    min-width: 100px;
-    height: 20px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#disciplina
-{
-    width: 20vw;
-    height: 20px;
-    padding: 12px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#data
-{
-    width: 15vw;
-    height: 20px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
 .content
 {
     transition:0.4s;
+}
+
+#search
+{
+    width: 50vw;
+    border-radius: 0;
+}
+
+#search:focus
+{
+    border-color: #ccc;
+    outline: none;
+    box-shadow: none;
+}
+
+#table-ocorrencias
+{
+    width: 60vw;
+}
+
+th,td,tr
+{
+    border: 1px solid black;
 }
