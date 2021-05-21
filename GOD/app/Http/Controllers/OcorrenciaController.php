@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Ocorrencia;
 use App\Models\Aluno;
+use App\Models\AlunoTurma;
+use App\Models\Turma;
 use App\Models\Escola;
 use Illuminate\Http\Request;
 
@@ -30,14 +32,52 @@ class OcorrenciaController extends Controller
 
         foreach ($alunos_id as $id) {
             $alunos = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id'); 
-        }   
+        }  
+
 
         foreach ($alunos as $aluno) {
-            $ocorrencias = Ocorrencia::where('aluno_id', $aluno)->get();
+            $json_OccId[] = Ocorrencia::where('aluno_id', $aluno)->pluck('aluno_id')->collect();
         }
 
-        return json_encode($ocorrencias);
+        
 
+        //Coloca os ids de cada ocorrencia num unico array
+        if(count($json_OccId) > 1)
+        {
+            for ($i=0; $i < count($json_OccId); $i++) { 
+                $json_ocorrencias = $json_OccId[0]->merge($json_OccId[$i]);                
+            }
+        }
+        else
+        {
+            $json_ocorrencias = $json_OccId[0];
+        }
+
+        $json_AlunoId = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id');
+
+        foreach($json_AlunoId as $alunoId)
+        {
+            $json_AlunoNome = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('nome')->reverse();
+            $json_TurmaId = AlunoTurma::where('aluno_id', $alunoId)->pluck('turma_id');
+
+            foreach($json_TurmaId as $turmaId)
+            {
+                $json_TurmaAno[] = Turma::where('id', $turmaId)->pluck('ano');
+                $json_TurmaCod[] = Turma::where('id', $json_TurmaId)->pluck('codTurma');
+            }                     
+        }
+        
+        for ($i=0; $i < count($json_AlunoNome); $i++) { 
+            $json_nomeAluno[$json_AlunoId[$i]] = $json_AlunoNome[$i];
+        }
+
+        //dd($json_ocorrencias));
+        
+        $array['occId'] = $json_ocorrencias;
+        $array['nomeAluno'] = $json_nomeAluno;
+        $array['turmaAno'] = $json_TurmaAno;
+        $array['turmaCod'] = $json_TurmaCod;
+        return json_encode($array);
         
     }
 

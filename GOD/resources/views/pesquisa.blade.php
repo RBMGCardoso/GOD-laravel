@@ -188,26 +188,31 @@
       
     </p>
 
-        <table class="text-center" id="table-ocorrencias">
-          <tr>
-            <th>Estado</th>
-            <th>Nome do aluno</th>
-            <th>Turma</th>
-            <th>Escola</th>
-            <th>Data</th>
-          </tr>
 
-          @foreach($ocorrencias as $occ)
-          <tr style="height:80px">
-            <td>Pendente</td> <!--Estado ocorrencia-->
-            <td>{{ $occ->aluno->nome }}</td> <!--Nome aluno-->
-            @foreach($occ->aluno->turma as $turma)
-            <td>{{ $turma->ano }}{{ $turma->codTurma }}</td> <!--Turma-->
-            <td>{{ $turma->escola->morada }}</td> <!--Escola-->
+        <table class="text-center" id="table-ocorrencias">
+          <thead>
+            <tr>
+              <th>Estado</th>
+              <th>Nome do aluno</th>
+              <th>Turma</th>
+              <th>Escola</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+
+          <tbody id="table-body">
+            @foreach($ocorrencias as $occ)
+            <tr style="height:80px">
+              <td>Pendente</td> <!--Estado ocorrencia-->
+              <td>{{ $occ->aluno->nome }}</td> <!--Nome aluno-->
+              @foreach($occ->aluno->turma as $turma)
+              <td>{{ $turma->ano }}{{ $turma->codTurma }}</td> <!--Turma-->
+              <td>{{ $turma->escola->morada }}</td> <!--Escola-->
+              @endforeach
+              <td>{{ $occ->data }}</td> <!--Data de ocorrencia-->
+            </tr>
             @endforeach
-            <td>{{ $occ->data }}</td> <!--Data de ocorrencia-->
-          </tr>
-          @endforeach
+          </tbody>
         </table>
 
       <!-- @foreach($ocorrencias as $occ)
@@ -240,20 +245,25 @@
             type:'GET',
             url: '{{ route("atualizarOcorrencias") }}',
             data: { name:$('#search').val() },
-            success:function(data)
+            success:function(occ)
             {
-
-              //$('#output').html(data);
+              var vars = JSON.parse(occ);
+              //$('#output').html(occ);
+              //console.log(vars.nomeAluno);
 
               var tableRow = '';
 
-              $('#table-ocorrencias').html('');
+              $('#table-body').html('');
 
-              $.each(JSON.parse(data), function(index, value){
-                console.log(data.aluno.nome);
-                tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+value.aluno.nome+'</td><td>'+value.data+'</td></tr>';
+              var iterations = 0;
+              console.log('---RESET---');
+              $.each(vars.occId, function(index, value){
+                console.log(vars.occId);
+                console.log(vars.nomeAluno);
+                tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAno[index]+' '+vars.turmaCod[index]+'</td></tr>';
               
-                $('#table-ocorrencias').append(tableRow);
+                $('#table-body').append(tableRow);
+                iterations++;
               })
             }
           });
