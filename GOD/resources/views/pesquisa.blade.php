@@ -246,25 +246,31 @@
             url: '{{ route("atualizarOcorrencias") }}',
             data: { name:$('#search').val() },
             success:function(occ)
-            {
-              var vars = JSON.parse(occ);
-              //$('#output').html(occ);
-              //console.log(vars.nomeAluno);
+            {  
+            var vars = JSON.parse(occ);
+            //$('#output').html(occ);
+            //console.log(vars.occId.length);
 
               var tableRow = '';
 
               $('#table-body').html('');
 
-              var iterations = 0;
-              console.log('---RESET---');
+              //Repete para cada ocorrencia encontrada
               $.each(vars.occId, function(index, value){
-                console.log(vars.occId);
-                console.log(vars.nomeAluno);
-                tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAno[index]+' '+vars.turmaCod[index]+'</td></tr>';
+                tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAluno[vars.occId[index]]+'</td></tr>';
               
                 $('#table-body').append(tableRow);
-                iterations++;
+  
               })
+
+              //Se não existirem ocorrencias encontradas
+              if(vars.occId == 0)
+              {
+                console.log('não existe nada');
+                tableRow = '<tr style="height:80px"><td colspan="5">Não foram encontrados resultados</td></tr>';
+                $('#table-body').append(tableRow);
+              }
+              
             }
           });
         })

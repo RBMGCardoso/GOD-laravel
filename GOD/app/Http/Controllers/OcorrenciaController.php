@@ -27,57 +27,121 @@ class OcorrenciaController extends Controller
 
     public function AtualizarInfo(Request $req)
     {
-        $alunos_id = Ocorrencia::all()->reverse()->pluck('aluno_id');
         $search = $req->name;
 
-        foreach ($alunos_id as $id) {
-            $alunos = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id'); 
-        }  
+        $AlunoTurmaAlunoId = AlunoTurma::all()->pluck('aluno_id');
+        $AlunoTurmaId = AlunoTurma::all()->pluck('turma_id');
 
+        $TurmaId = Turma::all()->pluck('id');
+        $TurmaAno = Turma::all()->pluck('ano');
+        $TurmaCod = Turma::all()->pluck('codTurma');
 
-        foreach ($alunos as $aluno) {
-            $json_OccId[] = Ocorrencia::where('aluno_id', $aluno)->pluck('aluno_id')->collect();
-        }
+        $idAlunoSearch = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id');
 
-        
+        $OccAlunoId = Ocorrencia::all()->reverse()->pluck('aluno_id');
+ 
 
-        //Coloca os ids de cada ocorrencia num unico array
-        if(count($json_OccId) > 1)
+        $idAluno = Aluno::all()->pluck('nome');
+
+        //Verifica se foram encontrados alunos
+        if(count($idAlunoSearch)>0)
         {
-            for ($i=0; $i < count($json_OccId); $i++) { 
-                $json_ocorrencias = $json_OccId[0]->merge($json_OccId[$i]);                
-            }
+            //For para todas as ocorrencias
+            for ($i=0; $i < count($OccAlunoId); $i++) { 
+                //For para todos os alunos
+                for ($j=0; $j < count($idAlunoSearch); $j++) { 
+                    //$i = aluno_id em ocorrencias || $j = id em alunos
+                        if($idAlunoSearch[$j] == $OccAlunoId[$i])
+                        {
+                            $json_OccId[$i] = $OccAlunoId[$i];
+                            $json_AlunoNome[$idAlunoSearch[$j]] = $idAluno[$OccAlunoId[$i]-1];
+
+                            //For para todas as turmas
+                            for ($y=0; $y < count($TurmaId); $y++) { 
+                                if($AlunoTurmaId[$json_OccId[$i]-1] == $TurmaId[$y])
+                                {
+                                    $json_Turma[$idAlunoSearch[$j]] = $TurmaAno[$y].$TurmaCod[$y];
+                                }
+                            }
+                        }
+                }          
+            }    
+
+            $array['occId'] = $json_OccId;
+            $array['nomeAluno'] = $json_AlunoNome;
+            $array['turmaAluno'] = $json_Turma;
         }
         else
         {
-            $json_ocorrencias = $json_OccId[0];
+            $array['occId'] = 0;
         }
 
-        $json_AlunoId = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id');
 
-        foreach($json_AlunoId as $alunoId)
-        {
-            $json_AlunoNome = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('nome')->reverse();
-            $json_TurmaId = AlunoTurma::where('aluno_id', $alunoId)->pluck('turma_id');
-
-            foreach($json_TurmaId as $turmaId)
-            {
-                $json_TurmaAno[] = Turma::where('id', $turmaId)->pluck('ano');
-                $json_TurmaCod[] = Turma::where('id', $json_TurmaId)->pluck('codTurma');
-            }                     
-        }
-        
-        for ($i=0; $i < count($json_AlunoNome); $i++) { 
-            $json_nomeAluno[$json_AlunoId[$i]] = $json_AlunoNome[$i];
-        }
-
-        //dd($json_ocorrencias));
-        
-        $array['occId'] = $json_ocorrencias;
-        $array['nomeAluno'] = $json_nomeAluno;
-        $array['turmaAno'] = $json_TurmaAno;
-        $array['turmaCod'] = $json_TurmaCod;
+        //dd(count($idAlunoSearch));
         return json_encode($array);
+
+
+
+        
+
+        // $alunos_id = Ocorrencia::all()->reverse()->pluck('aluno_id');
+        // $search = $req->name;
+
+        // foreach ($alunos_id as $id) {
+        //     $alunos = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id'); 
+        // }  
+
+
+        // foreach ($alunos as $aluno) {
+        //     $json_OccId[] = Ocorrencia::where('aluno_id', $aluno)->pluck('aluno_id')->collect();
+        // }
+
+        
+
+        // if($search == null)
+        // {
+        //     $json_ocorrencias = Ocorrencia::all()->reverse()->pluck('aluno_id');
+        // }
+        // else
+        // {
+        //     //Coloca os ids de cada ocorrencia num unico array
+        //     if(count($json_OccId) > 1)
+        //     {
+        //         for ($i=0; $i < count($json_OccId); $i++) { 
+        //             $json_ocorrencias = $json_OccId[0]->merge($json_OccId[$i]);                
+        //         }
+        //     }
+        //     else
+        //     {
+        //         $json_ocorrencias = $json_OccId[0];
+        //     }
+        // }
+
+        // $json_AlunoId = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id');
+
+        // foreach($json_AlunoId as $alunoId)
+        // {
+        //     $json_AlunoNome = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('nome')->reverse();
+        //     $json_TurmaId = AlunoTurma::where('aluno_id', $alunoId)->pluck('turma_id');
+
+        //     foreach($json_TurmaId as $turmaId)
+        //     {
+        //         $json_TurmaAno[] = Turma::where('id', $turmaId)->pluck('ano');
+        //         $json_TurmaCod[] = Turma::where('id', $json_TurmaId)->pluck('codTurma');
+        //     }                     
+        // }
+        
+        // for ($i=0; $i < count($json_AlunoNome); $i++) { 
+        //     $json_nomeAluno[$json_AlunoId[$i]] = $json_AlunoNome[$i];
+        // }
+
+        
+        
+        // $array['occId'] = $json_ocorrencias;
+        // $array['nomeAluno'] = $json_nomeAluno;
+        // $array['turmaAno'] = $json_TurmaAno;
+        // $array['turmaCod'] = $json_TurmaCod;
+        // return json_encode($array);
         
     }
 
