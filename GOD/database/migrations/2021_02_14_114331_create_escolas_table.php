@@ -15,6 +15,7 @@ class CreateEscolasTable extends Migration
     {
         Schema::create('escolas', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->string('nome');
             $table->string('morada');
             $table->string('concelho');
             $table->string('codpost');

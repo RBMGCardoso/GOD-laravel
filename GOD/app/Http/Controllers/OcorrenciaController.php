@@ -62,7 +62,7 @@ class OcorrenciaController extends Controller
                                 {
                                     $json_Turma[$idAlunoSearch[$j]] = $TurmaAno[$y].$TurmaCod[$y];
                                 }
-                            }
+                            }       
                         }
                 }          
             }    
@@ -73,11 +73,14 @@ class OcorrenciaController extends Controller
         }
         else
         {
-            $array['occId'] = 0;
+            //Retorna 0 que não é um ID válido para uma ocorrência
+            //caso não sejam encontrados alunos
+            //mostrando assim a mensagem "Não foram encontrados resultados"
+            //$array['occId'] = 0;
         }
 
 
-        //dd(count($idAlunoSearch));
+        //dd($json_Escola);
         return json_encode($array);
 
 

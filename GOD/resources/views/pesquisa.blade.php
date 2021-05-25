@@ -207,7 +207,7 @@
               <td>{{ $occ->aluno->nome }}</td> <!--Nome aluno-->
               @foreach($occ->aluno->turma as $turma)
               <td>{{ $turma->ano }}{{ $turma->codTurma }}</td> <!--Turma-->
-              <td>{{ $turma->escola->morada }}</td> <!--Escola-->
+              <td>{{ $turma->escola->nome }}</td> <!--Escola-->
               @endforeach
               <td>{{ $occ->data }}</td> <!--Data de ocorrencia-->
             </tr>
@@ -247,9 +247,8 @@
             data: { name:$('#search').val() },
             success:function(occ)
             {  
-            var vars = JSON.parse(occ);
-            //$('#output').html(occ);
-            //console.log(vars.occId.length);
+              var vars = JSON.parse(occ);
+              //$('#output').html(occ);
 
               var tableRow = '';
 
@@ -260,7 +259,9 @@
                 tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAluno[vars.occId[index]]+'</td></tr>';
               
                 $('#table-body').append(tableRow);
-  
+
+                //console.log(vars.escolaAluno);
+
               })
 
               //Se não existirem ocorrencias encontradas
@@ -269,8 +270,7 @@
                 console.log('não existe nada');
                 tableRow = '<tr style="height:80px"><td colspan="5">Não foram encontrados resultados</td></tr>';
                 $('#table-body').append(tableRow);
-              }
-              
+              }            
             }
           });
         })
