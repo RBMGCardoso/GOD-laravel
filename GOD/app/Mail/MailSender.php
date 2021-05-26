@@ -30,6 +30,6 @@ class MailSender extends Mailable
      */
     public function build()
     {
-        return $this->subject('Test GOD')->view('emails.Mail');
+        return $this->subject('Notificação de Ocorrência Disciplinar')->view('emails.Mail');
     }
 }
