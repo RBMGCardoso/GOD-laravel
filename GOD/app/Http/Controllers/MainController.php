@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+//Envio de emails
+use App\Mail\MailSender;
+use Illuminate\Support\Facades\Mail;
+
 use App\Models\Aluno;
 use App\Models\Turma;
 use App\Models\AlunoTurma;
 use App\Models\User;
 use App\Models\Ocorrencia;
 use App\Models\MotivoOcorrencia;
+
 
 class MainController extends Controller
 {
@@ -99,6 +104,14 @@ class MainController extends Controller
                     'ocorrencia_id' => Ocorrencia::all()->reverse()->first()->id
                 ]);
             }
+            
+            $details = [
+                'title' => 'Ocorrência criada por '.session('LoggedUser')->name.' a '.date('d/m/Y', strtotime($req->data)).' ás '.date('H', strtotime($req->data)).'h:'.date('i', strtotime($req->data)).'m',
+                'body' => 'O aluno test'
+            ];
+
+            Mail::to("a28878@aelourinha.pt")->send(new MailSender($details));
+
             return redirect('dashboard');
         }
         else

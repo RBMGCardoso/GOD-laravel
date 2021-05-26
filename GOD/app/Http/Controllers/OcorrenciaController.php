@@ -35,10 +35,15 @@ class OcorrenciaController extends Controller
         $TurmaId = Turma::all()->pluck('id');
         $TurmaAno = Turma::all()->pluck('ano');
         $TurmaCod = Turma::all()->pluck('codTurma');
+        $TurmaEscolaId = Turma::all()->pluck('escola_id');
+
+        $EscolaId = Escola::all()->pluck('id');
+        $EscolaNome = Escola::all()->pluck('nome');
 
         $idAlunoSearch = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id');
 
         $OccAlunoId = Ocorrencia::all()->reverse()->pluck('aluno_id');
+        $OccData = Ocorrencia::all()->reverse()->pluck('data');
  
 
         $idAluno = Aluno::all()->pluck('nome');
@@ -54,6 +59,7 @@ class OcorrenciaController extends Controller
                         if($idAlunoSearch[$j] == $OccAlunoId[$i])
                         {
                             $json_OccId[$i] = $OccAlunoId[$i];
+                            $json_OccData[$i] = $OccData[$i];
                             $json_AlunoNome[$idAlunoSearch[$j]] = $idAluno[$OccAlunoId[$i]-1];
 
                             //For para todas as turmas
@@ -61,6 +67,15 @@ class OcorrenciaController extends Controller
                                 if($AlunoTurmaId[$json_OccId[$i]-1] == $TurmaId[$y])
                                 {
                                     $json_Turma[$idAlunoSearch[$j]] = $TurmaAno[$y].$TurmaCod[$y];
+                                    $forTurmaId[$idAlunoSearch[$j]] = $y+1; //$y+1 id turma
+
+                                    //For para todas as escolas
+                                    for ($x=0; $x < count($EscolaId); $x++) { 
+                                        if($forTurmaId[$json_OccId[$i]] == $EscolaId[$x])
+                                        {
+                                            $json_EscolaNome[$idAlunoSearch[$j]] = $EscolaNome[$x];
+                                        }
+                                    }
                                 }
                             }       
                         }
@@ -70,17 +85,18 @@ class OcorrenciaController extends Controller
             $array['occId'] = $json_OccId;
             $array['nomeAluno'] = $json_AlunoNome;
             $array['turmaAluno'] = $json_Turma;
+            $array['nomeEscola'] = $json_EscolaNome;
+            $array['dataOcorrencia'] = $json_OccData;
         }
         else
         {
             //Retorna 0 que não é um ID válido para uma ocorrência
             //caso não sejam encontrados alunos
             //mostrando assim a mensagem "Não foram encontrados resultados"
-            //$array['occId'] = 0;
+            $array['occId'] = 0;
         }
 
 
-        //dd($json_Escola);
         return json_encode($array);
 
 

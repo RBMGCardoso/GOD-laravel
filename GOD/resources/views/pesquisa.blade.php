@@ -256,7 +256,7 @@
 
               //Repete para cada ocorrencia encontrada
               $.each(vars.occId, function(index, value){
-                tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAluno[vars.occId[index]]+'</td></tr>';
+                tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAluno[vars.occId[index]]+'</td><td>'+vars.nomeEscola[vars.occId[index]]+'</td><td>'+vars.dataOcorrencia[index]+'</td></tr>';
               
                 $('#table-body').append(tableRow);
 
