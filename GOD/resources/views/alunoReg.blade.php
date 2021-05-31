@@ -131,27 +131,34 @@
       <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
       <script src="./js/sidebars.js"></script>
     </div>
-    <div class="container d-flex justify-content-center" id="registo">
-      <form method="POST" action="{{ route('register.aluno') }}">
-        <input type="text" name="nome"  id="boxtext" placeholder="Nome"><br>
-        <input type="text" name="email" id="boxtext" placeholder="Email"><br>
-        <input type="text" name="telef" id="boxtext" placeholder="Telemóvel"><br>
-        <select name="turma" id="boxtext">
-          <option>Turma</option>
+    <div class="full-page">
+      <div class="row title d-flex justify-content-center align-items-center">
+        <h1 class="w-auto">Registo de Ocorrência / Participação Disciplinar</h1>
+      </div>
 
-          @foreach($turmas as $turma)
-            <option value="{{ $turma->id }}">{{ $turma->ano }} {{ $turma->codTurma }}</option>
-          @endforeach
-        </select>
-        <br>
-        <input type="date" name="datanasc" id="boxtext" placeholder="Data Nascimento"><br>
-        <input type="text" name="nif" id="boxtext" placeholder="NIF"><br>
-        <input type="text" name="cc" id="boxtext" placeholder="Cartão de Cidadão"><br>
-        <input type="text" name="morada" id="boxtext" placeholder="Morada"><br>
-        <input type="text" name="concelho" id="boxtext" placeholder="Concelho"><br>
-        <input type="text" name="codpost" id="boxtext" placeholder="Código Postal"><br>
-        <button class="bt_sub" value="submit">SUBMETER</button>
-      </form>
+      <div class="container d-flex justify-content-center" id="registo">
+        <form method="POST" action="{{ route('register.aluno') }}">
+          
+          <input type="text" name="nome"  id="boxtext" placeholder="Nome"><br>
+          <input type="text" name="email" id="boxtext" placeholder="Email"><br>
+          <input type="text" name="telef" id="boxtext" placeholder="Telemóvel"><br>
+          <select name="turma" id="boxtext">
+            <option>Turma</option>
+
+            @foreach($turmas as $turma)
+              <option value="{{ $turma->id }}">{{ $turma->ano }} {{ $turma->codTurma }}</option>
+            @endforeach
+          </select>
+          <br>
+          <input type="date" name="datanasc" id="boxtext" placeholder="Data Nascimento"><br>
+          <input type="text" name="nif" id="boxtext" placeholder="NIF"><br>
+          <input type="text" name="cc" id="boxtext" placeholder="Cartão de Cidadão"><br>
+          <input type="text" name="morada" id="boxtext" placeholder="Morada"><br>
+          <input type="text" name="concelho" id="boxtext" placeholder="Concelho"><br>
+          <input type="text" name="codpost" id="boxtext" placeholder="Código Postal"><br>
+          <button class="bt_sub" value="submit">SUBMETER</button>
+        </form>
+      </div>
     </div>
 </body>
 </html>

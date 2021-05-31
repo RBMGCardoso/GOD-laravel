@@ -1,24 +1,45 @@
-.info
+body{
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+.full-content
 {
-
-    width: 61%;
+    transition:0.4s;
 }
 
-.container{
-    position: relative;
-    top: 2%;
-    left: 20%;
+.title{
+    background-color: rgba(121, 255, 255, 1);
+    height: 200px;
+    margin-bottom: 20px;
 }
 
-/* Table */
+h1{
+    font-weight: 500;
+    color: #f8f8f8;
+}
+
+.identification{
+    width: 100%;
+}
+
+.input-box{
+    border: 2px solid #ccc;
+    border-radius: 0px;
+}
+
+.box-motivos{
+    width: 85%;
+}
+
 table{
     table-layout: fixed;
-    width: 61%;
+    width: 85%;
     height: 600px;
     border-collapse: collapse;
-    border-radius: 2px;
-    border-style: hidden; /* hide standard table (collapsed) border */
-    box-shadow: 0 0 0 2px #ccc; /* this draws the table border  */ 
+    border-radius: 1px;
+    border-style: hidden;
+    box-shadow: 0 0 0 2px #ccc; 
 }
 
 td{
@@ -28,14 +49,13 @@ td{
     padding-right: 10px;
 }
 
-.checkmark{ /* Tirar a borda da checkbox*/
+.checkmark{
     position: relative;
     width: 25px;
     height: 35px;
     vertical-align: middle;
 }
 
-/* Descrição */
 textarea {
     width: 61%;
     height: 150px;
@@ -49,10 +69,10 @@ textarea {
     font-family: "Arial";
 }
 
-.bt_sub{
+.btn-sub{
     width: 15vw;
     min-width: 100px;
-    height: 30px;
+    height: 40px;
     border: 0;
     background: #2f323a;
     border-radius: 10px;
@@ -60,61 +80,7 @@ textarea {
     outline:none;
 }
 
-.bt_sub:hover
+.btn-sub:hover
 {
     background-color: rgba(121, 255, 255, 1);
-}
-
-#fname
-{
-    width: 71%;
-    min-width: 31%;
-    height: 20px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#num
-{
-    width: calc(calc(100% - 75%) / 2);
-    min-width: 100px;
-    height: 20px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#anoturma
-{
-    width: calc(calc(100% - 75%) / 2);
-    min-width: 100px;
-    height: 20px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#disciplina
-{
-    width: 20vw;
-    height: 20px;
-    padding: 12px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#data
-{
-    width: 15vw;
-    height: 20px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.content
-{
-    transition:0.4s;
 }

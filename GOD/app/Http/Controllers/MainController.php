@@ -104,7 +104,7 @@ class MainController extends Controller
                     'ocorrencia_id' => Ocorrencia::all()->reverse()->first()->id
                 ]);
             }
-            
+            /*
             $details = [
                 'title' => 'Ocorrência criada por '.session('LoggedUser')->name.' a '.date('d/m/Y', strtotime($req->data)).' ás '.date('H', strtotime($req->data)).'h:'.date('i', strtotime($req->data)).'m',
                 'nomeAluno' => 'Foi criada uma ocorrência envolvendo o aluno '.Aluno::where('id', Ocorrencia::all()->reverse()->first()->aluno_id)->pluck('nome')->first().' da turma '.Turma::where('id', AlunoTurma::where('aluno_id', Aluno::where('id', Ocorrencia::all()->reverse()->first()->aluno_id)->pluck('id')->first())->pluck('turma_id')->first())->pluck('ano')->first().Turma::where('id', AlunoTurma::where('aluno_id', Aluno::where('id', Ocorrencia::all()->reverse()->first()->aluno_id)->pluck('id')->first())->pluck('turma_id')->first())->pluck('codTurma')->first(),
@@ -112,7 +112,7 @@ class MainController extends Controller
                 'decisao' => $req->textADec
             ];
 
-            Mail::to("")->send(new MailSender($details));
+            Mail::to("")->send(new MailSender($details));*/
 
             return redirect('dashboard');
         }
