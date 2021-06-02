@@ -161,7 +161,6 @@
 
           <div class="row justify-content-center">
             <div class="col-auto">
-
               <div class="row m-0 justify-content-center p-0 mt-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
                 <span class="w-auto m-0" style="line-height:30px">Dados do Aluno</span>
               </div>
@@ -203,7 +202,7 @@
                 </div>
               </div>
 
-              <div class="row m-0 justify-content-center p-0 mt-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+              <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
                 <span class="w-auto m-0" style="line-height:30px">Motivos</span>
               </div>
 
@@ -330,19 +329,30 @@
                 </table>
               </div>
 
-              <div class="row m-0 pt-5" style="width: 60vw;">
-                <label>Descrição da Ocorrência:</label>
-                <textarea maxlength="350" oninput="CharsCounterDesc()" name="textADesc" id="textADesc" style="font-size: 20px; width:100%"></textarea>
+              <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                <span class="separador w-auto m-0" style="line-height:30px">Descrição de Ocorrência</span>
+              </div>
+
+              <div class="row m-0 mt-3" style="width: 60vw;">
+                <textarea maxlength="350" oninput="CharsCounterDesc()" name="textADesc" id="textADesc" style="font-size: 20px; width:100%" placeholder="Descrição de Ocorrência"></textarea>
                 <span id="charsRemainDesc" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
               </div>
               
-              <div class="row m-0 pt-5" style="width: 60vw;">
-                <label>Em consequência disso, tomei a seguinte decisão:</label>
-                <textarea maxlength="350" oninput="CharsCounterDec()" name="textADec" id="textADec" style="font-size: 20px; width:100%"></textarea>
+              <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                <span class="w-auto m-0" style="line-height:30px">Decisão Tomada</span>
+              </div>
+
+              <div class="row m-0 mt-3" style="width: 60vw;">
+                <label></label>
+                <textarea maxlength="350" oninput="CharsCounterDec()" name="textADec" id="textADec" style="font-size: 20px; width:100%" placeholder="Em consequência disso, tomei a seguinte decisão..."></textarea>
                 <span id="charsRemainDec" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
               </div>
 
-              <div class="row m-0 pt-5" style="width: 60vw;">
+              <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                <span class="w-auto m-0" style="line-height:30px">Observaçôes de Comportamento</span>
+              </div>
+
+              <div class="row m-0 mt-3" style="width: 60vw;">
                 <div class="col" style="width: 50%; padding: 0px;">
                     <p>O comportamento observou-se neste aluno:</p>
 

@@ -3,6 +3,11 @@ body{
     overflow-x: hidden;
 }
 
+.separador{
+    color: #2f323a;
+    font-weight: 500;
+}
+
 .full-content
 {
     transition:0.4s;
@@ -75,7 +80,7 @@ textarea {
     height: 40px;
     border: 0;
     background: #2f323a;
-    border-radius: 10px;
+    border-radius: 4px;
     color: #fff;
     outline:none;
 }
@@ -83,4 +88,5 @@ textarea {
 .btn-sub:hover
 {
     background-color: rgba(121, 255, 255, 1);
+    color: #2f323a;
 }
