@@ -48,7 +48,7 @@
       function CharsCounterDesc()
       {
           var descText = document.getElementById('textADesc');
-          var charsQt = 350 - descText.value.length;
+          var charsQt = 500 - descText.value.length;
           
           var alertText = document.getElementById('charsRemainDesc');
           alertText.textContent = "Caracteres restantes: " + charsQt;       
@@ -56,8 +56,8 @@
 
       function CharsCounterDec()
       {
-          var descText = document.getElementById('textADec');
-          var charsQt = 350 - descText.value.length;
+          var decText = document.getElementById('textADec');
+          var charsQt = 350 - decText.value.length;
           
           var alertText = document.getElementById('charsRemainDec');
           alertText.textContent = "Caracteres restantes: " + charsQt;       
