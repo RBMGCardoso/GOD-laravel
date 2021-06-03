@@ -162,234 +162,246 @@
           <div class="row justify-content-center">
             <div class="col-auto">
 
-              <div class="row m-0 justify-content-center p-0 mt-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                <span class="w-auto m-0" style="line-height:30px">Dados do Aluno</span>
+              <div class="row m-0 justify-content-center p-0 mt-4 mb-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                <span class="w-auto m-0 separador" style="line-height:30px">Dados do Aluno</span>
               </div>
 
-              <div class="row-auto identification d-flex mt-3">
-                <div class="col">
-                  <div class="row m-0" style="width: 60vw;">
-                    <div class="col-9 p-0">
-                      <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Aluno">
-    
-                      <datalist id="nomes" style="width:100% !important">   
-                        @foreach($alunos as $aluno)
-                          <option value="{{ $aluno->nome }}">
-                        @endforeach
-                      </datalist>
-                    </div>   
+              <form method="POST" action="{{ route('ocorrencia.criar') }}">
+                <div class="row-auto identification d-flex mt-3">
+                  <div class="col">
+                    <div class="row m-0" style="width: 60vw;">
+                      <div class="col-9 p-0">
+                        <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Aluno">
+      
+                        <datalist id="nomes" style="width:100% !important">   
+                          @foreach($alunos as $aluno)
+                            <option value="{{ $aluno->nome }}">
+                          @endforeach
+                        </datalist>
+                      </div>   
+                      
+                      <div class="col-1 p-0">
+                        <input class="input-box form-control" type="text" id="num" name="numero" placeholder="Nº. Aluno">
+                      </div>
+                      <div class="col-2 p-0">
+                        <input class="input-box form-control" type="text" id="anoturma" name="anoturma" placeholder="Ano e Turma">
+                      </div>
+                    </div>
+
+                    <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
+                      <div class="col-4 p-0">
+                        <input class="input-box form-control" type="text" id="disciplina" name="disciplina" placeholder="Disciplina">
+                      </div>
+
+                      <div class="col-4 p-0">
+                        <!-- ESPAÇO BRANCO -->
+                      </div>
+
+                      <div class="col-4 p-0">
+                        <input class="input-box form-control" type="datetime-local" name="data" id="data" placeholder="Data da Ocorrência">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row m-0 justify-content-center p-0 mt-4 mb-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                  <span class="w-auto m-0 separador" style="line-height:30px">Motivos</span>
+                </div>
+
+                <div class="row m-0" style="width: 60vw;">
+                  <table>
+                    <tr>
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="1" id="Opc1" class="checkmark">
+                        <label for="Opc1">Desobedeceu a uma ordem</label>
+                      </td>
+                    </tr>
+      
+                    <tr>
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="2" id="Opc2" class="checkmark">
+                        <label for="Opc2">Recusou participar nas atividades da aula</label>
+                      </td>
+                    </tr>
+      
+                    <tr>             
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="3" id="Opc3" class="checkmark">
+                        <label for="Opc3">Fez gestos impróprios ao professor</label>
+                      </td>
+                    </tr>
+      
+                    <tr>        
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="4" id="Opc4" class="checkmark">
+                        <label for="Opc4">Fez comentários inadequados e desrespeitadores</label>
+                      </td>
+                    </tr>
+      
+                    <tr>      
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="5" id="Opc5" class="checkmark">
+                        <label for="Opc5">Perturbou a realização dos trabalhos dos seus colegas</label>
+                      </td>
+                    </tr>
+      
+                    <tr>     
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="6" id="Opc6" class="checkmark">
+                        <label for="Opc6">Continuou a conversar com colegas, mesmo depois da chamada de atenção do professor</label>
+                      </td>
+                    </tr>
+      
+                    <tr>              
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="7" id="Opc7" class="checkmark">
+                        <label for="Opc7">Pôs em causa a autoridade do professor</label>
+                      </td>
+                    </tr>
                     
-                    <div class="col-1 p-0">
-                      <input class="input-box form-control" type="text" id="num" name="numero" placeholder="Nº. Aluno">
-                    </div>
-                    <div class="col-2 p-0">
-                      <input class="input-box form-control" type="text" id="anoturma" name="anoturma" placeholder="Ano e Turma">
-                    </div>
+                    <tr>              
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="8" id="Opc8" class="checkmark">  
+                        <label for="Opc8">Falou muito alto, emitiu sons e/ou provocou ruídos</label>
+                      </td>
+                    </tr>
+      
+                    <tr>              
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="9" id="Opc9" class="checkmark">
+                        <label for="Opc9">Ausentou-se do seu lugar sem autorização</label>
+                      </td>
+                    </tr>
+      
+                    <tr>              
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="10" id="Opc10" class="checkmark">
+                        <label for="Opc10">Interrompeu, de forma persistente e inadequada, a comunicação professor/alunos</label>
+                      </td>
+                    </tr>
+      
+                    <tr>             
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="11" id="Opc11" class="checkmark">
+                        <label for="Opc11">Fez gestos impróprios a colegas</label>
+                      </td>
+                    </tr>
+      
+                    <tr>            
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="12" id="Opc12" class="checkmark">
+                        <label for="Opc12">Agrediu fisicamente um colega</label>
+                      </td>
+                    </tr>
+      
+                    <tr>              
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="13" id="Opc13" class="checkmark">
+                        <label for="Opc13">Insultou colega(s)</label>
+                      </td>
+                    </tr>
+      
+                    <tr>              
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="14" id="Opc14" class="checkmark">
+                        <label for="Opc14">Tirou objeto(s) a colega(s) sem a sua autorização</label>
+                      </td>
+                    </tr>
+      
+                    <tr>             
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="15" id="Opc15" class="checkmark">
+                        <label for="Opc15">Usou, indevidamente, telemóvel ou outro aparelho eletrónico</label>
+                      </td>
+                    </tr>
+      
+                    <tr>             
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="16" id="Opc16" class="checkmark">
+                        <label for="Opc16">Danificou materiais e/ou espaços escolares</label>
+                      </td>
+                    </tr>
+      
+                    <tr>             
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="17" id="Opc17" class="checkmark">
+                        <label for="Opc17">Outros</label>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div class="row m-0 justify-content-center p-0 mt-4 mb-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                  <span class="w-auto m-0 separador" style="line-height:30px">Descrição da Ocorrência</span>
+                </div>
+
+                <div class="row m-0" style="width: 60vw;">
+                  <textarea maxlength="500" oninput="CharsCounterDesc()" name="textADesc" id="textADesc" style="font-size: 20px; width:100%" placeholder="Descrição da Ocorrência..."></textarea>
+                  <span id="charsRemainDesc" style="color:red; font-size: 14px; float: right">Caracteres restantes: 500</span>
+                </div>
+                
+                <div class="row m-0 justify-content-center p-0 mt-4 mb-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                  <span class="w-auto m-0 separador" style="line-height:30px">Decisão tomada</span>
+                </div>
+
+                <div class="row m-0" style="width: 60vw;">
+                  <textarea maxlength="350" oninput="CharsCounterDec()" name="textADec" id="textADec" style="font-size: 20px; width:100%" placeholder="Em consequência disso, tomei a seguinte decisão..."></textarea>
+                  <span id="charsRemainDec" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
+                </div>
+
+                <div class="row m-0 justify-content-center p-0 mt-4 mb-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                  <span class="w-auto m-0 separador" style="line-height:30px">Regularidade dos comportamentos</span>
+                </div>
+
+                <div class="row m-0" style="width: 60vw;">
+                  <div class="col" style="width: 50%; padding: 0px;">
+                      <p>O comportamento observou-se neste aluno:</p>
+
+                      <div class="row-auto m-0 mb-2">                 
+                        <input type="radio" id="Opc18" name="frequenciaComport" style="margin-right: 20px;" value="Primeira Vez">
+                        <label for="Opc18">Pela 1ª vez</label>
+                      </div>
+
+                      <div class="row-auto m-0 mb-2">
+                        <input type="radio" id="Opc19" name="frequenciaComport" style="margin-right: 20px;" value="Reincidente">
+                        <label for="Opc19">De forma reincidente (pouco frequente)</label>
+                      </div>
+                      
+                      <div class="row-auto m-0 mb-2">
+                        <input type="radio" id="Opc20" name="frequenciaComport" style="margin-right: 20px;" value="Com frequência">
+                        <label for="Opc20">Com frequência</label>
+                      </div>
                   </div>
 
-                  <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
-                    <div class="col-4 p-0">
-                      <input class="input-box form-control" type="text" id="disciplina" name="disciplina" placeholder="Disciplina">
+                  <div class="col" style="width: 50%; padding: 0px;">
+                    <p>O aluno já demonstrou outros comportamentos incorretos?</p>
+
+                    <div class="row-auto m-0 mb-2" style="width: 60vw;">
+                      <input type="radio" id="Opc21" name="quantidadeComport" style="margin-right: 20px;" value="Sim">
+                      <label for="Opc21">Sim</label>
                     </div>
 
-                    <div class="col-4 p-0">
-                      <!-- ESPAÇO BRANCO -->
+                    <div class="row-auto m-0 mb-2" style="width: 60vw;">
+                      <input type="radio" id="Opc22" name="quantidadeComport" style="margin-right: 20px;" value="Não">
+                      <label for="Opc22">Não</label>
                     </div>
 
-                    <div class="col-4 p-0">
-                      <input class="input-box form-control" type="datetime-local" name="data" id="data" placeholder="Data da Ocorrência">
+                    <div class="row-auto m-0 mb-2" style="width: 60vw;">
+                      <input type="radio" id="Opc23" name="quantidadeComport" style="margin-right: 20px;" value="Poucas vezes">
+                      <label for="Opc23">Poucas vezes</label>
+                    </div>
+
+                    <div class="row-auto m-0 mb-2" style="width: 60vw;">
+                      <input type="radio" id="Opc24" name="quantidadeComport" style="margin-right: 20px;" value="Com frequência">
+                      <label for="Opc24">Com frequência</label>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="row m-0 justify-content-center p-0 mt-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                <span class="w-auto m-0" style="line-height:30px">Motivos</span>
-              </div>
-
-              <div class="row m-0 mt-3" style="width: 60vw;">
-                <table>
-                  <tr>
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="1" id="Opc1" class="checkmark">
-                      <label for="Opc1">Desobedeceu a uma ordem</label>
-                    </td>
-                  </tr>
-    
-                  <tr>
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="2" id="Opc2" class="checkmark">
-                      <label for="Opc2">Recusou participar nas atividades da aula</label>
-                    </td>
-                  </tr>
-    
-                  <tr>             
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="3" id="Opc3" class="checkmark">
-                      <label for="Opc3">Fez gestos impróprios ao professor</label>
-                    </td>
-                  </tr>
-    
-                  <tr>        
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="4" id="Opc4" class="checkmark">
-                      <label for="Opc4">Fez comentários inadequados e desrespeitadores</label>
-                    </td>
-                  </tr>
-    
-                  <tr>      
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="5" id="Opc5" class="checkmark">
-                      <label for="Opc5">Perturbou a realização dos trabalhos dos seus colegas</label>
-                    </td>
-                  </tr>
-    
-                  <tr>     
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="6" id="Opc6" class="checkmark">
-                      <label for="Opc6">Continuou a conversar com colegas, mesmo depois da chamada de atenção do professor</label>
-                    </td>
-                  </tr>
-    
-                  <tr>              
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="7" id="Opc7" class="checkmark">
-                      <label for="Opc7">Pôs em causa a autoridade do professor</label>
-                    </td>
-                  </tr>
-                  
-                  <tr>              
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="8" id="Opc8" class="checkmark">  
-                      <label for="Opc8">Falou muito alto, emitiu sons e/ou provocou ruídos</label>
-                    </td>
-                  </tr>
-    
-                  <tr>              
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="9" id="Opc9" class="checkmark">
-                      <label for="Opc9">Ausentou-se do seu lugar sem autorização</label>
-                    </td>
-                  </tr>
-    
-                  <tr>              
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="10" id="Opc10" class="checkmark">
-                      <label for="Opc10">Interrompeu, de forma persistente e inadequada, a comunicação professor/alunos</label>
-                    </td>
-                  </tr>
-    
-                  <tr>             
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="11" id="Opc11" class="checkmark">
-                      <label for="Opc11">Fez gestos impróprios a colegas</label>
-                    </td>
-                  </tr>
-    
-                  <tr>            
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="12" id="Opc12" class="checkmark">
-                      <label for="Opc12">Agrediu fisicamente um colega</label>
-                    </td>
-                  </tr>
-    
-                  <tr>              
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="13" id="Opc13" class="checkmark">
-                      <label for="Opc13">Insultou colega(s)</label>
-                    </td>
-                  </tr>
-    
-                  <tr>              
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="14" id="Opc14" class="checkmark">
-                      <label for="Opc14">Tirou objeto(s) a colega(s) sem a sua autorização</label>
-                    </td>
-                  </tr>
-    
-                  <tr>             
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="15" id="Opc15" class="checkmark">
-                      <label for="Opc15">Usou, indevidamente, telemóvel ou outro aparelho eletrónico</label>
-                    </td>
-                  </tr>
-    
-                  <tr>             
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="16" id="Opc16" class="checkmark">
-                      <label for="Opc16">Danificou materiais e/ou espaços escolares</label>
-                    </td>
-                  </tr>
-    
-                  <tr>             
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="17" id="Opc17" class="checkmark">
-                      <label for="Opc17">Outros</label>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-
-              <div class="row m-0 pt-5" style="width: 60vw;">
-                <label>Descrição da Ocorrência:</label>
-                <textarea maxlength="350" oninput="CharsCounterDesc()" name="textADesc" id="textADesc" style="font-size: 20px; width:100%"></textarea>
-                <span id="charsRemainDesc" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
-              </div>
-              
-              <div class="row m-0 pt-5" style="width: 60vw;">
-                <label>Em consequência disso, tomei a seguinte decisão:</label>
-                <textarea maxlength="350" oninput="CharsCounterDec()" name="textADec" id="textADec" style="font-size: 20px; width:100%"></textarea>
-                <span id="charsRemainDec" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
-              </div>
-
-              <div class="row m-0 pt-5" style="width: 60vw;">
-                <div class="col" style="width: 50%; padding: 0px;">
-                    <p>O comportamento observou-se neste aluno:</p>
-
-                    <div class="row-auto m-0 mb-2">                 
-                      <input type="radio" id="Opc18" name="frequenciaComport" style="margin-right: 20px;" value="Primeira Vez">
-                      <label for="Opc18">Pela 1ª vez</label>
-                    </div>
-
-                    <div class="row-auto m-0 mb-2">
-                      <input type="radio" id="Opc19" name="frequenciaComport" style="margin-right: 20px;" value="Reincidente">
-                      <label for="Opc19">De forma reincidente (pouco frequente)</label>
-                    </div>
-                    
-                    <div class="row-auto m-0 mb-2">
-                      <input type="radio" id="Opc20" name="frequenciaComport" style="margin-right: 20px;" value="Com frequência">
-                      <label for="Opc20">Com frequência</label>
-                    </div>
+                <div class="row m-0 justify-content-end pt-4">
+                  <button class="btn-sub mt-5 mb-5" value="submit">SUBMETER</button>
                 </div>
-
-                <div class="col" style="width: 50%; padding: 0px;">
-                  <p>O aluno já demonstrou outros comportamentos incorretos?</p>
-
-                  <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                    <input type="radio" id="Opc21" name="quantidadeComport" style="margin-right: 20px;" value="Sim">
-                    <label for="Opc21">Sim</label>
-                  </div>
-
-                  <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                    <input type="radio" id="Opc22" name="quantidadeComport" style="margin-right: 20px;" value="Não">
-                    <label for="Opc22">Não</label>
-                  </div>
-
-                  <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                    <input type="radio" id="Opc23" name="quantidadeComport" style="margin-right: 20px;" value="Poucas vezes">
-                    <label for="Opc23">Poucas vezes</label>
-                  </div>
-
-                  <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                    <input type="radio" id="Opc24" name="quantidadeComport" style="margin-right: 20px;" value="Com frequência">
-                    <label for="Opc24">Com frequência</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row m-0 justify-content-end pt-4">
-                <button class="btn-sub mt-5 mb-5" value="submit">SUBMETER</button>
-              </div>
+              </form>
             </div>
           </div>
         </div>

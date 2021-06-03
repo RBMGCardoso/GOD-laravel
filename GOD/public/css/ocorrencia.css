@@ -23,6 +23,11 @@ h1{
     width: 100%;
 }
 
+.separador{
+    font-weight: 600;
+    color: #333;
+}
+
 .input-box{
     border: 2px solid #ccc;
     border-radius: 0px;
