@@ -13,6 +13,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">      
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
     <link href="{{ url('/css/alunoReg.css') }}" rel="stylesheet">
 
     <link href="{{ url('/css/navbar.css') }}" rel="stylesheet">
@@ -251,6 +254,53 @@
                     <div class="col-2 p-0">
                       <input class="input-box form-control" type="text" id="codpost" name="codpost" placeholder="Código Postal">
                     </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row m-0 justify-content-center p-0 mt-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                <span class="separador w-auto m-0" style="line-height:30px">Dados do Encarregado de Educação</span>
+              </div>
+
+              <div class="row-auto identification d-flex mt-3">
+                <div class="col">
+                  <div class="row m-0" style="width: 60vw;">
+                    <div class="col-9 p-0">
+                      <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Encarregado de Educação">
+                    </div>   
+
+                    <div class="col-3 p-0">
+                      <input class="input-box form-control" type="text" id="anoturma" name="anoturma" placeholder="Parentesco">
+                    </div>
+                  </div>
+    
+                  <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
+                    <div class="col-3 p-0">
+                      <input class="input-box form-control" type="text" id="anoturma" name="telemovel" placeholder="Telemóvel/Telefone">
+                    </div>
+
+                    <div class="col-4 p-0">
+                      <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email">
+                    </div>
+
+                  </div>
+
+                  <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
+                    <div class="col-7 p-0">
+                      <input class="input-box form-control" type="text" id="morada" name="morada" placeholder="Morada">
+                    </div>
+
+                    <div class="col-3 p-0">
+                      <input class="input-box form-control" type="text" id="concelho" name="concelho" placeholder="Concelho">
+                    </div>
+
+                    <div class="col-2 p-0">
+                      <input class="input-box form-control" type="text" id="codpost" name="codpost" placeholder="Código Postal">
+                    </div>
+                  </div>
+
+                  <div class="row m-0 justify-content-end pt-4">
+                    <button class="btn-sub mt-5 mb-5" value="submit">SUBMETER</button>
                   </div>
                 </div>
               </div>
