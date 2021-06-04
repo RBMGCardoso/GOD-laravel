@@ -48,7 +48,7 @@
       function CharsCounterDesc()
       {
           var descText = document.getElementById('textADesc');
-          var charsQt = 350 - descText.value.length;
+          var charsQt = 500 - descText.value.length;
           
           var alertText = document.getElementById('charsRemainDesc');
           alertText.textContent = "Caracteres restantes: " + charsQt;       
@@ -56,8 +56,8 @@
 
       function CharsCounterDec()
       {
-          var descText = document.getElementById('textADec');
-          var charsQt = 350 - descText.value.length;
+          var decText = document.getElementById('textADec');
+          var charsQt = 350 - decText.value.length;
           
           var alertText = document.getElementById('charsRemainDec');
           alertText.textContent = "Caracteres restantes: " + charsQt;       
@@ -165,42 +165,43 @@
                 <span class="w-auto m-0" style="line-height:30px">Dados do Aluno</span>
               </div>
 
-              <div class="row-auto identification d-flex mt-3">
-                <div class="col">
-                  <div class="row m-0" style="width: 60vw;">
-                    <div class="col-9 p-0">
-                      <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Aluno">
-    
-                      <datalist id="nomes" style="width:100% !important">   
-                        @foreach($alunos as $aluno)
-                          <option value="{{ $aluno->nome }}">
-                        @endforeach
-                      </datalist>
-                    </div>   
-                    
-                    <div class="col-1 p-0">
-                      <input class="input-box form-control" type="text" id="num" name="numero" placeholder="Nº. Aluno">
-                    </div>
-                    <div class="col-2 p-0">
-                      <input class="input-box form-control" type="text" id="anoturma" name="anoturma" placeholder="Ano e Turma">
-                    </div>
-                  </div>
-
-                  <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
-                    <div class="col-4 p-0">
-                      <input class="input-box form-control" type="text" id="disciplina" name="disciplina" placeholder="Disciplina">
+              <form method="POST" action="{{ route('ocorrencia.criar') }}">
+                <div class="row-auto identification d-flex mt-3">
+                  <div class="col">
+                    <div class="row m-0" style="width: 60vw;">
+                      <div class="col-9 p-0">
+                        <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Aluno">
+      
+                        <datalist id="nomes" style="width:100% !important">   
+                          @foreach($alunos as $aluno)
+                            <option value="{{ $aluno->nome }}">
+                          @endforeach
+                        </datalist>
+                      </div>   
+                      
+                      <div class="col-1 p-0">
+                        <input class="input-box form-control" type="text" id="num" name="numero" placeholder="Nº. Aluno">
+                      </div>
+                      <div class="col-2 p-0">
+                        <input class="input-box form-control" type="text" id="anoturma" name="anoturma" placeholder="Ano e Turma">
+                      </div>
                     </div>
 
-                    <div class="col-4 p-0">
-                      <!-- ESPAÇO BRANCO -->
-                    </div>
+                    <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
+                      <div class="col-4 p-0">
+                        <input class="input-box form-control" type="text" id="disciplina" name="disciplina" placeholder="Disciplina">
+                      </div>
 
-                    <div class="col-4 p-0">
-                      <input class="input-box form-control" type="datetime-local" name="data" id="data" placeholder="Data da Ocorrência">
+                      <div class="col-4 p-0">
+                        <!-- ESPAÇO BRANCO -->
+                      </div>
+
+                      <div class="col-4 p-0">
+                        <input class="input-box form-control" type="datetime-local" name="data" id="data" placeholder="Data da Ocorrência">
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
               <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
                 <span class="w-auto m-0" style="line-height:30px">Motivos</span>
@@ -356,50 +357,73 @@
                 <div class="col" style="width: 50%; padding: 0px;">
                     <p>O comportamento observou-se neste aluno:</p>
 
-                    <div class="row-auto m-0 mb-2">                 
-                      <input type="radio" id="Opc18" name="frequenciaComport" style="margin-right: 20px;" value="Primeira Vez">
-                      <label for="Opc18">Pela 1ª vez</label>
-                    </div>
-
-                    <div class="row-auto m-0 mb-2">
-                      <input type="radio" id="Opc19" name="frequenciaComport" style="margin-right: 20px;" value="Reincidente">
-                      <label for="Opc19">De forma reincidente (pouco frequente)</label>
-                    </div>
-                    
-                    <div class="row-auto m-0 mb-2">
-                      <input type="radio" id="Opc20" name="frequenciaComport" style="margin-right: 20px;" value="Com frequência">
-                      <label for="Opc20">Com frequência</label>
-                    </div>
+                <div class="row m-0" style="width: 60vw;">
+                  <textarea maxlength="500" oninput="CharsCounterDesc()" name="textADesc" id="textADesc" style="font-size: 20px; width:100%" placeholder="Descrição da Ocorrência..."></textarea>
+                  <span id="charsRemainDesc" style="color:red; font-size: 14px; float: right">Caracteres restantes: 500</span>
+                </div>
+                
+                <div class="row m-0 justify-content-center p-0 mt-4 mb-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                  <span class="w-auto m-0 separador" style="line-height:30px">Decisão tomada</span>
                 </div>
 
-                <div class="col" style="width: 50%; padding: 0px;">
-                  <p>O aluno já demonstrou outros comportamentos incorretos?</p>
+                <div class="row m-0" style="width: 60vw;">
+                  <textarea maxlength="350" oninput="CharsCounterDec()" name="textADec" id="textADec" style="font-size: 20px; width:100%" placeholder="Em consequência disso, tomei a seguinte decisão..."></textarea>
+                  <span id="charsRemainDec" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
+                </div>
 
-                  <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                    <input type="radio" id="Opc21" name="quantidadeComport" style="margin-right: 20px;" value="Sim">
-                    <label for="Opc21">Sim</label>
+                <div class="row m-0 justify-content-center p-0 mt-4 mb-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                  <span class="w-auto m-0 separador" style="line-height:30px">Regularidade dos comportamentos</span>
+                </div>
+
+                <div class="row m-0" style="width: 60vw;">
+                  <div class="col" style="width: 50%; padding: 0px;">
+                      <p>O comportamento observou-se neste aluno:</p>
+
+                      <div class="row-auto m-0 mb-2">                 
+                        <input type="radio" id="Opc18" name="frequenciaComport" style="margin-right: 20px;" value="Primeira Vez">
+                        <label for="Opc18">Pela 1ª vez</label>
+                      </div>
+
+                      <div class="row-auto m-0 mb-2">
+                        <input type="radio" id="Opc19" name="frequenciaComport" style="margin-right: 20px;" value="Reincidente">
+                        <label for="Opc19">De forma reincidente (pouco frequente)</label>
+                      </div>
+                      
+                      <div class="row-auto m-0 mb-2">
+                        <input type="radio" id="Opc20" name="frequenciaComport" style="margin-right: 20px;" value="Com frequência">
+                        <label for="Opc20">Com frequência</label>
+                      </div>
                   </div>
 
-                  <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                    <input type="radio" id="Opc22" name="quantidadeComport" style="margin-right: 20px;" value="Não">
-                    <label for="Opc22">Não</label>
-                  </div>
+                  <div class="col" style="width: 50%; padding: 0px;">
+                    <p>O aluno já demonstrou outros comportamentos incorretos?</p>
 
-                  <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                    <input type="radio" id="Opc23" name="quantidadeComport" style="margin-right: 20px;" value="Poucas vezes">
-                    <label for="Opc23">Poucas vezes</label>
-                  </div>
+                    <div class="row-auto m-0 mb-2" style="width: 60vw;">
+                      <input type="radio" id="Opc21" name="quantidadeComport" style="margin-right: 20px;" value="Sim">
+                      <label for="Opc21">Sim</label>
+                    </div>
 
-                  <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                    <input type="radio" id="Opc24" name="quantidadeComport" style="margin-right: 20px;" value="Com frequência">
-                    <label for="Opc24">Com frequência</label>
+                    <div class="row-auto m-0 mb-2" style="width: 60vw;">
+                      <input type="radio" id="Opc22" name="quantidadeComport" style="margin-right: 20px;" value="Não">
+                      <label for="Opc22">Não</label>
+                    </div>
+
+                    <div class="row-auto m-0 mb-2" style="width: 60vw;">
+                      <input type="radio" id="Opc23" name="quantidadeComport" style="margin-right: 20px;" value="Poucas vezes">
+                      <label for="Opc23">Poucas vezes</label>
+                    </div>
+
+                    <div class="row-auto m-0 mb-2" style="width: 60vw;">
+                      <input type="radio" id="Opc24" name="quantidadeComport" style="margin-right: 20px;" value="Com frequência">
+                      <label for="Opc24">Com frequência</label>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="row m-0 justify-content-end pt-4">
-                <button class="btn-sub mt-5 mb-5" value="submit">SUBMETER</button>
-              </div>
+                <div class="row m-0 justify-content-end pt-4">
+                  <button class="btn-sub mt-5 mb-5" value="submit">SUBMETER</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

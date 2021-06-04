@@ -260,7 +260,7 @@
               
                 $('#table-body').append(tableRow);
 
-                //console.log(vars.escolaAluno);
+                console.log(vars.nomeEscola[vars.occId[index]]);
 
               })
 
