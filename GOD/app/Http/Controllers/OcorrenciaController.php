@@ -68,10 +68,15 @@ class OcorrenciaController extends Controller
                                 {
                                     $json_Turma[$idAlunoSearch[$j]] = $TurmaAno[$y].$TurmaCod[$y];
                                     $forTurmaId[$idAlunoSearch[$j]] = $y+1; //$y+1 id turma
+                                                                      
+                                    if($forTurmaId[$json_OccId[$i]] == $TurmaId[$y])
+                                    {
+                                        $escolaId[$idAlunoSearch[$j]] = $TurmaEscolaId[$y];
+                                    }
 
                                     //For para todas as escolas
                                     for ($x=0; $x < count($EscolaId); $x++) { 
-                                        if($forTurmaId[$json_OccId[$i]] == $EscolaId[$x])
+                                        if($escolaId[$idAlunoSearch[$j]] == $EscolaId[$x])
                                         {
                                             $json_EscolaNome[$idAlunoSearch[$j]] = $EscolaNome[$x];
                                         }
@@ -96,7 +101,7 @@ class OcorrenciaController extends Controller
             $array['occId'] = 0;
         }
 
-
+        //dd($json_EscolaNome);
         return json_encode($array);
 
 

@@ -256,21 +256,19 @@
 
               //Repete para cada ocorrencia encontrada
               $.each(vars.occId, function(index, value){
-                tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAluno[vars.occId[index]]+'</td><td>'+vars.nomeEscola[vars.occId[index]]+'</td><td>'+vars.dataOcorrencia[index]+'</td></tr>';
-              
+                tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAluno[vars.occId[index]]+'</td><td>'+vars.nomeEscola[vars.occId[index]]+'</td><td>'+vars.dataOcorrencia[index]+'</td></tr>';            
+                console.log(vars.occId[index]);
                 $('#table-body').append(tableRow);
 
-                console.log(vars.nomeEscola[vars.occId[index]]);
-
               })
-
+              
               //Se não existirem ocorrencias encontradas
               if(vars.occId == 0)
               {
                 console.log('não existe nada');
                 tableRow = '<tr style="height:80px"><td colspan="5">Não foram encontrados resultados</td></tr>';
-                $('#table-body').append(tableRow);
-              }            
+                $('#table-body').append(tableRow);    
+              }        
             }
           });
         })

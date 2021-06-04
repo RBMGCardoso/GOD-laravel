@@ -335,8 +335,8 @@
                 </div>
 
                 <div class="row m-0 mt-3" style="width: 60vw;">
-                  <textarea maxlength="350" oninput="CharsCounterDesc()" name="textADesc" id="textADesc" style="font-size: 20px; width:100%" placeholder="Descrição de Ocorrência"></textarea>
-                  <span id="charsRemainDesc" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
+                  <textarea maxlength="500" oninput="CharsCounterDesc()" name="textADesc" id="textADesc" style="font-size: 20px; width:100%" placeholder="Descrição de Ocorrência..."></textarea>
+                  <span id="charsRemainDesc" style="color:red; font-size: 14px; float: right">Caracteres restantes: 500</span>
                 </div>
                 
                 <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
