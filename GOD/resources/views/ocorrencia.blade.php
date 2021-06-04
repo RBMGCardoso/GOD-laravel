@@ -162,7 +162,7 @@
           <div class="row justify-content-center">
             <div class="col-auto">
               <div class="row m-0 justify-content-center p-0 mt-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                <span class="w-auto m-0" style="line-height:30px">Dados do Aluno</span>
+                <span class="separador w-auto m-0" style="line-height:30px">Dados do Aluno</span>
               </div>
 
               <form method="POST" action="{{ route('ocorrencia.criar') }}">
@@ -203,170 +203,148 @@
                   </div>
                 </div>
 
-              <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                <span class="w-auto m-0" style="line-height:30px">Motivos</span>
-              </div>
+                <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                  <span class="separador w-auto m-0" style="line-height:30px">Motivos</span>
+                </div>
 
-              <div class="row m-0 mt-3" style="width: 60vw;">
-                <table>
-                  <tr>
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="1" id="Opc1" class="checkmark">
-                      <label for="Opc1">Desobedeceu a uma ordem</label>
-                    </td>
-                  </tr>
-    
-                  <tr>
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="2" id="Opc2" class="checkmark">
-                      <label for="Opc2">Recusou participar nas atividades da aula</label>
-                    </td>
-                  </tr>
-    
-                  <tr>             
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="3" id="Opc3" class="checkmark">
-                      <label for="Opc3">Fez gestos impróprios ao professor</label>
-                    </td>
-                  </tr>
-    
-                  <tr>        
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="4" id="Opc4" class="checkmark">
-                      <label for="Opc4">Fez comentários inadequados e desrespeitadores</label>
-                    </td>
-                  </tr>
-    
-                  <tr>      
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="5" id="Opc5" class="checkmark">
-                      <label for="Opc5">Perturbou a realização dos trabalhos dos seus colegas</label>
-                    </td>
-                  </tr>
-    
-                  <tr>     
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="6" id="Opc6" class="checkmark">
-                      <label for="Opc6">Continuou a conversar com colegas, mesmo depois da chamada de atenção do professor</label>
-                    </td>
-                  </tr>
-    
-                  <tr>              
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="7" id="Opc7" class="checkmark">
-                      <label for="Opc7">Pôs em causa a autoridade do professor</label>
-                    </td>
-                  </tr>
-                  
-                  <tr>              
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="8" id="Opc8" class="checkmark">  
-                      <label for="Opc8">Falou muito alto, emitiu sons e/ou provocou ruídos</label>
-                    </td>
-                  </tr>
-    
-                  <tr>              
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="9" id="Opc9" class="checkmark">
-                      <label for="Opc9">Ausentou-se do seu lugar sem autorização</label>
-                    </td>
-                  </tr>
-    
-                  <tr>              
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="10" id="Opc10" class="checkmark">
-                      <label for="Opc10">Interrompeu, de forma persistente e inadequada, a comunicação professor/alunos</label>
-                    </td>
-                  </tr>
-    
-                  <tr>             
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="11" id="Opc11" class="checkmark">
-                      <label for="Opc11">Fez gestos impróprios a colegas</label>
-                    </td>
-                  </tr>
-    
-                  <tr>            
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="12" id="Opc12" class="checkmark">
-                      <label for="Opc12">Agrediu fisicamente um colega</label>
-                    </td>
-                  </tr>
-    
-                  <tr>              
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="13" id="Opc13" class="checkmark">
-                      <label for="Opc13">Insultou colega(s)</label>
-                    </td>
-                  </tr>
-    
-                  <tr>              
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="14" id="Opc14" class="checkmark">
-                      <label for="Opc14">Tirou objeto(s) a colega(s) sem a sua autorização</label>
-                    </td>
-                  </tr>
-    
-                  <tr>             
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="15" id="Opc15" class="checkmark">
-                      <label for="Opc15">Usou, indevidamente, telemóvel ou outro aparelho eletrónico</label>
-                    </td>
-                  </tr>
-    
-                  <tr>             
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="16" id="Opc16" class="checkmark">
-                      <label for="Opc16">Danificou materiais e/ou espaços escolares</label>
-                    </td>
-                  </tr>
-    
-                  <tr>             
-                    <td>
-                      <input type="checkbox" name="motivos[]" value="17" id="Opc17" class="checkmark">
-                      <label for="Opc17">Outros</label>
-                    </td>
-                  </tr>
-                </table>
-              </div>
+                <div class="row m-0 mt-3" style="width: 60vw;">
+                  <table>
+                    <tr>
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="1" id="Opc1" class="checkmark">
+                        <label for="Opc1">Desobedeceu a uma ordem</label>
+                      </td>
+                    </tr>
+      
+                    <tr>
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="2" id="Opc2" class="checkmark">
+                        <label for="Opc2">Recusou participar nas atividades da aula</label>
+                      </td>
+                    </tr>
+      
+                    <tr>             
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="3" id="Opc3" class="checkmark">
+                        <label for="Opc3">Fez gestos impróprios ao professor</label>
+                      </td>
+                    </tr>
+      
+                    <tr>        
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="4" id="Opc4" class="checkmark">
+                        <label for="Opc4">Fez comentários inadequados e desrespeitadores</label>
+                      </td>
+                    </tr>
+      
+                    <tr>      
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="5" id="Opc5" class="checkmark">
+                        <label for="Opc5">Perturbou a realização dos trabalhos dos seus colegas</label>
+                      </td>
+                    </tr>
+      
+                    <tr>     
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="6" id="Opc6" class="checkmark">
+                        <label for="Opc6">Continuou a conversar com colegas, mesmo depois da chamada de atenção do professor</label>
+                      </td>
+                    </tr>
+      
+                    <tr>              
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="7" id="Opc7" class="checkmark">
+                        <label for="Opc7">Pôs em causa a autoridade do professor</label>
+                      </td>
+                    </tr>
+                    
+                    <tr>              
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="8" id="Opc8" class="checkmark">  
+                        <label for="Opc8">Falou muito alto, emitiu sons e/ou provocou ruídos</label>
+                      </td>
+                    </tr>
+      
+                    <tr>              
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="9" id="Opc9" class="checkmark">
+                        <label for="Opc9">Ausentou-se do seu lugar sem autorização</label>
+                      </td>
+                    </tr>
+      
+                    <tr>              
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="10" id="Opc10" class="checkmark">
+                        <label for="Opc10">Interrompeu, de forma persistente e inadequada, a comunicação professor/alunos</label>
+                      </td>
+                    </tr>
+      
+                    <tr>             
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="11" id="Opc11" class="checkmark">
+                        <label for="Opc11">Fez gestos impróprios a colegas</label>
+                      </td>
+                    </tr>
+      
+                    <tr>            
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="12" id="Opc12" class="checkmark">
+                        <label for="Opc12">Agrediu fisicamente um colega</label>
+                      </td>
+                    </tr>
+      
+                    <tr>              
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="13" id="Opc13" class="checkmark">
+                        <label for="Opc13">Insultou colega(s)</label>
+                      </td>
+                    </tr>
+      
+                    <tr>              
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="14" id="Opc14" class="checkmark">
+                        <label for="Opc14">Tirou objeto(s) a colega(s) sem a sua autorização</label>
+                      </td>
+                    </tr>
+      
+                    <tr>             
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="15" id="Opc15" class="checkmark">
+                        <label for="Opc15">Usou, indevidamente, telemóvel ou outro aparelho eletrónico</label>
+                      </td>
+                    </tr>
+      
+                    <tr>             
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="16" id="Opc16" class="checkmark">
+                        <label for="Opc16">Danificou materiais e/ou espaços escolares</label>
+                      </td>
+                    </tr>
+      
+                    <tr>             
+                      <td>
+                        <input type="checkbox" name="motivos[]" value="17" id="Opc17" class="checkmark">
+                        <label for="Opc17">Outros</label>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
 
-              <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                <span class="separador w-auto m-0" style="line-height:30px">Descrição de Ocorrência</span>
-              </div>
+                <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                  <span class="separador w-auto m-0" style="line-height:30px">Descrição de Ocorrência</span>
+                </div>
 
-              <div class="row m-0 mt-3" style="width: 60vw;">
-                <textarea maxlength="350" oninput="CharsCounterDesc()" name="textADesc" id="textADesc" style="font-size: 20px; width:100%" placeholder="Descrição de Ocorrência"></textarea>
-                <span id="charsRemainDesc" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
-              </div>
-              
-              <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                <span class="w-auto m-0" style="line-height:30px">Decisão Tomada</span>
-              </div>
-
-              <div class="row m-0 mt-3" style="width: 60vw;">
-                <label></label>
-                <textarea maxlength="350" oninput="CharsCounterDec()" name="textADec" id="textADec" style="font-size: 20px; width:100%" placeholder="Em consequência disso, tomei a seguinte decisão..."></textarea>
-                <span id="charsRemainDec" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
-              </div>
-
-              <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                <span class="w-auto m-0" style="line-height:30px">Observaçôes de Comportamento</span>
-              </div>
-
-              <div class="row m-0 mt-3" style="width: 60vw;">
-                <div class="col" style="width: 50%; padding: 0px;">
-                    <p>O comportamento observou-se neste aluno:</p>
-
-                <div class="row m-0" style="width: 60vw;">
-                  <textarea maxlength="500" oninput="CharsCounterDesc()" name="textADesc" id="textADesc" style="font-size: 20px; width:100%" placeholder="Descrição da Ocorrência..."></textarea>
-                  <span id="charsRemainDesc" style="color:red; font-size: 14px; float: right">Caracteres restantes: 500</span>
+                <div class="row m-0 mt-3" style="width: 60vw;">
+                  <textarea maxlength="350" oninput="CharsCounterDesc()" name="textADesc" id="textADesc" style="font-size: 20px; width:100%" placeholder="Descrição de Ocorrência"></textarea>
+                  <span id="charsRemainDesc" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
                 </div>
                 
-                <div class="row m-0 justify-content-center p-0 mt-4 mb-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                  <span class="w-auto m-0 separador" style="line-height:30px">Decisão tomada</span>
+                <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                  <span class="separador w-auto m-0" style="line-height:30px">Decisão Tomada</span>
                 </div>
 
-                <div class="row m-0" style="width: 60vw;">
+                <div class="row m-0 mt-3" style="width: 60vw;">
+                  <label></label>
                   <textarea maxlength="350" oninput="CharsCounterDec()" name="textADec" id="textADec" style="font-size: 20px; width:100%" placeholder="Em consequência disso, tomei a seguinte decisão..."></textarea>
                   <span id="charsRemainDec" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
                 </div>

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 
     <link href="{{ url('/css/alunoReg.css') }}" rel="stylesheet">
+
     <link href="{{ url('/css/navbar.css') }}" rel="stylesheet">
 
     <script>
@@ -63,6 +64,33 @@
     </script> 
 
   </head>
+
+  <script>
+    function closeSidebar()
+      {
+        var sidebar = document.getElementById("sidebar");
+        var button = document.getElementById("menu-btn");
+        var content = document.getElementById("content");
+
+        if(sidebar.style.marginLeft == "-250px")
+        {        
+          //abrir
+          sidebar.style.marginLeft = "0px";
+          button.style.transform.transitionDuration = "2s";
+          button.style.transform = "translateX(0px)";
+          content.style.marginLeft = "250px";
+          
+        }
+        else
+        {
+          //fechar
+          sidebar.style.marginLeft = "-250px";
+          button.style.transform.transitionDuration = "2s";
+          button.style.transform = "translateX(-250px) rotate(180Deg)";
+          content.style.marginLeft = "0px";
+        }
+      }
+  </script>
 
   <body>
     <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
@@ -114,27 +142,27 @@
         </div>
       </ul>
 
-    <div class="profile">
-      <div class="dropup ms-3">
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-          <strong>{{ session('LoggedUser')->name }}</strong>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-          <li><a class="dropdown-item" href="#">
-            @forelse (session('LoggedUser')->cargos as $cargo)
-              {{ $cargo->cargo }}
-            @empty
-              Nenhum cargo atribuido
-            @endforelse             
-          </a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
-        </ul>
+      <div class="profile">
+        <div class="dropup ms-3">
+          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
+            <strong>{{ session('LoggedUser')->name }}</strong>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="#">
+              @forelse (session('LoggedUser')->cargos as $cargo)
+                {{ $cargo->cargo }}
+              @empty
+                Nenhum cargo atribuido
+              @endforelse             
+            </a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
+          </ul>
+        </div>
       </div>
-    </div>
         <!--      SCRIPTS     -->
         <script src="{{ url('/js/navbar.js') }}"></script>
     </nav>
@@ -153,15 +181,80 @@
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./js/sidebars.js"></script>
 
-    <div class="row-auto full-content" style="margin-left: 250px;">
+    <div class="row-auto full-content" id="content" style="margin-left: 250px;">
       <div class="col">
         <div class="row title d-flex justify-content-center align-items-center">
-          <h1 class="w-auto">Registo de Ocorrência / Participação Disciplinar</h1>
+          <h1 class="w-auto">Registar Aluno</h1>
         </div>
 
-        <div class="row justify-content-center" style="background-color: pink;">
+        <div class="row justify-content-center">
           <div class="col-auto">
-            
+            <div class="row m-0 justify-content-center p-0 mt-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+              <span class="separador w-auto m-0" style="line-height:30px">Dados do Aluno</span>
+            </div>
+  
+            <form method="POST">
+              <div class="row-auto identification d-flex mt-3">
+                <div class="col">
+                  <div class="row m-0" style="width: 60vw;">
+                    <div class="col-9 p-0">
+                      <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Aluno">
+                    </div>   
+                    
+                    <div class="col-1 p-0">
+                      <input class="input-box form-control" type="text" id="num" name="numero" placeholder="Nº. Aluno">
+                    </div>
+                    <div class="col-2 p-0">
+                      <input class="input-box form-control" type="text" id="anoturma" name="anoturma" placeholder="Ano e Turma">
+                    </div>
+                  </div>
+    
+                  <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
+                    <div class="col-6 p-0">
+                      <select class="input-box form-control" id="escola" name="escola">
+                        <option>Selecione a Escola</option>
+                      </select>
+                    </div>
+
+                    <div class="col-4 p-0">
+                      <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email">
+                    </div>
+
+                    <div class="col-2 p-0">
+                      <input class="input-box form-control" type="text" id="telemovel" name="telemovel" placeholder="Telemóvel">
+                    </div>
+                  </div>
+
+                  <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
+                    <div class="col-4 p-0">
+                      <input class="input-box form-control" type="datetime-local" name="data" id="data" placeholder="Data de Nascimento">
+                    </div>
+
+                    <div class="col-4 p-0">
+                      <input class="input-box form-control" type="text" id="nif" name="nif" placeholder="NIF">
+                    </div> 
+
+                    <div class="col-4 p-0">
+                      <input class="input-box form-control" type="text" id="cc" name="cc" placeholder="Nº. Cartão de Cidadão">
+                    </div> 
+                  </div>
+
+                  <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
+                    <div class="col-7 p-0">
+                      <input class="input-box form-control" type="text" id="morada" name="morada" placeholder="Morada">
+                    </div>
+
+                    <div class="col-3 p-0">
+                      <input class="input-box form-control" type="text" id="concelho" name="concelho" placeholder="Concelho">
+                    </div>
+
+                    <div class="col-2 p-0">
+                      <input class="input-box form-control" type="text" id="codpost" name="codpost" placeholder="Código Postal">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

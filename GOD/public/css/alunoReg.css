@@ -1,13 +1,28 @@
-#boxtext{
-    width: 20vw;
-    height: 40px;
-    padding: 12px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+body{
+    overflow-x: hidden;
 }
 
-select
+.full-content
 {
-    padding: 0px !important;
+    transition:0.4s;
+}
+
+.title{
+    background-color: rgba(121, 255, 255, 1);
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+h1{
+    font-weight: 500;
+    color: #f8f8f8;
+}
+
+.separador{
+    font-weight: 600;
+    color: #333;
+}
+
+.identification{
+    width: 100%;
 }
