@@ -20,9 +20,10 @@ class OcorrenciaController extends Controller
     public function index(Ocorrencia $ocorrencia, Escola $escola)
     {
         $ocorrencias = Ocorrencia::all()->reverse();
-
         $escolas = Escola::all();
-        return view('pesquisa', ['ocorrencias' => $ocorrencias], ['escolas' => $escolas]);  
+        $turmas = Turma::all();
+
+        return view('pesquisa', compact('ocorrencias', 'escolas', 'turmas'));  
     }
 
     public function AtualizarInfo(Request $req)
@@ -100,6 +101,12 @@ class OcorrenciaController extends Controller
             //mostrando assim a mensagem "Não foram encontrados resultados"
             $array['occId'] = 0;
         }
+
+        $array['nomeEscolaSemOcc'] = $EscolaNome;
+        $array['turmaId'] = $TurmaEscolaId;
+        $array['turmaEscolaAno'] = $TurmaAno;
+        $array['turmaEscolaCod'] = $TurmaCod;
+        $array['escolaId'] = $EscolaId;
 
         //dd($json_EscolaNome);
         return json_encode($array);

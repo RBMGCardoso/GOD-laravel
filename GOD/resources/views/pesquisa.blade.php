@@ -169,17 +169,19 @@
 
     <div class="col d-flex justify-content-center mt-2">
       <div class="row-auto me-4" style="width: 208px">
-        <select class="form-select" aria-label="Default select example" name="selectEscola">
+        <select class="form-select" aria-label="Default select example" name="selectEscola" id="selectEscola">
           <option value="null" selected>Escolas</option>
           @foreach($escolas as $escola)
-            <option value="{{ $escola->id }}">{{ $escola->morada }}</option>
+            <option value="{{ $escola->id }}">{{ $escola->nome }}</option>
           @endforeach
         </select>
       </div>
 
       <div class="row-auto ms-4" style="width: 208px">
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Turmas?</option>
+        <select class="form-select" aria-label="Default select example" id="selectTurma" disabled>
+          @foreach($turmas as $turma)
+            <option selected>{{ $turma->ano }}</option>
+          @endforeach
         </select>
       </div>
     </div>
@@ -240,7 +242,13 @@
 
     <script>
       $(document).ready(function(){
-        $("#search").keyup(function(){
+        $("#search").keyup(atualizarOcc);
+        $("#selectEscola").change(atualizarOcc);
+        $("#selectEscola").change(atualizarTurmas);
+
+      })
+
+      function atualizarOcc(){
           $.ajax({
             type:'GET',
             url: '{{ route("atualizarOcorrencias") }}',
@@ -256,10 +264,19 @@
 
               //Repete para cada ocorrencia encontrada
               $.each(vars.occId, function(index, value){
-                tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAluno[vars.occId[index]]+'</td><td>'+vars.nomeEscola[vars.occId[index]]+'</td><td>'+vars.dataOcorrencia[index]+'</td></tr>';            
-                console.log(vars.occId[index]);
-                $('#table-body').append(tableRow);
-
+                if($('#selectEscola option:selected').html() != "Escolas") //Verifica se a select foi usada
+                {
+                  if(vars.nomeEscola[vars.occId[index]] == $('#selectEscola option:selected').html()) //Verifica se a escola escolhida é igual á do aluno
+                  {                      
+                    tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAluno[vars.occId[index]]+'</td><td>'+vars.nomeEscola[vars.occId[index]]+'</td><td>'+vars.dataOcorrencia[index]+'</td></tr>';            
+                    $('#table-body').append(tableRow);      
+                  }    
+                }      
+                else //Caso a select escolas não tenha sido usada, mostra todas as ocorrencias
+                {
+                  tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAluno[vars.occId[index]]+'</td><td>'+vars.nomeEscola[vars.occId[index]]+'</td><td>'+vars.dataOcorrencia[index]+'</td></tr>';            
+                  $('#table-body').append(tableRow);  
+                }    
               })
               
               //Se não existirem ocorrencias encontradas
@@ -271,9 +288,52 @@
               }        
             }
           });
-        })
-      })
-    </script>
+        }
 
-    </body>
+        function atualizarTurmas()
+        {
+          if($('#selectEscola option:selected').html() != "Escolas")
+          {
+            $("#selectTurma").removeAttr("disabled");
+
+            $.ajax({
+            type:'GET',
+            url: '{{ route("atualizarOcorrencias") }}',
+            data: { name:$('#search').val() },
+            success: function(occ)
+            {
+              var vars = JSON.parse(occ);
+
+              $('#selectTurma').html("");
+
+              $.each(vars.escolaId, function(index, value)
+              {
+                if($('#selectEscola option:selected').html() == vars.nomeEscolaSemOcc[index] && vars.turmaId[index] == value)
+                {
+                  $.each(vars.turmaId, function(i, v){
+                    if(vars.turmaId[i] == $('#selectEscola option:selected').val())
+                    {
+                      $('#selectTurma').append("<option value="+vars.turmaEscolaAno[i]+vars.turmaEscolaCod[i]+">"+vars.turmaEscolaAno[i]+vars.turmaEscolaCod[i]+"</option>");
+                    }
+                  })
+                }
+              })
+
+              //$("#selectTurma").append()
+            }
+
+            });
+          }
+          else
+          {
+            $('#selectTurma').html("");
+            $('#selectTurma').append("<option>Selecione uma escola</option>");
+            
+            $("#selectTurma").attr("disabled", "disabled");
+          }
+        }
+
+
+    </script>
+  </body>
 <html>
