@@ -11,6 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
     <link href="{{ url('/css/pesquisa.css') }}" rel="stylesheet">
     <link href="{{ url('/css/navbar.css') }}" rel="stylesheet">
     
@@ -117,7 +119,7 @@
         <div class="profile">
           <div class="dropup ms-3">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
+              <img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" alt="mdo" width="32" height="32" class="rounded-circle me-2">
               <strong>{{ session('LoggedUser')->name }}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
@@ -140,15 +142,16 @@
       </nav>
 
       <button class="btn text-dark shadow-none" id="menu-btn" style="position:relative;left:250px;width:50px;height:50px" onclick="closeSidebar()">
-      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-        width="30px" height="30px" viewBox="0 0 451.846 451.847" style="enable-background:new 0 0 451.846 451.847;">
-        <g>
-          <path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
-            c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
-            c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"/>
-        </g>
-      </svg>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="30px" height="30px" viewBox="0 0 451.846 451.847" style="enable-background:new 0 0 451.846 451.847;">
+          <g>
+            <path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+              c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+              c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"/>
+          </g>
+        </svg>
       </button>
+      
       <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
       <script src="./js/sidebars.js"></script>
     </div>
@@ -158,30 +161,34 @@
       </table>
 
     <div class="form d-flex justify-content-center mt-3">
-      <div class="form-outline">
-        <input type="search" id="search" class="form-control" placeholder="Pesquisa"/>
-      </div>
+      <div class="row" id="search">
+        <div class="col m-0 p-0">
+          <div class="form-outline">
+            <input type="search" class="form-control rounded-0" id="pesquisa" placeholder="Pesquisar nome do aluno..."/>
+          </div>
+        </div>
 
-      <button type="button" class="btn btn-secondary disabled" style="border-radius: 0;">
-        <i class="fa fa-search"></i>
-      </button>
+        <div class="col-auto m-0 p-0">
+          <button type="button" class="btn btn-secondary disabled" style="border-radius: 0;">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
     </div>
 
     <div class="col d-flex justify-content-center mt-2">
-      <div class="row-auto me-4" style="width: 208px">
+      <div class="row-auto me-4" style="width: 258px">
         <select class="form-select" aria-label="Default select example" name="selectEscola" id="selectEscola">
-          <option value="null" selected>Escolas</option>
+          <option value="null" selected>Todas as escolas</option>
           @foreach($escolas as $escola)
             <option value="{{ $escola->id }}">{{ $escola->nome }}</option>
           @endforeach
         </select>
       </div>
 
-      <div class="row-auto ms-4" style="width: 208px">
+      <div class="row-auto ms-4" style="width: 258px">
         <select class="form-select" aria-label="Default select example" id="selectTurma" disabled>
-          @foreach($turmas as $turma)
-            <option selected>{{ $turma->ano }}</option>
-          @endforeach
+            <option selected>Selecione uma escola</option>
         </select>
       </div>
     </div>
@@ -199,6 +206,7 @@
               <th>Turma</th>
               <th>Escola</th>
               <th>Data</th>
+              <th>Link</th>
             </tr>
           </thead>
 
@@ -216,25 +224,6 @@
             @endforeach
           </tbody>
         </table>
-
-      <!-- @foreach($ocorrencias as $occ)
-        <div class="card w-75 mt-5 mb-5" style="background-color: #ddd">
-          <div class="card-body">
-            <h5 class="card-title">{{ $occ->aluno->nome }}</h5>
-            <p class="card-text">{{ $occ->descricao }}</p>
-              <div class="d-flex justify-content-start">
-                <ul>
-                  @forelse ($occ->motivos as $motivo)
-                    <li>{{ $motivo->motivo }}</li>
-                  @empty
-                    
-                  @endforelse
-                </ul>
-              </div>
-            <a href="#" class="btn btn-primary">Ver ocorrência</a>
-          </div>
-        </div>
-      @endforeach  -->
     </div>
 
 
@@ -242,20 +231,21 @@
 
     <script>
       $(document).ready(function(){
-        $("#search").keyup(atualizarOcc);
-        $("#selectEscola").change(atualizarOcc);
         $("#selectEscola").change(atualizarTurmas);
-
+        $("#pesquisa").keyup(atualizarOcc);
+        $("#selectEscola").change(atualizarOcc);
+        $("#selectTurma").change(atualizarOcc);
       })
 
       function atualizarOcc(){
           $.ajax({
             type:'GET',
             url: '{{ route("atualizarOcorrencias") }}',
-            data: { name:$('#search').val() },
+            data: { name:$('#pesquisa').val() },
             success:function(occ)
             {  
               var vars = JSON.parse(occ);
+
               //$('#output').html(occ);
 
               var tableRow = '';
@@ -264,64 +254,72 @@
 
               //Repete para cada ocorrencia encontrada
               $.each(vars.occId, function(index, value){
-                if($('#selectEscola option:selected').html() != "Escolas") //Verifica se a select foi usada
+                tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAluno[vars.occId[index]]+'</td><td>'+vars.nomeEscola[vars.occId[index]]+'</td><td>'+vars.dataOcorrencia[index]+'</td><td><a href="{{ route("pagOcorrencia", '+idDaOcc+') }}" target="_blank">Abrir</a></td></tr>';
+                realTableRow = tableRow.replace('+idDaOcc+', vars.idOcorrencia[index]);
+                if($('#selectEscola option:selected').html() != "Todas as escolas") //Verifica se a select foi usada
                 {
                   if(vars.nomeEscola[vars.occId[index]] == $('#selectEscola option:selected').html()) //Verifica se a escola escolhida é igual á do aluno
-                  {                      
-                    tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAluno[vars.occId[index]]+'</td><td>'+vars.nomeEscola[vars.occId[index]]+'</td><td>'+vars.dataOcorrencia[index]+'</td></tr>';            
-                    $('#table-body').append(tableRow);      
+                  {      
+                    if($('#selectTurma option:selected').html() != "Selecione uma escola" && $('#selectTurma option:selected').html() != "Todas as turmas") //Verifica se a select turma foi usada
+                    {
+                      if(vars.turmaAluno[vars.occId[index]] == $("#selectTurma option:selected").html()) //Verifica se a escola escolhida é igual á do aluno
+                      {                                         
+                        $('#table-body').append(realTableRow);   
+                      } 
+                    }  
+                    else //Caso a select turma não tenha sido usada, mostra todas as ocorrencias
+                    {
+                      $('#table-body').append(realTableRow);
+                    } 
                   }    
                 }      
                 else //Caso a select escolas não tenha sido usada, mostra todas as ocorrencias
                 {
-                  tableRow = '<tr style="height:80px"><td>Pendente</td><td>'+vars.nomeAluno[vars.occId[index]]+'</td><td>'+vars.turmaAluno[vars.occId[index]]+'</td><td>'+vars.nomeEscola[vars.occId[index]]+'</td><td>'+vars.dataOcorrencia[index]+'</td></tr>';            
-                  $('#table-body').append(tableRow);  
+                  $('#table-body').append(realTableRow);  
                 }    
               })
               
               //Se não existirem ocorrencias encontradas
               if(vars.occId == 0)
               {
-                console.log('não existe nada');
-                tableRow = '<tr style="height:80px"><td colspan="5">Não foram encontrados resultados</td></tr>';
+                tableRow = '<tr style="height:80px"><td colspan="6">Não foram encontrados resultados</td></tr>';
                 $('#table-body').append(tableRow);    
-              }        
+              }      
             }
           });
         }
 
         function atualizarTurmas()
         {
-          if($('#selectEscola option:selected').html() != "Escolas")
+          if($('#selectEscola option:selected').html() != "Todas as escolas")
           {
             $("#selectTurma").removeAttr("disabled");
 
             $.ajax({
-            type:'GET',
-            url: '{{ route("atualizarOcorrencias") }}',
-            data: { name:$('#search').val() },
-            success: function(occ)
-            {
-              var vars = JSON.parse(occ);
-
-              $('#selectTurma').html("");
-
-              $.each(vars.escolaId, function(index, value)
+              type:'GET',
+              url: '{{ route("atualizarOcorrencias") }}',
+              data: { name:$('#pesquisa').val() },
+              success: function(occ)
               {
-                if($('#selectEscola option:selected').html() == vars.nomeEscolaSemOcc[index] && vars.turmaId[index] == value)
+                var vars = JSON.parse(occ);
+
+                $('#selectTurma').html("");
+
+                $.each(vars.escolaId, function(index, value)
                 {
-                  $.each(vars.turmaId, function(i, v){
-                    if(vars.turmaId[i] == $('#selectEscola option:selected').val())
-                    {
-                      $('#selectTurma').append("<option value="+vars.turmaEscolaAno[i]+vars.turmaEscolaCod[i]+">"+vars.turmaEscolaAno[i]+vars.turmaEscolaCod[i]+"</option>");
-                    }
-                  })
-                }
-              })
+                  if($('#selectEscola option:selected').html() == vars.nomeEscolaSemOcc[index] && vars.turmaId[index] == value)
+                  {
+                    $('#selectTurma').append("<option>Todas as turmas</option>")
+                    $.each(vars.turmaId, function(i, v){
+                      if(vars.turmaId[i] == $('#selectEscola option:selected').val())
+                      {
+                        $('#selectTurma').append("<option value="+vars.turmaEscolaAno[i]+vars.turmaEscolaCod[i]+">"+vars.turmaEscolaAno[i]+vars.turmaEscolaCod[i]+"</option>");
+                      }
+                    })
+                  }
+                })
 
-              //$("#selectTurma").append()
-            }
-
+              }
             });
           }
           else
@@ -332,8 +330,6 @@
             $("#selectTurma").attr("disabled", "disabled");
           }
         }
-
-
     </script>
   </body>
 <html>
