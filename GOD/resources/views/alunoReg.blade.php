@@ -229,11 +229,11 @@
                   </div>
 
                   <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
-                    <div class="col-4 p-0">
+                    <div class="col-3 p-0 me-2">
                       <input class="input-box form-control" type="datetime-local" name="data" id="data" placeholder="Data de Nascimento">
                     </div>
 
-                    <div class="col-4 p-0">
+                    <div class="col-4 p-0 me-2">
                       <input class="input-box form-control" type="text" id="nif" name="nif" placeholder="NIF">
                     </div> 
 
