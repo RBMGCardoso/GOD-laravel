@@ -47,6 +47,9 @@ class OcorrenciaController extends Controller
         $OccAlunoId = Ocorrencia::all()->reverse()->pluck('aluno_id');
         $OccData = Ocorrencia::all()->reverse()->pluck('data');
  
+        //indice de idaluno precisa de ser igual ao id do aluno
+        //
+        //solução: for loop onde nomeAluno[$idAluno] = Aluno::where('id', $idAluno)->pluck(nome);
         $idAluno = Aluno::all()->pluck('nome');
 
         //Verifica se foram encontrados alunos
