@@ -71,7 +71,7 @@ class MainController extends Controller
 
         AlunoTurma::insert([
             'aluno_id' => Aluno::all()->reverse()->first()->id,
-            'turma_id' => $req->escola
+            'turma_id' => $req->turma
         ]);
     }
 

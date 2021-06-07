@@ -49,5 +49,3 @@ Route::post('check', [UserAuthController::Class, 'check'])->name('auth.check');
 
 Route::get('ocorrencias', [OcorrenciaController::Class, 'index'])->name('mostrarOcorrencias');
 Route::get('ocorrenciasAtualizarInfo', [OcorrenciaController::Class, 'AtualizarInfo'])->name('atualizarOcorrencias');
-
-Route::get('ocorrencias/{idOcc}', [OcorrenciaController::Class, 'redirectOcc'])->name('pagOcorrencia');
