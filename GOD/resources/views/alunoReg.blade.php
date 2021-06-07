@@ -196,7 +196,7 @@
               <span class="separador w-auto m-0" style="line-height:30px">Dados do Aluno</span>
             </div>
   
-            <form method="POST">
+            <form method="POST" action="{{ route('register.aluno') }}">
               <div class="row-auto identification d-flex mt-3">
                 <div class="col">
                   <div class="row m-0" style="width: 60vw;">
@@ -215,7 +215,9 @@
                   <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
                     <div class="col-6 p-0">
                       <select class="input-box form-control" id="escola" name="escola">
-                        <option>Selecione a Escola</option>
+                        @foreach($turmas as $turma)
+                          <option value="{{ $turma->id }}">{{ $turma->ano }} {{ $turma->codTurma }}</option>
+                        @endforeach
                       </select>
                     </div>
 
@@ -224,13 +226,13 @@
                     </div>
 
                     <div class="col-2 p-0">
-                      <input class="input-box form-control" type="text" id="telemovel" name="telemovel" placeholder="Telemóvel">
+                      <input class="input-box form-control" type="text" id="telef" name="telef" placeholder="Telemóvel">
                     </div>
                   </div>
 
                   <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
                     <div class="col-4 p-0">
-                      <input class="input-box form-control" type="datetime-local" name="data" id="data" placeholder="Data de Nascimento">
+                      <input class="input-box form-control" type="datetime-local" name="datanasc" id="data" placeholder="Data de Nascimento">
                     </div>
 
                     <div class="col-4 p-0">
@@ -266,36 +268,36 @@
                 <div class="col">
                   <div class="row m-0" style="width: 60vw;">
                     <div class="col-9 p-0">
-                      <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Encarregado de Educação">
+                      <input class="input-box form-control" list="nomes" autocomplete="off" placeholder="Nome do Encarregado de Educação">
                     </div>   
 
                     <div class="col-3 p-0">
-                      <input class="input-box form-control" type="text" id="anoturma" name="anoturma" placeholder="Parentesco">
+                      <input class="input-box form-control" type="text" placeholder="Parentesco">
                     </div>
                   </div>
     
                   <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
                     <div class="col-3 p-0">
-                      <input class="input-box form-control" type="text" id="anoturma" name="telemovel" placeholder="Telemóvel/Telefone">
+                      <input class="input-box form-control" type="text" placeholder="Telemóvel/Telefone">
                     </div>
 
                     <div class="col-4 p-0">
-                      <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email">
+                      <input class="input-box form-control" type="text" placeholder="Email">
                     </div>
 
                   </div>
 
                   <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
                     <div class="col-7 p-0">
-                      <input class="input-box form-control" type="text" id="morada" name="morada" placeholder="Morada">
+                      <input class="input-box form-control" type="text" placeholder="Morada">
                     </div>
 
                     <div class="col-3 p-0">
-                      <input class="input-box form-control" type="text" id="concelho" name="concelho" placeholder="Concelho">
+                      <input class="input-box form-control" type="text" placeholder="Concelho">
                     </div>
 
                     <div class="col-2 p-0">
-                      <input class="input-box form-control" type="text" id="codpost" name="codpost" placeholder="Código Postal">
+                      <input class="input-box form-control" type="text" placeholder="Código Postal">
                     </div>
                   </div>
 

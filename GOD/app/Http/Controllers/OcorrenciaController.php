@@ -43,24 +43,28 @@ class OcorrenciaController extends Controller
 
         $idAlunoSearch = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id');
 
+        $IdOcorrencia = Ocorrencia::all()->reverse()->pluck('id');
         $OccAlunoId = Ocorrencia::all()->reverse()->pluck('aluno_id');
         $OccData = Ocorrencia::all()->reverse()->pluck('data');
  
-
         $idAluno = Aluno::all()->pluck('nome');
 
         //Verifica se foram encontrados alunos
-        if(count($idAlunoSearch)>0)
+        if(count($idAlunoSearch)>0 && count($IdOcorrencia)>0)
         {
             //For para todas as ocorrencias
             for ($i=0; $i < count($OccAlunoId); $i++) { 
+
                 //For para todos os alunos
                 for ($j=0; $j < count($idAlunoSearch); $j++) { 
-                    //$i = aluno_id em ocorrencias || $j = id em alunos
+
+                        //$i = aluno_id em ocorrencias || $j = id em alunos
                         if($idAlunoSearch[$j] == $OccAlunoId[$i])
                         {
                             $json_OccId[$i] = $OccAlunoId[$i];
                             $json_OccData[$i] = $OccData[$i];
+                            $json_IdOcorrencia[$i] = $IdOcorrencia[$i];
+
                             $json_AlunoNome[$idAlunoSearch[$j]] = $idAluno[$OccAlunoId[$i]-1];
 
                             //For para todas as turmas
@@ -88,6 +92,7 @@ class OcorrenciaController extends Controller
                 }          
             }    
 
+            $array['idOcorrencia'] = $json_IdOcorrencia;
             $array['occId'] = $json_OccId;
             $array['nomeAluno'] = $json_AlunoNome;
             $array['turmaAluno'] = $json_Turma;
@@ -108,72 +113,15 @@ class OcorrenciaController extends Controller
         $array['turmaEscolaCod'] = $TurmaCod;
         $array['escolaId'] = $EscolaId;
 
-        //dd($json_EscolaNome);
-        return json_encode($array);
+        return json_encode($array);        
+    }
 
-
-
-        
-
-        // $alunos_id = Ocorrencia::all()->reverse()->pluck('aluno_id');
-        // $search = $req->name;
-
-        // foreach ($alunos_id as $id) {
-        //     $alunos = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id'); 
-        // }  
-
-
-        // foreach ($alunos as $aluno) {
-        //     $json_OccId[] = Ocorrencia::where('aluno_id', $aluno)->pluck('aluno_id')->collect();
-        // }
-
-        
-
-        // if($search == null)
-        // {
-        //     $json_ocorrencias = Ocorrencia::all()->reverse()->pluck('aluno_id');
-        // }
-        // else
-        // {
-        //     //Coloca os ids de cada ocorrencia num unico array
-        //     if(count($json_OccId) > 1)
-        //     {
-        //         for ($i=0; $i < count($json_OccId); $i++) { 
-        //             $json_ocorrencias = $json_OccId[0]->merge($json_OccId[$i]);                
-        //         }
-        //     }
-        //     else
-        //     {
-        //         $json_ocorrencias = $json_OccId[0];
-        //     }
-        // }
-
-        // $json_AlunoId = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id');
-
-        // foreach($json_AlunoId as $alunoId)
-        // {
-        //     $json_AlunoNome = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('nome')->reverse();
-        //     $json_TurmaId = AlunoTurma::where('aluno_id', $alunoId)->pluck('turma_id');
-
-        //     foreach($json_TurmaId as $turmaId)
-        //     {
-        //         $json_TurmaAno[] = Turma::where('id', $turmaId)->pluck('ano');
-        //         $json_TurmaCod[] = Turma::where('id', $json_TurmaId)->pluck('codTurma');
-        //     }                     
-        // }
-        
-        // for ($i=0; $i < count($json_AlunoNome); $i++) { 
-        //     $json_nomeAluno[$json_AlunoId[$i]] = $json_AlunoNome[$i];
-        // }
-
-        
-        
-        // $array['occId'] = $json_ocorrencias;
-        // $array['nomeAluno'] = $json_nomeAluno;
-        // $array['turmaAno'] = $json_TurmaAno;
-        // $array['turmaCod'] = $json_TurmaCod;
-        // return json_encode($array);
-        
+    public function redirectOcc(Ocorrencia $idOcc)
+    {
+        $descricao = Ocorrencia::find($idOcc)->pluck('aluno_id');
+        $nome_aluno = Aluno::where('id', $descricao)->pluck('nome');
+        dd($nome_aluno);
+        //return view('');
     }
 
     /**
