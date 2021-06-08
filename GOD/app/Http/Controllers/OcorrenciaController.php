@@ -22,93 +22,19 @@ class OcorrenciaController extends Controller
         $ocorrencias = Ocorrencia::all()->reverse();
         $escolas = Escola::all();
         $turmas = Turma::all();
+        $alunos = Aluno::all();;
 
-        return view('pesquisa', compact('ocorrencias', 'escolas', 'turmas'));  
+        return view('pesquisa', compact('ocorrencias', 'escolas', 'turmas', 'alunos'));  
     }
 
-    public function AtualizarInfo(Request $req)
+    public function AtualizarTurmas()
     {
-        $search = $req->name;
-
-        $AlunoTurmaAlunoId = AlunoTurma::all()->pluck('aluno_id');
-        $AlunoTurmaId = AlunoTurma::all()->pluck('turma_id');
-
-        $TurmaId = Turma::all()->pluck('id');
         $TurmaAno = Turma::all()->pluck('ano');
         $TurmaCod = Turma::all()->pluck('codTurma');
         $TurmaEscolaId = Turma::all()->pluck('escola_id');
 
         $EscolaId = Escola::all()->pluck('id');
         $EscolaNome = Escola::all()->pluck('nome');
-
-        $idAlunoSearch = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id');
-
-        $IdOcorrencia = Ocorrencia::all()->reverse()->pluck('id');
-        $OccAlunoId = Ocorrencia::all()->reverse()->pluck('aluno_id');
-        $OccData = Ocorrencia::all()->reverse()->pluck('data');
- 
-        //indice de idaluno precisa de ser igual ao id do aluno
-        //
-        //solução: for loop onde nomeAluno[$idAluno] = Aluno::where('id', $idAluno)->pluck(nome);
-        $idAluno = Aluno::all()->pluck('nome');
-
-        //Verifica se foram encontrados alunos
-        if(count($idAlunoSearch)>0 && count($IdOcorrencia)>0)
-        {
-            //For para todas as ocorrencias
-            for ($i=0; $i < count($OccAlunoId); $i++) { 
-
-                //For para todos os alunos
-                for ($j=0; $j < count($idAlunoSearch); $j++) { 
-
-                        //$i = aluno_id em ocorrencias || $j = id em alunos
-                        if($idAlunoSearch[$j] == $OccAlunoId[$i])
-                        {
-                            $json_OccId[$i] = $OccAlunoId[$i];
-                            $json_OccData[$i] = $OccData[$i];
-                            $json_IdOcorrencia[$i] = $IdOcorrencia[$i];
-
-                            $json_AlunoNome[$idAlunoSearch[$j]] = $idAluno[$OccAlunoId[$i]-1];
-
-                            //For para todas as turmas
-                            for ($y=0; $y < count($TurmaId); $y++) { 
-                                if($AlunoTurmaId[$json_OccId[$i]-1] == $TurmaId[$y])
-                                {
-                                    $json_Turma[$idAlunoSearch[$j]] = $TurmaAno[$y].$TurmaCod[$y];
-                                    $forTurmaId[$idAlunoSearch[$j]] = $y+1; //$y+1 id turma
-                                                                      
-                                    if($forTurmaId[$json_OccId[$i]] == $TurmaId[$y])
-                                    {
-                                        $escolaId[$idAlunoSearch[$j]] = $TurmaEscolaId[$y];
-                                    }
-
-                                    //For para todas as escolas
-                                    for ($x=0; $x < count($EscolaId); $x++) { 
-                                        if($escolaId[$idAlunoSearch[$j]] == $EscolaId[$x])
-                                        {
-                                            $json_EscolaNome[$idAlunoSearch[$j]] = $EscolaNome[$x];
-                                        }
-                                    }
-                                }
-                            }       
-                        }
-                }          
-            }    
-
-            $array['idOcorrencia'] = $json_IdOcorrencia;
-            $array['occId'] = $json_OccId;
-            $array['nomeAluno'] = $json_AlunoNome;
-            $array['turmaAluno'] = $json_Turma;
-            $array['nomeEscola'] = $json_EscolaNome;
-            $array['dataOcorrencia'] = $json_OccData;
-        }
-        else
-        {
-            //Retorna 0 que não é um ID válido para uma ocorrência
-            //caso não sejam encontrados alunos
-            //mostrando assim a mensagem "Não foram encontrados resultados"
-            $array['occId'] = 0;
-        }
 
         $array['nomeEscolaSemOcc'] = $EscolaNome;
         $array['turmaId'] = $TurmaEscolaId;
@@ -119,12 +45,65 @@ class OcorrenciaController extends Controller
         return json_encode($array);        
     }
 
-    public function redirectOcc(Ocorrencia $idOcc)
+    public function AtualizarAlunos(Request $req)
     {
-        $descricao = Ocorrencia::find($idOcc)->pluck('aluno_id');
-        $nome_aluno = Aluno::where('id', $descricao)->pluck('nome');
-        dd($nome_aluno);
-        //return view('');
+        $search = $req->search;
+
+        $idAlunoSearch = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('id'); 
+        $nomeAlunos = Aluno::where('nome', 'like', '%' . $search . '%')->pluck('nome');
+
+        $alunoIdAlunoTurma = AlunoTurma::all()->pluck('aluno_id');
+        $turmaIdAlunoTurma =  AlunoTurma::all()->pluck('turma_id');
+
+        $idTurma = Turma::all()->pluck('id');
+        $anoTurma = Turma::all()->pluck('ano');
+        $codTurma = Turma::all()->pluck('codTurma');
+        $escolaIdTurma = Turma::all()->pluck('escola_id');
+
+        $escolaId = Escola::all()->pluck('id');
+        $escolaNome = Escola::all()->pluck('nome');
+
+
+        //Associa o ano e código ao id da turma
+        for ($i=0; $i < count($idTurma); $i++) { 
+            $turma[$idTurma[$i]] = $anoTurma[$i].$codTurma[$i];
+
+            for ($e=0; $e < count($escolaNome); $e++) { 
+                if ($escolaId[$e] == $escolaIdTurma[$i]) {
+                    $idEscola[$idTurma[$i]] = $escolaId[$e];
+                    $turmaEscolaNome[$idTurma[$i]] = $escolaNome[$e];
+                }                
+            }
+        }
+
+        //// Obtém o ID da turma de cada aluno
+        //
+        for ($i=0; $i < count($idAlunoSearch); $i++) { 
+            for ($t=0; $t < count($alunoIdAlunoTurma); $t++) { 
+                if($alunoIdAlunoTurma[$t] == $idAlunoSearch[$i])
+                {
+                    $turmaAluno[$i] = $turma[$turmaIdAlunoTurma[$t]]; //Cria um array com as turmas onde o index é igual ao index no foreach do ajax
+
+                    for ($e=0; $e < count($escolaNome); $e++) {  
+                        $nomeEscola[$i] = $turmaEscolaNome[$turmaIdAlunoTurma[$t]];
+                    }
+                }
+            }
+        }
+
+        $array['idAluno'] = $idAlunoSearch; //Id dos alunos com nome parecido ao que foi pesquisado
+        $array['nomeAluno'] = $nomeAlunos; //Nome dos alunos com nome parecido ao que foi pesquisado
+        $array['turmaAluno'] = $turmaAluno; //Turma dos alunos com nome parecido ao que foi pesquisado
+        $array['escolaAluno'] = $nomeEscola; //Turma dos alunos com nome parecido ao que foi pesquisado
+
+        return json_encode($array);
+    }
+
+    public function perfilAluno(Aluno $idAluno)
+    {
+        //$descricao = Ocorrencia::find($idOcc)->pluck('aluno_id');
+        dd($idAluno->datanasc);
+        //return view('dashboard');
     }
 
     /**
