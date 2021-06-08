@@ -270,7 +270,7 @@
                     </div>   
 
                     <div class="col-3 p-0">
-                      <input class="input-box form-control" type="text" id="anoturma" name="anoturma" placeholder="Parentesco">
+                      <input class="input-box form-control" type="text" id="parentesco" name="parentesco" placeholder="Parentesco">
                     </div>
                   </div>
     

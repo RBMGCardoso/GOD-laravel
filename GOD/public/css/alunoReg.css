@@ -44,3 +44,15 @@ h1{
     background-color: rgba(121, 255, 255, 1);
     color: #2f323a;
 }
+
+@media (max-width: 767px) {
+    .separador{
+        font-size: 13.5px;
+    }
+}
+
+@media (max-width: 767px) {
+    .btn-sub{
+        font-size: 13.5px;
+    }
+}
