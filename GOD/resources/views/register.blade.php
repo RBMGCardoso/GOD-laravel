@@ -140,12 +140,74 @@
     <script src="./js/sidebars.js"></script> 
 
     <div class="row full-content" id="content" style="margin-left: 250px;">
-      <div class="col">
+      <div class="col p-0">
         <div class="row title d-flex justify-content-center align-items-center">
           <h1 class="w-auto">Registar Utilizador</h1>
         </div>
 
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <form method="POST">
+              <div class="row-auto identification d-flex mt-3">
+                <div class="col justify-content-center">
+                  <div class="row m-0 pt-4" style="width: 45vw;">
+                    <div class="col-12 p-0">
+                      <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Utilizador">
+                    </div>
+                  </div>
 
+                  <div class="row m-0 pt-4" style="width: 45vw;">
+                    <div class="col-12 p-0">
+                      <input class="input-box form-control" type="text" id="telemovel" name="telemovel" placeholder="Telemóvel/Telefone">
+                    </div>
+                  </div>
+
+                  <div class="row m-0 pt-4" style="width: 45vw;">
+                    <div class="col-12 p-0">
+                      <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email">
+                    </div>
+                  </div>
+
+                  <div class="row m-0 pt-4" style="width: 45vw;">
+                    <div class="col-12 p-0">
+                      <input class="input-box form-control" type="password" id="pass" name="password" placeholder="Password">
+                    </div>
+                  </div>
+
+                  <div class="row m-0 justify-content-center p-0 mt-3" style="width: 45vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                    <span class="separador w-auto m-0" style="line-height:30px">Cargo do Utilizador</span>
+                  </div>
+
+                  <div class="row m-0 pt-4" style="width: 45vw;">
+                    <div class="col p-0">
+                      <lable>Diretor</lable>
+                      <input type="radio" value="diretor" id="Opc1" name="cargoUser">
+                    </div>
+                    
+                    <div class="col p-0">
+                      <label>Diretor de turma</label>
+                      <input type="radio" value="diretor de turma" id="Opc2" name="cargoUser">
+                    </div>
+
+                    <div class="col p-0">
+                      <label>Professor</label>
+                      <input type="radio" value="professor" id="Opc3" name="cargoUser">
+                    </div>
+
+                    <div class="col p-0">
+                      <label>Secretaria</label>
+                      <input type="radio" value="secretaria" id="Opc4" name="cargoUser">
+                    </div>
+                  </div>
+
+                  <div class="row m-0 justify-content-end pt-4">
+                    <button class="btn-sub mt-5 mb-5" value="submit">SUBMETER</button>
+                  </div>
+                </div>  
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </body>

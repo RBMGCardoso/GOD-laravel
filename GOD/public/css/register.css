@@ -18,3 +18,24 @@ h1{
     font-weight: 500;
     color: #f8f8f8;
 }
+
+.identification{
+    width: 100%;
+}
+
+.btn-sub{
+    width: 15vw;
+    min-width: 100px;
+    height: 40px;
+    border: 0;
+    background: #2f323a;
+    border-radius: 4px;
+    color: #fff;
+    outline:none;
+}
+
+.btn-sub:hover
+{
+    background-color: rgba(121, 255, 255, 1);
+    color: #2f323a;
+}
