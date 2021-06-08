@@ -48,4 +48,8 @@ Route::get('/logout', [UserAuthController::Class, 'logout'])->name('logout');
 Route::post('check', [UserAuthController::Class, 'check'])->name('auth.check');
 
 Route::get('ocorrencias', [OcorrenciaController::Class, 'index'])->name('mostrarOcorrencias');
-Route::get('ocorrenciasAtualizarInfo', [OcorrenciaController::Class, 'AtualizarInfo'])->name('atualizarOcorrencias');
+
+Route::get('ocorrenciasAtualizarTurmas', [OcorrenciaController::Class, 'AtualizarTurmas'])->name('atualizarTurmas');
+Route::get('ocorrenciasAtualizarAlunos', [OcorrenciaController::Class, 'AtualizarAlunos'])->name('atualizarAlunos');
+
+Route::get('ocorrencias/{idAluno}', [OcorrenciaController::Class, 'perfilAluno'])->name('perfilAluno');

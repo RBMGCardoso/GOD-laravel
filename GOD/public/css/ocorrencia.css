@@ -86,6 +86,7 @@ textarea {
     border: 0;
     background: #2f323a;
     border-radius: 4px;
+    font-weight: normal;
     color: #fff;
     outline:none;
 }
@@ -93,5 +94,6 @@ textarea {
 .btn-sub:hover
 {
     background-color: rgba(121, 255, 255, 1);
+    font-weight: 600;
     color: #2f323a;
 }
