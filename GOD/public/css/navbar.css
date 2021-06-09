@@ -93,11 +93,6 @@ body
   fill: rgba(121, 255, 255, 1);
 }
 
-.dropdown-toggle::after {
+#registarDiv > .dropdown-toggle::after {
   display: none !important;
-}
-
-#dropdown-button
-{
-  transition: 0.1s;
 }

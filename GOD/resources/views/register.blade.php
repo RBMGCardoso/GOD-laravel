@@ -45,48 +45,56 @@
           }
         }
     </script>
-
   </head>
 
   <body>
     <div class="navbar-div">
       <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
-            <a href="{{ route('dashboardPage') }}" class="navbar-brand text-light">
-              <div class="display-5 font-weight-bold">
-                <div class="row">
-                  <div class="col">
-                  GOD
-                  </div>
-                </div>       
-              </div>
-            </a>
-            <hr style="width:100%;text-align:left;margin-left:0;margin-bottom:0;color:#fff">
-            <ul class="nav-pills navbar-nav d-flex flex-column w-100">
-              <li class="nav-item w-100">
-                <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fa fa-home"></i> Início</a>
-              </li>
+          <a href="{{ route('dashboardPage') }}" class="navbar-brand text-light">
+            <div class="display-5 font-weight-bold">
+              <div class="row">
+                <div class="col">
+                GOD
+                </div>
+              </div>       
+            </div>
+          </a>
+          <hr style="width:100%;text-align:left;margin-left:0;margin-bottom:0;color:#fff">
+          <ul class="nav-pills navbar-nav d-flex flex-column w-100">
+            <li class="nav-item w-100">
+              <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fa fa-home"></i> Início</a>
+            </li>
 
-              <li class="nav-item w-100">
-                <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fa fa-plus-square"></i> Criar Ocorrência</a>
-              </li>
+            <li class="nav-item w-100">
+              <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fa fa-plus-square"></i> Criar Ocorrência</a>
+            </li>
 
+            <li class="nav-item w-100">
+              <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fa fa-search"></i> Pesquisar</a>
+            </li>
+
+            @if(session('LoggedUser')->cargo == "Diretor de Turma")
               <li class="nav-item w-100">
-                <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fa fa-search"></i> Pesquisar</a>
+                <a href="" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fas fa-users"></i> Direção de turma</a>
               </li>
-              
+            @endif
+            
+            @if(session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
               <div class="dropdown nav-item w-100" onclick="mudarButton()">
-                  <a class="dropdown-toggle nav-link rounded-0 text-light ps-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <div class="row me-0">
-                      <div class="col">
-                        <i class="fas fa-user-plus"></i> 
-                        Registar 
-                      </div>
-
-                      <div class="col d-flex pt-1 justify-content-end">
-                        <i class="fas fa-sort-down w-auto text-right" id="dropdown-button"></i>                
-                      </div>
+                <a class="dropdown-toggle nav-link rounded-0 text-light ps-3" id="registarDiv" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="row me-0">
+                    <div class="col">
+                      <i class="fas fa-user-plus"></i> 
+                      Registar 
                     </div>
-                  </a>
+
+                    <div class="col d-flex pt-1 justify-content-end">
+                      <i class="fas fa-sort-down w-auto text-right" id="dropdown-button"></i>                
+                    </div>
+                  </div>
+                </a>
+                
+
                 <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton" style="background-color: transparent;">
                   <li>
                     <a href="{{ route('registerPage') }}" class="dropdown-item nav-link rounded-0 text-light ps-3" id="btn"><i class="fas fa-plus-square"></i> Registar Utilizador</a>
@@ -97,47 +105,44 @@
                   </li>
                 </ul>
               </div>
+            @endif         
+          </ul>
+
+        <div class="profile">
+          <div class="dropup ms-3">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" alt="mdo" width="32" height="32" class="rounded-circle me-2">
+              <strong>{{ session('LoggedUser')->name }}</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+              <li><a class="dropdown-item">
+                    {{ session('LoggedUser')->cargo }}     
+              </a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Meu perfil</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
             </ul>
-
-          <div class="profile">
-            <div class="dropup ms-3">
-              <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-                <strong>{{ session('LoggedUser')->name }}</strong>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" href="#">
-                  @forelse (session('LoggedUser')->cargos as $cargo)
-                    {{ $cargo->cargo }}
-                  @empty
-                    Nenhum cargo atribuido
-                  @endforelse             
-                </a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
-              </ul>
-            </div>
           </div>
-              <!--      SCRIPTS     -->
-              <script src="{{ url('/js/navbar.js') }}"></script>
-      </nav> 
-    </div>
+        </div>
+            <!--      SCRIPTS     -->
+            <script src="{{ url('/js/navbar.js') }}"></script>
+      </nav>
 
-    <button class="btn text-dark shadow-none" id="menu-btn" style="position:absolute;left:250px;width:50px;height:50px; z-index: 600;" onclick="closeSidebar()">
-      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-        width="30px" height="30px" viewBox="0 0 451.846 451.847" style="enable-background:new 0 0 451.846 451.847;">
+      <button class="btn text-dark shadow-none" id="menu-btn" style="position:absolute;left:250px;width:50px;height:50px" onclick="closeSidebar()">
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="30px" height="30px" viewBox="0 0 451.846 451.847" style="enable-background:new 0 0 451.846 451.847;">
           <g>
             <path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
               c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
               c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"/>
           </g>
-      </svg>
-    </button>
-
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./js/sidebars.js"></script> 
+        </svg>
+      </button>
+      
+      <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="./js/sidebars.js"></script>
+    </div>
 
     <div class="row full-content" id="content" style="margin-left: 250px;">
       <div class="col p-0">
@@ -147,30 +152,30 @@
 
         <div class="row justify-content-center">
           <div class="col-auto">
-            <form method="POST">
+            <form method="POST" action="{{ route('register.utilizador') }}">
               <div class="row-auto identification d-flex mt-3">
                 <div class="col justify-content-center">
                   <div class="row m-0 pt-4" style="width: 45vw;">
                     <div class="col-12 p-0">
-                      <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Utilizador">
+                      <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Utilizador" required>
                     </div>
                   </div>
 
                   <div class="row m-0 pt-4" style="width: 45vw;">
                     <div class="col-12 p-0">
-                      <input class="input-box form-control" type="text" id="telemovel" name="telemovel" placeholder="Telemóvel/Telefone">
+                      <input class="input-box form-control" type="text" id="telemovel" name="telemovel" placeholder="Telemóvel/Telefone" required>
                     </div>
                   </div>
 
                   <div class="row m-0 pt-4" style="width: 45vw;">
                     <div class="col-12 p-0">
-                      <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email">
+                      <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email" required>
                     </div>
                   </div>
 
                   <div class="row m-0 pt-4" style="width: 45vw;">
                     <div class="col-12 p-0">
-                      <input class="input-box form-control" type="password" id="pass" name="password" placeholder="Password">
+                      <input class="input-box form-control" type="password" id="pass" name="password" placeholder="Password" required>
                     </div>
                   </div>
 
@@ -178,25 +183,25 @@
                     <span class="separador w-auto m-0" style="line-height:30px">Cargo do Utilizador</span>
                   </div>
 
-                  <div class="row m-0 pt-4" style="width: 45vw;">
+                  <div class="row m-0 pt-4 text-center" style="width: 45vw;">
                     <div class="col p-0">
-                      <lable>Diretor</lable>
-                      <input type="radio" value="diretor" id="Opc1" name="cargoUser">
+                      <label for="Opc1">Diretor</label>
+                      <input type="radio" value="Diretor" id="Opc1" name="cargoUser" required>
                     </div>
                     
                     <div class="col p-0">
-                      <label>Diretor de turma</label>
-                      <input type="radio" value="diretor de turma" id="Opc2" name="cargoUser">
+                      <label for="Opc2">Diretor de turma</label>
+                      <input type="radio" value="Diretor de Turma" id="Opc2" name="cargoUser" required>
                     </div>
 
                     <div class="col p-0">
-                      <label>Professor</label>
-                      <input type="radio" value="professor" id="Opc3" name="cargoUser">
+                      <label for="Opc3">Professor</label>
+                      <input type="radio" value="Professor" id="Opc3" name="cargoUser" required>
                     </div>
 
                     <div class="col p-0">
-                      <label>Secretaria</label>
-                      <input type="radio" value="secretaria" id="Opc4" name="cargoUser">
+                      <label for="Opc4">Secretaria</label>
+                      <input type="radio" value="Secretaria" id="Opc4" name="cargoUser" required>
                     </div>
                   </div>
 

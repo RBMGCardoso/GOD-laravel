@@ -44,7 +44,7 @@ class UserAuthController extends Controller
         if(session()->has('LoggedUser'))
         {
             session()->pull('LoggedUser');
-            return redirect('login');
+            return redirect('');
         }
     }
 }

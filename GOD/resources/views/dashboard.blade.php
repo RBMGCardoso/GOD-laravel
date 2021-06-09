@@ -49,7 +49,7 @@
     
   </head>
   <body>
-  <div class="navbar-div">
+    <div class="navbar-div">
       <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
           <a href="{{ route('dashboardPage') }}" class="navbar-brand text-light">
             <div class="display-5 font-weight-bold">
@@ -73,9 +73,16 @@
             <li class="nav-item w-100">
               <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fa fa-search"></i> Pesquisar</a>
             </li>
+
+            @if(session('LoggedUser')->cargo == "Diretor de Turma")
+              <li class="nav-item w-100">
+                <a href="" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fas fa-users"></i> Direção de turma</a>
+              </li>
+            @endif
             
-            <div class="dropdown nav-item w-100" onclick="mudarButton()">
-                <a class="dropdown-toggle nav-link rounded-0 text-light ps-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            @if(session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
+              <div class="dropdown nav-item w-100" onclick="mudarButton()">
+                <a class="dropdown-toggle nav-link rounded-0 text-light ps-3" id="registarDiv" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   <div class="row me-0">
                     <div class="col">
                       <i class="fas fa-user-plus"></i> 
@@ -87,16 +94,19 @@
                     </div>
                   </div>
                 </a>
-              <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton" style="background-color: transparent;">
-                <li>
-                  <a href="{{ route('registerPage') }}" class="dropdown-item nav-link rounded-0 text-light ps-3" id="btn"><i class="fas fa-plus-square"></i> Registar Utilizador</a>
-                </li>
+                
 
-                <li>
-                  <a href="{{ route('registerAlunoPage') }}" class="dropdown-item nav-link rounded-0 text-light ps-3" id="btn"><i class="fas fa-plus-square"></i> Registar Aluno</a>
-                </li>
-              </ul>
-            </div>
+                <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton" style="background-color: transparent;">
+                  <li>
+                    <a href="{{ route('registerPage') }}" class="dropdown-item nav-link rounded-0 text-light ps-3" id="btn"><i class="fas fa-plus-square"></i> Registar Utilizador</a>
+                  </li>
+
+                  <li>
+                    <a href="{{ route('registerAlunoPage') }}" class="dropdown-item nav-link rounded-0 text-light ps-3" id="btn"><i class="fas fa-plus-square"></i> Registar Aluno</a>
+                  </li>
+                </ul>
+              </div>
+            @endif         
           </ul>
 
         <div class="profile">
@@ -106,15 +116,11 @@
               <strong>{{ session('LoggedUser')->name }}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-              <li><a class="dropdown-item" href="#">
-                @forelse (session('LoggedUser')->cargos as $cargo)
-                  Cargo: {{ $cargo->cargo }}
-                @empty
-                  Nenhum cargo atribuido ou sessão expirada.
-                @endforelse             
+              <li><a class="dropdown-item">
+                    {{ session('LoggedUser')->cargo }}     
               </a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Perfil</a></li>
+              <li><a class="dropdown-item" href="#">Meu perfil</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
             </ul>
@@ -124,7 +130,7 @@
             <script src="{{ url('/js/navbar.js') }}"></script>
       </nav>
 
-      <button class="btn text-dark shadow-none" id="menu-btn" style="position:relative;left:250px;width:50px;height:50px" onclick="closeSidebar()">
+      <button class="btn text-dark shadow-none" id="menu-btn" style="position:absolute;left:250px;width:50px;height:50px" onclick="closeSidebar()">
         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
           width="30px" height="30px" viewBox="0 0 451.846 451.847" style="enable-background:new 0 0 451.846 451.847;">
           <g>

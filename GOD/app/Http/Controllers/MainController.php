@@ -15,6 +15,8 @@ use App\Models\User;
 use App\Models\Ocorrencia;
 use App\Models\MotivoOcorrencia;
 
+use Illuminate\Support\Facades\Hash;
+
 
 class MainController extends Controller
 {
@@ -45,6 +47,16 @@ class MainController extends Controller
         {
             return redirect('login');
         }
+    }
+
+    public function RegisterUtilizador(Request $req)
+    {
+        User::insert([
+            'name' => $req->nome,
+            'email' => $req->email,
+            'password' => Hash::make($req->password),
+            'cargo' => $req->cargoUser
+        ]);
     }
 
     public function RegisterAlunoPage(Request $request, Turma $turma)
@@ -104,6 +116,7 @@ class MainController extends Controller
                     'ocorrencia_id' => Ocorrencia::all()->reverse()->first()->id
                 ]);
             }
+            
             /*
             $details = [
                 'title' => 'Ocorrência criada por '.session('LoggedUser')->name.' a '.date('d/m/Y', strtotime($req->data)).' ás '.date('H', strtotime($req->data)).'h:'.date('i', strtotime($req->data)).'m',

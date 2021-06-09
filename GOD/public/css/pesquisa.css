@@ -2,18 +2,7 @@ input:focus, select:focus{
     box-shadow: none !important; /*Remove a sombra azul ao clicar em qualquer input */
 }
 
-/* Table */
-#responsive-table{
-    table-layout: fixed;
-    width: 61%;
-    height: 600px;
-    border-collapse: collapse;
-    border-radius: 2px;
-    border-style: hidden; /* hide standard table (collapsed) border */
-    box-shadow: 0 0 0 2px #ccc; /* this draws the table border  */ 
-}
-
-.content
+.full-content
 {
     transition:0.4s;
 }
