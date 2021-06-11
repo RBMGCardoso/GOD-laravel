@@ -40,13 +40,14 @@ body
   border-bottom: 1px solid #555;
 }
 
- .nav-link
+.nav-link
 {
-  font-size: 1.25em;
+  font-size: 1.20em;
   width:250px;
   height: 48px;
   position: relative;
 }
+
 
 .nav-link:active,
 .nav-link:focus,
@@ -93,6 +94,6 @@ body
   fill: rgba(121, 255, 255, 1);
 }
 
-#registarDiv > .dropdown-toggle::after {
+.registar-div > .dropdown-toggle::after {
   display: none !important;
 }

@@ -19,7 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('cargo');
+
+            $table->integer('dirTurma')->nullable()->unsigned();
+            $table->foreign('dirTurma')->nullable()->references('id')->on('turmas');
             $table->rememberToken();
+
             $table->timestamps();
         });
     }

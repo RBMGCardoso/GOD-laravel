@@ -71,7 +71,7 @@
             <div class="display-5 font-weight-bold">
               <div class="row">
                 <div class="col">
-                GOD
+                  GOD
                 </div>
               </div>       
             </div>
@@ -79,34 +79,39 @@
           <hr style="width:100%;text-align:left;margin-left:0;margin-bottom:0;color:#fff">
           <ul class="nav-pills navbar-nav d-flex flex-column w-100">
             <li class="nav-item w-100">
-              <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fa fa-home"></i> Início</a>
+              <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-home fa-fw"></i> Início</a>
             </li>
 
             <li class="nav-item w-100">
-              <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fa fa-plus-square"></i> Criar Ocorrência</a>
-            </li>
-
-            <li class="nav-item w-100">
-              <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fa fa-search"></i> Pesquisar</a>
+              <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-plus-square fa-fw"></i> Criar Ocorrência</a>
             </li>
 
             @if(session('LoggedUser')->cargo == "Diretor de Turma")
               <li class="nav-item w-100">
-                <a href="" class="nav-link rounded-0 text-light ps-3" id="btn"><i class="fas fa-users"></i> Direção de turma</a>
+                <a href="{{ route('minhaTurma') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-users fa-fw"></i> Direção de turma</a>
               </li>
             @endif
+
+            
+            <li class="nav-item w-100">
+              <a href="" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-book fa-fw"></i> Minhas Ocorrências</a>
+            </li>    
             
             @if(session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
-              <div class="dropdown nav-item w-100" onclick="mudarButton()">
-                <a class="dropdown-toggle nav-link rounded-0 text-light ps-3" id="registarDiv" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              <li class="nav-item w-100">
+                <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-search fa-fw"></i> Pesquisar</a>
+              </li>
+
+              <div class="dropdown nav-item w-100 registar-div" onclick="mudarButton()">
+                <a class="dropdown-toggle nav-link rounded-0 text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   <div class="row me-0">
                     <div class="col">
-                      <i class="fas fa-user-plus"></i> 
+                      <i class="fas fa-user-plus fa-fw"></i> 
                       Registar 
                     </div>
 
                     <div class="col d-flex pt-1 justify-content-end">
-                      <i class="fas fa-sort-down w-auto text-right" id="dropdown-button"></i>                
+                      <i class="fas fa-sort-down w-auto text-right fa-fw" id="dropdown-button"></i>                
                     </div>
                   </div>
                 </a>
@@ -114,15 +119,15 @@
 
                 <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton" style="background-color: transparent;">
                   <li>
-                    <a href="{{ route('registerPage') }}" class="dropdown-item nav-link rounded-0 text-light ps-3" id="btn"><i class="fas fa-plus-square"></i> Registar Utilizador</a>
+                    <a href="{{ route('registerPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Utilizador</a>
                   </li>
 
                   <li>
-                    <a href="{{ route('registerAlunoPage') }}" class="dropdown-item nav-link rounded-0 text-light ps-3" id="btn"><i class="fas fa-plus-square"></i> Registar Aluno</a>
+                    <a href="{{ route('registerAlunoPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Aluno</a>
                   </li>
                 </ul>
               </div>
-            @endif         
+            @endif     
           </ul>
 
         <div class="profile">

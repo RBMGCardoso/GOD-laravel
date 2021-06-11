@@ -94,7 +94,7 @@ class OcorrenciaController extends Controller
         $array['idAluno'] = $idAlunoSearch; //Id dos alunos com nome parecido ao que foi pesquisado
         $array['nomeAluno'] = $nomeAlunos; //Nome dos alunos com nome parecido ao que foi pesquisado
         $array['turmaAluno'] = $turmaAluno; //Turma dos alunos com nome parecido ao que foi pesquisado
-        $array['escolaAluno'] = $nomeEscola; //Turma dos alunos com nome parecido ao que foi pesquisado
+        $array['escolaAluno'] = $nomeEscola; //Nome da Escola linkada à turma do array acima
 
         return json_encode($array);
     }

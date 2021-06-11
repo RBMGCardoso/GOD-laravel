@@ -22,14 +22,7 @@ class MainController extends Controller
 {
     public function DashboardPage()
     {
-        if(session('LoggedUser') !== null)
-        {
-            return view('dashboard');
-        }
-        else
-        {
-            return redirect('login');
-        }
+        return view('dashboard');
     }
 
     public function LoginPage()
@@ -39,14 +32,7 @@ class MainController extends Controller
 
     public function RegisterPage()
     {
-        if(session('LoggedUser') !== null)
-        {
-            return view('register');
-        }
-        else
-        {
-            return redirect('login');
-        }
+        return view('register');
     }
 
     public function RegisterUtilizador(Request $req)
@@ -132,6 +118,62 @@ class MainController extends Controller
         else
         {
             return back();
+        }
+    }
+
+    public function dirTurma()
+    {
+        $alunosId = AlunoTurma::where('turma_id', session('LoggedUser')->dirTurma)->pluck('aluno_id');
+        $alunos = Aluno::all();
+
+        for ($i=0; $i < count($alunosId); $i++) { 
+            for ($j=0; $j < count($alunos); $j++) { 
+                if($alunos[$j]->id == $alunosId[$i])
+                {
+                    $alunosModel[$i] = $alunos[$j];
+                }
+            }
+        }
+
+        if(!isset($alunosModel))
+        {
+            $alunosModel = null;
+        }
+        
+        return view('dirTurma', compact('alunosModel'));
+    }
+
+    public function minhasOcc()
+    {
+        $ocorrencias = Ocorrencia::all()->pluck('cod_p');
+        $ocorrenciasId = Ocorrencia::all();
+
+        for ($i=0; $i < count($ocorrencias); $i++) { 
+            if($ocorrencias[$i] == session('LoggedUser')->id)
+            {
+                $arrayOcc[] = $ocorrenciasId[$i];
+            }
+        }
+        
+        if(!isset($arrayOcc))
+        {
+           $arrayOcc = null; 
+        }
+
+        return view('minhaOccs', compact('arrayOcc'));
+    }
+
+    public function pagOcc(Ocorrencia $idOcc)
+    {
+        
+
+        if(session('LoggedUser')->id == $idOcc->cod_p || session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
+        {
+            return view('pagOcc', compact('idOcc'));
+        }
+        else
+        {
+            return redirect('dashboard')->with('jsPermissionAlert', 'Você não tem permissão para aceder a esta página. Se acha que isto é um erro contacte os seus superiores.');
         }
 
     }

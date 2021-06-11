@@ -22,7 +22,6 @@ use App\Http\Controllers\PesquisaController;
 //
 Route::get('/', [UserAuthController::Class, 'Login'])->name('login');
 Route::post('check', [UserAuthController::Class, 'check'])->name('auth.check');
-Route::get('/logout', [UserAuthController::Class, 'logout'])->name('logout');
 
 
 //// Página de ocorrência
@@ -33,17 +32,27 @@ Route::middleware([CheckSession::class])->group(function(){
 
     Route::get('/dashboard', [MainController::Class, 'DashboardPage'])->name('dashboardPage'); //View da dashboard
 
-    Route::get('/registar', [MainController::Class, 'RegisterPage'])->name('registerPage'); //View registar utilizador
-    Route::post('registarPost', [MainController::Class, 'RegisterUtilizador'])->name('register.utilizador'); //Post para enviar utilizador para a DB
+    Route::middleware([CheckCargoDiretor::class])->group(function(){ //Middleware de cargos. Apenas diretores e pessoal da secretaria pode acessar estas páginas
+            Route::get('/registar', [MainController::Class, 'RegisterPage'])->name('registerPage'); //View registar utilizador
+            Route::post('registarPost', [MainController::Class, 'RegisterUtilizador'])->name('register.utilizador'); //Post para enviar utilizador para a DB
+        
+            Route::get('/registarAluno', [MainController::Class, 'RegisterAlunoPage'])->name('registerAlunoPage'); //View registar aluno
+            Route::post('/registarAlunoPost', [MainController::Class, 'RegisterAluno'])->name('register.aluno'); //Post para enviar aluno para a DB      
+        
+            Route::get('ocorrencias', [OcorrenciaController::Class, 'index'])->name('mostrarOcorrencias'); //View da página de pesquisa
 
-    Route::get('/registarAluno', [MainController::Class, 'RegisterAlunoPage'])->name('registerAlunoPage'); //View registar aluno
-    Route::post('/registarAlunoPost', [MainController::Class, 'RegisterAluno'])->name('register.aluno'); //Post para enviar aluno para a DB
+            Route::get('ocorrenciasAtualizarTurmas', [OcorrenciaController::Class, 'AtualizarTurmas'])->name('atualizarTurmas'); //Ajax para adicionar turmas á select na pesquisa
+            Route::get('ocorrenciasAtualizarAlunos', [OcorrenciaController::Class, 'AtualizarAlunos'])->name('atualizarAlunos'); //Ajax para atualizar os alunos dependendo da pesquisa
+        }
+    );
 
+    Route::get('minhas-ocorrencias', [MainController::Class, 'minhasOcc'])->name('minhasOcc'); //View das ocorrencias criadas pelo utilizador
 
-    Route::get('ocorrencias', [OcorrenciaController::Class, 'index'])->name('mostrarOcorrencias'); //View da página de pesquisa
+    Route::get('ocorrencia/{idOcc}', [MainController::Class, 'pagOcc'])->name('pagOcc'); //View das ocorrencias criadas pelo utilizador
 
-    Route::get('ocorrenciasAtualizarTurmas', [OcorrenciaController::Class, 'AtualizarTurmas'])->name('atualizarTurmas'); //Ajax para adicionar turmas á select na pesquisa
-    Route::get('ocorrenciasAtualizarAlunos', [OcorrenciaController::Class, 'AtualizarAlunos'])->name('atualizarAlunos'); //Ajax para atualizar os alunos dependendo da pesquisa
-
+    Route::get('minha-turma', [MainController::Class, 'dirTurma'])->name('minhaTurma'); //View da direção de turma de um diretor de turma
+    
     Route::get('alunos/{idAluno}', [OcorrenciaController::Class, 'perfilAluno'])->name('perfilAluno'); //View do perfil do aluno
+
+    Route::get('/logout', [UserAuthController::Class, 'logout'])->name('logout');
 });

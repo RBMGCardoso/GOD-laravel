@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-    <link href="{{ url('/css/register.css') }}" rel="stylesheet">
+    <link href="{{ url('/css/minhaOccs.css') }}" rel="stylesheet">
     <link href="{{ url('/css/navbar.css') }}" rel="stylesheet">
 
     <script>
@@ -152,70 +152,18 @@
     <div class="row full-content" id="content" style="margin-left: 250px;">
       <div class="col p-0">
         <div class="row title d-flex justify-content-center align-items-center">
-          <h1 class="w-auto">Registar Utilizador</h1>
+          <h1 class="w-auto">Minhas Ocorrências</h1>
         </div>
 
         <div class="row justify-content-center">
           <div class="col-auto">
-            <form method="POST" action="{{ route('register.utilizador') }}">
-              <div class="row-auto identification d-flex mt-3">
-                <div class="col justify-content-center">
-                  <div class="row m-0 pt-4" style="width: 45vw;">
-                    <div class="col-12 p-0">
-                      <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Utilizador" required>
-                    </div>
-                  </div>
-
-                  <div class="row m-0 pt-4" style="width: 45vw;">
-                    <div class="col-12 p-0">
-                      <input class="input-box form-control" type="text" id="telemovel" name="telemovel" placeholder="Telemóvel/Telefone" required>
-                    </div>
-                  </div>
-
-                  <div class="row m-0 pt-4" style="width: 45vw;">
-                    <div class="col-12 p-0">
-                      <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email" required>
-                    </div>
-                  </div>
-
-                  <div class="row m-0 pt-4" style="width: 45vw;">
-                    <div class="col-12 p-0">
-                      <input class="input-box form-control" type="password" id="pass" name="password" placeholder="Password" required>
-                    </div>
-                  </div>
-
-                  <div class="row m-0 justify-content-center p-0 mt-3" style="width: 45vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                    <span class="separador w-auto m-0" style="line-height:30px">Cargo do Utilizador</span>
-                  </div>
-
-                  <div class="row m-0 pt-4 text-center" style="width: 45vw;">
-                    <div class="col p-0">
-                      <label for="Opc1">Diretor</label>
-                      <input type="radio" value="Diretor" id="Opc1" name="cargoUser" required>
-                    </div>
-                    
-                    <div class="col p-0">
-                      <label for="Opc2">Diretor de turma</label>
-                      <input type="radio" value="Diretor de Turma" id="Opc2" name="cargoUser" required>
-                    </div>
-
-                    <div class="col p-0">
-                      <label for="Opc3">Professor</label>
-                      <input type="radio" value="Professor" id="Opc3" name="cargoUser" required>
-                    </div>
-
-                    <div class="col p-0">
-                      <label for="Opc4">Secretaria</label>
-                      <input type="radio" value="Secretaria" id="Opc4" name="cargoUser" required>
-                    </div>
-                  </div>
-
-                  <div class="row m-0 justify-content-end pt-4">
-                    <button class="btn-sub mt-5 mb-5" value="submit">SUBMETER</button>
-                  </div>
-                </div>  
-              </div>
-            </form>
+            @if($arrayOcc != null)
+                @foreach ($arrayOcc as $occ)
+                    <a href="{{ route('pagOcc', $occ->id) }}">{{ $occ->id }}</a> <br />
+                @endforeach
+            @else
+                Nenhuma ocorrência encontrada.
+            @endif
           </div>
         </div>
       </div>
