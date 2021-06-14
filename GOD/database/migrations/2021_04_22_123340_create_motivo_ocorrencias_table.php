@@ -14,6 +14,7 @@ class CreateMotivoOcorrenciasTable extends Migration
     public function up()
     {
         Schema::create('motivo_ocorrencia', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
             $table->integer('motivo_id')->unsigned();
             $table->integer('ocorrencia_id')->unsigned();
 

@@ -178,7 +178,7 @@
                 <span class="separador w-auto m-0" style="line-height:30px">Dados do Aluno</span>
               </div>
 
-              <form method="POST" action="{{ route('ocorrencia.criar') }}">
+              <form method="POST" action="{{ route('ocorrencia.criar') }}" id="myForm">
                 <div class="row-auto identification d-flex mt-3">
                   <div class="col">
                     <div class="row m-0" style="width: 60vw;">
@@ -220,123 +220,123 @@
                   <span class="separador w-auto m-0" style="line-height:30px">Motivos</span>
                 </div>
 
-                <div class="row m-0 mt-3" style="width: 60vw;">
+                <div class="row m-0 mt-3 checkbox-group" style="width: 60vw;">
                   <table>
                     <tr>
                       <td>
-                        <input type="checkbox" name="motivos[]" value="1" id="Opc1" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="1" id="Opc1" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc1">Desobedeceu a uma ordem</label>
                       </td>
                     </tr>
       
                     <tr>
                       <td>
-                        <input type="checkbox" name="motivos[]" value="2" id="Opc2" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="2" id="Opc2" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc2">Recusou participar nas atividades da aula</label>
                       </td>
                     </tr>
       
                     <tr>             
                       <td>
-                        <input type="checkbox" name="motivos[]" value="3" id="Opc3" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="3" id="Opc3" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc3">Fez gestos impróprios ao professor</label>
                       </td>
                     </tr>
       
                     <tr>        
                       <td>
-                        <input type="checkbox" name="motivos[]" value="4" id="Opc4" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="4" id="Opc4" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc4">Fez comentários inadequados e desrespeitadores</label>
                       </td>
                     </tr>
       
                     <tr>      
                       <td>
-                        <input type="checkbox" name="motivos[]" value="5" id="Opc5" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="5" id="Opc5" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc5">Perturbou a realização dos trabalhos dos seus colegas</label>
                       </td>
                     </tr>
       
                     <tr>     
                       <td>
-                        <input type="checkbox" name="motivos[]" value="6" id="Opc6" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="6" id="Opc6" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc6">Continuou a conversar com colegas, mesmo depois da chamada de atenção do professor</label>
                       </td>
                     </tr>
       
                     <tr>              
                       <td>
-                        <input type="checkbox" name="motivos[]" value="7" id="Opc7" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="7" id="Opc7" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc7">Pôs em causa a autoridade do professor</label>
                       </td>
                     </tr>
                     
                     <tr>              
                       <td>
-                        <input type="checkbox" name="motivos[]" value="8" id="Opc8" class="checkmark">  
+                        <input type="checkbox" name="motivos[]" value="8" id="Opc8" class="checkmark" onchange="checkedBoxes()">  
                         <label for="Opc8">Falou muito alto, emitiu sons e/ou provocou ruídos</label>
                       </td>
                     </tr>
       
                     <tr>              
                       <td>
-                        <input type="checkbox" name="motivos[]" value="9" id="Opc9" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="9" id="Opc9" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc9">Ausentou-se do seu lugar sem autorização</label>
                       </td>
                     </tr>
       
                     <tr>              
                       <td>
-                        <input type="checkbox" name="motivos[]" value="10" id="Opc10" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="10" id="Opc10" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc10">Interrompeu, de forma persistente e inadequada, a comunicação professor/alunos</label>
                       </td>
                     </tr>
       
                     <tr>             
                       <td>
-                        <input type="checkbox" name="motivos[]" value="11" id="Opc11" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="11" id="Opc11" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc11">Fez gestos impróprios a colegas</label>
                       </td>
                     </tr>
       
                     <tr>            
                       <td>
-                        <input type="checkbox" name="motivos[]" value="12" id="Opc12" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="12" id="Opc12" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc12">Agrediu fisicamente um colega</label>
                       </td>
                     </tr>
       
                     <tr>              
                       <td>
-                        <input type="checkbox" name="motivos[]" value="13" id="Opc13" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="13" id="Opc13" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc13">Insultou colega(s)</label>
                       </td>
                     </tr>
       
                     <tr>              
                       <td>
-                        <input type="checkbox" name="motivos[]" value="14" id="Opc14" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="14" id="Opc14" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc14">Tirou objeto(s) a colega(s) sem a sua autorização</label>
                       </td>
                     </tr>
       
                     <tr>             
                       <td>
-                        <input type="checkbox" name="motivos[]" value="15" id="Opc15" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="15" id="Opc15" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc15">Usou, indevidamente, telemóvel ou outro aparelho eletrónico</label>
                       </td>
                     </tr>
       
                     <tr>             
                       <td>
-                        <input type="checkbox" name="motivos[]" value="16" id="Opc16" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="16" id="Opc16" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc16">Danificou materiais e/ou espaços escolares</label>
                       </td>
                     </tr>
       
                     <tr>             
                       <td>
-                        <input type="checkbox" name="motivos[]" value="17" id="Opc17" class="checkmark">
+                        <input type="checkbox" name="motivos[]" value="17" id="Opc17" class="checkmark" onchange="checkedBoxes()">
                         <label for="Opc17">Outros</label>
                       </td>
                     </tr>
@@ -371,17 +371,17 @@
                       <p>O comportamento observou-se neste aluno:</p>
 
                       <div class="row-auto m-0 mb-2">                 
-                        <input type="radio" id="Opc18" name="frequenciaComport" style="margin-right: 20px;" value="Primeira Vez">
+                        <input type="radio" id="Opc18" name="frequenciaComport" style="margin-right: 20px;" class="frequenciaComport" value="Primeira Vez">
                         <label for="Opc18">Pela 1ª vez</label>
                       </div>
 
                       <div class="row-auto m-0 mb-2">
-                        <input type="radio" id="Opc19" name="frequenciaComport" style="margin-right: 20px;" value="Reincidente">
+                        <input type="radio" id="Opc19" name="frequenciaComport" style="margin-right: 20px;" class="frequenciaComport" value="Reincidente">
                         <label for="Opc19">De forma reincidente (pouco frequente)</label>
                       </div>
                       
                       <div class="row-auto m-0 mb-2">
-                        <input type="radio" id="Opc20" name="frequenciaComport" style="margin-right: 20px;" value="Com frequência">
+                        <input type="radio" id="Opc20" name="frequenciaComport" style="margin-right: 20px;" class="frequenciaComport" value="Com frequência">
                         <label for="Opc20">Com frequência</label>
                       </div>
                   </div>
@@ -390,34 +390,96 @@
                     <p>O aluno já demonstrou outros comportamentos incorretos?</p>
 
                     <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                      <input type="radio" id="Opc21" name="quantidadeComport" style="margin-right: 20px;" value="Sim">
+                      <input type="radio" id="Opc21" name="quantidadeComport" style="margin-right: 20px;" class="quantidadeComport" value="Sim" required>
                       <label for="Opc21">Sim</label>
                     </div>
 
                     <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                      <input type="radio" id="Opc22" name="quantidadeComport" style="margin-right: 20px;" value="Não">
+                      <input type="radio" id="Opc22" name="quantidadeComport" style="margin-right: 20px;" class="quantidadeComport" value="Não" required>
                       <label for="Opc22">Não</label>
                     </div>
 
                     <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                      <input type="radio" id="Opc23" name="quantidadeComport" style="margin-right: 20px;" value="Poucas vezes">
+                      <input type="radio" id="Opc23" name="quantidadeComport" style="margin-right: 20px;" class="quantidadeComport" value="Poucas vezes" required>
                       <label for="Opc23">Poucas vezes</label>
                     </div>
 
                     <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                      <input type="radio" id="Opc24" name="quantidadeComport" style="margin-right: 20px;" value="Com frequência">
+                      <input type="radio" id="Opc24" name="quantidadeComport" style="margin-right: 20px;" value="Com frequência" required>
                       <label for="Opc24">Com frequência</label>
                     </div>
                   </div>
                 </div>
 
                 <div class="row m-0 justify-content-end pt-4">
-                  <button class="btn-sub mt-5 mb-5" value="submit">SUBMETER</button>
+                  <button class="btn-sub mt-5 mb-5" onclick="verificarNome()" type="button" id="submitButton">SUBMETER</button>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+      <script>
+
+      function checkedBoxes() {
+        var boxes = document.getElementsByClassName("checkmark");
+
+        var checked = 0;
+        for (let i = 0; i < boxes.length; i++) {
+          if(boxes[i].checked)
+          checked++;       
+        }  
+        return checked;   
+      }
+
+      function checkboxRequired() {
+        var form = document.getElementById("myForm");
+
+        if(checkedBoxes()>0)
+        {
+          form.submit();
+        }
+        else
+        {
+          alert('É necessário selecionar pelo menos um motivo.');
+        }
+      }
+
+      function verificarNome()
+      {
+        if($("#fname").val() != "" && $("#num").val() != "" && //"Required" que tem de ser feito com ifs, já que o form.submit() é chamado pelo AJAX
+          $("#anoturma").val() != ""  && $("#disciplina").val() != ""  && 
+          $("#data").val() != "" && $("#textADesc").val() != "" && 
+          $("#textADec").val() != "" && $(".frequenciaComport:checked").val() != undefined &&
+          $(".quantidadeComport:checked").val() != undefined)
+          {
+            if($("#fname").val() != "")
+            {
+              $.ajax({
+                type: 'GET',
+                url: '{{ route("ocorrenciaNomeCheck") }}',
+                data: { nome: $('#fname').val() },
+                success: function(value)
+                {
+                  var valor = JSON.parse(value);
+                  if(valor == "Aluno encontrado"){
+                    checkboxRequired();
+                  }else if(valor == "Nenhum aluno encontrado"){
+                    alert("Não foi encontrado nenhum aluno com o nome inserido, certifique-se que escreveu o nome corretamente, e que tem os devidos acentos. Caso o erro persista utilize as sugestões de nomes para encontrar o aluno desejado.");
+                  }
+                }        
+              });
+            }
+          }
+          else
+          {
+            alert("Certifique-se que preenche os campos todos.");
+          }
+      }
+      
+      </script>
   </body>
 <html>

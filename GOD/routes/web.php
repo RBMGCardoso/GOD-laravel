@@ -28,6 +28,7 @@ Route::post('check', [UserAuthController::Class, 'check'])->name('auth.check');
 //
 Route::middleware([CheckSession::class])->group(function(){
     Route::get('/ocorrencia', [MainController::Class, 'OcorrenciaPage'])->name('ocorrenciaPage'); //View de criar a ocorrencia
+    Route::get('/ocorrenciaNomeCheck', [MainController::Class, 'OcorrenciaNomeCheck'])->name('ocorrenciaNomeCheck'); // AJAX para verificar se o nome do aluno existe
     Route::post('/ocorrencia', [MainController::Class, 'criarOcorrencia'])->name('ocorrencia.criar'); //Post para enviar a ocorrencia para a DB
 
     Route::get('/dashboard', [MainController::Class, 'DashboardPage'])->name('dashboardPage'); //View da dashboard

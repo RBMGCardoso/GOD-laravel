@@ -181,46 +181,55 @@
               <span class="separador w-auto m-0" style="line-height:30px">Dados do Aluno</span>
             </div>
   
-            <form method="POST" action="{{ route('register.aluno') }}">
+            <form method="POST" action="{{ route('register.aluno') }}" id="myform">
               <div class="row-auto identification d-flex mt-3">
                 <div class="col">
                   <div class="row m-0" style="width: 60vw;">
-                    <div class="col-9 p-0">
+                    <div class="col-10 p-0">
                       <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Aluno">
                     </div>   
                     
-                    <div class="col-1 p-0">
-                      <input class="input-box form-control" type="text" id="num" name="numero" placeholder="Nº. Aluno">
-                    </div>
                     <div class="col-2 p-0">
-                      <input class="input-box form-control" type="text" id="anoturma" name="anoturma" placeholder="Ano e Turma">
+                      <input class="input-box form-control" type="text" id="num" name="numero" placeholder="Nº. Aluno">
                     </div>
                   </div>
     
                   <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
-                    <div class="col-6 p-0">
-                      <select class="input-box form-control" id="escola" name="escola">
-                        @foreach($turmas as $turma)
-                          <option value="{{ $turma->id }}">{{ $turma->ano }} {{ $turma->codTurma }}</option>
+                    <div class="col-3 p-0">
+                      <select class="input-box form-control" id="selectEscola" name="escola">
+                        <option selected>- Escola -</option>
+
+                        @foreach($escolas as $escola)
+                          <option value="{{ $escola->id }}">{{ $escola->nome }}</option>
                         @endforeach
                       </select>
                     </div>
 
-                    <div class="col-4 p-0">
+                    <div class="col-3 p-0">
+                      <select class="input-box form-control" type="text" id="selectTurma" name="anoturma" disabled>
+                        <option selected>Selecione uma escola</option>
+                      </select>
+                    </div>
+
+                    <div class="col-3 p-0">
                       <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email">
                     </div>
 
-                    <div class="col-2 p-0">
+                    <div class="col-3 p-0">
                       <input class="input-box form-control" type="text" id="telef" name="telef" placeholder="Telemóvel">
                     </div>
                   </div>
 
                   <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
-                    <div class="col-3 p-0 me-2">
+                    <div class="col-4 p-0">
                       <input class="input-box form-control" type="datetime-local" name="datanasc" id="datanasc" placeholder="Data de Nascimento">
+
+                      <div class="d-flex justify-content-end">
+                        <label class="justify-content-end" style="color: red;font-size: 12px">Data de Nascimento* </label>
+                      </div>
                     </div>
 
-                    <div class="col-4 p-0 me-2">
+                    <div class="col-4 p-0">
                       <input class="input-box form-control" type="text" id="nif" name="nif" placeholder="NIF">
                     </div> 
 
@@ -230,12 +239,12 @@
                   </div>
 
                   <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
-                    <div class="col-7 p-0">
-                      <input class="input-box form-control" type="text" id="morada" name="morada" placeholder="Morada">
-                    </div>
-
                     <div class="col-3 p-0">
                       <input class="input-box form-control" type="text" id="concelho" name="concelho" placeholder="Concelho">
+                    </div>
+
+                    <div class="col-7 p-0">
+                      <input class="input-box form-control" type="text" id="morada" name="morada" placeholder="Morada">
                     </div>
 
                     <div class="col-2 p-0">
@@ -253,7 +262,7 @@
                 <div class="col">
                   <div class="row m-0" style="width: 60vw;">
                     <div class="col-9 p-0">
-                      <input class="input-box form-control" list="nomes" autocomplete="off" placeholder="Nome do Encarregado de Educação">
+                      <input class="input-box form-control" id="nomeEE" placeholder="Nome do Encarregado de Educação">
                     </div>   
 
                     <div class="col-3 p-0">
@@ -263,31 +272,31 @@
     
                   <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
                     <div class="col-3 p-0">
-                      <input class="input-box form-control" type="text" placeholder="Telemóvel/Telefone">
+                      <input class="input-box form-control" id="telefEE" type="text" placeholder="Telemóvel/Telefone">
                     </div>
 
                     <div class="col-4 p-0">
-                      <input class="input-box form-control" type="text" placeholder="Email">
+                      <input class="input-box form-control" id="emailEE" type="text" placeholder="Email">
                     </div>
 
                   </div>
 
                   <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
                     <div class="col-7 p-0">
-                      <input class="input-box form-control" type="text" placeholder="Morada">
+                      <input class="input-box form-control" id="moradaEE" type="text" placeholder="Morada">
                     </div>
 
                     <div class="col-3 p-0">
-                      <input class="input-box form-control" type="text" placeholder="Concelho">
+                      <input class="input-box form-control" id="concelhoEE" type="text" placeholder="Concelho">
                     </div>
 
                     <div class="col-2 p-0">
-                      <input class="input-box form-control" type="text" placeholder="Código Postal">
+                      <input class="input-box form-control" id="ccEE" type="text" placeholder="Código Postal">
                     </div>
                   </div>
 
                   <div class="row m-0 justify-content-end pt-4">
-                    <button class="btn-sub mt-5 mb-5" value="submit">SUBMETER</button>
+                    <button class="btn-sub mt-5 mb-5" onclick="verificarCampos()" type="button">SUBMETER</button>
                   </div>
                 </div>
               </div>
@@ -296,5 +305,89 @@
         </div>
       </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <script>
+      function verificarCampos()
+      {
+        if($("#fname").val() != "" && $("#num").val() != "" && $("#selectTurma").val() != "Selecione uma escola" &&
+        $("#email").val() != "" && $("#telef").val() != "" && $("#datanasc").val() != "" && $("#nif").val() != "" &&
+        $("#cc").val() != "" && $("#morada").val() != "" && $("#concelho").val() != "" && $("#codpost").val() != "")
+        {
+          if($("#nomeEE").val() != "" && $("#parentesco").val() != "" && $("#telefEE").val() != "" && $("#emailEE").val() != "" &&
+          $("#moradaEE").val() != "" && $("#concelhoEE").val() != "" && $("#ccEE").val() != "")
+          {
+            $("#myform").submit();
+          }
+          else
+          {
+            if($("#nomeEE").val() == "" && $("#parentesco").val() == "" && $("#telefEE").val() == "" && $("#emailEE").val() == "" &&
+            $("#moradaEE").val() == "" && $("#concelhoEE").val() == "" && $("#ccEE").val() == "")
+            {
+              var r = confirm("Tem a certeza que deseja adicionar um aluno sem encarregado de educação?");
+
+              if(r)
+              {
+                $("#myform").submit();
+              }
+            }
+            else
+            {
+              alert("Certifique-se que preenche todos os campos do encarregado de educação.");
+            }
+          }
+        }
+        else
+        {
+          alert("Certifique-se que preenche os campos todos.");
+        }
+      }
+
+
+      $(document).ready(function(){
+        $("#selectEscola").change(atualizarTurmas);
+      });
+
+      function atualizarTurmas() {
+        if($('#selectEscola option:selected').html() != "- Escola -")
+        {
+          $("#selectTurma").removeAttr("disabled");
+
+          $.ajax({
+            type:'GET',
+            url: '{{ route("atualizarTurmas") }}',
+            success: function(occ)
+            {
+              var vars = JSON.parse(occ);
+
+              $('#selectTurma').html("");
+
+
+              $.each(vars.escolaId, function(index, value)
+              {
+                if($('#selectEscola option:selected').html() == vars.nomeEscolaSemOcc[index])
+                {
+                  $.each(vars.turmaId, function(i, v){
+                    if(vars.turmaId[i] == $('#selectEscola option:selected').val())
+                    {
+                      $('#selectTurma').append("<option value="+vars.turmaEscolaAno[i]+vars.turmaEscolaCod[i]+">"+vars.turmaEscolaAno[i]+vars.turmaEscolaCod[i]+"</option>");
+                    }
+                  })
+                }
+              })
+
+            }
+          });
+        }
+        else
+        {
+          $('#selectTurma').html("");
+          $('#selectTurma').append("<option>Selecione uma escola</option>");
+          
+          $("#selectTurma").attr("disabled", "disabled");
+        }
+      }
+    </script>
   </body>
 </html>

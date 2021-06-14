@@ -76,6 +76,8 @@ body
 {
   transition: 0.4s;    
   fill: #222;
+  stroke: #222;
+  stroke-width: 0px;
 }
 
 .active-nav
@@ -91,7 +93,7 @@ body
 
 #menu-btn:hover
 {
-  fill: rgba(121, 255, 255, 1);
+  stroke-width: 40px;
 }
 
 .registar-div > .dropdown-toggle::after {

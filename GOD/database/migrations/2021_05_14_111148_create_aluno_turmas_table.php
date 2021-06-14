@@ -14,6 +14,7 @@ class CreateAlunoTurmasTable extends Migration
     public function up()
     {
         Schema::create('aluno_turma', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
             $table->integer('aluno_id')->unsigned();
             $table->integer('turma_id')->unsigned();
 

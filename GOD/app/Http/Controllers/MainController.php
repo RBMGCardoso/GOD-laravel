@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 
 use App\Models\Aluno;
 use App\Models\Turma;
+use App\Models\Escola;
 use App\Models\AlunoTurma;
 use App\Models\User;
 use App\Models\Ocorrencia;
@@ -45,11 +46,11 @@ class MainController extends Controller
         ]);
     }
 
-    public function RegisterAlunoPage(Request $request, Turma $turma)
+    public function RegisterAlunoPage(Request $request)
     {
-        $turmas = Turma::all();
+        $escolas = Escola::all();
 
-        return view('alunoReg', ['turmas' => $turmas]);
+        return view('alunoReg', ['escolas' => $escolas]);
     }
 
     public function RegisterAluno(Request $req)
@@ -118,6 +119,31 @@ class MainController extends Controller
         else
         {
             return back();
+        }
+    }
+
+    public function OcorrenciaNomeCheck(Request $req)
+    {
+        $alunosNomes = Aluno::all()->pluck('nome');
+
+        for ($i=0; $i < count($alunosNomes); $i++) { 
+            if($alunosNomes[$i] == $req->nome)
+            {
+                $alunoEncontrado[] = $alunosNomes[$i];           
+            }
+        }
+        
+        if(isset($alunoEncontrado))
+        {
+            if(count($alunoEncontrado) == 1){
+                return json_encode("Aluno encontrado");
+            }else if(count($alunoEncontrado) > 1){
+                return json_encode("Vários alunos encontrados");
+            }
+        }
+        else
+        {
+            return json_encode("Nenhum aluno encontrado");
         }
     }
 
