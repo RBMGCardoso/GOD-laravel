@@ -193,21 +193,32 @@
             <div class="card-header">Estado das Ocorrências</div>
             <div class="card-body pt-2">   
               <div class="col">
-                @foreach($arrayOcc as $occ)
-                  <a href="{{ route('pagOcc', $occ->id) }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
-                    <div class="col-auto ps-0 ms-0 d-flex align-items-center" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
-                    <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div>
-                  </a>
-                @endforeach
-                <div class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary">
-                  <div class="col-auto ps-0 ms-0 d-flex align-items-center" style="font-size: 13px">Dia 12-32-2122</div>
-                  <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>
-                </div>
+                @if($arrayOcc != null)
+                  @foreach($arrayOcc as $occ)
+                    @switch($occ->estado)
+                      @case('Aceite')
+                        <a href="{{ route('pagOcc', $occ->id) }}" title="ID de Ocorrência: {{ $occ->id }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
+                          <div class="col-auto ps-0 ms-0 d-flex align-items-center" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
+                          <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div>
+                        </a>
+                      @break;
 
-                <div class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary">
-                  <div class="col-auto ps-0 ms-0 d-flex align-items-center" style="font-size: 13px">Dia 12-32-2122</div>
-                  <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
-                </div>
+                      @case('Pendente')
+                        <a href="{{ route('pagOcc', $occ->id) }}" title="ID de Ocorrência: {{ $occ->id }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
+                          <div class="col-auto ps-0 ms-0 d-flex align-items-center" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
+                          <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>
+                        </a>
+                      @break;
+
+                      @case('Recusada')
+                        <a href="{{ route('pagOcc', $occ->id) }}" title="ID de Ocorrência: {{ $occ->id }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
+                          <div class="col-auto ps-0 ms-0 d-flex align-items-center" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
+                          <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
+                        </a>
+                      @break;
+                    @endswitch                  
+                  @endforeach
+                @endif                
               </div>
             </div>
           </div>
@@ -229,7 +240,6 @@
           {
             var vars = JSON.parse(info);
 
-            console.log(vars.labels);
             var chartType = new Chart(myChart, {
               type:'line',
               data:{
@@ -246,7 +256,12 @@
                 maintainAspectRatio: false,
                 scale: {
                   ticks: {
-                    precision: 0
+                    precision: 0,
+                  }
+                },
+                scales:{
+                  y:{
+                    beginAtZero: true,
                   }
                 }
               }

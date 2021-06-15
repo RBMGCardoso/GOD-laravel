@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('cargo');
 
             $table->integer('dirTurma')->nullable()->unsigned();
-            $table->foreign('dirTurma')->nullable()->references('id')->on('turmas');
+            $table->foreign('dirTurma')->references('id')->on('turmas');
             $table->rememberToken();
 
             $table->timestamps();

@@ -88,7 +88,8 @@ class MainController extends Controller
                 'frequencia' =>  $req->frequenciaComport,
                 'comport_inc' =>  $req->quantidadeComport,
                 'aluno_id' =>  Aluno::where('nome', '=', $req->input('nome'))->first()->id,
-                'cod_p' =>  session('LoggedUser')->id
+                'cod_p' =>  session('LoggedUser')->id,
+                'estado' => "Pendente"
             ]);
         
             foreach ($motivos as $motivo) 

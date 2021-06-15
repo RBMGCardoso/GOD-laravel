@@ -22,6 +22,7 @@ class CreateOcorrenciasTable extends Migration
             $table->string('frequencia');
             $table->string('comport_inc');
             $table->string('cod_p');
+            $table->string('estado');
 
             $table->foreign('aluno_id')->references('id')->on('alunos');
             $table->timestamps();
