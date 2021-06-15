@@ -1,0 +1,16 @@
+#content
+{
+    transition: 0.4s;
+}
+
+#painelOcc
+{
+    color: #333;
+    text-decoration: none;
+}
+
+#painelOcc:hover
+{
+    cursor: pointer;
+    background-color: #aaa;
+}

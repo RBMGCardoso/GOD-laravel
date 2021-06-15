@@ -6,6 +6,7 @@ use App\Http\Controllers\AlunosController;
 use App\Http\Controllers\OcorrenciaController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\PesquisaController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,8 @@ Route::middleware([CheckSession::class])->group(function(){
     Route::get('/ocorrenciaNomeCheck', [MainController::Class, 'OcorrenciaNomeCheck'])->name('ocorrenciaNomeCheck'); // AJAX para verificar se o nome do aluno existe
     Route::post('/ocorrencia', [MainController::Class, 'criarOcorrencia'])->name('ocorrencia.criar'); //Post para enviar a ocorrencia para a DB
 
-    Route::get('/dashboard', [MainController::Class, 'DashboardPage'])->name('dashboardPage'); //View da dashboard
+    Route::get('/dashboard', [DashboardController::Class, 'DashboardPage'])->name('dashboardPage'); //View da dashboard
+    Route::get('/dashboardGraficoOcorrencias', [DashboardController::Class, 'GraficoOcorrencias'])->name('grafOcc'); //AJAX para buscar quantidade de occs
 
     Route::middleware([CheckCargoDiretor::class])->group(function(){ //Middleware de cargos. Apenas diretores e pessoal da secretaria pode acessar estas páginas
             Route::get('/registar', [MainController::Class, 'RegisterPage'])->name('registerPage'); //View registar utilizador

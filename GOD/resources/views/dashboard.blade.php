@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,14 +20,16 @@
 
     <link href="{{ url('/css/navbar.css') }}" rel="stylesheet">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
       //// Como o nome diz, fecha e abre a sidebar ao clicar no botão
       //
       function closeSidebar()
       {
         var sidebar = document.getElementById("sidebar");
-        var sidebar2 = document.getElementById("sidebar2");
         var button = document.getElementById("menu-btn");
+        var content = document.getElementById("content");
 
         if(sidebar.style.marginLeft == "-250px")
         {        
@@ -35,6 +37,7 @@
           sidebar.style.marginLeft = "0px";
           button.style.transform.transitionDuration = "2s";
           button.style.transform = "translateX(0px)";
+          content.style.marginLeft = "250px";
           
         }
         else
@@ -43,6 +46,7 @@
           sidebar.style.marginLeft = "-250px";
           button.style.transform.transitionDuration = "2s";
           button.style.transform = "translateX(-250px) rotate(180Deg)";
+          content.style.marginLeft = "0px";
         }
       }
     </script>
@@ -164,8 +168,91 @@
       <script src="./js/sidebars.js"></script>
     </div>
 
-    <div class="row-auto full-content" id="content" style="margin-left: 250px;">
-      
+    <div class="row full-content" id="content" style="margin-left: 250px; height:100vh">
+        <div class="col ms-2">
+          <div class="row" style="margin-top: 50px">
+            <div class="alert alert-info d-flex" role="alert">
+              <div class="col-auto">Bem vindo(a), {{ session('LoggedUser')->name }}, está aqui a sua dashboard.</div>
+              <div class="col text-end">Data: {{ date("d-m-Y")}}</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="card p-0">
+              <h5 class="card-header">Ocorrências criadas por mês</h5>
+
+              <div class="card-body justify-content-center d-flex">
+                <canvas id="myChart" style="height: 300px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-auto d-flex align-items-center me-1 ms-2 ps-0">
+          <div class="card text-dark bg-light" style="max-width: 18rem; height: 99vh;">
+            <div class="card-header">Estado das Ocorrências</div>
+            <div class="card-body pt-2">   
+              <div class="col">
+                @foreach($arrayOcc as $occ)
+                  <a href="{{ route('pagOcc', $occ->id) }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
+                    <div class="col-auto ps-0 ms-0 d-flex align-items-center" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
+                    <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div>
+                  </a>
+                @endforeach
+                <div class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary">
+                  <div class="col-auto ps-0 ms-0 d-flex align-items-center" style="font-size: 13px">Dia 12-32-2122</div>
+                  <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>
+                </div>
+
+                <div class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary">
+                  <div class="col-auto ps-0 ms-0 d-flex align-items-center" style="font-size: 13px">Dia 12-32-2122</div>
+                  <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+      var myChart = document.getElementById("myChart").getContext("2d");
+
+      //Global Options
+      Chart.defaults.font.family = "Arial";
+      Chart.defaults.font.size = 20;
+
+      $.ajax({
+          type:'GET',
+          url: '{{ route("grafOcc") }}',
+          success: function(info)
+          {
+            var vars = JSON.parse(info);
+
+            console.log(vars.labels);
+            var chartType = new Chart(myChart, {
+              type:'line',
+              data:{
+                labels:vars.labels,
+                datasets:[{
+                  label: 'Nº de ocorrências',
+                  data: vars.quantidade,
+                  backgroundColor: "rgb(255,0,0)",
+                  borderColor: "rgb(200,0,0)",
+                }],
+              },
+              options:{
+                responsive: true,
+                maintainAspectRatio: false,
+                scale: {
+                  ticks: {
+                    precision: 0
+                  }
+                }
+              }
+            });
+          }
+        });
+    </script>
   </body>
 </html>

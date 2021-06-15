@@ -21,11 +21,6 @@ use Illuminate\Support\Facades\Hash;
 
 class MainController extends Controller
 {
-    public function DashboardPage()
-    {
-        return view('dashboard');
-    }
-
     public function LoginPage()
     {
         return view('login');
