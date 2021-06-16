@@ -3,6 +3,10 @@ body{
     overflow-x: hidden;
 }
 
+a{
+    text-decoration: none;
+}
+
 .full-content
 {
     transition:0.4s;

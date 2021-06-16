@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registar</title>
+    <title>Minhas Ocorrências</title>
       
       <!-- Bootstrap core CSS -->
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -157,13 +157,58 @@
 
         <div class="row justify-content-center">
           <div class="col-auto">
-            @if($arrayOcc != null)
-                @foreach ($arrayOcc as $occ)
-                    <a href="{{ route('pagOcc', $occ->id) }}">{{ $occ->id }}</a> <br />
-                @endforeach
-            @else
-                Nenhuma ocorrência encontrada.
-            @endif
+                    
+            <div class="card" style="width: 60vw;">
+              <div class="card-header">
+                Ocorrencias Criadas
+              </div>
+
+              <div class="card-body">
+                @if($arrayOcc != null)
+                  @foreach ($arrayOcc as $occ)
+                    <a href="{{ route('pagOcc', $occ->id) }}">
+                      <div class="row alert alert-secondary">
+                        <div class="col-auto d-flex">
+                          {{ $occ->id }}
+                        </div>
+
+                        <div class="col-auto d-flex">
+                          
+                        </div>
+
+                        <div class="col d-flex justify-content-end">
+                          <div class="justify-content-center">
+                            <div class="row justify-content-center">
+                              @switch($occ->estado)
+                                @case('Aceite')
+                                    <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
+                                @break;
+          
+                                @case('Pendente')       
+                                    <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
+                                @break;
+          
+                                @case('Recusada')              
+                                    <div class="col-auto  align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
+                                @break;
+                              @endswitch  
+                            </div>
+
+                            <div class="row justify-content-center mt-1" style="font-size: 13.6px">
+                              {{ date('d-m-Y', strtotime($occ->data)) }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  @endforeach
+                @else
+                  Nenhuma ocorrência encontrada.
+                @endif
+              </div>
+            </div>
+            <br />
+                
           </div>
         </div>
       </div>
