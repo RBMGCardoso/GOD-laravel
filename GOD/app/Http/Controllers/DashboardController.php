@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ocorrencia;
+use App\Models\Notification;
 
 class DashboardController extends Controller
 {
@@ -74,7 +75,7 @@ class DashboardController extends Controller
                             break;  
 
                         case '12':
-                            $quantidade["Dec"." ".date("Y")]++;
+                            $quantidade["Dez"." ".date("Y")]++;
                             break;  
                     }
                 }
@@ -88,21 +89,79 @@ class DashboardController extends Controller
 
     public function DashboardPage()
     {   
+        $notifications = Notification::all()->pluck('cod_p');
+        $notificationsId = Notification::all();
+
         $ocorrencias = Ocorrencia::all()->pluck('cod_p');
         $ocorrenciasId = Ocorrencia::all();
+        $ocorrenciasEstado = Ocorrencia::all()->pluck('estado');
+
+        $qtdOccs['Aceites'] = 0;
+        $qtdOccs['Pendentes'] = 0;
+        $qtdOccs['Recusadas'] = 0;
 
         for ($i=0; $i < count($ocorrencias); $i++) { 
             if($ocorrencias[$i] == session('LoggedUser')->id)
             {
                 $arrayOcc[] = $ocorrenciasId[$i];
+
+                switch ($ocorrenciasEstado[$i]) {
+                    case 'Aceite':
+                        $qtdOccs['Aceites']++;
+                        break;
+
+                    case 'Pendente':
+                        $qtdOccs['Pendentes']++;
+                        break;
+
+                    case 'Recusada':
+                        $qtdOccs['Recusadas']++;
+                        break;              
+                }
             }
         }
         
+        $totalOccs = $qtdOccs['Aceites'] + $qtdOccs['Pendentes'] + $qtdOccs['Recusadas'];
+        if($totalOccs > 0)
+        {
+            $percentagem['Aceites'] = round(($qtdOccs['Aceites']*100)/$totalOccs,5)."%";
+            $percentagem['Pendentes'] = round(($qtdOccs['Pendentes']*100)/$totalOccs,5)."%";
+            $percentagem['Recusadas'] = round(($qtdOccs['Recusadas']*100)/$totalOccs,5)."%";
+        }
+        else
+        {
+            $percentagem['Aceites'] = '0'."%";
+            $percentagem['Pendentes'] = '0'."%";
+            $percentagem['Recusadas'] = '0'."%";
+        }
+
         if(!isset($arrayOcc))
         {
            $arrayOcc = null; 
         }
 
-        return view('dashboard', compact('arrayOcc'));
+        for ($i=0; $i < count($notifications); $i++) { 
+            if($notifications[$i] == session('LoggedUser')->id)
+            {
+                $arrayNot[] = $notificationsId[$i];
+            }
+        }
+        
+        if(!isset($arrayNot))
+        {
+           $arrayNot = null; 
+        }
+
+        return view('dashboard', compact('arrayOcc', 'arrayNot', 'percentagem'));
+    }
+
+    public function EliminarNotification(Request $req)
+    {      
+        $notif = Notification::find($req->idNotif);
+        $notif->delete();
+        
+        $qtdNotifs = count(Notification::where('cod_p', session('LoggedUser')->id)->pluck('id'));
+
+        return json_encode($qtdNotifs);
     }
 }

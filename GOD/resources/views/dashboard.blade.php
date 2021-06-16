@@ -7,6 +7,7 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -177,12 +178,37 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row mb-3">
             <div class="card p-0">
               <h5 class="card-header">Ocorrências criadas por mês</h5>
 
               <div class="card-body justify-content-center d-flex">
                 <canvas id="myChart" style="height: 300px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="card p-0">
+              <h5 class="card-header">Notificações</h5>
+
+              <div class="card-body">
+                @if ($arrayNot != null)
+                  <div class="pt-1 pb-1 ps-3 pe-3 mb-1 alert alert-secondary d-flex" id="noNotifs" role="alert" style="display: none !important;">
+                    <div class="col-auto">Não foram encontradas notificações<br></div>
+                  </div>  
+
+                  @foreach ($arrayNot as $not)
+                    <div class="pt-1 pb-1 ps-3 pe-3 mb-1 alert alert-secondary alert-dismissible d-flex" class="notifications" role="alert">
+                      <div class="col-auto">{{ $not->texto }} <br></div>
+                      <div class="col align-items-center justify-content-end d-flex"><button type="button" class="btn-close p-0 d-flex " id="buttonCloseNotif" style="position:relative" data-bs-dismiss="alert" aria-label="Close" onclick="apagarNotification('{{ $not->id }}')"></button></div>               
+                    </div>            
+                  @endforeach
+                @else
+                  <div class="pt-1 pb-1 ps-3 pe-3 mb-1 alert alert-secondary d-flex" role="alert">
+                    <div class="col-auto">Não foram encontradas notificações<br></div>
+                  </div>  
+                @endif
               </div>
             </div>
           </div>
@@ -192,33 +218,51 @@
           <div class="card text-dark bg-light" style="max-width: 18rem; height: 99vh;">
             <div class="card-header">Estado das Ocorrências</div>
             <div class="card-body pt-2">   
-              <div class="col">
-                @if($arrayOcc != null)
-                  @foreach($arrayOcc as $occ)
-                    @switch($occ->estado)
-                      @case('Aceite')
-                        <a href="{{ route('pagOcc', $occ->id) }}" title="ID de Ocorrência: {{ $occ->id }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
-                          <div class="col-auto ps-0 ms-0 d-flex align-items-center" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
-                          <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div>
-                        </a>
-                      @break;
+              <div class="col h-100">
+                <div class="row-auto p-0 m-0 mb-2">
+                  <div class="progress" id="progress" style="height: 10px;">
+                    <div class="progress-bar" role="progressbar" title="Ocorrências Aceites" style="background-color: rgb(0,200,0); width: {{ $percentagem['Aceites'] }};" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" id="progBarVerde"><span class="textoProgBar" hidden>Aceites</span></div>
+                    <div class="progress-bar" role="progressbar" title="Ocorrências Pendentes" style="background-color: rgb(255,200,0); width: {{ $percentagem['Pendentes'] }};" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="progBarAmarelo"><span class="textoProgBar" hidden>Pendentes</span></div>
+                    <div class="progress-bar" role="progressbar" title="Ocorrências Recusadas" style="background-color: rgb(255,0,0); width: {{ $percentagem['Recusadas'] }};" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="progBarVermelho"><span class="textoProgBar" hidden>Recusadas</span></div>
+                  </div>
+                </div>
 
-                      @case('Pendente')
-                        <a href="{{ route('pagOcc', $occ->id) }}" title="ID de Ocorrência: {{ $occ->id }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
-                          <div class="col-auto ps-0 ms-0 d-flex align-items-center" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
-                          <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>
-                        </a>
-                      @break;
-
-                      @case('Recusada')
-                        <a href="{{ route('pagOcc', $occ->id) }}" title="ID de Ocorrência: {{ $occ->id }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
-                          <div class="col-auto ps-0 ms-0 d-flex align-items-center" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
-                          <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
-                        </a>
-                      @break;
-                    @endswitch                  
-                  @endforeach
-                @endif                
+                <div class="row-auto p-0 m-0">
+                  @if($arrayOcc != null)
+                    @foreach($arrayOcc as $occ)
+                      @switch($occ->estado)
+                        @case('Aceite')
+                          <a href="{{ route('pagOcc', $occ->id) }}" title="ID de Ocorrência: {{ $occ->id }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
+                            <div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
+                            <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div>
+                          </a>
+                        @break;
+  
+                        @case('Pendente')
+                          <a href="{{ route('pagOcc', $occ->id) }}" title="ID de Ocorrência: {{ $occ->id }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
+                            <div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
+                            <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>
+                          </a>
+                        @break;
+  
+                        @case('Recusada')
+                          <a href="{{ route('pagOcc', $occ->id) }}" title="ID de Ocorrência: {{ $occ->id }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
+                            <div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
+                            <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
+                          </a>
+                        @break;
+                      @endswitch                  
+                    @endforeach
+                  @else
+                          Sem ocorrências
+                  @endif                
+                </div>
+                
+                <a href="{{ route('minhasOcc') }}" class="row p-0 m-0 justify-content-center text-center" id="avisoOccs" style="position: absolute; bottom: 10px;left: 5%; right: 5%;font-size: 10px; word-wrap: break-word;">
+                  <hr class="w-75">
+                  Está a ver apenas as suas últimas ocorrências.
+                  Clique aqui se deseja ver todas as suas ocorrências.
+                </a>
               </div>
             </div>
           </div>
@@ -226,12 +270,94 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    
     <script>
+      $(document).ready(function()
+      {
+        $("#progBarVerde").mouseover(function()
+        {
+          expandirProgBar(1);
+        });
+
+        $("#progBarAmarelo").mouseover(function()
+        {
+          expandirProgBar(2);
+        });
+
+        $("#progBarVermelho").mouseover(function()
+        {
+          expandirProgBar(3);
+        });
+
+        $(".progress-bar").mouseleave(function()
+        {
+          reduzirProgBar();
+        });
+      });
+
+      function expandirProgBar(numCor) {
+        document.getElementById('progress').style.height = "20px";
+
+        switch (numCor) {
+          case 1:
+          document.getElementsByClassName('textoProgBar')[0].removeAttribute('hidden');
+          document.getElementById('progBarVerde').style.width = "100%";
+          document.getElementById('progBarAmarelo').style.width = "0%";
+          document.getElementById('progBarVermelho').style.width = "0%";
+            break;
+
+            case 2:
+            document.getElementsByClassName('textoProgBar')[1].removeAttribute('hidden');
+            document.getElementById('progBarVerde').style.width = "0%";
+            document.getElementById('progBarAmarelo').style.width = "100%";
+            document.getElementById('progBarVermelho').style.width = "0%";
+            break;
+
+            case 3:
+            document.getElementsByClassName('textoProgBar')[2].removeAttribute('hidden');
+            document.getElementById('progBarVerde').style.width = "0%";
+            document.getElementById('progBarAmarelo').style.width = "0%";
+            document.getElementById('progBarVermelho').style.width = "100%";
+            break;
+        }
+
+      }
+
+      function reduzirProgBar() {
+        for (let i = 0; i < document.getElementsByClassName('textoProgBar').length; i++) {
+          document.getElementsByClassName('textoProgBar')[i].setAttribute('hidden', 0);     
+        }
+
+          document.getElementById('progress').style.height = "10px";
+          document.getElementById('progBarVerde').style.width = "{{ $percentagem['Aceites'] }}";
+          document.getElementById('progBarAmarelo').style.width = "{{ $percentagem['Pendentes'] }}";
+          document.getElementById('progBarVermelho').style.width = "{{ $percentagem['Recusadas'] }}";
+      }
+
+      function apagarNotification(idNotif) {
+        $.ajax({
+          type:'POST',
+          url: '{{ route("eliminarNotif") }}',
+          data: { idNotif: idNotif },
+          success: function(qtdNotifs)
+          {
+            if (qtdNotifs == 0) {
+              document.getElementById('noNotifs').style.display = "flex";
+            }
+          }
+        });
+      }
+
+
       var myChart = document.getElementById("myChart").getContext("2d");
 
       //Global Options
       Chart.defaults.font.family = "Arial";
       Chart.defaults.font.size = 20;
+
+      var gradient = myChart.createLinearGradient(0, 0, 0, 400);
+      gradient.addColorStop(0, 'rgba(255,0,0,1)');   
+      gradient.addColorStop(1, 'rgba(250,174,50,0)');
 
       $.ajax({
           type:'GET',
@@ -247,11 +373,14 @@
                 datasets:[{
                   label: 'Nº de ocorrências',
                   data: vars.quantidade,
-                  backgroundColor: "rgb(255,0,0)",
+                  backgroundColor: gradient,
                   borderColor: "rgb(200,0,0)",
                 }],
               },
               options:{
+                tension: 0.4,
+                bezierCurve: true,
+                fill: true,
                 responsive: true,
                 maintainAspectRatio: false,
                 scale: {

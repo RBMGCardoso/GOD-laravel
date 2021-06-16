@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 //Envio de emails
 use App\Mail\MailSender;
@@ -15,6 +16,7 @@ use App\Models\AlunoTurma;
 use App\Models\User;
 use App\Models\Ocorrencia;
 use App\Models\MotivoOcorrencia;
+use App\Models\Notification;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -78,9 +80,24 @@ class MainController extends Controller
     public function criarOcorrencia(Request $req, Ocorrencia $ocorrencia, MotivoOcorrencia $motivoOcorrencia)
     {   
         $motivos = $req->input('motivos');
+        $usersDirTurma = User::all()->pluck('dirTurma');
+        $alunoDirTurma = AlunoTurma::where('aluno_id', Aluno::where('nome', '=', $req->input('nome'))->first()->id)->pluck('turma_id');
         
         if(Aluno::where('nome', '=', $req->input('nome'))->first() !== null)
         {
+            for ($i=0; $i < count($usersDirTurma); $i++) { 
+                for ($j=0; $j < count($alunoDirTurma); $j++) { 
+                    if($usersDirTurma[$i] == $alunoDirTurma[$j])
+                    {
+                        Notification::insert([
+                            'cod_p' => User::where('dirTurma', $i)->pluck('id')->first(),
+                            'texto' => 'O(A) aluno(a), '.Aluno::where('nome', '=', $req->input('nome'))->first()->nome.' da sua direção de turma recebeu uma ocorrência no dia '.Carbon::now()->format("d-m-Y"),
+                            'data' => Carbon::now()
+                        ]);
+                    }
+                }
+            }
+
             Ocorrencia::insert([
                 'data' =>  $req->data,
                 'descricao' =>  $req->textADesc,
