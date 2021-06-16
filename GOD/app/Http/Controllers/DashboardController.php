@@ -152,7 +152,7 @@ class DashboardController extends Controller
            $arrayNot = null; 
         }
 
-        return view('dashboard', compact('arrayOcc', 'arrayNot', 'percentagem'));
+        return view('dashboard', compact('arrayOcc', 'arrayNot', 'percentagem', 'qtdOccs'));
     }
 
     public function EliminarNotification(Request $req)

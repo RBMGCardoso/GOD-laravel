@@ -9,15 +9,15 @@
     text-decoration: none;
 }
 
-#dataOccPainel
-{
-    font-family: 'Ubuntu Mono', monospace;
-}
-
 #painelOcc:hover
 {
     cursor: pointer;
     background-color: #aaa;
+}
+
+#dataOccPainel
+{
+    font-family: 'Ubuntu Mono', monospace;
 }
 
 .progress-bar

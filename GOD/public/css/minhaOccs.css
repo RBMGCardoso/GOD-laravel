@@ -22,3 +22,9 @@ h1{
     font-weight: 500;
     color: #f8f8f8;
 }
+
+#occCard:hover
+{
+    cursor: pointer;
+    background-color: #bbb !important;
+}

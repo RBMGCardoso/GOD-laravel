@@ -77,7 +77,7 @@
 
             
             <li class="nav-item w-100">
-              <a href="" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-book fa-fw"></i> Minhas Ocorrências</a>
+              <a href="{{ route('minhasOcc') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-book fa-fw"></i> Minhas Ocorrências</a>
             </li>    
             
             @if(session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
@@ -108,6 +108,14 @@
                   <li>
                     <a href="{{ route('registerAlunoPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Aluno</a>
                   </li>
+
+                  <li>
+                    <a href="" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Turma</a>
+                  </li>
+
+                  <li>
+                    <a href="" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Escola</a>
+                  </li>
                 </ul>
               </div>
             @endif     
@@ -121,12 +129,12 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
               <li><a class="dropdown-item">
-                    {{ session('LoggedUser')->cargo }}     
+                    Cargo: {{ session('LoggedUser')->cargo }}     
               </a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Meu perfil</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
+              <li><a class="dropdown-item" href="{{ route('logout') }}">Terminar Sessão</a></li>
             </ul>
           </div>
         </div>
@@ -163,11 +171,11 @@
                 Ocorrencias Criadas
               </div>
 
-              <div class="card-body">
+              <div class="card-body pt-2 pb-2">
                 @if($arrayOcc != null)
                   @foreach ($arrayOcc as $occ)
                     <a href="{{ route('pagOcc', $occ->id) }}">
-                      <div class="row alert alert-secondary">
+                      <div class="row mb-2 mt-2 alert alert-secondary" id="occCard">
                         <div class="col-auto d-flex">
                           {{ $occ->id }}
                         </div>

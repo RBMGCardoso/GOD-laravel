@@ -222,9 +222,9 @@
               <div class="col h-100">
                 <div class="row-auto p-0 m-0 mb-2">
                   <div class="progress" id="progress" style="height: 10px;">
-                    <div class="progress-bar" role="progressbar" title="Ocorrências Aceites" style="background-color: rgb(0,200,0); width: {{ $percentagem['Aceites'] }};" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" id="progBarVerde"><span class="textoProgBar" hidden>Aceites</span></div>
-                    <div class="progress-bar" role="progressbar" title="Ocorrências Pendentes" style="background-color: rgb(255,200,0); width: {{ $percentagem['Pendentes'] }};" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="progBarAmarelo"><span class="textoProgBar" hidden>Pendentes</span></div>
-                    <div class="progress-bar" role="progressbar" title="Ocorrências Recusadas" style="background-color: rgb(255,0,0); width: {{ $percentagem['Recusadas'] }};" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="progBarVermelho"><span class="textoProgBar" hidden>Recusadas</span></div>
+                    <div class="progress-bar" role="progressbar" title="Ocorrências Aceites" style="background-color: rgb(0,200,0); width: {{ $percentagem['Aceites'] }};" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" id="progBarVerde"><span class="textoProgBar" hidden>Aceites: {{ $qtdOccs['Aceites'] }}</span></div>
+                    <div class="progress-bar" role="progressbar" title="Ocorrências Pendentes" style="background-color: rgb(255,200,0); width: {{ $percentagem['Pendentes'] }};" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="progBarAmarelo"><span class="textoProgBar" hidden>Pendentes: {{ $qtdOccs['Pendentes'] }}</span></div>
+                    <div class="progress-bar" role="progressbar" title="Ocorrências Recusadas" style="background-color: rgb(255,0,0); width: {{ $percentagem['Recusadas'] }};" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="progBarVermelho"><span class="textoProgBar" hidden>Recusadas: {{ $qtdOccs['Recusadas'] }}</span></div>
                   </div>
                 </div>
 
