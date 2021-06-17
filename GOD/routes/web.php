@@ -44,6 +44,8 @@ Route::middleware([CheckSession::class])->group(function(){
             Route::get('/registarAluno', [MainController::Class, 'RegisterAlunoPage'])->name('registerAlunoPage'); //View registar aluno
             Route::post('/registarAlunoPost', [MainController::Class, 'RegisterAluno'])->name('register.aluno'); //Post para enviar aluno para a DB      
         
+            route::get('registar-escola', [MainController::Class, 'registerEscolas'])->name('registerEscolas');
+
             Route::get('ocorrencias', [OcorrenciaController::Class, 'index'])->name('mostrarOcorrencias'); //View da página de pesquisa
 
             Route::get('ocorrenciasAtualizarTurmas', [OcorrenciaController::Class, 'AtualizarTurmas'])->name('atualizarTurmas'); //Ajax para adicionar turmas á select na pesquisa

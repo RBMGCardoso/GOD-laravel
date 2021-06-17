@@ -216,4 +216,9 @@ class MainController extends Controller
         }
 
     }
+
+    public function registerEscolas()
+    {
+        return view('escolaReg');
+    }
 }
