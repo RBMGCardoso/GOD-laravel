@@ -220,15 +220,15 @@
             <div class="card-header">Estado das Ocorrências</div>
             <div class="card-body pt-2">   
               <div class="col h-100">
-                <div class="row-auto p-0 m-0 mb-2">
-                  <div class="progress" id="progress" style="height: 10px;">
+                <div class="row-auto p-0 m-0">
+                  <div class="progress" id="progress" style="height: 10px;" title="Sem ocorrências">
                     <div class="progress-bar" role="progressbar" title="Clique para visualizar apenas ocorrências aceites" style="background-color: rgb(0,200,0); width: {{ $percentagem['Aceites'] }};" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" id="progBarVerde"><span class="textoProgBar" hidden>Aceites: {{ $qtdOccs['Aceites'] }}</span></div>
                     <div class="progress-bar" role="progressbar" title="Clique para visualizar apenas ocorrências pendentes" style="background-color: rgb(255,200,0); width: {{ $percentagem['Pendentes'] }};" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="progBarAmarelo"><span class="textoProgBar" hidden>Pendentes: {{ $qtdOccs['Pendentes'] }}</span></div>
                     <div class="progress-bar" role="progressbar" title="Clique para visualizar apenas ocorrências recusadas" style="background-color: rgb(255,0,0); width: {{ $percentagem['Recusadas'] }};" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="progBarVermelho"><span class="textoProgBar" hidden>Recusadas: {{ $qtdOccs['Recusadas'] }}</span></div>
-                  </div>
+                  </div>      
                 </div>
 
-                <hr>
+                <hr class="mt-2 mb-2">
 
                 <div class="row-auto p-0 m-0" id="sidebarOccs">
                   <!-- @if($arrayOcc != null)

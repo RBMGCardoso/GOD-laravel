@@ -85,7 +85,7 @@
                 <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-search fa-fw"></i> Pesquisar</a>
               </li>
 
-              <div class="dropdown nav-item w-100 registar-div" onclick="mudarButton()">
+              <div class="dropdown nav-item w-100 registar-div">
                 <a class="dropdown-toggle nav-link rounded-0 text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   <div class="row me-0">
                     <div class="col">
@@ -165,14 +165,28 @@
 
         <div class="row justify-content-center">
           <div class="col-auto">
-          @if ($alunosModel != null)
-            @foreach ($alunosModel as $aluno)
-                <a href="{{ route('perfilAluno', $aluno->id) }}">{{ $aluno->nome }}</a> <br />
-            @endforeach
-          @else
-            Nenhum aluno encontrado.
-          @endif
+          <div class="card" style="width: 60vw;">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-auto">Direção de turma</div>
+                  <div class="col text-end">{{ $designTurma }}</div>
+                </div>
+              </div>
 
+              <div class="card-body pt-2 pb-2">
+              @if ($alunosModel != null)
+                @foreach ($alunosModel as $aluno)
+                    <a href="{{ route('perfilAluno', $aluno->id) }}">
+                      <div class="row mb-2 mt-2 alert alert-secondary" id="alunoCard" style="">
+                        {{ $aluno->nome }}
+                      </div>
+                    </a>
+                @endforeach
+              @else
+                Nenhum aluno encontrado.
+              @endif
+              </div>
+            </div>
           </div>
         </div>
       </div>

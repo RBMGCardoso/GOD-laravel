@@ -3,6 +3,11 @@ body{
     overflow-x: hidden;
 }
 
+a
+{
+    text-decoration: none;
+}
+
 .full-content
 {
     transition:0.4s;
@@ -17,4 +22,10 @@ body{
 h1{
     font-weight: 500;
     color: #f8f8f8;
+}
+
+#alunoCard:hover
+{
+    cursor: pointer;
+    background-color: #bbb !important;
 }
