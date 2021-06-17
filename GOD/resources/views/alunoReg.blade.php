@@ -230,7 +230,7 @@
 
                   <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
                     <div class="col-4 p-0">
-                      <input class="input-box form-control" type="datetime-local" name="datanasc" id="datanasc" placeholder="Data de Nascimento">
+                      <input class="input-box form-control" type="date" name="datanasc" id="datanasc" placeholder="Data de Nascimento">
 
                       <div class="d-flex justify-content-end">
                         <label class="justify-content-end" style="color: red;font-size: 12px">Data de Nascimento* </label>

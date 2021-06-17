@@ -35,7 +35,8 @@ Route::middleware([CheckSession::class])->group(function(){
     Route::get('/dashboard', [DashboardController::Class, 'DashboardPage'])->name('dashboardPage'); //View da dashboard
     Route::get('/dashboardGraficoOcorrencias', [DashboardController::Class, 'GraficoOcorrencias'])->name('grafOcc'); //AJAX para buscar quantidade de occs
     Route::post('/dashboardEliminarNotification', [DashboardController::Class, 'EliminarNotification'])->name('eliminarNotif'); //AJAX para eliminar notificações
-
+    Route::get('/dashboardFiltrarOcorrencias', [DashboardController::Class, 'FiltrarOccs'])->name('filtrarOccs'); //AJAX para filtrar ocorrencias
+    
     Route::middleware([CheckCargoDiretor::class])->group(function(){ //Middleware de cargos. Apenas diretores e pessoal da secretaria pode acessar estas páginas
             Route::get('/registar', [MainController::Class, 'RegisterPage'])->name('registerPage'); //View registar utilizador
             Route::post('registarPost', [MainController::Class, 'RegisterUtilizador'])->name('register.utilizador'); //Post para enviar utilizador para a DB

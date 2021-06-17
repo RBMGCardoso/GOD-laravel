@@ -155,12 +155,46 @@ class DashboardController extends Controller
         return view('dashboard', compact('arrayOcc', 'arrayNot', 'percentagem', 'qtdOccs'));
     }
 
+    public function FiltrarOccs(Request $req)
+    {
+        $estados = ['Aceite','Pendente', 'Recusada'];
+        $ocorrenciasId = Ocorrencia::all()->pluck('id')->reverse();
+        $ocorrenciasEstado = Ocorrencia::all()->pluck('estado')->reverse();
+        $ocorrenciasCodP = Ocorrencia::all()->pluck('cod_p')->reverse();
+        $ocorrencia = Ocorrencia::all()->reverse();
+
+        for ($i=0; $i < count($ocorrenciasId); $i++) { 
+            if ($ocorrenciasCodP[$i] == session('LoggedUser')->id) 
+            {
+                if($req->estadoOcc != 0)
+                {
+                    if($ocorrenciasEstado[$i] == $estados[$req->estadoOcc-1])
+                    {
+                        $ocorrencias[] = $ocorrencia[$i];
+                    } 
+                }else
+                {
+                    $ocorrencias[] = $ocorrencia[$i];
+                }
+            }
+        }
+         
+        if(isset($ocorrencias))
+        {
+            return json_encode($ocorrencias);
+        }
+        else
+        {
+            return json_encode(0);
+        }
+    }
+
     public function EliminarNotification(Request $req)
     {      
         $notif = Notification::find($req->idNotif);
         $notif->delete();
         
-        $qtdNotifs = count(Notification::where('cod_p', session('LoggedUser')->id)->pluck('id'));
+        $qtdNotifs = count(Notification::where('cod_p','=',session('LoggedUser')->id)->pluck('id'));
 
         return json_encode($qtdNotifs);
     }

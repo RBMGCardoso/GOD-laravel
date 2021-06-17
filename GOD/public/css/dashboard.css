@@ -25,6 +25,11 @@
     transition: 0.2s;
 }
 
+.progress-bar:hover
+{
+    cursor:pointer;
+}
+
 #progress
 {
     transition: 0.2s;

@@ -222,14 +222,16 @@
               <div class="col h-100">
                 <div class="row-auto p-0 m-0 mb-2">
                   <div class="progress" id="progress" style="height: 10px;">
-                    <div class="progress-bar" role="progressbar" title="Ocorrências Aceites" style="background-color: rgb(0,200,0); width: {{ $percentagem['Aceites'] }};" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" id="progBarVerde"><span class="textoProgBar" hidden>Aceites: {{ $qtdOccs['Aceites'] }}</span></div>
-                    <div class="progress-bar" role="progressbar" title="Ocorrências Pendentes" style="background-color: rgb(255,200,0); width: {{ $percentagem['Pendentes'] }};" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="progBarAmarelo"><span class="textoProgBar" hidden>Pendentes: {{ $qtdOccs['Pendentes'] }}</span></div>
-                    <div class="progress-bar" role="progressbar" title="Ocorrências Recusadas" style="background-color: rgb(255,0,0); width: {{ $percentagem['Recusadas'] }};" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="progBarVermelho"><span class="textoProgBar" hidden>Recusadas: {{ $qtdOccs['Recusadas'] }}</span></div>
+                    <div class="progress-bar" role="progressbar" title="Clique para visualizar apenas ocorrências aceites" style="background-color: rgb(0,200,0); width: {{ $percentagem['Aceites'] }};" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" id="progBarVerde"><span class="textoProgBar" hidden>Aceites: {{ $qtdOccs['Aceites'] }}</span></div>
+                    <div class="progress-bar" role="progressbar" title="Clique para visualizar apenas ocorrências pendentes" style="background-color: rgb(255,200,0); width: {{ $percentagem['Pendentes'] }};" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="progBarAmarelo"><span class="textoProgBar" hidden>Pendentes: {{ $qtdOccs['Pendentes'] }}</span></div>
+                    <div class="progress-bar" role="progressbar" title="Clique para visualizar apenas ocorrências recusadas" style="background-color: rgb(255,0,0); width: {{ $percentagem['Recusadas'] }};" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="progBarVermelho"><span class="textoProgBar" hidden>Recusadas: {{ $qtdOccs['Recusadas'] }}</span></div>
                   </div>
                 </div>
 
-                <div class="row-auto p-0 m-0">
-                  @if($arrayOcc != null)
+                <hr>
+
+                <div class="row-auto p-0 m-0" id="sidebarOccs">
+                  <!-- @if($arrayOcc != null)
                     @foreach($arrayOcc as $occ)
                       @switch($occ->estado)
                         @case('Aceite')
@@ -256,7 +258,7 @@
                     @endforeach
                   @else
                           Sem ocorrências
-                  @endif                
+                  @endif                 -->
                 </div>
                 
                 <a href="{{ route('minhasOcc') }}" class="row p-0 m-0 justify-content-center text-center" id="avisoOccs" style="position: absolute; bottom: 10px;left: 5%; right: 5%;font-size: 10px; word-wrap: break-word;">
@@ -273,8 +275,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     
     <script>
+      var filtered = false;
       $(document).ready(function()
       {
+        filtrarOcorrencias(0);
         $("#progBarVerde").mouseover(function()
         {
           expandirProgBar(1);
@@ -294,7 +298,92 @@
         {
           reduzirProgBar();
         });
+
+        $("#progBarVerde").click(function()
+        {
+          filtrarOcorrencias(1);
+        });
+
+        $("#progBarAmarelo").click(function()
+        {
+          filtrarOcorrencias(2);
+        });
+
+        $("#progBarVermelho").click(function()
+        {
+          filtrarOcorrencias(3);
+        });
+
       });
+
+      function filtrarOcorrencias(estadoOcc) {
+        if(!filtered)
+        {
+          estadoOcc = 0;
+        }
+
+        $.ajax({
+          type:'GET',
+          url: '{{ route("filtrarOccs") }}',
+          data: { estadoOcc: estadoOcc },
+          success: function(occs)
+          {
+            var vars = JSON.parse(occs);
+
+            $("#sidebarOccs").empty();
+
+            $.each(vars, function(i,v){
+              var d = new Date(vars[i].data);
+              var dia = d.getDate();
+              var mes = d.getMonth() + 1;
+              var ano = d.getFullYear();
+
+              if(dia < 10)
+              {
+                dia = '0'+dia;
+              }
+
+              if(mes < 10)
+              {
+                mes = '0'+mes;
+              }
+
+              switch (vars[i].estado) {
+                case 'Aceite':
+                  var tempRow = '<a href="{{ route("pagOcc",'+idOcc+') }}" title="ID de Ocorrência: '+vars[i].id+'" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc"><div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia '+dia+'-'+mes+'-'+ano+'</div><div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div></a>'; 
+                  var row = tempRow.replace('+idOcc+', vars[i].id);
+                    $("#sidebarOccs").prepend(row);
+                  break;
+
+                case 'Pendente':
+                  var tempRow = '<a href="{{ route("pagOcc",'+idOcc+') }}" title="ID de Ocorrência: '+vars[i].id+'" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc"><div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia '+dia+'-'+mes+'-'+ano+'</div><div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div></a>';
+                  var row = tempRow.replace('+idOcc+', vars[i].id);
+                  
+                  $("#sidebarOccs").prepend(row);
+                break;
+
+                case 'Recusada':
+                  var tempRow = '<a href="{{ route("pagOcc",'+idOcc+') }}" title="ID de Ocorrência: '+vars[i].id+'" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc"><div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia '+dia+'-'+mes+'-'+ano+'</div><div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div></a>';
+                  var row = tempRow.replace('+idOcc+', vars[i].id);
+                  $("#sidebarOccs").prepend(row);
+                break;
+              }
+              
+            })
+
+            if(vars == '0')
+            {
+              var row = '<a class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary justify-content-center" id="painelOcc">Sem ocorrências</a>';
+              $("#sidebarOccs").prepend(row);
+            }
+            
+          }
+        });
+
+        filtered = !filtered;
+
+        //$('#sidebarOccs').prepend('<p>aaa</p>');
+      }
 
       function expandirProgBar(numCor) {
         document.getElementById('progress').style.height = "20px";
@@ -325,14 +414,17 @@
       }
 
       function reduzirProgBar() {
-        for (let i = 0; i < document.getElementsByClassName('textoProgBar').length; i++) {
+        if(filtered)
+        {
+          for (let i = 0; i < document.getElementsByClassName('textoProgBar').length; i++) {
           document.getElementsByClassName('textoProgBar')[i].setAttribute('hidden', 0);     
-        }
+          }
 
-          document.getElementById('progress').style.height = "10px";
-          document.getElementById('progBarVerde').style.width = "{{ $percentagem['Aceites'] }}";
-          document.getElementById('progBarAmarelo').style.width = "{{ $percentagem['Pendentes'] }}";
-          document.getElementById('progBarVermelho').style.width = "{{ $percentagem['Recusadas'] }}";
+            document.getElementById('progress').style.height = "10px";
+            document.getElementById('progBarVerde').style.width = "{{ $percentagem['Aceites'] }}";
+            document.getElementById('progBarAmarelo').style.width = "{{ $percentagem['Pendentes'] }}";
+            document.getElementById('progBarVermelho').style.width = "{{ $percentagem['Recusadas'] }}";
+          }
       }
 
       function apagarNotification(idNotif) {
