@@ -175,13 +175,13 @@
                 @if($arrayOcc != null)
                   @foreach ($arrayOcc as $occ)
                     <a href="{{ route('pagOcc', $occ->id) }}">
-                      <div class="row mb-2 mt-2 alert alert-secondary" id="occCard">
-                        <div class="col-auto d-flex">
-                          {{ $occ->id }}
+                      <div class="row mb-2 mt-2 alert alert-secondary" id="occCard" style="">
+                        <div class="col-auto d-flex align-self-center" style="border-radius:5px; border: 1px solid #555;">
+                          <span style="line-height:160%;"><b>ID: </b> {{ $occ->id }}</span>
                         </div>
 
-                        <div class="col-auto d-flex">
-                          
+                        <div class="col-auto d-flex align-self-center">
+                          <span style="line-height:160%;">{{ $occ->aluno->nome }}</span>
                         </div>
 
                         <div class="col d-flex justify-content-end">
@@ -215,7 +215,6 @@
                 @endif
               </div>
             </div>
-            <br />
                 
           </div>
         </div>

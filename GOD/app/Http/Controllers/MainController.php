@@ -91,7 +91,7 @@ class MainController extends Controller
                     {
                         Notification::insert([
                             'cod_p' => User::where('dirTurma', $i)->pluck('id')->first(),
-                            'texto' => 'O(A) aluno(a), '.Aluno::where('nome', '=', $req->input('nome'))->first()->nome.' da sua direção de turma recebeu uma ocorrência no dia '.Carbon::now()->format("d-m-Y"),
+                            'texto' => 'O(A) aluno(a), '.Aluno::where('nome', '=', $req->input('nome'))->first()->nome.', da sua direção de turma recebeu uma ocorrência no dia '.Carbon::now()->format("d-m-Y"),
                             'data' => Carbon::now()
                         ]);
                     }
@@ -164,6 +164,9 @@ class MainController extends Controller
     {
         $alunosId = AlunoTurma::where('turma_id', session('LoggedUser')->dirTurma)->pluck('aluno_id');
         $alunos = Aluno::all();
+        $anoTurma = Turma::where('id', session('LoggedUser')->dirTurma)->pluck('ano')->first();
+        $codTurma = Turma::where('id', session('LoggedUser')->dirTurma)->pluck('codTurma')->first();
+        $designTurma = $anoTurma.$codTurma;
 
         for ($i=0; $i < count($alunosId); $i++) { 
             for ($j=0; $j < count($alunos); $j++) { 
@@ -179,7 +182,7 @@ class MainController extends Controller
             $alunosModel = null;
         }
         
-        return view('dirTurma', compact('alunosModel'));
+        return view('dirTurma', compact('alunosModel', 'designTurma'));
     }
 
     public function minhasOcc()
@@ -187,7 +190,7 @@ class MainController extends Controller
         $ocorrencias = Ocorrencia::all()->pluck('cod_p');
         $ocorrenciasId = Ocorrencia::all();
 
-        for ($i=0; $i < count($ocorrencias); $i++) { 
+        for ($i=count($ocorrencias)-1; $i >= 0; $i--) { 
             if($ocorrencias[$i] == session('LoggedUser')->id)
             {
                 $arrayOcc[] = $ocorrenciasId[$i];
