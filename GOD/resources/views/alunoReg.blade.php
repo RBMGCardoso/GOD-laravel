@@ -45,25 +45,6 @@
               content.style.marginLeft = "0px";
             }
           }
-  
-  
-        function CharsCounterDesc()
-        {
-            var descText = document.getElementById('textADesc');
-            var charsQt = 350 - descText.value.length;
-            
-            var alertText = document.getElementById('charsRemainDesc');
-            alertText.textContent = "Caracteres restantes: " + charsQt;       
-        }
-  
-        function CharsCounterDec()
-        {
-            var descText = document.getElementById('textADec');
-            var charsQt = 350 - descText.value.length;
-            
-            var alertText = document.getElementById('charsRemainDec');
-            alertText.textContent = "Caracteres restantes: " + charsQt;       
-        }
     </script> 
   </head>
 
