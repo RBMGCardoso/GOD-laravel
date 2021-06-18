@@ -351,13 +351,20 @@
       });
 
       function alterarEstado(idOcc) { 
-        if(estado != 0)
+        if(estado != 0 && $('#motivo_est').val() != '')
         {   
           $('#myForm').submit();
         }
         else
         {
-          alert('Por favor selecione se pretende Aceitar ou Recusar a ocorrência.');
+          if(estado == 0)
+          {
+            alert('Por favor selecione se pretende Aceitar ou Recusar a ocorrência.');
+          }else if($('#motivo_est').val() == '')
+          {
+            alert('Por favor escreva um motivo para a sua escolha.');
+          }
+          
         }
       }
     </script>
