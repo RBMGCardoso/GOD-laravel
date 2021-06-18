@@ -56,6 +56,7 @@ Route::middleware([CheckSession::class])->group(function(){
     Route::get('minhas-ocorrencias', [MainController::Class, 'minhasOcc'])->name('minhasOcc'); //View das ocorrencias criadas pelo utilizador
 
     Route::get('ocorrencia/{idOcc}', [MainController::Class, 'pagOcc'])->name('pagOcc'); //View das ocorrencias criadas pelo utilizador
+    Route::post('alterarEstado', [MainController::Class, 'AlterarEstado'])->name('alterarEstado'); //Alterar estado de ocorrencia
 
     Route::get('minha-turma', [MainController::Class, 'dirTurma'])->name('minhaTurma'); //View da direção de turma de um diretor de turma
     

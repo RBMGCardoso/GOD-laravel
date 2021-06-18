@@ -165,7 +165,7 @@
 
         <div class="row justify-content-center">
           <div class="col-auto">
-            <div class="card" style="width: 60vw;">
+            <div class="card" id="cardOcc" style="width: 60vw;">
               <div class="card-header">
                 <div class="row">
                   <div class="col">
@@ -238,7 +238,7 @@
           </div>
 
           <div class="col-auto">
-            <div class="card">
+            <div class="card" id="cardEstado">
               <div class="card-header">
                 <div class="row">
                   <div class="col-auto">Mudar estado</div>
@@ -261,9 +261,9 @@
               </div>
 
               <div class="card-body">
-                <div class="row">
-                  <div class="col d-flex justify-content-center border-end">Aceitar</div>
-                  <div class="col d-flex justify-content-center">Recusar</div>
+                <div class="row-auto d-flex">
+                  <div class="col w-50 d-flex justify-content-center rounded-start" id="buttonStatAceitar">Aceitar</div>
+                  <div class="col w-50 d-flex justify-content-center rounded-end"id="buttonStatRecusar">Recusar</div>
                 </div>
                 <hr>
 
@@ -272,13 +272,15 @@
                     Motivo:
                   </div>
 
-                  <div class="card-body p-0">
-                    <textarea name="motivo_est" id="motivo_est" cols="30"style="border: 0px; resize: none;"></textarea>
+                  <div class="card-body p-0 ">
+                    <textarea class="p-2" name="motivo_est" id="motivo_est" cols="30" rows="10" style="border: 0px; resize: none;"></textarea>
                   </div>
                 </div>
 
-                <div class="row-auto d-flex justify-content-center mt-3">
-                  <button type="button" class="btn btn-primary btn-sm">Small button</button>
+                <div class="row m-0 justify-content-center">
+                  <form method="POST" action="{{ route('alterarEstado') }}" id="myForm">
+                    <button class="btn-sub mt-3 w-50" onclick="alterarEstado('{{ $idOcc->id }}')" type="button" id="submitButton">SUBMETER</button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -321,6 +323,44 @@
         </div>
       </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <script>
+      var estado = 0;
+
+      $(document).ready(function()
+      {
+        $('#buttonStatAceitar').click(function(){
+          estado = 1;
+          document.getElementById('buttonStatAceitar').style.backgroundColor= "rgb(0,200,0)";
+          document.getElementById('buttonStatAceitar').style.color= "rgb(255,255,255)";
+
+          document.getElementById('buttonStatRecusar').style.backgroundColor= "rgba(0,0,0,0)";
+          document.getElementById('buttonStatRecusar').style.color= "rgb(255,0,0)";
+        });
+
+        $('#buttonStatRecusar').click(function(){
+          estado = 2;
+          document.getElementById('buttonStatRecusar').style.backgroundColor= "rgb(255,0,0)";
+          document.getElementById('buttonStatRecusar').style.color= "rgb(255,255,255)";
+
+          document.getElementById('buttonStatAceitar').style.backgroundColor= "rgba(0,0,0,0)";
+          document.getElementById('buttonStatAceitar').style.color= "rgb(0,200,0)";
+        });
+      });
+
+      function alterarEstado(idOcc) { 
+        if(estado != 0)
+        {   
+          $('#myForm').submit();
+        }
+        else
+        {
+          alert('Por favor selecione se pretende Aceitar ou Recusar a ocorrência.');
+        }
+      }
+    </script>
   </body>
 </html>
 

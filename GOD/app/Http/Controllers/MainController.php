@@ -235,6 +235,11 @@ class MainController extends Controller
 
     }
 
+    public function AlterarEstado(Request $req)
+    {
+        return redirect('dashboard');
+    }
+
     public function registerEscolas()
     {
         return view('escolaReg');
