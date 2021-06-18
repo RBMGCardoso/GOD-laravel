@@ -170,9 +170,9 @@
                 <div class="row">
                   <div class="col">
                     <div class="row">
-                      <span>Nome do Aluno:</span>
+                      <span>Nome do Aluno: {{ $idOcc->aluno->nome }} <a href="{{ route('perfilAluno', $idOcc->aluno->id) }}"><i class="fas fa-external-link-alt"></i></a></span>
                     </div>
-                    <span>Ano e Turma:</span>
+                    <span>Ano e Turma: {{ $turma }}</span>
                   </div>
 
                   <div class="col d-flex justify-content-end">
@@ -189,10 +189,14 @@
               <div class="card-body pt-2 pb-2">
                 <div class="col">
                   <div class="row">
-                    <ul style="list-style: none;">
-                      <li>
-                        Motivos
-                      </li>
+                    <span>Motivos:</span>
+                    
+                    <ul style="list-style-position:inside">
+                      @foreach ($motivosOcc as $motivo)
+                        <li>
+                            {{ $motivo }}
+                        </li>
+                      @endforeach
                     </ul>
                   </div>
 

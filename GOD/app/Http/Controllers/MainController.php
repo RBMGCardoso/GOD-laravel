@@ -15,6 +15,7 @@ use App\Models\Escola;
 use App\Models\AlunoTurma;
 use App\Models\User;
 use App\Models\Ocorrencia;
+use App\Models\Motivo;
 use App\Models\MotivoOcorrencia;
 use App\Models\Notification;
 
@@ -207,16 +208,30 @@ class MainController extends Controller
 
     public function pagOcc(Ocorrencia $idOcc)
     {
+        $motivos = MotivoOcorrencia::where('ocorrencia_id', $idOcc->id)->pluck('motivo_id');
+        $motivosId = Motivo::all()->pluck('id');
+        $motivosMot = Motivo::all()->pluck('motivo');
         
+        for ($i=0; $i < count($motivos); $i++) { 
+            for ($t=0; $t < count($motivosId); $t++) { 
+                if($motivos[$i] == $motivosId[$t])
+                {
+                    $motivosOcc[] = $motivosMot[$t];
+                }
+            }
+        }
 
-        if(session('LoggedUser')->id == $idOcc->cod_p || session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
-        {
-            return view('pagOcc', compact('idOcc'));
-        }
-        else
-        {
-            return redirect('dashboard')->with('jsPermissionAlert', 'Você não tem permissão para aceder a esta página. Se acha que isto é um erro contacte os seus superiores.');
-        }
+
+        $turmaAlunoId = AlunoTurma::where('aluno_id', $idOcc->aluno->id)->pluck('turma_id');
+        $turmaId = Turma::where('id', $turmaAlunoId)->pluck('id')->first();
+
+        $turmaAno = Turma::all()->pluck('ano');
+        $turmaCod = Turma::all()->pluck('codTurma');
+
+        $turma = $turmaAno[$turmaId].$turmaCod[$turmaId];
+
+        return view('pagOcc', compact('idOcc', 'motivosOcc', 'turma'));
+
 
     }
 

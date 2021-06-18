@@ -139,6 +139,11 @@ class DashboardController extends Controller
         {
            $arrayOcc = null; 
         }
+        else
+        {
+            $arrayOcc = array_slice($arrayOcc, 0, 20);
+        }
+
 
         for ($i=0; $i < count($notifications); $i++) { 
             if($notifications[$i] == session('LoggedUser')->id)
@@ -178,9 +183,11 @@ class DashboardController extends Controller
                 }
             }
         }
+
          
         if(isset($ocorrencias))
         {
+            $ocorrencias = array_slice($ocorrencias, 0, 20);
             return json_encode($ocorrencias);
         }
         else

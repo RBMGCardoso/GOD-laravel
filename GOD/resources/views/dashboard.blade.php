@@ -231,36 +231,8 @@
                 <hr class="mt-2 mb-2">
 
                 <div class="row-auto p-0 m-0" id="sidebarOccs">
-                  <!-- @if($arrayOcc != null)
-                    @foreach($arrayOcc as $occ)
-                      @switch($occ->estado)
-                        @case('Aceite')
-                          <a href="{{ route('pagOcc', $occ->id) }}" title="ID de Ocorrência: {{ $occ->id }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
-                            <div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
-                            <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div>
-                          </a>
-                        @break;
-  
-                        @case('Pendente')
-                          <a href="{{ route('pagOcc', $occ->id) }}" title="ID de Ocorrência: {{ $occ->id }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
-                            <div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
-                            <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>
-                          </a>
-                        @break;
-  
-                        @case('Recusada')
-                          <a href="{{ route('pagOcc', $occ->id) }}" title="ID de Ocorrência: {{ $occ->id }}" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc">
-                            <div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia {{ date('d-m-Y', strtotime($occ->data)) }}</div>
-                            <div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
-                          </a>
-                        @break;
-                      @endswitch                  
-                    @endforeach
-                  @else
-                          Sem ocorrências
-                  @endif                 -->
                 </div>
-                
+               
                 <a href="{{ route('minhasOcc') }}" class="row p-0 m-0 justify-content-center text-center" id="avisoOccs" style="position: absolute; bottom: 10px;left: 5%; right: 5%;font-size: 10px; word-wrap: break-word;">
                   <hr class="w-75">
                   Está a ver apenas as suas últimas ocorrências.
