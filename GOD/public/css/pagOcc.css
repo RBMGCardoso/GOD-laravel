@@ -18,3 +18,7 @@ h1{
     font-weight: 500;
     color: #f8f8f8;
 }
+
+#motivo_est:focus{
+    outline: none;
+}

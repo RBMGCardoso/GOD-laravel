@@ -177,22 +177,6 @@
 
                   <div class="col d-flex justify-content-end">
                     <div class="justify-content-center pe-2">
-                      <div class="row justify-content-end">
-                        @switch($idOcc->estado)
-                          @case('Aceite')
-                            <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
-                          @break;
-            
-                          @case('Pendente')       
-                            <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
-                          @break;
-            
-                          @case('Recusada')              
-                            <div class="col-auto  align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
-                          @break;
-                        @endswitch  
-                      </div>
-  
                       <div class="row justify-content-center mt-1">
                         <span class="p-0">Data: {{ $idOcc->data }}</span>
                       </div>
@@ -248,8 +232,97 @@
               </div>
             </div>
           </div>
+
+          <div class="col-auto">
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-auto">Mudar estado</div>
+                  <div class="col m-0 d-flex justify-content-end">               
+                    @switch($idOcc->estado)
+                      @case('Aceite')
+                        <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
+                      @break;
+        
+                      @case('Pendente')       
+                        <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
+                      @break;
+        
+                      @case('Recusada')              
+                        <div class="col-auto  align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
+                      @break;
+                    @endswitch  
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <div class="row">
+                  <div class="col d-flex justify-content-center border-end">Aceitar</div>
+                  <div class="col d-flex justify-content-center">Recusar</div>
+                </div>
+                <hr>
+
+                <div class="card">
+                  <div class="card-header">
+                    Motivo:
+                  </div>
+
+                  <div class="card-body p-0">
+                    <textarea name="motivo_est" id="motivo_est" cols="30"style="border: 0px; resize: none;"></textarea>
+                  </div>
+                </div>
+
+                <div class="row-auto d-flex justify-content-center mt-3">
+                  <button type="button" class="btn btn-primary btn-sm">Small button</button>
+                </div>
+              </div>
+            </div>
+          
+            <!-- <div class="card">
+              <div class="card-header ">
+                <div class="row">
+                  <div class="col-auto">a</div>
+                  <div class="col m-0 d-flex justify-content-end">               
+                    @switch($idOcc->estado)
+                      @case('Aceite')
+                        <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
+                      @break;
+        
+                      @case('Pendente')       
+                        <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
+                      @break;
+        
+                      @case('Recusada')              
+                        <div class="col-auto  align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
+                      @break;
+                    @endswitch  
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <div class="card">
+                  <div class="card-header">
+                    Motivo:
+                  </div>
+
+                  <div class="card-body p-0">
+                    <textarea disabled name="motivo_est" id="motivo_est" cols="30"style="border: 0px; resize: none;"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
         </div>
       </div>
     </div>
   </body>
 </html>
+
+<!--
+  <div class="col form-group">
+                  <label class="form-control" for="motivo_est">Motivo:</label>
+                  <textarea class="form-control" name="motivo_est" id="" cols="30" rows="6"></textarea>
+                </div>
+-->
