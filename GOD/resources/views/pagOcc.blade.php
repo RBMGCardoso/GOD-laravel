@@ -165,7 +165,88 @@
 
         <div class="row justify-content-center">
           <div class="col-auto">
-            {{ $idOcc->data }}
+            <div class="card" style="width: 60vw;">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col">
+                    <div class="row">
+                      <span>Nome do Aluno:</span>
+                    </div>
+                    <span>Ano e Turma:</span>
+                  </div>
+
+                  <div class="col d-flex justify-content-end">
+                    <div class="justify-content-center pe-2">
+                      <div class="row justify-content-end">
+                        @switch($idOcc->estado)
+                          @case('Aceite')
+                            <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
+                          @break;
+            
+                          @case('Pendente')       
+                            <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
+                          @break;
+            
+                          @case('Recusada')              
+                            <div class="col-auto  align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
+                          @break;
+                        @endswitch  
+                      </div>
+  
+                      <div class="row justify-content-center mt-1">
+                        <span class="p-0">Data: {{ $idOcc->data }}</span>
+                      </div>
+                    </div>
+                  </div>
+                    
+                </div>
+              </div>
+
+              <div class="card-body pt-2 pb-2">
+                <div class="col">
+                  <div class="row">
+                    <ul style="list-style: none;">
+                      <li>
+                        Motivos
+                      </li>
+                    </ul>
+                  </div>
+
+                  <hr style="width: 100%;">
+
+                  <div class="row">
+                    <span>Descrição da Ocorrência:</span>
+                    <span>{{ $idOcc->descricao }}</span>
+                  </div>
+
+                  <hr class="w-100">
+
+                  <div class="row">
+                    <span>Decisão Tomada:</span>
+                    <span>{{ $idOcc->decisao }}</span>
+                  </div>
+
+                  <hr class="w-100">
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="row">
+                        <span>O comportamento observou-se neste aluno:</span>
+                      </div>
+                      <span>{{ $idOcc->frequencia }}</span>
+                    </div>
+                    
+                    <div class="col">
+                      <div class="row">
+                        <span>O aluno já demonstrou outros comportamento incorretos?</span>
+                      </div>
+                      <span>{{ $idOcc->comport_inc }}</span>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
