@@ -41,10 +41,12 @@ Route::middleware([CheckSession::class])->group(function(){
             Route::get('/registar', [MainController::Class, 'RegisterPage'])->name('registerPage'); //View registar utilizador
             Route::post('registarPost', [MainController::Class, 'RegisterUtilizador'])->name('register.utilizador'); //Post para enviar utilizador para a DB
         
-            Route::get('/registarAluno', [MainController::Class, 'RegisterAlunoPage'])->name('registerAlunoPage'); //View registar aluno
+            Route::get('/registar-aluno', [MainController::Class, 'RegisterAlunoPage'])->name('registerAlunoPage'); //View registar aluno
             Route::post('/registarAlunoPost', [MainController::Class, 'RegisterAluno'])->name('register.aluno'); //Post para enviar aluno para a DB      
         
-            route::get('registar-escola', [MainController::Class, 'registerEscolas'])->name('registerEscolas');
+            Route::get('registar-escola', [MainController::Class, 'registerEscolas'])->name('registerEscolas');
+            
+            Route::get('registar-turma', [MainController::Class, 'registerTurmas'])->name('registerTurmas');
 
             Route::get('ocorrencias', [OcorrenciaController::Class, 'index'])->name('mostrarOcorrencias'); //View da página de pesquisa
 
