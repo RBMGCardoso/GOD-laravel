@@ -54,7 +54,20 @@ class MainController extends Controller
 
     public function RegisterAluno(Request $req)
     {    
-
+        return json_encode($req->form->parentesco);
+        dd();
+        if(!$req->info)
+        {
+            Encarregado::insert([
+                'nome' => $req->nomeEE,
+                'parentesco' => $req->parentesco,
+                'telef' => $req->telefEE,
+                'email' => $req->emailEE,
+                'morada' => $req->moradaEE,
+                'concelho' => $req->concelhoEE,
+                'codPost' => $req->codPostEE,
+            ]);
+        }
 
         Aluno::insert([
             'nome' =>  $req->nome,
@@ -67,6 +80,13 @@ class MainController extends Controller
             'codpost' =>  $req->codpost,
             'cc' =>  $req->cc
         ]);
+
+        if(!$req->info)
+        {
+            Aluno::all()->reverse()->first()->insert([
+                'eeId' => Encarregado::all()->reverse()->pluck('id')->first(),
+            ]);
+        }
 
         AlunoTurma::insert([
             'aluno_id' => Aluno::all()->reverse()->first()->id,
@@ -285,6 +305,7 @@ class MainController extends Controller
         return view('escolaReg');
     }
 
+    
     public function registerTurmas()
     {
         return view('turmaReg');

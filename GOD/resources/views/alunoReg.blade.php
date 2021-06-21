@@ -170,7 +170,7 @@
               <span class="separador w-auto m-0" style="line-height:30px">Dados do Aluno</span>
             </div>
   
-            <form method="POST" action="{{ route('register.aluno') }}" id="myform">
+            <form id="myform">
               <div class="row-auto identification d-flex mt-3">
                 <div class="col">
                   <div class="row m-0" style="width: 60vw;">
@@ -280,7 +280,7 @@
                     </div>
 
                     <div class="col-2 p-0">
-                      <input class="input-box form-control" id="ccEE" name="ccEE" type="text" placeholder="Código Postal">
+                      <input class="input-box form-control" id="ccEE" name="codPostEE" type="text" placeholder="Código Postal">
                     </div>
                   </div>
 
@@ -307,7 +307,16 @@
           if($("#nomeEE").val() != "" && $("#parentesco").val() != "" && $("#telefEE").val() != "" && $("#emailEE").val() != "" &&
           $("#moradaEE").val() != "" && $("#concelhoEE").val() != "" && $("#ccEE").val() != "")
           {
-            $("#myform").submit();
+            var form = $('#myform').serialize();
+            $.ajax({
+                type:'POST',
+                url: '{{ route("register.aluno") }}',
+                data: { info: r, form: form },
+                success: function(occ)
+                {
+                  console.log(occ);
+                }
+                });
           }
           else
           {
@@ -318,7 +327,17 @@
 
               if(r)
               {
-                $("#myform").submit();
+                var form = $('#myform').serialize();
+
+                $.ajax({
+                type:'POST',
+                url: '{{ route("register.aluno") }}',
+                data: { info: r, form: form },
+                success: function(occ)
+                {
+                  console.log(occ);
+                }
+                });
               }
             }
             else

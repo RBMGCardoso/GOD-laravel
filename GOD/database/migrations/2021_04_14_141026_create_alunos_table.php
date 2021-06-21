@@ -25,7 +25,7 @@ class CreateAlunosTable extends Migration
             $table->string('codpost');
             $table->string('cc');
 
-            $table->integer('eeId')->unsigned();
+            $table->integer('eeId')->nullable()->unsigned();
             $table->foreign('eeId')->references('id')->on('encarregados');
 
             $table->timestamps();
