@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Registar Escola</title>
+    <title>Registar Turmas</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-    <link href="{{ url('/css/escolaReg.css') }}" rel="stylesheet">
+    <link href="{{ url('/css/turmaReg.css') }}" rel="stylesheet">
 
     <link href="{{ url('/css/navbar.css') }}" rel="stylesheet">
 
@@ -158,59 +158,39 @@
       <script src="./js/sidebars.js"></script>
     </div>
 
-    <div class="row-auto full-content" id="content" style="margin-left: 250px;">
+    <div class="row-auto full-content" id="content">
       <div class="col">
         <div class="row title d-flex justify-content-center align-items-center">
-          <h1 class="w-auto">Registar Escola</h1>
+          <h1 class="w-auto">Registar Turma</h1>
         </div>
 
         <div class="row justify-content-center">
          <div class="col-auto">
           <div class="row m-0 justify-content-center p-0 mt-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-            <span class="separador w-auto m-0" style="line-height:30px">Dados sobre a Escola</span>
+            <span class="separador w-auto m-0" style="line-height:30px">Dados da Turma</span>
           </div>
 
           <form method="POST" action="">
             <div class="row-auto identification d-flex mt-3">
               <div class="col">
                 <div class="row m-0" style="width: 60vw;">
-                  <div class="col-9 p-0">
-                    <input class="input-box form-control" name="nome" id="name" autocomplete="off" placeholder="Nome da Escola">
+                  <div class="col-2 p-0">
+                    <input class="input-box form-control" name="ano" id="ano" autocomplete="off" placeholder="Ano">
                   </div>
                   
-                  <div class="col-3 p-0">
-                    <input class="input-box form-control" name="representante" id="representante" autocomplete="off" placeholder="Representante">
+                  <div class="col-2 p-0">
+                    <input class="input-box form-control" name="codTurma" id="codTurma" autocomplete="off" placeholder="Turma">
+                  </div>
+                  
+                  <div class="col-8 p-0">
+                      <select>
+                          <option>Selecione uma Escola</option>
+                          <option></option>
+                      </select>
                   </div>
                 </div>
   
                 <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
-                  <div class="col-6 p-0">
-                    <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email">
-                  </div>
-
-                  <div class="col-3 p-0">
-                    <input class="input-box form-control" type="text" id="telef" name="telef" placeholder="Telemóvel">
-                  </div>
-
-                  <div class="col-3 p-0">
-                    <input class="input-box form-control" type="text" id="fax" name="fax" placeholder="Fax">
-                  </div>
-                </div>
-
-                <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
-                  <div class="col-3 p-0">
-                    <input class="input-box form-control" type="text" id="concelho" name="concelho" placeholder="Concelho">
-                  </div>
-
-                  <div class="col-7 p-0">
-                    <input class="input-box form-control" type="text" id="morada" name="morada" placeholder="Morada">
-                  </div>
-
-                  <div class="col-2 p-0">
-                    <input class="input-box form-control" type="text" id="codpost" name="codpost" placeholder="Código Postal">
-                  </div>
-                </div>
-
                 <div class="row m-0 justify-content-end pt-4">
                   <button class="btn-sub mt-5 mb-5" onclick="verificarCampos()" type="button">SUBMETER</button>
                 </div>
