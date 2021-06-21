@@ -193,7 +193,7 @@
                   </div>
 
                   <div class="col-3 p-0">
-                    <input class="input-box form-control" type="text" id="fax" name="fax" placeholder="fax"> <!-- Não deve ser obrigatorio, pq já pouco usam fax-->
+                    <input class="input-box form-control" type="text" id="fax" name="fax" placeholder="Fax">
                   </div>
                 </div>
 
