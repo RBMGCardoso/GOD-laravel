@@ -81,8 +81,6 @@ class MainController extends Controller
     public function criarOcorrencia(Request $req, Ocorrencia $ocorrencia, MotivoOcorrencia $motivoOcorrencia)
     {   
         $motivos = $req->input('motivos');
-        $usersDirTurma = User::all()->pluck('dirTurma');
-        $alunoDirTurma = AlunoTurma::where('aluno_id', Aluno::where('nome', '=', $req->input('nome'))->first()->id)->pluck('turma_id');
         
         if(Aluno::where('nome', '=', $req->input('nome'))->first() !== null)
         {
@@ -104,17 +102,23 @@ class MainController extends Controller
                     'ocorrencia_id' => Ocorrencia::all()->reverse()->first()->id
                 ]);
             }
+             
+            $usersDirTurma = User::all()->pluck('dirTurma');
+            $alunoDirTurma = AlunoTurma::where('aluno_id', Aluno::where('nome', '=', $req->input('nome'))->first()->id)->pluck('turma_id');
 
             for ($i=0; $i < count($usersDirTurma); $i++) { 
                 for ($j=0; $j < count($alunoDirTurma); $j++) { 
                     if($usersDirTurma[$i] == $alunoDirTurma[$j])
                     {
-                        Notification::insert([
-                            'cod_p' => User::where('dirTurma', $i)->pluck('id')->first(),
-                            'texto' => 'O(A) aluno(a), '.Aluno::where('nome', '=', $req->input('nome'))->first()->nome.', da sua direção de turma recebeu uma ocorrência no dia '.Carbon::now()->format("d-m-Y"),
-                            'data' => Carbon::now(),
-                            'cod_occ' => Ocorrencia::all()->reverse()->pluck('id')->first()
-                        ]);
+                        if(User::where('dirTurma', $alunoDirTurma[$i])->pluck('id')->first() != session('LoggedUser')->id)
+                        {
+                            Notification::insert([
+                                'cod_p' => User::where('dirTurma', $alunoDirTurma[$i])->pluck('id')->first(),
+                                'texto' => 'O(A) aluno(a), '.Aluno::where('nome', '=', $req->input('nome'))->first()->nome.', da sua direção de turma recebeu uma ocorrência no dia '.Carbon::now()->format("d-m-Y"),
+                                'data' => Carbon::now(),
+                                'cod_occ' => Ocorrencia::all()->reverse()->pluck('id')->first()
+                            ]);
+                        }
                     }
                 }
             }
@@ -193,9 +197,16 @@ class MainController extends Controller
         $ocorrenciasId = Ocorrencia::all();
 
         for ($i=count($ocorrencias)-1; $i >= 0; $i--) { 
-            if($ocorrencias[$i] == session('LoggedUser')->id)
+            if(session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
             {
                 $arrayOcc[] = $ocorrenciasId[$i];
+            }
+            else
+            {
+                if($ocorrencias[$i] == session('LoggedUser')->id)
+                {
+                    $arrayOcc[] = $ocorrenciasId[$i];
+                }
             }
         }
         
@@ -248,7 +259,7 @@ class MainController extends Controller
                     Ocorrencia::where('id', $req->idOcc)->update(['motivo' => $req->motivo]);
                     
                     Notification::insert([
-                        'cod_p' => User::where('id', Ocorrencia::find($req->idOcc)->pluck('cod_p'))->pluck('id')->first(),
+                        'cod_p' => User::where('id', Ocorrencia::where('id', $req->idOcc)->pluck('cod_p')->first())->pluck('id')->first(),
                         'texto' => 'A sua ocorrência de dia '.Ocorrencia::where('id', $req->idOcc)->pluck('data')->first().', foi aceite.',
                         'data' => Carbon::now(),
                         'cod_occ' => $req->idOcc
@@ -260,7 +271,7 @@ class MainController extends Controller
                     Ocorrencia::where('id', $req->idOcc)->update(['motivo' => $req->motivo]);
 
                     Notification::insert([
-                        'cod_p' => User::where('id', Ocorrencia::find($req->idOcc)->pluck('cod_p'))->pluck('id')->first(),
+                        'cod_p' => User::where('id', Ocorrencia::where('id', $req->idOcc)->pluck('cod_p')->first())->pluck('id')->first(),
                         'texto' => 'A sua ocorrência de dia '.Ocorrencia::where('id', $req->idOcc)->pluck('data')->first().', foi recusada.',
                         'data' => Carbon::now(),
                         'cod_occ' => $req->idOcc

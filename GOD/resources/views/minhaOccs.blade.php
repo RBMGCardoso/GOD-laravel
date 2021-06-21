@@ -165,56 +165,112 @@
 
         <div class="row justify-content-center">
           <div class="col-auto">
-                    
-            <div class="card" style="width: 60vw;">
+
+          <div class="card mb-2" style="width: 60vw;">
               <div class="card-header">
-                Ocorrencias Criadas
+                Minhas Ocorrências
               </div>
 
               <div class="card-body pt-2 pb-2">
                 @if($arrayOcc != null)
                   @foreach ($arrayOcc as $occ)
-                    <a href="{{ route('pagOcc', $occ->id) }}">
-                      <div class="row mb-2 mt-2 alert alert-secondary" id="occCard" style="">
-                        <div class="col-auto d-flex align-self-center" style="border-radius:5px; border: 1px solid #555;">
-                          <span style="line-height:160%;"><b>ID: </b> {{ $occ->id }}</span>
-                        </div>
+                    @if($occ->cod_p == session('LoggedUser')->id)
+                      <a href="{{ route('pagOcc', $occ->id) }}">
+                        <div class="row mb-2 mt-2 alert alert-secondary" id="occCard" style="">
+                          <div class="col-auto d-flex align-self-center" style="border-radius:5px; border: 1px solid #555;">
+                            <span style="line-height:160%;"><b>ID: </b> {{ $occ->id }}</span>
+                          </div>
 
-                        <div class="col-auto d-flex align-self-center">
-                          <span style="line-height:160%;">{{ $occ->aluno->nome }}</span>
-                        </div>
+                          <div class="col-auto d-flex align-self-center">
+                            <span style="line-height:160%;">{{ $occ->aluno->nome }}</span>
+                          </div>
 
-                        <div class="col d-flex justify-content-end">
-                          <div class="justify-content-center">
-                            <div class="row justify-content-center">
-                              @switch($occ->estado)
-                                @case('Aceite')
-                                    <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
-                                @break;
-          
-                                @case('Pendente')       
-                                    <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
-                                @break;
-          
-                                @case('Recusada')              
-                                    <div class="col-auto  align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
-                                @break;
-                              @endswitch  
-                            </div>
+                          <div class="col d-flex justify-content-end">
+                            <div class="justify-content-center">
+                              <div class="row justify-content-center">
+                                @switch($occ->estado)
+                                  @case('Aceite')
+                                      <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
+                                  @break;
+            
+                                  @case('Pendente')       
+                                      <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
+                                  @break;
+            
+                                  @case('Recusada')              
+                                      <div class="col-auto  align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
+                                  @break;
+                                @endswitch  
+                              </div>
 
-                            <div class="row justify-content-center mt-1" style="font-size: 13.6px">
-                              {{ date('d-m-Y', strtotime($occ->data)) }}
+                              <div class="row justify-content-center mt-1" style="font-size: 13.6px">
+                                {{ date('d-m-Y', strtotime($occ->data)) }}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </a>
+                      </a>
+                    @endif
                   @endforeach
                 @else
                   Nenhuma ocorrência encontrada.
                 @endif
               </div>
             </div>
+                    
+            @if(session('LoggedUser')->cargo == 'Diretor' || session('LoggedUser')->cargo == 'Secretaria')
+              <div class="card" style="width: 60vw;">
+                <div class="card-header">
+                  Outras Ocorrências
+                </div>
+
+                <div class="card-body pt-2 pb-2">
+                  @if($arrayOcc != null)
+                    @foreach ($arrayOcc as $occ)
+                      @if($occ->cod_p != session('LoggedUser')->id)
+                        <a href="{{ route('pagOcc', $occ->id) }}">
+                          <div class="row mb-2 mt-2 alert alert-secondary" id="occCard" style="">
+                            <div class="col-auto d-flex align-self-center" style="border-radius:5px; border: 1px solid #555;">
+                              <span style="line-height:160%;"><b>ID: </b> {{ $occ->id }}</span>
+                            </div>
+
+                            <div class="col-auto d-flex align-self-center">
+                              <span style="line-height:160%;">{{ $occ->aluno->nome }}</span>
+                            </div>
+
+                            <div class="col d-flex justify-content-end">
+                              <div class="justify-content-center">
+                                <div class="row justify-content-center">
+                                  @switch($occ->estado)
+                                    @case('Aceite')
+                                        <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
+                                    @break;
+              
+                                    @case('Pendente')       
+                                        <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
+                                    @break;
+              
+                                    @case('Recusada')              
+                                        <div class="col-auto  align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
+                                    @break;
+                                  @endswitch  
+                                </div>
+
+                                <div class="row justify-content-center mt-1" style="font-size: 13.6px">
+                                  {{ date('d-m-Y', strtotime($occ->data)) }}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      @endif
+                    @endforeach
+                  @else
+                    Nenhuma ocorrência encontrada.
+                  @endif
+                </div>
+              </div>
+            @endif
                 
           </div>
         </div>

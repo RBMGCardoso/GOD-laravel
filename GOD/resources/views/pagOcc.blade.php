@@ -237,99 +237,101 @@
             </div>
           </div>
 
-          <div class="col-auto">
-            <div class="card" id="cardEstado">
-              <div class="card-header">
-                <div class="row">
-                  @if($idOcc->estado == 'Pendente')
-                    <div class="col-auto">Mudar estado</div>
-                  @else
-                    <div class="col-auto">Estado</div>
-                  @endif
-                  <div class="col m-0 d-flex justify-content-end">               
-                    @switch($idOcc->estado)
-                      @case('Aceite')
-                        <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
-                      @break;
-        
-                      @case('Pendente')       
-                        <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
-                      @break;
-        
-                      @case('Recusada')              
-                        <div class="col-auto  align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
-                      @break;
-                    @endswitch  
+          @if(session('LoggedUser')->cargo == 'Diretor' || session('LoggedUser')->cargo == 'Secretaria' || $idOcc->estado != 'Pendente')
+            <div class="col-auto">
+              <div class="card" id="cardEstado">
+                <div class="card-header">
+                  <div class="row">
+                    @if($idOcc->estado == 'Pendente')
+                      <div class="col-auto">Mudar estado</div>
+                    @else
+                      <div class="col-auto">Estado</div>
+                    @endif
+                    <div class="col m-0 d-flex justify-content-end">               
+                      @switch($idOcc->estado)
+                        @case('Aceite')
+                          <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
+                        @break;
+          
+                        @case('Pendente')       
+                          <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
+                        @break;
+          
+                        @case('Recusada')              
+                          <div class="col-auto  align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
+                        @break;
+                      @endswitch  
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="card-body">
-                @if($idOcc->estado == 'Pendente')
-                  <div class="row-auto d-flex">
-                      <div class="col w-50 d-flex justify-content-center rounded-start" id="buttonStatAceitar">Aceitar</div>
-                      <div class="col w-50 d-flex justify-content-center rounded-end"id="buttonStatRecusar">Recusar</div>
+                <div class="card-body">
+                  @if($idOcc->estado == 'Pendente')
+                    <div class="row-auto d-flex">
+                        <div class="col w-50 d-flex justify-content-center rounded-start" id="buttonStatAceitar">Aceitar</div>
+                        <div class="col w-50 d-flex justify-content-center rounded-end"id="buttonStatRecusar">Recusar</div>
+                    </div>
+                    <hr>
+                  @endif
+
+                  <div class="card">
+                    <div class="card-header">
+                      Motivo:
+                    </div>
+
+                    <div class="card-body p-0 ">
+                      @if($idOcc->estado == 'Pendente')
+                        <textarea class="p-2" name="motivo_est" id="motivo_est" cols="30" rows="10" style="border: 0px; resize: none;"></textarea>
+                      @else
+                        <textarea class="p-2" name="motivo_est" id="motivo_est" cols="30" rows="10" disabled style="border: 0px; resize: none;">@if($idOcc->motivo != null){{ $idOcc->motivo }}@endif</textarea>
+                      @endif
+                    </div>
                   </div>
-                  <hr>
-                @endif
 
-                <div class="card">
-                  <div class="card-header">
-                    Motivo:
-                  </div>
-
-                  <div class="card-body p-0 ">
-                    @if($idOcc->estado == 'Pendente')
-                      <textarea class="p-2" name="motivo_est" id="motivo_est" cols="30" rows="10" style="border: 0px; resize: none;"></textarea>
-                    @else
-                      <textarea class="p-2" name="motivo_est" id="motivo_est" cols="30" rows="10" disabled style="border: 0px; resize: none;">@if($idOcc->motivo != null){{ $idOcc->motivo }}@endif</textarea>
+                  <div class="row m-0 justify-content-center">
+                    @if($idOcc->estado == 'Pendente')              
+                      <button class="btn-sub mt-3 w-50" onclick="alterarEstado('{{ $idOcc->id }}')" type="button" id="submitButton">SUBMETER</button>
                     @endif
                   </div>
                 </div>
-
-                <div class="row m-0 justify-content-center">
-                  @if($idOcc->estado == 'Pendente')              
-                    <button class="btn-sub mt-3 w-50" onclick="alterarEstado('{{ $idOcc->id }}')" type="button" id="submitButton">SUBMETER</button>
-                  @endif
-                </div>
               </div>
-            </div>
+            
+              <!-- <div class="card">
+                <div class="card-header ">
+                  <div class="row">
+                    <div class="col-auto">a</div>
+                    <div class="col m-0 d-flex justify-content-end">               
+                      @switch($idOcc->estado)
+                        @case('Aceite')
+                          <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
+                        @break;
           
-            <!-- <div class="card">
-              <div class="card-header ">
-                <div class="row">
-                  <div class="col-auto">a</div>
-                  <div class="col m-0 d-flex justify-content-end">               
-                    @switch($idOcc->estado)
-                      @case('Aceite')
-                        <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
-                      @break;
-        
-                      @case('Pendente')       
-                        <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
-                      @break;
-        
-                      @case('Recusada')              
-                        <div class="col-auto  align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
-                      @break;
-                    @endswitch  
+                        @case('Pendente')       
+                          <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
+                        @break;
+          
+                        @case('Recusada')              
+                          <div class="col-auto  align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
+                        @break;
+                      @endswitch  
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="card-body">
-                <div class="card">
-                  <div class="card-header">
-                    Motivo:
-                  </div>
+                <div class="card-body">
+                  <div class="card">
+                    <div class="card-header">
+                      Motivo:
+                    </div>
 
-                  <div class="card-body p-0">
-                    <textarea disabled name="motivo_est" id="motivo_est" cols="30"style="border: 0px; resize: none;"></textarea>
+                    <div class="card-body p-0">
+                      <textarea disabled name="motivo_est" id="motivo_est" cols="30"style="border: 0px; resize: none;"></textarea>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div> -->
-          </div>
+              </div> -->
+            </div>
+          @endif
         </div>
       </div>
     </div>

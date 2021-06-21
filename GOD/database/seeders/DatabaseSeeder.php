@@ -63,6 +63,15 @@ class DatabaseSeeder extends Seeder
                 }               
             }
         }
+        
+        for ($i=0; $i < 10; $i++) { 
+            DB::table('users')->insert([
+                'name' => Str::random(10),
+                'email' => Str::random(5).'@'.Str::random(5).'.pt',
+                'password' => '$2y$10$0YhGhJlBqyfjamRK7skDy.jDkRlirNXVxuiTYztKkN8VMsFbSntO6',
+                'cargo' => 'Diretor de Turma',
+            ]);
+        }
 
         for ($i=1; $i <= 17; $i++) { 
             DB::table('motivos')->insert([
@@ -70,25 +79,25 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        for ($i=0; $i < 100; $i++) { 
-            DB::table('ocorrencias')->insert([
-                'aluno_id' => random_int(1,1199),
-                'data' => '2021-'.strval(random_int(1,12)).'-18 11:29:00',
-                'descricao' => Str::random(10),
-                'decisao' => Str::random(10),
-                'frequencia' => Str::random(10),
-                'comport_inc' => Str::random(10),
-                'cod_p' => random_int(6,8),
-                'estado' => 'Pendente'
+        // for ($i=0; $i < 20; $i++) { 
+        //     DB::table('ocorrencias')->insert([
+        //         'aluno_id' => random_int(1,1199),
+        //         'data' => '2021-'.strval(random_int(1,12)).'-18 11:29:00',
+        //         'descricao' => Str::random(10),
+        //         'decisao' => Str::random(10),
+        //         'frequencia' => Str::random(10),
+        //         'comport_inc' => Str::random(10),
+        //         'cod_p' => 7,
+        //         'estado' => 'Pendente'
 
-            ]);
+        //     ]);
 
-            for ($t=1; $t < random_int(0, 17); $t++) { 
-                DB::table('motivo_ocorrencia')->insert([
-                    'motivo_id' => random_int(1,17),
-                    'ocorrencia_id' => Ocorrencia::all()->reverse()->pluck('id')->first()
-                ]);
-            }
-        }
+        //     for ($t=1; $t < random_int(0, 17); $t++) { 
+        //         DB::table('motivo_ocorrencia')->insert([
+        //             'motivo_id' => random_int(1,17),
+        //             'ocorrencia_id' => Ocorrencia::all()->reverse()->pluck('id')->first()
+        //         ]);
+        //     }
+        // }
     }
 }
