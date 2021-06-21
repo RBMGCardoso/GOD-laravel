@@ -286,4 +286,9 @@ class MainController extends Controller
     {
         return view('escolaReg');
     }
+
+    public function registerTurmas()
+    {
+        return view('turmaReg');
+    }
 }
