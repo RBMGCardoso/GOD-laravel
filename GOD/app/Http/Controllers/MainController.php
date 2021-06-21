@@ -18,6 +18,7 @@ use App\Models\Ocorrencia;
 use App\Models\Motivo;
 use App\Models\MotivoOcorrencia;
 use App\Models\Notification;
+use App\Models\Encarregado;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -52,8 +53,9 @@ class MainController extends Controller
     }
 
     public function RegisterAluno(Request $req)
-    {
-     
+    {    
+
+
         Aluno::insert([
             'nome' =>  $req->nome,
             'datanasc' =>  $req->datanasc,
@@ -104,25 +106,20 @@ class MainController extends Controller
             }
              
             $usersDirTurma = User::all()->pluck('dirTurma');
-            $alunoDirTurma = AlunoTurma::where('aluno_id', Aluno::where('nome', '=', $req->input('nome'))->first()->id)->pluck('turma_id');
+            $alunoDirTurma = AlunoTurma::where('aluno_id', Aluno::where('nome', '=', $req->input('nome'))->first()->id)->pluck('turma_id')->first();
 
             for ($i=0; $i < count($usersDirTurma); $i++) { 
-                for ($j=0; $j < count($alunoDirTurma); $j++) { 
-                    if($usersDirTurma[$i] == $alunoDirTurma[$j])
-                    {
-                        if(User::where('dirTurma', $alunoDirTurma[$i])->pluck('id')->first() != session('LoggedUser')->id)
-                        {
-                            Notification::insert([
-                                'cod_p' => User::where('dirTurma', $alunoDirTurma[$i])->pluck('id')->first(),
-                                'texto' => 'O(A) aluno(a), '.Aluno::where('nome', '=', $req->input('nome'))->first()->nome.', da sua direção de turma recebeu uma ocorrência no dia '.Carbon::now()->format("d-m-Y"),
-                                'data' => Carbon::now(),
-                                'cod_occ' => Ocorrencia::all()->reverse()->pluck('id')->first()
-                            ]);
-                        }
-                    }
+                if($usersDirTurma[$i] == $alunoDirTurma)
+                {
+
+                    Notification::insert([
+                        'cod_p' => User::where('dirTurma', $alunoDirTurma)->pluck('id')->first(),
+                        'texto' => 'O(A) aluno(a), '.Aluno::where('nome', '=', $req->input('nome'))->first()->nome.', da sua direção de turma recebeu uma ocorrência no dia '.Carbon::now()->format("d-m-Y"),
+                        'data' => Carbon::now(),
+                        'cod_occ' => Ocorrencia::all()->reverse()->pluck('id')->first()
+                    ]);
                 }
             }
-            
             /*
             $details = [
                 'title' => 'Ocorrência criada por '.session('LoggedUser')->name.' a '.date('d/m/Y', strtotime($req->data)).' ás '.date('H', strtotime($req->data)).'h:'.date('i', strtotime($req->data)).'m',
@@ -235,17 +232,18 @@ class MainController extends Controller
 
 
         $turmaAlunoId = AlunoTurma::where('aluno_id', $idOcc->aluno->id)->pluck('turma_id');
+
         $turmaId = Turma::where('id', $turmaAlunoId)->pluck('id')->first();
-        $turmaAno = Turma::all()->pluck('ano');
-        $turmaCod = Turma::all()->pluck('codTurma');
+        $turmaAno = Turma::find($turmaAlunoId)->pluck('ano')->first();
+        $turmaCod = Turma::find($turmaAlunoId)->pluck('codTurma')->first();
 
         for ($i=0; $i < count($turmaAlunoId); $i++) { 
             if($turmaAlunoId[$i] == $turmaId)
             {
-                $turma = $turmaAno[$i].$turmaCod[$i];
+                $turma = $turmaAno.$turmaCod;
             }
         }
-
+        
         return view('pagOcc', compact('idOcc', 'motivosOcc', 'turma'));
 
 

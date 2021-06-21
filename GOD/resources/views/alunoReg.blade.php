@@ -251,7 +251,7 @@
                 <div class="col">
                   <div class="row m-0" style="width: 60vw;">
                     <div class="col-9 p-0">
-                      <input class="input-box form-control" id="nomeEE" placeholder="Nome do Encarregado de Educação">
+                      <input class="input-box form-control" id="nomeEE" name="nomeEE" placeholder="Nome do Encarregado de Educação">
                     </div>   
 
                     <div class="col-3 p-0">
@@ -261,26 +261,26 @@
     
                   <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
                     <div class="col-3 p-0">
-                      <input class="input-box form-control" id="telefEE" type="text" placeholder="Telemóvel/Telefone">
+                      <input class="input-box form-control" id="telefEE" name="telefEE" type="text" placeholder="Telemóvel/Telefone">
                     </div>
 
                     <div class="col-4 p-0">
-                      <input class="input-box form-control" id="emailEE" type="text" placeholder="Email">
+                      <input class="input-box form-control" id="emailEE" name="emailEE" type="text" placeholder="Email">
                     </div>
 
                   </div>
 
                   <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
                     <div class="col-7 p-0">
-                      <input class="input-box form-control" id="moradaEE" type="text" placeholder="Morada">
+                      <input class="input-box form-control" id="moradaEE" name="moradaEE" type="text" placeholder="Morada">
                     </div>
 
                     <div class="col-3 p-0">
-                      <input class="input-box form-control" id="concelhoEE" type="text" placeholder="Concelho">
+                      <input class="input-box form-control" id="concelhoEE" name="concelhoEE" type="text" placeholder="Concelho">
                     </div>
 
                     <div class="col-2 p-0">
-                      <input class="input-box form-control" id="ccEE" type="text" placeholder="Código Postal">
+                      <input class="input-box form-control" id="ccEE" name="ccEE" type="text" placeholder="Código Postal">
                     </div>
                   </div>
 
