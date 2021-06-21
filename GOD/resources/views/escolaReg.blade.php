@@ -175,21 +175,25 @@
               <div class="col">
                 <div class="row m-0" style="width: 60vw;">
                   <div class="col-9 p-0">
-                    <input class="input-box form-control" name="nome" id="fname" autocomplete="off" placeholder="Nome da Escola">
+                    <input class="input-box form-control" name="nome" id="name" autocomplete="off" placeholder="Nome da Escola">
                   </div>
                   
-                  <div class="col-9 p-0">
-                    <input class="input-box form-control" name="representante" id="fname" autocomplete="off" placeholder="Representante">
+                  <div class="col-3 p-0">
+                    <input class="input-box form-control" name="representante" id="representante" autocomplete="off" placeholder="Representante">
                   </div>
                 </div>
   
                 <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
-                  <div class="col-3 p-0">
+                  <div class="col-6 p-0">
                     <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email">
                   </div>
 
                   <div class="col-3 p-0">
                     <input class="input-box form-control" type="text" id="telef" name="telef" placeholder="Telemóvel">
+                  </div>
+
+                  <div class="col-3 p-0">
+                    <input class="input-box form-control" type="text" id="fax" name="fax" placeholder="fax"> <!-- Não deve ser obrigatorio, pq já pouco usam fax-->
                   </div>
                 </div>
 
