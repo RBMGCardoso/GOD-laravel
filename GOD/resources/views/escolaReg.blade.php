@@ -165,7 +165,55 @@
         </div>
 
         <div class="row justify-content-center">
-         
+         <div class="col-auto">
+          <div class="row m-0 justify-content-center p-0 mt-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+            <span class="separador w-auto m-0" style="line-height:30px">Dados sobre a Escola</span>
+          </div>
+
+          <form method="POST" action="">
+            <div class="row-auto identification d-flex mt-3">
+              <div class="col">
+                <div class="row m-0" style="width: 60vw;">
+                  <div class="col-9 p-0">
+                    <input class="input-box form-control" name="nome" id="fname" autocomplete="off" placeholder="Nome da Escola">
+                  </div>
+                  
+                  <div class="col-9 p-0">
+                    <input class="input-box form-control" name="representante" id="fname" autocomplete="off" placeholder="Representante">
+                  </div>
+                </div>
+  
+                <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
+                  <div class="col-3 p-0">
+                    <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email">
+                  </div>
+
+                  <div class="col-3 p-0">
+                    <input class="input-box form-control" type="text" id="telef" name="telef" placeholder="Telemóvel">
+                  </div>
+                </div>
+
+                <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
+                  <div class="col-3 p-0">
+                    <input class="input-box form-control" type="text" id="concelho" name="concelho" placeholder="Concelho">
+                  </div>
+
+                  <div class="col-7 p-0">
+                    <input class="input-box form-control" type="text" id="morada" name="morada" placeholder="Morada">
+                  </div>
+
+                  <div class="col-2 p-0">
+                    <input class="input-box form-control" type="text" id="codpost" name="codpost" placeholder="Código Postal">
+                  </div>
+                </div>
+
+                <div class="row m-0 justify-content-end pt-4">
+                  <button class="btn-sub mt-5 mb-5" onclick="verificarCampos()" type="button">SUBMETER</button>
+                </div>
+              </div>
+            </div>
+          </form>
+         </div>
         </div>
       </div>
     </div>
