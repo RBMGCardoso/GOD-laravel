@@ -11,6 +11,20 @@
 
 #painelOcc:hover
 {
+    color: #333;
+    cursor: pointer;
+    background-color: #aaa;
+}
+
+#notification
+{
+    color: #333;
+    text-decoration: none !important;
+}
+
+#notification:hover
+{
+    color: #333;
     cursor: pointer;
     background-color: #aaa;
 }

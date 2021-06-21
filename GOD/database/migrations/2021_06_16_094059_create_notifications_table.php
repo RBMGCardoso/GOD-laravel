@@ -16,6 +16,7 @@ class CreateNotificationsTable extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->integer('cod_p');
+            $table->integer('cod_occ');
             $table->string('texto');
             $table->dateTime('data');
             $table->timestamps();

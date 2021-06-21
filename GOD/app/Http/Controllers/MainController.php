@@ -86,19 +86,6 @@ class MainController extends Controller
         
         if(Aluno::where('nome', '=', $req->input('nome'))->first() !== null)
         {
-            for ($i=0; $i < count($usersDirTurma); $i++) { 
-                for ($j=0; $j < count($alunoDirTurma); $j++) { 
-                    if($usersDirTurma[$i] == $alunoDirTurma[$j])
-                    {
-                        Notification::insert([
-                            'cod_p' => User::where('dirTurma', $i)->pluck('id')->first(),
-                            'texto' => 'O(A) aluno(a), '.Aluno::where('nome', '=', $req->input('nome'))->first()->nome.', da sua direção de turma recebeu uma ocorrência no dia '.Carbon::now()->format("d-m-Y"),
-                            'data' => Carbon::now()
-                        ]);
-                    }
-                }
-            }
-
             Ocorrencia::insert([
                 'data' =>  $req->data,
                 'descricao' =>  $req->textADesc,
@@ -116,6 +103,20 @@ class MainController extends Controller
                     'motivo_id' => $motivo,
                     'ocorrencia_id' => Ocorrencia::all()->reverse()->first()->id
                 ]);
+            }
+
+            for ($i=0; $i < count($usersDirTurma); $i++) { 
+                for ($j=0; $j < count($alunoDirTurma); $j++) { 
+                    if($usersDirTurma[$i] == $alunoDirTurma[$j])
+                    {
+                        Notification::insert([
+                            'cod_p' => User::where('dirTurma', $i)->pluck('id')->first(),
+                            'texto' => 'O(A) aluno(a), '.Aluno::where('nome', '=', $req->input('nome'))->first()->nome.', da sua direção de turma recebeu uma ocorrência no dia '.Carbon::now()->format("d-m-Y"),
+                            'data' => Carbon::now(),
+                            'cod_occ' => Ocorrencia::all()->reverse()->pluck('id')->first()
+                        ]);
+                    }
+                }
             }
             
             /*
@@ -224,11 +225,15 @@ class MainController extends Controller
 
         $turmaAlunoId = AlunoTurma::where('aluno_id', $idOcc->aluno->id)->pluck('turma_id');
         $turmaId = Turma::where('id', $turmaAlunoId)->pluck('id')->first();
-
         $turmaAno = Turma::all()->pluck('ano');
         $turmaCod = Turma::all()->pluck('codTurma');
 
-        $turma = $turmaAno[$turmaId].$turmaCod[$turmaId];
+        for ($i=0; $i < count($turmaAlunoId); $i++) { 
+            if($turmaAlunoId[$i] == $turmaId)
+            {
+                $turma = $turmaAno[$i].$turmaCod[$i];
+            }
+        }
 
         return view('pagOcc', compact('idOcc', 'motivosOcc', 'turma'));
 
@@ -237,7 +242,33 @@ class MainController extends Controller
 
     public function AlterarEstado(Request $req)
     {
-        return redirect('dashboard');
+        switch ($req->estado) {
+            case '1':
+                    Ocorrencia::where('id', $req->idOcc)->update(['estado' => 'Aceite']);
+                    Ocorrencia::where('id', $req->idOcc)->update(['motivo' => $req->motivo]);
+                    
+                    Notification::insert([
+                        'cod_p' => User::where('id', Ocorrencia::find($req->idOcc)->pluck('cod_p'))->pluck('id')->first(),
+                        'texto' => 'A sua ocorrência de dia '.Ocorrencia::where('id', $req->idOcc)->pluck('data')->first().', foi aceite.',
+                        'data' => Carbon::now(),
+                        'cod_occ' => $req->idOcc
+                    ]);
+                break;
+
+            case '2':
+                    Ocorrencia::where('id', $req->idOcc)->update(['estado' => 'Recusada']);
+                    Ocorrencia::where('id', $req->idOcc)->update(['motivo' => $req->motivo]);
+
+                    Notification::insert([
+                        'cod_p' => User::where('id', Ocorrencia::find($req->idOcc)->pluck('cod_p'))->pluck('id')->first(),
+                        'texto' => 'A sua ocorrência de dia '.Ocorrencia::where('id', $req->idOcc)->pluck('data')->first().', foi recusada.',
+                        'data' => Carbon::now(),
+                        'cod_occ' => $req->idOcc
+                    ]);
+                break;
+        }
+        return route('pagOcc', $req->idOcc);
+        //return back();
     }
 
     public function registerEscolas()

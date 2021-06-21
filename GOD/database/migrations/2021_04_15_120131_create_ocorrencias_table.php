@@ -23,6 +23,7 @@ class CreateOcorrenciasTable extends Migration
             $table->string('comport_inc');
             $table->string('cod_p');
             $table->string('estado');
+            $table->string('motivo')->nullable(); //mostra o motivo para a ocorrencia ter sido aceite ou recusada
 
             $table->foreign('aluno_id')->references('id')->on('alunos');
             $table->timestamps();

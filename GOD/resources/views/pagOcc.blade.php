@@ -241,7 +241,11 @@
             <div class="card" id="cardEstado">
               <div class="card-header">
                 <div class="row">
-                  <div class="col-auto">Mudar estado</div>
+                  @if($idOcc->estado == 'Pendente')
+                    <div class="col-auto">Mudar estado</div>
+                  @else
+                    <div class="col-auto">Estado</div>
+                  @endif
                   <div class="col m-0 d-flex justify-content-end">               
                     @switch($idOcc->estado)
                       @case('Aceite')
@@ -261,11 +265,13 @@
               </div>
 
               <div class="card-body">
-                <div class="row-auto d-flex">
-                  <div class="col w-50 d-flex justify-content-center rounded-start" id="buttonStatAceitar">Aceitar</div>
-                  <div class="col w-50 d-flex justify-content-center rounded-end"id="buttonStatRecusar">Recusar</div>
-                </div>
-                <hr>
+                @if($idOcc->estado == 'Pendente')
+                  <div class="row-auto d-flex">
+                      <div class="col w-50 d-flex justify-content-center rounded-start" id="buttonStatAceitar">Aceitar</div>
+                      <div class="col w-50 d-flex justify-content-center rounded-end"id="buttonStatRecusar">Recusar</div>
+                  </div>
+                  <hr>
+                @endif
 
                 <div class="card">
                   <div class="card-header">
@@ -273,14 +279,18 @@
                   </div>
 
                   <div class="card-body p-0 ">
-                    <textarea class="p-2" name="motivo_est" id="motivo_est" cols="30" rows="10" style="border: 0px; resize: none;"></textarea>
+                    @if($idOcc->estado == 'Pendente')
+                      <textarea class="p-2" name="motivo_est" id="motivo_est" cols="30" rows="10" style="border: 0px; resize: none;"></textarea>
+                    @else
+                      <textarea class="p-2" name="motivo_est" id="motivo_est" cols="30" rows="10" disabled style="border: 0px; resize: none;">@if($idOcc->motivo != null){{ $idOcc->motivo }}@endif</textarea>
+                    @endif
                   </div>
                 </div>
 
                 <div class="row m-0 justify-content-center">
-                  <form method="POST" action="{{ route('alterarEstado') }}" id="myForm">
+                  @if($idOcc->estado == 'Pendente')              
                     <button class="btn-sub mt-3 w-50" onclick="alterarEstado('{{ $idOcc->id }}')" type="button" id="submitButton">SUBMETER</button>
-                  </form>
+                  @endif
                 </div>
               </div>
             </div>
@@ -353,7 +363,15 @@
       function alterarEstado(idOcc) { 
         if(estado != 0 && $('#motivo_est').val() != '')
         {   
-          $('#myForm').submit();
+          $.ajax({
+            type:'POST',
+            url: '{{ route("alterarEstado") }}',
+            data: { idOcc : idOcc, estado : estado, motivo :  $('#motivo_est').val()},
+            success: function(redirect)
+            {
+              window.location.replace(redirect)
+            }
+          });
         }
         else
         {

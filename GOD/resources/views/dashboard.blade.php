@@ -200,10 +200,10 @@
                   </div>  
 
                   @foreach ($arrayNot as $not)
-                    <div class="pt-1 pb-1 ps-3 pe-3 mb-1 alert alert-secondary alert-dismissible d-flex" class="notifications" role="alert">
+                    <a href="{{ route('pagOcc', $not->cod_occ) }}" target="_blank" class="pt-1 pb-1 ps-3 pe-3 mb-1 alert alert-secondary alert-dismissible d-flex" class="notifications" id="notification" role="alert">
                       <div class="col-auto">{{ $not->texto }} <br></div>
                       <div class="col align-items-center justify-content-end d-flex"><button type="button" class="btn-close p-0 d-flex " id="buttonCloseNotif" style="position:relative" data-bs-dismiss="alert" aria-label="Close" onclick="apagarNotification('{{ $not->id }}')"></button></div>               
-                    </div>            
+                    </a>            
                   @endforeach
                 @else
                   <div class="pt-1 pb-1 ps-3 pe-3 mb-1 alert alert-secondary d-flex" role="alert">
