@@ -6,6 +6,11 @@ body
   overflow-x: hidden;
 }
 
+#sidebar
+{
+  z-index: 9999;
+}
+
 #btn
 {
   position: relative;
@@ -105,7 +110,7 @@ body
   display: block;
 }
 
-@media (max-width: 768px)
+@media (max-width: 1160px)
 {
   #content
   {

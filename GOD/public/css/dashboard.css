@@ -3,6 +3,35 @@
     transition: 0.4s;
 }
 
+@media (max-width: 1160px)
+{
+    #dataDashboard
+    {
+        display: none;
+    }
+
+    #alertBemVindo
+    {
+        display: block !important;
+    }
+
+    #ocorrenciasCard
+{
+    min-width: 90.5vw !important;
+}
+
+}
+
+#alertBemVindo
+{
+    min-width: 436px;
+}
+
+#cardNotifs
+{
+    min-width: 436px;
+}
+
 #painelOcc
 {
     color: #333;

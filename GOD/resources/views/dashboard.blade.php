@@ -174,11 +174,11 @@
     </div>
 
     <div class="row full-content" id="content" style="margin-left: 250px; height:100vh">
-        <div class="col ms-2">
+        <div class="col ms-2 me-4">
           <div class="row" style="margin-top: 50px">
-            <div class="alert alert-info d-flex" role="alert">
-              <div class="col-auto">Bem vindo(a), {{ session('LoggedUser')->name }}, está aqui a sua dashboard.</div>
-              <div class="col text-end">Data: {{ date("d-m-Y")}}</div>
+            <div class="alert alert-info d-flex" role="alert" id="alertBemVindo">
+              <div class="col-auto" style="word-wrap: normal;">Bem vindo(a), {{ session('LoggedUser')->name }}, está aqui a sua dashboard.</div>
+              <div class="col text-end" id="dataDashboard">Data: {{ date("d-m-Y")}}</div>
             </div>
           </div>
 
@@ -203,7 +203,7 @@
             </div>
 
           <div class="row">
-            <div class="card p-0">
+            <div class="card p-0 mb-3" id="cardNotifs">
               <h5 class="card-header">Notificações</h5>
 
               <div class="card-body">
@@ -228,10 +228,10 @@
           </div>
         </div>
 
-        <div class="col-auto d-flex align-items-center me-1 ms-2 ps-0">
-          <div class="card text-dark bg-light" style="max-width: 18rem; height: 99vh;">
+        <div class="col-auto d-flex mt-1 mb-1 me-1 ms-2 ps-0">
+          <div class="card text-dark bg-light" id="ocorrenciasCard" style="max-width: 18rem; height: auto;">
             <div class="card-header">Estado das Ocorrências</div>
-            <div class="card-body pt-2">   
+            <div class="card-body pt-2 pb-1 ps-1 pe-1">   
               <div class="col h-100">
                 <div class="row-auto p-0 m-0">
                   <div class="progress" id="progress" style="height: 10px;" title="Sem ocorrências">
@@ -243,11 +243,11 @@
 
                 <hr class="mt-2 mb-2">
 
-                <div class="row-auto p-0 m-0" id="sidebarOccs">
+                <div class="row p-0 m-0 justify-content-center" id="sidebarOccs">
                 </div>
                
-                <a href="{{ route('minhasOcc') }}" class="row p-0 m-0 justify-content-center text-center" id="avisoOccs" style="position: absolute; bottom: 10px;left: 5%; right: 5%;font-size: 10px; word-wrap: break-word;">
-                  <hr class="w-75">
+                <a href="{{ route('minhasOcc') }}" class="row p-0 m-0 mb-1 justify-content-center text-center" id="avisoOccs" style="font-size: 10px; word-wrap: break-word;">
+                  <hr class="w-75 mt-2">
                   Está a ver apenas as suas últimas ocorrências.
                   Clique aqui se deseja ver todas as suas ocorrências.
                 </a>
@@ -307,12 +307,10 @@
           estadoOcc = 0;
         }
 
-        var height = $(window).height();
-
         $.ajax({
           type:'GET',
           url: '{{ route("filtrarOccs") }}',
-          data: { estadoOcc: estadoOcc, tamanho: height },
+          data: { estadoOcc: estadoOcc },
           success: function(occs)
           {
             var vars = JSON.parse(occs);
@@ -337,20 +335,20 @@
 
               switch (vars[i].estado) {
                 case 'Aceite':
-                  var tempRow = '<a href="{{ route("pagOcc",'+idOcc+') }}" title="ID de Ocorrência: '+vars[i].id+'" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc"><div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia '+dia+'-'+mes+'-'+ano+'</div><div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div></a>'; 
+                  var tempRow = '<a href="{{ route("pagOcc",'+idOcc+') }}" title="ID de Ocorrência: '+vars[i].id+'" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc"><div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia '+dia+'-'+mes+'-'+ano+'</div><div class="col w-75 ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div></a>'; 
                   var row = tempRow.replace('+idOcc+', vars[i].id);
                     $("#sidebarOccs").prepend(row);
                   break;
 
                 case 'Pendente':
-                  var tempRow = '<a href="{{ route("pagOcc",'+idOcc+') }}" title="ID de Ocorrência: '+vars[i].id+'" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc"><div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia '+dia+'-'+mes+'-'+ano+'</div><div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div></a>';
+                  var tempRow = '<a href="{{ route("pagOcc",'+idOcc+') }}" title="ID de Ocorrência: '+vars[i].id+'" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc"><div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia '+dia+'-'+mes+'-'+ano+'</div><div class="col w-75 ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div></a>';
                   var row = tempRow.replace('+idOcc+', vars[i].id);
                   
                   $("#sidebarOccs").prepend(row);
                 break;
 
                 case 'Recusada':
-                  var tempRow = '<a href="{{ route("pagOcc",'+idOcc+') }}" title="ID de Ocorrência: '+vars[i].id+'" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc"><div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia '+dia+'-'+mes+'-'+ano+'</div><div class="col-auto ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div></a>';
+                  var tempRow = '<a href="{{ route("pagOcc",'+idOcc+') }}" title="ID de Ocorrência: '+vars[i].id+'" class="row mb-2 ps-2 pe-2 pb-1 pt-1 alert alert-secondary" id="painelOcc"><div class="col-auto ps-0 ms-0 d-flex align-items-center" id="dataOccPainel" style="font-size: 13px">Dia '+dia+'-'+mes+'-'+ano+'</div><div class="col w-75 ms-5 align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div></a>';
                   var row = tempRow.replace('+idOcc+', vars[i].id);
                   $("#sidebarOccs").prepend(row);
                 break;

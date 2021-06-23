@@ -200,20 +200,10 @@ class DashboardController extends Controller
                 }
             }
         }
-
-        if($req->tamanho > 800)
-        {
-            $occAmount = 20;
-        }
-        else
-        {
-            $occAmount = 10;
-        }
-
          
         if(isset($ocorrencias))
         {
-            $ocorrencias = array_slice($ocorrencias, 0, $occAmount);
+            $ocorrencias = array_slice($ocorrencias, 0, 20);
             return json_encode($ocorrencias);
         }
         else
