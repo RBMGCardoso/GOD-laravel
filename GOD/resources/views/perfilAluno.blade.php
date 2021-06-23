@@ -160,32 +160,30 @@
     <div class="row full-content" id="content" style="margin-left: 250px;">
       <div class="col p-0">
         <div class="row title d-flex justify-content-center align-items-center">
-          <h1 class="w-auto">????</h1>
+          <h1 class="w-auto">Informações sobre o Aluno</h1>
         </div>
 
         <div class="row justify-content-center">
           <div class="col-auto">
-            <div class="card mb-2" style="width: 60vw;">
+            <div class="card mb-4" style="width: 60vw;">
               <div class="card-header">
-                Informações sobre o Aluno
+                <div class="row">
+                  <div class="col">
+                    Nome do Aluno:
+                  </div>
+
+                  <div class="col-auto justify-content-end">
+                    Nº. Turma:
+                  </div>
+
+                  <div class="col-auto justify-content-end">
+                    Ano e Turma:
+                  </div>
+                </div>
               </div>
 
               <div class="card-body pt-2 pb-2">
                 <div class="col">
-                  <div class="row">
-                    <div class="col">
-                      Nome:
-                    </div>
-
-                    <div class="col-auto justify-content-end">
-                      Nº. Turma:
-                    </div>
-
-                    <div class="col-auto justify-content-end">
-                      Ano e Turma:
-                    </div>
-                  </div>
-
                   <div class="row">
                     <div class="col">
                       Escola:
@@ -196,6 +194,48 @@
                     </div>
 
                     <div class="col-auto justify-content-end">
+                      Telemovel:
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      Morada:
+                    </div>
+
+                    <div class="col">
+                      Concelho:
+                    </div>
+
+                    <div class="col-auto justify-content-end">
+                      Codigo Postal:
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-4" style="width: 60vw;">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col">
+                    Nome do Encarregado de Educação:
+                  </div>
+
+                  <div class="col-auto justify-content-end">
+                    Parentesco:
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body pt-2 pb-2">
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      Email:
+                    </div>
+
+                    <div class="col">
                       Telemovel:
                     </div>
                   </div>
