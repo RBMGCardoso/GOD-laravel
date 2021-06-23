@@ -102,7 +102,7 @@ class OcorrenciaController extends Controller
     public function perfilAluno(Aluno $idAluno)
     {
         //$descricao = Ocorrencia::find($idOcc)->pluck('aluno_id');
-        dd($idAluno->nome);
+        return view('perfilAluno');
         //return view('dashboard');
     }
 

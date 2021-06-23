@@ -1,51 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Registar Turmas</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Ocorrências</title>
       
       <!-- Bootstrap core CSS -->
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">      
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-    <link href="{{ url('/css/turmaReg.css') }}" rel="stylesheet">
-
+    <link href="{{ url('/css/perfilAluno.css') }}" rel="stylesheet">
     <link href="{{ url('/css/navbar.css') }}" rel="stylesheet">
 
     <script>
-        function closeSidebar()
-          {
-            var sidebar = document.getElementById("sidebar");
-            var button = document.getElementById("menu-btn");
-            var content = document.getElementById("content");
+      function closeSidebar()
+        {
+          var sidebar = document.getElementById("sidebar");
+          var button = document.getElementById("menu-btn");
+          var content = document.getElementById("content");
   
-            if(sidebar.style.marginLeft == "-250px")
-            {        
-              //abrir
-              sidebar.style.marginLeft = "0px";
-              button.style.transform.transitionDuration = "2s";
-              button.style.transform = "translateX(0px)";
-              content.style.marginLeft = "250px";
-              
-            }
-            else
-            {
-              //fechar
-              sidebar.style.marginLeft = "-250px";
-              button.style.transform.transitionDuration = "2s";
-              button.style.transform = "translateX(-250px) rotate(180Deg)";
-              content.style.marginLeft = "0px";
-            }
+          if(sidebar.style.marginLeft == "-250px")
+          {        
+            //abrir
+            sidebar.style.marginLeft = "0px";
+            button.style.transform.transitionDuration = "2s";
+            button.style.transform = "translateX(0px)";
+            content.style.marginLeft = "250px";
+            
           }
-    </script> 
+          else
+          {
+            //fechar
+            sidebar.style.marginLeft = "-250px";
+            button.style.transform.transitionDuration = "2s";
+            button.style.transform = "translateX(-250px) rotate(180Deg)";
+            content.style.marginLeft = "0px";
+          }
+        }
+    </script>
   </head>
 
   <body>
@@ -158,49 +157,119 @@
       <script src="./js/sidebars.js"></script>
     </div>
 
-    <div class="row-auto full-content" id="content">
-      <div class="col">
+    <div class="row full-content" id="content" style="margin-left: 250px;">
+      <div class="col p-0">
         <div class="row title d-flex justify-content-center align-items-center">
-          <h1 class="w-auto">Registar Turma</h1>
+          <h1 class="w-auto">????</h1>
         </div>
 
         <div class="row justify-content-center">
-         <div class="col-auto">
-          <div class="row m-0 justify-content-center p-0 mt-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-            <span class="separador w-auto m-0" style="line-height:30px">Dados da Turma</span>
-          </div>
+          <div class="col-auto">
+            <div class="card mb-2" style="width: 60vw;">
+              <div class="card-header">
+                Informações sobre o Aluno
+              </div>
 
-          <form method="POST" action="">
-            <div class="row-auto identification d-flex mt-3">
-              <div class="col">
-                <div class="row m-0" style="width: 60vw;">
-                  <div class="col-2 p-0">
-                    <input class="input-box form-control" name="ano" id="ano" autocomplete="off" placeholder="Ano">
+              <div class="card-body pt-2 pb-2">
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      Nome:
+                    </div>
+
+                    <div class="col-auto justify-content-end">
+                      Nº. Turma:
+                    </div>
+
+                    <div class="col-auto justify-content-end">
+                      Ano e Turma:
+                    </div>
                   </div>
-                  
-                  <div class="col-2 p-0">
-                    <input class="input-box form-control" name="codTurma" id="codTurma" autocomplete="off" placeholder="Turma">
+
+                  <div class="row">
+                    <div class="col">
+                      Escola:
+                    </div>
+
+                    <div class="col">
+                      Email:
+                    </div>
+
+                    <div class="col-auto justify-content-end">
+                      Telemovel:
+                    </div>
                   </div>
-                  
-                  <div class="col-8 p-0">
-                      <select class="form-control">
-                          <option>Selecione uma Escola</option>
-                      </select>
+
+                  <div class="row">
+                    <div class="col">
+                      Morada:
+                    </div>
+
+                    <div class="col">
+                      Concelho:
+                    </div>
+
+                    <div class="col-auto justify-content-end">
+                      Codigo Postal:
+                    </div>
                   </div>
-                </div>
-  
-                <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
-                <div class="row m-0 justify-content-end pt-4">
-                  <button class="btn-sub mt-5 mb-5" onclick="verificarCampos()" type="button">SUBMETER</button>
                 </div>
               </div>
             </div>
-          </form>
-         </div>
+
+            <div class="card" style="width: 60vw;">
+              <div class="card-header">
+                Lista de Ocorrências
+              </div>
+
+              <div class="card-body pt-2 pb-2">
+                <a href="">
+                  <div class="row mb-2 mt-2 alert alert-secondary" id="occCard">
+                    <div class="col-auto d-flex align-self-center" style="border-radius:5px; border: 1px solid #555;">
+                      <span style="line-height:160%;"><b>ID:</b></span>
+                    </div>
+
+                    <div class="col-auto d-flex align-self-center">
+                      <span style="line-height:160%;"></span>
+                    </div>
+
+                    <div class="col d-flex justify-content-end">
+                      <div class="justify-content-center">
+                        <div class="row justify-content-center">
+                          <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
+                        </div>
+
+                        <div class="row justify-content-center mt-1" style="font-size: 13.6px">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   </body>
 </html>
+
+<!--
+                    <div class="row">
+                      <span>Escola:</span>
+                      <span>Email:</span>
+                      <span>Telemovel:</span>
+                    </div>
+
+                    <div class="row">
+                      <span>Data de Nascimento:</span>
+                      <span>NIF:</span>
+                      <span>N.º CC:</span>
+                    </div>
+
+                    <div class="row">
+                      <span>Morada:</span>
+                      <span>Concelho:</span>
+                      <span>Codigo Postal</span>
+                    </div>
+-->
