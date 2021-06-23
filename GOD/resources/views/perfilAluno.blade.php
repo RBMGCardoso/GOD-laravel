@@ -165,11 +165,11 @@
 
         <div class="row justify-content-center">
           <div class="col-auto">
-            <div class="card mb-2" style="width: 60vw;">
+            <div class="card mb-4" style="width: 60vw;">
               <div class="card-header">
                 <div class="row">
                   <div class="col">
-                    Nome:
+                    Nome do Aluno:
                   </div>
 
                   <div class="col-auto justify-content-end">
@@ -215,15 +215,11 @@
               </div>
             </div>
 
-            <div class="card mb-2" style="width: 60vw;">
+            <div class="card mb-4" style="width: 60vw;">
               <div class="card-header">
                 <div class="row">
                   <div class="col">
-                    Encarregado de Educação
-                  </div>
-
-                  <div class="col-auto justify-content-end">
-                    Nome:
+                    Nome do Encarregado de Educação:
                   </div>
 
                   <div class="col-auto justify-content-end">
