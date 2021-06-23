@@ -170,26 +170,26 @@
             <span class="separador w-auto m-0" style="line-height:30px">Dados sobre a Escola</span>
           </div>
 
-          <form method="POST" action="">
+          <form method="POST" action="{{ route('registerEscolasPost') }}">
             <div class="row-auto identification d-flex mt-3">
               <div class="col">
                 <div class="row m-0" style="width: 60vw;">
                   <div class="col-9 p-0">
-                    <input class="input-box form-control" name="nome" id="name" autocomplete="off" placeholder="Nome da Escola">
+                    <input class="input-box form-control" name="nome" id="name" autocomplete="off" placeholder="Nome da Escola" required>
                   </div>
                   
                   <div class="col-3 p-0">
-                    <input class="input-box form-control" name="representante" id="representante" autocomplete="off" placeholder="Representante">
+                    <input class="input-box form-control" name="representante" id="representante" autocomplete="off" placeholder="Representante" required>
                   </div>
                 </div>
   
                 <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
                   <div class="col-6 p-0">
-                    <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email">
+                    <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email" required>
                   </div>
 
                   <div class="col-3 p-0">
-                    <input class="input-box form-control" type="text" id="telef" name="telef" placeholder="Telemóvel">
+                    <input class="input-box form-control" type="text" id="telef" name="telef" placeholder="Telemóvel" required>
                   </div>
 
                   <div class="col-3 p-0">
@@ -199,20 +199,20 @@
 
                 <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
                   <div class="col-3 p-0">
-                    <input class="input-box form-control" type="text" id="concelho" name="concelho" placeholder="Concelho">
+                    <input class="input-box form-control" type="text" id="concelho" name="concelho" placeholder="Concelho" required>
                   </div>
 
                   <div class="col-7 p-0">
-                    <input class="input-box form-control" type="text" id="morada" name="morada" placeholder="Morada">
+                    <input class="input-box form-control" type="text" id="morada" name="morada" placeholder="Morada" required>
                   </div>
 
                   <div class="col-2 p-0">
-                    <input class="input-box form-control" type="text" id="codpost" name="codpost" placeholder="Código Postal">
+                    <input class="input-box form-control" type="text" id="codpost" name="codpost" placeholder="Código Postal" required>
                   </div>
                 </div>
 
                 <div class="row m-0 justify-content-end pt-4">
-                  <button class="btn-sub mt-5 mb-5" onclick="verificarCampos()" type="button">SUBMETER</button>
+                  <button class="btn-sub mt-5 mb-5" type="submit">SUBMETER</button>
                 </div>
               </div>
             </div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ocorrencia;
 use App\Models\Notification;
+use App\Models\AlunoTurma;
+use App\Models\Aluno;
 
 class DashboardController extends Controller
 {
@@ -83,7 +85,22 @@ class DashboardController extends Controller
         }
 
         $array['quantidade'] = $quantidade;
-        //$array['labels'] = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+        return json_encode($array);
+    }
+
+    public function GraficoOcorrencias2()
+    {
+        $alunosDirTurma = AlunoTurma::where('turma_id', session('LoggedUser')->dirTurma)->pluck('aluno_id');
+        
+        for ($i=0; $i < count($alunosDirTurma); $i++) { 
+            $alunos[] = Aluno::where('id', $alunosDirTurma[$i])->pluck('nome')->first();
+
+            $ocorrencias[$alunos[$i]] = count(Ocorrencia::where('aluno_id', $alunosDirTurma[$i])->pluck('id')->flatten());
+
+
+        }
+
+        $array['ocorrencias'] = $ocorrencias;
         return json_encode($array);
     }
 
@@ -184,10 +201,19 @@ class DashboardController extends Controller
             }
         }
 
+        if($req->tamanho > 800)
+        {
+            $occAmount = 20;
+        }
+        else
+        {
+            $occAmount = 10;
+        }
+
          
         if(isset($ocorrencias))
         {
-            $ocorrencias = array_slice($ocorrencias, 0, 20);
+            $ocorrencias = array_slice($ocorrencias, 0, $occAmount);
             return json_encode($ocorrencias);
         }
         else

@@ -73,73 +73,76 @@
             </div>
           </a>
           <hr style="width:100%;text-align:left;margin-left:0;margin-bottom:0;color:#fff">
-          <ul class="nav-pills navbar-nav d-flex flex-column w-100">
-            <li class="nav-item w-100">
-              <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-home fa-fw"></i> Início</a>
-            </li>
-
-            <li class="nav-item w-100">
-              <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-plus-square fa-fw"></i> Criar Ocorrência</a>
-            </li>
-
-            @if(session('LoggedUser')->cargo == "Diretor de Turma")
+          <div class="largeScreenButtons">
+            <ul class="nav-pills navbar-nav d-flex flex-column w-100">
               <li class="nav-item w-100">
-                <a href="{{ route('minhaTurma') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-users fa-fw"></i> Direção de turma</a>
-              </li>
-            @endif
-
-            
-            <li class="nav-item w-100">
-              <a href="{{ route('minhasOcc') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-book fa-fw"></i> Minhas Ocorrências</a>
-            </li>    
-            
-            @if(session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
-              <li class="nav-item w-100">
-                <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-search fa-fw"></i> Pesquisar</a>
+                <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-home fa-fw"></i> <span>Início</span></a>
               </li>
 
-              <div class="dropdown nav-item w-100 registar-div" onclick="mudarButton()">
-                <a class="dropdown-toggle nav-link rounded-0 text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  <div class="row me-0">
-                    <div class="col">
-                      <i class="fas fa-user-plus fa-fw"></i> 
-                      Registar 
+              <li class="nav-item w-100">
+                <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-plus-square fa-fw"></i> <span>Criar Ocorrência</span></a>
+              </li>
+
+              @if(session('LoggedUser')->cargo == "Diretor de Turma")
+                <li class="nav-item w-100">
+                  <a href="{{ route('minhaTurma') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-users fa-fw"></i> <span>Direção de turma</span></a>
+                </li>
+              @endif
+
+              
+              <li class="nav-item w-100">
+                <a href="{{ route('minhasOcc') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-book fa-fw"></i> <span>Minhas Ocorrências</span></a>
+              </li>    
+              
+              @if(session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
+                <li class="nav-item w-100">
+                  <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-search fa-fw"></i> <span>Pesquisar</span></a>
+                </li>
+
+                <div class="dropdown nav-item w-100 registar-div" onclick="mudarButton()">
+                  <a class="dropdown-toggle nav-link rounded-0 text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="row me-0">
+                      <div class="col">
+                        <i class="fas fa-user-plus fa-fw"></i> 
+                        <span> Registar </span>
+                      </div>
+
+                      <div class="col d-flex pt-1 justify-content-end">
+                        <i class="fas fa-sort-down w-auto text-right fa-fw" id="dropdown-button"></i>                
+                      </div>
                     </div>
+                  </a>
+                  
 
-                    <div class="col d-flex pt-1 justify-content-end">
-                      <i class="fas fa-sort-down w-auto text-right fa-fw" id="dropdown-button"></i>                
-                    </div>
-                  </div>
-                </a>
-                
+                  <ul class="dropdown-menu p-0 m-0 border-0" aria-labelledby="dropdownMenuButton" style="background-color: transparent;">
+                    <li>
+                      <a href="{{ route('registerPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Utilizador</span></a>
+                    </li>
 
-                <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton" style="background-color: transparent;">
-                  <li>
-                    <a href="{{ route('registerPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Utilizador</a>
-                  </li>
+                    <li>
+                      <a href="{{ route('registerAlunoPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Aluno</span></a>
+                    </li>
 
-                  <li>
-                    <a href="{{ route('registerAlunoPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Aluno</a>
-                  </li>
+                    <li>
+                      <a href="{{ route('registerTurmas') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Turma</span></a>
+                    </li>
 
-                  <li>
-                    <a href="{{ route('registerTurmas') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Turma</a>
-                  </li>
-
-                  <li>
-                    <a href="{{ route('registerEscolas') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Escola</a>
-                  </li>
-                </ul>
-              </div>
-            @endif     
-          </ul>
+                    <li>
+                      <a href="{{ route('registerEscolas') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Escola</span></a>
+                    </li>
+                  </ul>
+                </div>
+              @endif     
+            </ul>
+          </div>
 
         <div class="profile">
-          <div class="dropup ms-3">
+          <div class="dropup ms-2">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-              <strong>{{ session('LoggedUser')->name }}</strong>
+              <strong id="userDetails">{{ session('LoggedUser')->name }}</strong>
             </a>
+
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
               <li><a class="dropdown-item">
                     Cargo: {{ session('LoggedUser')->cargo }}     
@@ -179,15 +182,25 @@
             </div>
           </div>
 
-          <div class="row mb-3">
-            <div class="card p-0">
-              <h5 class="card-header">Ocorrências criadas por mês</h5>
+            <div class="row mb-3">        
+              @if(session('LoggedUser')->cargo == 'Diretor' || session('LoggedUser')->cargo == 'Secretaria')
+                <div class="card p-0">
+                  <h5 class="card-header">Ocorrências criadas por mês</h5>
 
-              <div class="card-body justify-content-center d-flex">
-                <canvas id="myChart" style="height: 300px; max-width: 100%;"></canvas>
-              </div>
+                  <div class="card-body justify-content-center d-flex">
+                    <canvas id="myChart" style="height: 300px; max-width: 100%;"></canvas>
+                  </div>
+                </div>
+              @elseif (session('LoggedUser')->cargo == 'Diretor de Turma')
+                <div class="card p-0">
+                  <h5 class="card-header">Ocorrências da sua direção de turma</h5>
+
+                  <div class="card-body justify-content-center d-flex">
+                    <canvas id="myChart2" style="height: 300px; max-width: 100%;"></canvas>
+                  </div>
+                </div>
+              @endif
             </div>
-          </div>
 
           <div class="row">
             <div class="card p-0">
@@ -294,10 +307,12 @@
           estadoOcc = 0;
         }
 
+        var height = $(window).height();
+
         $.ajax({
           type:'GET',
           url: '{{ route("filtrarOccs") }}',
-          data: { estadoOcc: estadoOcc },
+          data: { estadoOcc: estadoOcc, tamanho: height },
           success: function(occs)
           {
             var vars = JSON.parse(occs);
@@ -413,39 +428,82 @@
         });
       }
 
+      if( "{{ Session::get('LoggedUser')['cargo'] }}" == 'Diretor' || "{{ Session::get('LoggedUser')['cargo'] }}" == 'Secretaria')
+      {
+        var myChart = document.getElementById("myChart").getContext("2d");
 
-      var myChart = document.getElementById("myChart").getContext("2d");
+        //Global Options
+        Chart.defaults.font.family = "Arial";
+        Chart.defaults.font.size = 20;
 
-      //Global Options
-      Chart.defaults.font.family = "Arial";
-      Chart.defaults.font.size = 20;
+        var gradient = myChart.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(255,0,0,1)');   
+        gradient.addColorStop(1, 'rgba(250,174,50,0)');
 
-      var gradient = myChart.createLinearGradient(0, 0, 0, 400);
-      gradient.addColorStop(0, 'rgba(255,0,0,1)');   
-      gradient.addColorStop(1, 'rgba(250,174,50,0)');
+        $.ajax({
+            type:'GET',
+            url: '{{ route("grafOcc") }}',
+            success: function(info)
+            {
+              var vars = JSON.parse(info);
 
-      $.ajax({
+              var chartType = new Chart(myChart, {
+                type:'line',
+                data:{
+                  labels:vars.labels,
+                  datasets:[{
+                    label: 'Nº de ocorrências',
+                    data: vars.quantidade,
+                    backgroundColor: gradient,
+                    borderColor: "rgb(200,0,0)",
+                  }],
+                },
+                options:{
+                  tension: 0.4,
+                  bezierCurve: true,
+                  fill: true,
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  scale: {
+                    ticks: {
+                      precision: 0,
+                    }
+                  },
+                  scales:{
+                    y:{
+                      beginAtZero: true,
+                    }
+                  }
+                }
+              });
+            }
+          });
+      }
+
+        var myChart2 = document.getElementById("myChart2").getContext("2d");
+
+        var gradient = myChart2.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(255,0,0,1)');   
+        gradient.addColorStop(1, 'rgba(250,174,50,0)');
+
+
+        $.ajax({
           type:'GET',
-          url: '{{ route("grafOcc") }}',
+          url: '{{ route("grafOcc2") }}',
           success: function(info)
           {
             var vars = JSON.parse(info);
 
-            var chartType = new Chart(myChart, {
-              type:'line',
+            var chartType = new Chart(myChart2, {
+              type:'bar',
               data:{
-                labels:vars.labels,
                 datasets:[{
                   label: 'Nº de ocorrências',
-                  data: vars.quantidade,
+                  data: vars.ocorrencias,
                   backgroundColor: gradient,
-                  borderColor: "rgb(200,0,0)",
                 }],
               },
               options:{
-                tension: 0.4,
-                bezierCurve: true,
-                fill: true,
                 responsive: true,
                 maintainAspectRatio: false,
                 scale: {

@@ -20,7 +20,7 @@ class CreateEscolasTable extends Migration
             $table->string('concelho');
             $table->string('codpost');
             $table->string('telef');
-            $table->string('fax');
+            $table->string('fax')->nullable();
             $table->string('email');
             $table->string('representante');
             $table->timestamps();

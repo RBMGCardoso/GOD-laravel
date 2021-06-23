@@ -32,16 +32,47 @@ class MainController extends Controller
 
     public function RegisterPage()
     {
-        return view('register');
+        $escolas = Escola::all();
+        return view('register', compact('escolas'));
     }
 
     public function RegisterUtilizador(Request $req)
     {
+        if($req->cargoUser == "Diretor de Turma")
+        {
+
+            $turmas = Turma::all()->where('escola_id', $req->selectEscola)->flatten();
+            $dirTurmas = User::where('dirTurma', '!=', 'null')->pluck('dirTurma');
+
+            for ($i=0; $i < count($turmas); $i++) {          
+                try {           
+                    if($turmas[$i]->ano.$turmas[$i]->codTurma == $req->selectTurma)
+                    {
+                        $idTurma = $turmas[$i]->id;
+                    }
+                } catch (\Throwable $th) {
+                    $th;
+                }
+            }  
+        }     
+        else
+        {
+            $idTurma = null;
+        } 
+
+        for ($i=0; $i < count($dirTurmas); $i++) { 
+            if($dirTurmas[$i] == $idTurma)
+            {
+                return back()->with('JSAlert', 'Já existe um professor que é diretor desta turma. Se acha que isto é um erro contacte a administração do site.');
+            }
+        }
+
         User::insert([
             'name' => $req->nome,
             'email' => $req->email,
             'password' => Hash::make($req->password),
-            'cargo' => $req->cargoUser
+            'cargo' => $req->cargoUser,
+            'dirTurma' => $idTurma
         ]);
     }
 
@@ -54,43 +85,51 @@ class MainController extends Controller
 
     public function RegisterAluno(Request $req)
     {    
-        return json_encode($req->form->parentesco);
-        dd();
+        parse_str($_POST['form'], $infoform);
+
         if(!$req->info)
         {
             Encarregado::insert([
-                'nome' => $req->nomeEE,
-                'parentesco' => $req->parentesco,
-                'telef' => $req->telefEE,
-                'email' => $req->emailEE,
-                'morada' => $req->moradaEE,
-                'concelho' => $req->concelhoEE,
-                'codPost' => $req->codPostEE,
+                'nome' => $infoform['nomeEE'],
+                'parentesco' => $infoform['parentesco'],
+                'telemovel' => $infoform['telefEE'],
+                'email' => $infoform['emailEE'],
+                'morada' => $infoform['moradaEE'],
+                'concelho' => $infoform['concelhoEE'],
+                'codPost' => $infoform['codPostEE'],
+            ]);
+
+            Aluno::insert([
+                'nome' => $infoform['nome'],
+                'datanasc' =>  $infoform['datanasc'],
+                'email' =>  $infoform['email'],
+                'nif' =>  $infoform['nif'],
+                'telef' =>  $infoform['telef'],
+                'morada' => $infoform['morada'],
+                'concelho' =>  $infoform['concelho'],
+                'codpost' =>  $infoform['codpost'],
+                'cc' =>  $infoform['cc'],     
+                'eeId' => Encarregado::all()->reverse()->pluck('id')->first(),      
             ]);
         }
-
-        Aluno::insert([
-            'nome' =>  $req->nome,
-            'datanasc' =>  $req->datanasc,
-            'email' =>  $req->email,
-            'nif' =>  $req->nif,
-            'telef' =>  $req->telef,
-            'morada' =>  $req->morada,
-            'concelho' =>  $req->concelho,
-            'codpost' =>  $req->codpost,
-            'cc' =>  $req->cc
-        ]);
-
-        if(!$req->info)
+        else
         {
-            Aluno::all()->reverse()->first()->insert([
-                'eeId' => Encarregado::all()->reverse()->pluck('id')->first(),
+            Aluno::insert([
+                'nome' => $infoform['nome'],
+                'datanasc' =>  $infoform['datanasc'],
+                'email' =>  $infoform['email'],
+                'nif' =>  $infoform['nif'],
+                'telef' =>  $infoform['telef'],
+                'morada' => $infoform['morada'],
+                'concelho' =>  $infoform['concelho'],
+                'codpost' =>  $infoform['codpost'],
+                'cc' =>  $infoform['cc'],           
             ]);
         }
 
         AlunoTurma::insert([
             'aluno_id' => Aluno::all()->reverse()->first()->id,
-            'turma_id' => $req->escola
+            'turma_id' => $infoform['escola']
         ]);
     }
 
@@ -131,7 +170,6 @@ class MainController extends Controller
             for ($i=0; $i < count($usersDirTurma); $i++) { 
                 if($usersDirTurma[$i] == $alunoDirTurma)
                 {
-
                     Notification::insert([
                         'cod_p' => User::where('dirTurma', $alunoDirTurma)->pluck('id')->first(),
                         'texto' => 'O(A) aluno(a), '.Aluno::where('nome', '=', $req->input('nome'))->first()->nome.', da sua direção de turma recebeu uma ocorrência no dia '.Carbon::now()->format("d-m-Y"),
@@ -305,9 +343,49 @@ class MainController extends Controller
         return view('escolaReg');
     }
 
+    public function registerEscolasPost(Request $req)
+    {
+        Escola::insert([
+            'nome' => $req->nome,
+            'representante' => $req->representante,
+            'email' => $req->email,
+            'telef' => $req->telef,
+            'fax' => $req->fax,
+            'concelho' => $req->concelho,
+            'morada' => $req->morada,
+            'codPost' => $req->codpost
+        ]);
+
+        return redirect('dashboard');
+    }
+
     
     public function registerTurmas()
     {
-        return view('turmaReg');
+        $escolas = Escola::all();
+        return view('turmaReg', compact('escolas'));
+    }
+
+    public function registerTurmasPost(Request $req)
+    {
+        if(mb_substr($req->ano, -1) == 'º')
+        {
+            $ano = $req->ano;
+        }
+        else
+        {
+            $ano = $req->ano.'º';
+        }
+
+        if($req->escola != 'null')
+        {
+            Turma::insert([
+            'ano' => $ano,
+            'codTurma' => $req->codTurma,
+            'escola_id' => $req->escola
+            ]);
+        }
+
+        return redirect('dashboard');
     }
 }

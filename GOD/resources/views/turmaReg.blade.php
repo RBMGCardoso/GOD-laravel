@@ -170,21 +170,25 @@
             <span class="separador w-auto m-0" style="line-height:30px">Dados da Turma</span>
           </div>
 
-          <form method="POST" action="">
+          <form id="myform" method="POST" action="{{ route('registerTurmasPost') }}">
             <div class="row-auto identification d-flex mt-3">
               <div class="col">
                 <div class="row m-0" style="width: 60vw;">
                   <div class="col-2 p-0">
-                    <input class="input-box form-control" name="ano" id="ano" autocomplete="off" placeholder="Ano">
+                    <input class="input-box form-control" name="ano" id="ano" autocomplete="off" placeholder="Ano" required>
                   </div>
                   
                   <div class="col-2 p-0">
-                    <input class="input-box form-control" name="codTurma" id="codTurma" autocomplete="off" placeholder="Turma">
+                    <input class="input-box form-control" name="codTurma" id="codTurma" autocomplete="off" placeholder="Código de Turma" required>
                   </div>
                   
                   <div class="col-8 p-0">
-                      <select class="form-control">
+                      <select id="escola" name="escola" required>
                           <option>Selecione uma Escola</option>
+                          
+                          @foreach ($escolas as $escola)
+                            <option value="{{ $escola->id }}">{{ $escola->nome }}</option>
+                          @endforeach
                       </select>
                   </div>
                 </div>
@@ -202,5 +206,18 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <script>
+    function verificarCampos() {
+      if($('#escola').val() != 'Selecione uma Escola' && $('#ano').val() != '' && $('#codTurma').val() != '')
+      {
+        $('#myform').submit();
+      }
+      else
+      {
+        alert('Por favor, preencha todos os campos corretamente');
+      }
+    }
+    </script>
   </body>
 </html>
