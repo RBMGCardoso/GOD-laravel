@@ -34,6 +34,8 @@ Route::middleware([CheckSession::class])->group(function(){
 
     Route::get('/dashboard', [DashboardController::Class, 'DashboardPage'])->name('dashboardPage'); //View da dashboard
     Route::get('/dashboardGraficoOcorrencias', [DashboardController::Class, 'GraficoOcorrencias'])->name('grafOcc'); //AJAX para buscar quantidade de occs
+    Route::get('/dashboardGraficoOcorrencias2', [DashboardController::Class, 'GraficoOcorrencias2'])->name('grafOcc2');
+    
     Route::post('/dashboardEliminarNotification', [DashboardController::Class, 'EliminarNotification'])->name('eliminarNotif'); //AJAX para eliminar notificações
     Route::get('/dashboardFiltrarOcorrencias', [DashboardController::Class, 'FiltrarOccs'])->name('filtrarOccs'); //AJAX para filtrar ocorrencias
     
@@ -42,11 +44,13 @@ Route::middleware([CheckSession::class])->group(function(){
             Route::post('registarPost', [MainController::Class, 'RegisterUtilizador'])->name('register.utilizador'); //Post para enviar utilizador para a DB
         
             Route::get('/registar-aluno', [MainController::Class, 'RegisterAlunoPage'])->name('registerAlunoPage'); //View registar aluno
-            Route::post('/registarAlunoPost', [MainController::Class, 'RegisterAluno'])->name('register.aluno'); //Post para enviar aluno para a DB      
+            Route::post('/registar-AlunoPost', [MainController::Class, 'RegisterAluno'])->name('register.aluno'); //Post para enviar aluno para a DB      
         
-            Route::get('registar-escola', [MainController::Class, 'registerEscolas'])->name('registerEscolas');
+            Route::get('registar-escola', [MainController::Class, 'registerEscolas'])->name('registerEscolas'); //View registar escola
+            Route::post('registar-escolaPost', [MainController::Class, 'registerEscolasPost'])->name('registerEscolasPost'); //Post registar escola
             
             Route::get('registar-turma', [MainController::Class, 'registerTurmas'])->name('registerTurmas');
+            Route::post('registar-turmaPost', [MainController::Class, 'registerTurmasPost'])->name('registerTurmasPost');
 
             Route::get('ocorrencias', [OcorrenciaController::Class, 'index'])->name('mostrarOcorrencias'); //View da página de pesquisa
 

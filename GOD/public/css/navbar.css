@@ -99,3 +99,79 @@ body
 .registar-div > .dropdown-toggle::after {
   display: none !important;
 }
+
+.largeScreenButtons
+{
+  display: block;
+}
+
+@media (max-width: 768px)
+{
+  #content
+  {
+    margin-left: 45px !important;
+  }
+
+  .largeScreenButtons span
+  {
+    display: none !important;
+  }
+
+  #menu-btn
+  {
+    display: none;
+  }
+
+  .navbar
+  {
+    width: 45px;
+    margin-left: 0px !important;
+  }
+
+  .nav-link
+  {
+    width: 45px;
+    margin-left: 0px !important;
+  }
+
+  #dropdown-button
+  {
+    display: none;
+  }
+
+  .navbar-brand
+  {
+    display: none;
+  }
+
+  .nav-item
+  {
+    border-bottom: 0;
+  }
+
+  #userDetails
+  {
+    display:none;
+  }
+
+  .profile
+  {
+    width: 45px ;
+    display: flex;
+    justify-content: center;
+  }
+
+  .dropup
+  {
+    margin-left: 0px !important;
+  }
+
+  .dropup img
+  {
+    margin:0px !important;
+  }
+
+  .dropdown-toggle::after {
+    display:none !important;
+}
+}

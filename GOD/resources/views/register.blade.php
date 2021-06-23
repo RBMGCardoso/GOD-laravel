@@ -48,6 +48,12 @@
   </head>
 
   <body>
+    @if(session()->has('JSAlert'))
+      <script>
+          alert("{{ session()->get('JSAlert') }}");
+      </script>
+    @endif
+
     <div class="navbar-div">
       <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
           <a href="{{ route('dashboardPage') }}" class="navbar-brand text-light">
@@ -165,7 +171,7 @@
 
         <div class="row justify-content-center">
           <div class="col-auto">
-            <form method="POST" action="{{ route('register.utilizador') }}">
+            <form method="POST" action="{{ route('register.utilizador') }}" id="myForm">
               <div class="row-auto identification d-flex mt-3">
                 <div class="col justify-content-center">
                   <div class="row m-0 pt-4" style="width: 45vw;">
@@ -192,6 +198,13 @@
                     </div>
                   </div>
 
+                  
+                  <div class="row m-0 pt-4" style="width: 45vw;">
+                    <div class="col-12 p-0">
+                      <input class="input-box form-control" type="password" id="passConfirm" placeholder="Confirme a sua password" required>
+                    </div>
+                  </div>
+
                   <div class="row m-0 justify-content-center p-0 mt-3" style="width: 45vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
                     <span class="separador w-auto m-0" style="line-height:30px">Cargo do Utilizador</span>
                   </div>
@@ -199,27 +212,54 @@
                   <div class="row m-0 pt-4 text-center" style="width: 45vw;">
                     <div class="col p-0">
                       <label for="Opc1">Diretor</label>
-                      <input type="radio" value="Diretor" id="Opc1" name="cargoUser" required>
+                      <input type="radio" value="Diretor" id="Opc1" name="cargoUser" class="cargoUser" required>
                     </div>
                     
                     <div class="col p-0">
                       <label for="Opc2">Diretor de turma</label>
-                      <input type="radio" value="Diretor de Turma" id="Opc2" name="cargoUser" required>
+                      <input type="radio" value="Diretor de Turma" id="Opc2" name="cargoUser" class="cargoUser" required>
                     </div>
 
                     <div class="col p-0">
                       <label for="Opc3">Professor</label>
-                      <input type="radio" value="Professor" id="Opc3" name="cargoUser" required>
+                      <input type="radio" value="Professor" id="Opc3" name="cargoUser" class="cargoUser" required>
                     </div>
 
                     <div class="col p-0">
                       <label for="Opc4">Secretaria</label>
-                      <input type="radio" value="Secretaria" id="Opc4" name="cargoUser" required>
+                      <input type="radio" value="Secretaria" id="Opc4" name="cargoUser" class="cargoUser" required>
+                    </div>
+                  </div>
+
+                  <div id="cardDirTurma" hidden>
+                    <div class="card mt-3">
+                      <div class="card-header">
+                        Direção de Turma
+                      </div>
+
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col">
+                            <select class="form-select" aria-label="Default select example" name="selectEscola" id="selectEscola">
+                              <option value="null" selected>Selecione uma escola</option>
+                              @foreach($escolas as $escola)
+                              <option value="{{ $escola->id }}">{{ $escola->nome }}</option>
+                              @endforeach
+                            </select>
+                          </div>
+
+                          <div class="col">
+                            <select class="form-select" name="selectTurma" id="selectTurma" aria-required="true">
+                              <option value="">Selecione uma escola</option>
+                            </select>
+                          </div>
+                        </div>  
+                      </div>
                     </div>
                   </div>
 
                   <div class="row m-0 justify-content-end pt-4">
-                    <button class="btn-sub mt-5 mb-5" value="submit">SUBMETER</button>
+                    <button class="btn-sub mt-5 mb-5" type="button" onclick="verificarEscolhaTurma()">SUBMETER</button>
                   </div>
                 </div>  
               </div>
@@ -228,5 +268,89 @@
         </div>
       </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <script>
+    function verificarEscolhaTurma(params) {
+      if((($('input[name="cargoUser"]:checked', '#myForm').val() == 'Diretor de Turma' && $('#selectTurma').val() != '') || $('input[name="cargoUser"]:checked', '#myForm').val() != 'Diretor de Turma') && document.getElementById('myForm').checkValidity())
+      {
+        if($('#passConfirm').val() == $('#pass').val())
+        {
+          $('#myForm').submit();
+        }
+        else
+        {
+          alert('As passwords não coincidem.');
+        }
+      }
+      else
+      {
+        alert('Por favor, preencha todos os campos corretamente');
+      }
+    }
+
+    $(document).ready(function(){
+      $('.cargoUser').click(function(){
+        dirTurma();
+      });
+
+      $("#selectEscola").change(atualizarTurmas);
+
+    })
+
+    function dirTurma() {
+      if($('input[name="cargoUser"]:checked', '#myForm').val() == 'Diretor de Turma')
+      {
+        $('#cardDirTurma').removeAttr('hidden');
+      }
+      else
+      {
+        $('#cardDirTurma').attr('hidden','hidden');
+      }
+    }
+
+    function atualizarTurmas()
+      {
+        if($('#selectEscola option:selected').html() != "Selecione uma escola")
+        {
+          $("#selectTurma").removeAttr("disabled");
+
+          $.ajax({
+            type:'GET',
+            url: '{{ route("atualizarTurmas") }}',
+            success: function(occ)
+            {
+              var vars = JSON.parse(occ);
+
+              $('#selectTurma').html("");
+
+
+              $.each(vars.escolaId, function(index, value)
+              {
+                if($('#selectEscola option:selected').html() == vars.nomeEscolaSemOcc[index])
+                {
+                  $.each(vars.turmaId, function(i, v){
+                    if(vars.turmaId[i] == $('#selectEscola option:selected').val())
+                    {
+                      console.log();
+                      $('#selectTurma').append("<option value='"+vars.turmaEscolaAno[i]+vars.turmaEscolaCod[i]+"'>"+vars.turmaEscolaAno[i]+vars.turmaEscolaCod[i]+"</option>");
+                    }
+                  })
+                }
+              })
+
+            }
+          });
+        }
+        else
+        {
+          $('#selectTurma').html("");
+          $('#selectTurma').append("<option value=''>Selecione uma escola</option>");
+          
+          $("#selectTurma").attr("disabled", "disabled");
+        }
+      }
+    </script>
   </body>
 </html>
