@@ -3,6 +3,36 @@
     transition: 0.4s;
 }
 
+#ocorrenciasCard
+{
+    max-width: 18rem;
+}
+
+#colOcc
+{
+    width: auto !important;
+}
+
+.headerCard
+{
+    border: 0 !important;
+    background-color: #222;
+    color: #ddd;
+    width: auto !important;
+    border-top-left-radius: 7px !important;
+    border-top-right-radius: 7px !important;
+}
+
+.card
+{
+    border: 0 !important;
+}
+
+.card-body
+{
+    background-color: #eee !important;
+}
+
 @media (max-width: 1160px)
 {
     #dataDashboard
@@ -15,10 +45,16 @@
         display: block !important;
     }
 
+    #colOcc
+    {
+        width: unset !important;
+
+    }
+
     #ocorrenciasCard
-{
-    min-width: 90.5vw !important;
-}
+    {
+        max-width: unset !important;
+    }
 
 }
 

@@ -77,73 +77,76 @@
             </div>
           </a>
           <hr style="width:100%;text-align:left;margin-left:0;margin-bottom:0;color:#fff">
-          <ul class="nav-pills navbar-nav d-flex flex-column w-100">
-            <li class="nav-item w-100">
-              <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-home fa-fw"></i> Início</a>
-            </li>
-
-            <li class="nav-item w-100">
-              <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-plus-square fa-fw"></i> Criar Ocorrência</a>
-            </li>
-
-            @if(session('LoggedUser')->cargo == "Diretor de Turma")
+          <div class="largeScreenButtons">
+            <ul class="nav-pills navbar-nav d-flex flex-column w-100">
               <li class="nav-item w-100">
-                <a href="{{ route('minhaTurma') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-users fa-fw"></i> Direção de turma</a>
-              </li>
-            @endif
-
-            
-            <li class="nav-item w-100">
-              <a href="{{ route('minhasOcc') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-book fa-fw"></i> Minhas Ocorrências</a>
-            </li>    
-            
-            @if(session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
-              <li class="nav-item w-100">
-                <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-search fa-fw"></i> Pesquisar</a>
+                <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-home fa-fw"></i> <span>Início</span></a>
               </li>
 
-              <div class="dropdown nav-item w-100 registar-div" onclick="mudarButton()">
-                <a class="dropdown-toggle nav-link rounded-0 text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  <div class="row me-0">
-                    <div class="col">
-                      <i class="fas fa-user-plus fa-fw"></i> 
-                      Registar 
+              <li class="nav-item w-100">
+                <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-plus-square fa-fw"></i> <span>Criar Ocorrência</span></a>
+              </li>
+
+              @if(session('LoggedUser')->cargo == "Diretor de Turma")
+                <li class="nav-item w-100">
+                  <a href="{{ route('minhaTurma') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-users fa-fw"></i> <span>Direção de turma</span></a>
+                </li>
+              @endif
+
+              
+              <li class="nav-item w-100">
+                <a href="{{ route('minhasOcc') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-book fa-fw"></i> <span>Minhas Ocorrências</span></a>
+              </li>    
+              
+              @if(session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
+                <li class="nav-item w-100">
+                  <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-search fa-fw"></i> <span>Pesquisar</span></a>
+                </li>
+
+                <div class="dropdown nav-item w-100 registar-div" onclick="mudarButton()">
+                  <a class="dropdown-toggle nav-link rounded-0 text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="row me-0">
+                      <div class="col">
+                        <i class="fas fa-user-plus fa-fw"></i> 
+                        <span> Registar </span>
+                      </div>
+
+                      <div class="col d-flex pt-1 justify-content-end">
+                        <i class="fas fa-sort-down w-auto text-right fa-fw" id="dropdown-button"></i>                
+                      </div>
                     </div>
+                  </a>
+                  
 
-                    <div class="col d-flex pt-1 justify-content-end">
-                      <i class="fas fa-sort-down w-auto text-right fa-fw" id="dropdown-button"></i>                
-                    </div>
-                  </div>
-                </a>
-                
+                  <ul class="dropdown-menu p-0 m-0 border-0" aria-labelledby="dropdownMenuButton" style="background-color: transparent;">
+                    <li>
+                      <a href="{{ route('registerPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Utilizador</span></a>
+                    </li>
 
-                <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton" style="background-color: transparent;">
-                  <li>
-                    <a href="{{ route('registerPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Utilizador</a>
-                  </li>
+                    <li>
+                      <a href="{{ route('registerAlunoPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Aluno</span></a>
+                    </li>
 
-                  <li>
-                    <a href="{{ route('registerAlunoPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Aluno</a>
-                  </li>
+                    <li>
+                      <a href="{{ route('registerTurmas') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Turma</span></a>
+                    </li>
 
-                  <li>
-                    <a href="{{ route('registerTurmas') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Turma</a>
-                  </li>
-
-                  <li>
-                    <a href="{{ route('registerEscolas') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Escola</a>
-                  </li>
-                </ul>
-              </div>
-            @endif     
-          </ul>
+                    <li>
+                      <a href="{{ route('registerEscolas') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Escola</span></a>
+                    </li>
+                  </ul>
+                </div>
+              @endif     
+            </ul>
+          </div>
 
         <div class="profile">
-          <div class="dropup ms-3">
+          <div class="dropup ms-2">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-              <strong>{{ session('LoggedUser')->name }}</strong>
+              <strong id="userDetails">{{ session('LoggedUser')->name }}</strong>
             </a>
+
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
               <li><a class="dropdown-item">
                     Cargo: {{ session('LoggedUser')->cargo }}     
@@ -174,263 +177,273 @@
       <script src="./js/sidebars.js"></script>
     </div>
 
-      <div class="row-auto full-content" id="content" style="margin-left: 250px;">
-        <div class="col">
-          <div class="row title d-flex justify-content-center align-items-center">
-            <h1 class="w-auto">Registo de Ocorrência / Participação Disciplinar</h1>
-          </div>
+    <div class="row-auto full-content" id="content" style="margin-left: 250px;">
+      <div class="col">
+        <div class="row title d-flex justify-content-center align-items-center">
+          <h1 class="w-auto text-center">Registo de Ocorrência / Participação Disciplinar</h1>
+        </div>
 
-          <div class="row justify-content-center">
-            <div class="col-auto">
-              <div class="row m-0 justify-content-center p-0 mt-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                <span class="separador w-auto m-0" style="line-height:30px">Dados do Aluno</span>
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <div class="row m-0 justify-content-center p-0 mt-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+              <span class="separador w-auto m-0" style="line-height:30px">Dados do Aluno</span>
+            </div>
+
+            <form method="POST" action="{{ route('ocorrencia.criar') }}" id="myForm">
+              <div class="row-auto identification d-flex mt-3">
+                <div class="col">
+                  <div class="row m-0" style="width: 60vw;">              
+                    <div class="col-3 p-0">
+                      <select class="form-select" aria-label="Default select example" name="selectEscola" id="selectEscola">
+                        <option value="null" selected>- Escola -</option>
+                        @foreach($escolas as $escola)
+                          <option value="{{ $escola->id }}">{{ $escola->nome }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+
+                    <div class="col-2 p-0">
+                      <select class="form-select" aria-label="Default select example" id="selectTurma" disabled>
+                        <option selected>Selecione uma escola</option>
+                      </select>
+                    </div>
+
+                    <div class="col-7 p-0">
+                      <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Aluno" disabled>
+    
+                      <datalist id="nomes" style="width:100% !important">   
+                      </datalist>
+                    </div> 
+                  </div>
+
+                  <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
+                    <div class="col-4 p-0">
+                      <input class="input-box form-control" type="text" id="disciplina" name="disciplina" placeholder="Disciplina">
+                    </div>
+
+                    <div class="col-4 p-0">
+                      <!-- ESPAÇO BRANCO -->
+                    </div>
+
+                    <div class="col-4 p-0">
+                      <input class="input-box form-control" type="datetime-local" name="data" id="data" placeholder="Data da Ocorrência">
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <form method="POST" action="{{ route('ocorrencia.criar') }}" id="myForm">
-                <div class="row-auto identification d-flex mt-3">
-                  <div class="col">
-                    <div class="row m-0" style="width: 60vw;">
-                      <div class="col-9 p-0">
-                        <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Aluno">
-      
-                        <datalist id="nomes" style="width:100% !important">   
-                          @foreach($alunos as $aluno)
-                            <option value="{{ $aluno->nome }}">
-                          @endforeach
-                        </datalist>
-                      </div>   
-                      
-                      <div class="col-1 p-0">
-                        <input class="input-box form-control" type="text" id="num" name="numero" placeholder="Nº. Aluno">
-                      </div>
-                      <div class="col-2 p-0">
-                        <input class="input-box form-control" type="text" id="anoturma" name="anoturma" placeholder="Ano e Turma">
-                      </div>
+              <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                <span class="separador w-auto m-0" style="line-height:30px">Motivos</span>
+              </div>
+
+              <div class="row m-0 mt-3 checkbox-group" style="width: 60vw;">
+                <table>
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="1" id="Opc1" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc1">Desobedeceu a uma ordem</label>
+                    </td>
+                  </tr>
+    
+                  <tr>
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="2" id="Opc2" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc2">Recusou participar nas atividades da aula</label>
+                    </td>
+                  </tr>
+    
+                  <tr>             
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="3" id="Opc3" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc3">Fez gestos impróprios ao professor</label>
+                    </td>
+                  </tr>
+    
+                  <tr>        
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="4" id="Opc4" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc4">Fez comentários inadequados e desrespeitadores</label>
+                    </td>
+                  </tr>
+    
+                  <tr>      
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="5" id="Opc5" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc5">Perturbou a realização dos trabalhos dos seus colegas</label>
+                    </td>
+                  </tr>
+    
+                  <tr>     
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="6" id="Opc6" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc6">Continuou a conversar com colegas, mesmo depois da chamada de atenção do professor</label>
+                    </td>
+                  </tr>
+    
+                  <tr>              
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="7" id="Opc7" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc7">Pôs em causa a autoridade do professor</label>
+                    </td>
+                  </tr>
+                  
+                  <tr>              
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="8" id="Opc8" class="checkmark" onchange="checkedBoxes()">  
+                      <label for="Opc8">Falou muito alto, emitiu sons e/ou provocou ruídos</label>
+                    </td>
+                  </tr>
+    
+                  <tr>              
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="9" id="Opc9" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc9">Ausentou-se do seu lugar sem autorização</label>
+                    </td>
+                  </tr>
+    
+                  <tr>              
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="10" id="Opc10" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc10">Interrompeu, de forma persistente e inadequada, a comunicação professor/alunos</label>
+                    </td>
+                  </tr>
+    
+                  <tr>             
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="11" id="Opc11" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc11">Fez gestos impróprios a colegas</label>
+                    </td>
+                  </tr>
+    
+                  <tr>            
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="12" id="Opc12" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc12">Agrediu fisicamente um colega</label>
+                    </td>
+                  </tr>
+    
+                  <tr>              
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="13" id="Opc13" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc13">Insultou colega(s)</label>
+                    </td>
+                  </tr>
+    
+                  <tr>              
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="14" id="Opc14" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc14">Tirou objeto(s) a colega(s) sem a sua autorização</label>
+                    </td>
+                  </tr>
+    
+                  <tr>             
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="15" id="Opc15" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc15">Usou, indevidamente, telemóvel ou outro aparelho eletrónico</label>
+                    </td>
+                  </tr>
+    
+                  <tr>             
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="16" id="Opc16" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc16">Danificou materiais e/ou espaços escolares</label>
+                    </td>
+                  </tr>
+    
+                  <tr>             
+                    <td>
+                      <input type="checkbox" name="motivos[]" value="17" id="Opc17" class="checkmark" onchange="checkedBoxes()">
+                      <label for="Opc17">Outros</label>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                <span class="separador w-auto m-0" style="line-height:30px">Descrição de Ocorrência</span>
+              </div>
+
+              <div class="row m-0 mt-3" style="width: 60vw;">
+                <textarea maxlength="500" oninput="CharsCounterDesc()" name="textADesc" id="textADesc" style="font-size: 20px; width:100%" placeholder="Descrição de Ocorrência..."></textarea>
+                <span id="charsRemainDesc" style="color:red; font-size: 14px; float: right">Caracteres restantes: 500</span>
+              </div>
+              
+              <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                <span class="separador w-auto m-0" style="line-height:30px">Decisão Tomada</span>
+              </div>
+
+              <div class="row m-0 mt-3" style="width: 60vw;">
+                <label></label>
+                <textarea maxlength="350" oninput="CharsCounterDec()" name="textADec" id="textADec" style="font-size: 20px; width:100%" placeholder="Em consequência disso, tomei a seguinte decisão..."></textarea>
+                <span id="charsRemainDec" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
+              </div>
+
+              <div class="row m-0 justify-content-center p-0 mt-4 mb-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
+                <span class="w-auto m-0 separador" style="line-height:30px">Regularidade dos comportamentos</span>
+              </div>
+
+              <div class="row m-0" style="width: 60vw;">
+                <div class="col" style="width: 50%; padding: 0px;">
+                    <p>O comportamento observou-se neste aluno:</p>
+
+                    <div class="row-auto m-0 mb-2">                 
+                      <input type="radio" id="Opc18" name="frequenciaComport" style="margin-right: 20px;" class="frequenciaComport" value="Primeira Vez">
+                      <label for="Opc18">Pela 1ª vez</label>
                     </div>
 
-                    <div class="row p-0 m-0 mt-2 pt-2" style="width: 60vw;">
-                      <div class="col-4 p-0">
-                        <input class="input-box form-control" type="text" id="disciplina" name="disciplina" placeholder="Disciplina">
-                      </div>
-
-                      <div class="col-4 p-0">
-                        <!-- ESPAÇO BRANCO -->
-                      </div>
-
-                      <div class="col-4 p-0">
-                        <input class="input-box form-control" type="datetime-local" name="data" id="data" placeholder="Data da Ocorrência">
-                      </div>
+                    <div class="row-auto m-0 mb-2">
+                      <input type="radio" id="Opc19" name="frequenciaComport" style="margin-right: 20px;" class="frequenciaComport" value="Reincidente">
+                      <label for="Opc19">De forma reincidente (pouco frequente)</label>
                     </div>
-                  </div>
-                </div>
-
-                <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                  <span class="separador w-auto m-0" style="line-height:30px">Motivos</span>
-                </div>
-
-                <div class="row m-0 mt-3 checkbox-group" style="width: 60vw;">
-                  <table>
-                    <tr>
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="1" id="Opc1" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc1">Desobedeceu a uma ordem</label>
-                      </td>
-                    </tr>
-      
-                    <tr>
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="2" id="Opc2" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc2">Recusou participar nas atividades da aula</label>
-                      </td>
-                    </tr>
-      
-                    <tr>             
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="3" id="Opc3" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc3">Fez gestos impróprios ao professor</label>
-                      </td>
-                    </tr>
-      
-                    <tr>        
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="4" id="Opc4" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc4">Fez comentários inadequados e desrespeitadores</label>
-                      </td>
-                    </tr>
-      
-                    <tr>      
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="5" id="Opc5" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc5">Perturbou a realização dos trabalhos dos seus colegas</label>
-                      </td>
-                    </tr>
-      
-                    <tr>     
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="6" id="Opc6" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc6">Continuou a conversar com colegas, mesmo depois da chamada de atenção do professor</label>
-                      </td>
-                    </tr>
-      
-                    <tr>              
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="7" id="Opc7" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc7">Pôs em causa a autoridade do professor</label>
-                      </td>
-                    </tr>
                     
-                    <tr>              
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="8" id="Opc8" class="checkmark" onchange="checkedBoxes()">  
-                        <label for="Opc8">Falou muito alto, emitiu sons e/ou provocou ruídos</label>
-                      </td>
-                    </tr>
-      
-                    <tr>              
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="9" id="Opc9" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc9">Ausentou-se do seu lugar sem autorização</label>
-                      </td>
-                    </tr>
-      
-                    <tr>              
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="10" id="Opc10" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc10">Interrompeu, de forma persistente e inadequada, a comunicação professor/alunos</label>
-                      </td>
-                    </tr>
-      
-                    <tr>             
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="11" id="Opc11" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc11">Fez gestos impróprios a colegas</label>
-                      </td>
-                    </tr>
-      
-                    <tr>            
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="12" id="Opc12" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc12">Agrediu fisicamente um colega</label>
-                      </td>
-                    </tr>
-      
-                    <tr>              
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="13" id="Opc13" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc13">Insultou colega(s)</label>
-                      </td>
-                    </tr>
-      
-                    <tr>              
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="14" id="Opc14" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc14">Tirou objeto(s) a colega(s) sem a sua autorização</label>
-                      </td>
-                    </tr>
-      
-                    <tr>             
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="15" id="Opc15" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc15">Usou, indevidamente, telemóvel ou outro aparelho eletrónico</label>
-                      </td>
-                    </tr>
-      
-                    <tr>             
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="16" id="Opc16" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc16">Danificou materiais e/ou espaços escolares</label>
-                      </td>
-                    </tr>
-      
-                    <tr>             
-                      <td>
-                        <input type="checkbox" name="motivos[]" value="17" id="Opc17" class="checkmark" onchange="checkedBoxes()">
-                        <label for="Opc17">Outros</label>
-                      </td>
-                    </tr>
-                  </table>
+                    <div class="row-auto m-0 mb-2">
+                      <input type="radio" id="Opc20" name="frequenciaComport" style="margin-right: 20px;" class="frequenciaComport" value="Com frequência">
+                      <label for="Opc20">Com frequência</label>
+                    </div>
                 </div>
 
-                <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                  <span class="separador w-auto m-0" style="line-height:30px">Descrição de Ocorrência</span>
-                </div>
+                <div class="col" style="width: 50%; padding: 0px;">
+                  <p>O aluno já demonstrou outros comportamentos incorretos?</p>
 
-                <div class="row m-0 mt-3" style="width: 60vw;">
-                  <textarea maxlength="500" oninput="CharsCounterDesc()" name="textADesc" id="textADesc" style="font-size: 20px; width:100%" placeholder="Descrição de Ocorrência..."></textarea>
-                  <span id="charsRemainDesc" style="color:red; font-size: 14px; float: right">Caracteres restantes: 500</span>
-                </div>
-                
-                <div class="row m-0 justify-content-center p-0 mt-4" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                  <span class="separador w-auto m-0" style="line-height:30px">Decisão Tomada</span>
-                </div>
-
-                <div class="row m-0 mt-3" style="width: 60vw;">
-                  <label></label>
-                  <textarea maxlength="350" oninput="CharsCounterDec()" name="textADec" id="textADec" style="font-size: 20px; width:100%" placeholder="Em consequência disso, tomei a seguinte decisão..."></textarea>
-                  <span id="charsRemainDec" style="color:red; font-size: 14px; float: right">Caracteres restantes: 350</span>
-                </div>
-
-                <div class="row m-0 justify-content-center p-0 mt-4 mb-3" style="width: 60vw; height: 30px; background-color: rgba(121, 255, 255, 1);">
-                  <span class="w-auto m-0 separador" style="line-height:30px">Regularidade dos comportamentos</span>
-                </div>
-
-                <div class="row m-0" style="width: 60vw;">
-                  <div class="col" style="width: 50%; padding: 0px;">
-                      <p>O comportamento observou-se neste aluno:</p>
-
-                      <div class="row-auto m-0 mb-2">                 
-                        <input type="radio" id="Opc18" name="frequenciaComport" style="margin-right: 20px;" class="frequenciaComport" value="Primeira Vez">
-                        <label for="Opc18">Pela 1ª vez</label>
-                      </div>
-
-                      <div class="row-auto m-0 mb-2">
-                        <input type="radio" id="Opc19" name="frequenciaComport" style="margin-right: 20px;" class="frequenciaComport" value="Reincidente">
-                        <label for="Opc19">De forma reincidente (pouco frequente)</label>
-                      </div>
-                      
-                      <div class="row-auto m-0 mb-2">
-                        <input type="radio" id="Opc20" name="frequenciaComport" style="margin-right: 20px;" class="frequenciaComport" value="Com frequência">
-                        <label for="Opc20">Com frequência</label>
-                      </div>
+                  <div class="row-auto m-0 mb-2" style="width: 60vw;">
+                    <input type="radio" id="Opc21" name="quantidadeComport" style="margin-right: 20px;" class="quantidadeComport" value="Sim" required>
+                    <label for="Opc21">Sim</label>
                   </div>
 
-                  <div class="col" style="width: 50%; padding: 0px;">
-                    <p>O aluno já demonstrou outros comportamentos incorretos?</p>
+                  <div class="row-auto m-0 mb-2" style="width: 60vw;">
+                    <input type="radio" id="Opc22" name="quantidadeComport" style="margin-right: 20px;" class="quantidadeComport" value="Não" required>
+                    <label for="Opc22">Não</label>
+                  </div>
 
-                    <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                      <input type="radio" id="Opc21" name="quantidadeComport" style="margin-right: 20px;" class="quantidadeComport" value="Sim" required>
-                      <label for="Opc21">Sim</label>
-                    </div>
+                  <div class="row-auto m-0 mb-2" style="width: 60vw;">
+                    <input type="radio" id="Opc23" name="quantidadeComport" style="margin-right: 20px;" class="quantidadeComport" value="Poucas vezes" required>
+                    <label for="Opc23">Poucas vezes</label>
+                  </div>
 
-                    <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                      <input type="radio" id="Opc22" name="quantidadeComport" style="margin-right: 20px;" class="quantidadeComport" value="Não" required>
-                      <label for="Opc22">Não</label>
-                    </div>
-
-                    <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                      <input type="radio" id="Opc23" name="quantidadeComport" style="margin-right: 20px;" class="quantidadeComport" value="Poucas vezes" required>
-                      <label for="Opc23">Poucas vezes</label>
-                    </div>
-
-                    <div class="row-auto m-0 mb-2" style="width: 60vw;">
-                      <input type="radio" id="Opc24" name="quantidadeComport" style="margin-right: 20px;" value="Com frequência" required>
-                      <label for="Opc24">Com frequência</label>
-                    </div>
+                  <div class="row-auto m-0 mb-2" style="width: 60vw;">
+                    <input type="radio" id="Opc24" name="quantidadeComport" style="margin-right: 20px;" value="Com frequência" required>
+                    <label for="Opc24">Com frequência</label>
                   </div>
                 </div>
+              </div>
 
-                <div class="row m-0 justify-content-end pt-4">
-                  <button class="btn-sub mt-5 mb-5" onclick="verificarNome()" type="button" id="submitButton">SUBMETER</button>
-                </div>
-              </form>
-            </div>
+              <div class="row m-0 justify-content-end pt-4">
+                <button class="btn-sub mt-5 mb-5" onclick="verificarNome()" type="button" id="submitButton">SUBMETER</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
+    </div>
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
       <script>
+      $(document).ready(function()
+      {
+        $("#selectEscola").click(atualizarTurmas);
+        $("#selectTurma").click(atualizarAlunos);
+      });
 
       function checkedBoxes() {
         var boxes = document.getElementsByClassName("checkmark");
@@ -478,6 +491,8 @@
                   }else if(valor == "Nenhum aluno encontrado"){
                     alert("Não foi encontrado nenhum aluno com o nome inserido, certifique-se que escreveu o nome corretamente, e que tem os devidos acentos. Caso o erro persista utilize as sugestões de nomes para encontrar o aluno desejado.");
                   }
+
+                  atualizarAlunos();
                 }        
               });
             }
@@ -486,8 +501,78 @@
           {
             alert("Certifique-se que preenche os campos todos.");
           }
+      }  
+
+      function atualizarTurmas() {
+        if($('#selectEscola option:selected').html() != "- Escola -")
+        {
+          $("#selectTurma").removeAttr("disabled");
+
+          $.ajax({
+            type:'GET',
+            url: '{{ route("atualizarTurmas") }}',
+            success: function(occ)
+            {
+              var vars = JSON.parse(occ);
+
+              $('#selectTurma').html("");
+              $('#selectTurma').append('<option>- Turma -</option>');
+
+              $.each(vars.escolaId, function(index, value)
+              {
+                if($('#selectEscola option:selected').html() == vars.nomeEscolaSemOcc[index])
+                {
+                  $.each(vars.turmaId, function(i, v){
+                    if(vars.turmaId[i] == $('#selectEscola option:selected').val())
+                    {
+                      $('#selectTurma').append("<option value="+vars.turmaEscolaAno[i]+vars.turmaEscolaCod[i]+">"+vars.turmaEscolaAno[i]+vars.turmaEscolaCod[i]+"</option>");
+                    }
+                  })
+                }
+              })
+
+            }
+          });
+        }
+        else
+        {
+          $('#selectTurma').html("");
+          $('#selectTurma').append("<option>Selecione uma escola</option>");
+          
+          $("#selectTurma").attr("disabled", "disabled");
+        }
       }
-      
+
+      function atualizarAlunos() {
+        $.ajax({
+            type:'GET',
+            url: '{{ route("ocorrenciaAtualizarAlunos") }}',
+            data: { escola : $('#selectEscola option:selected').val(), turma : $('#selectTurma option:selected').val() },
+            success: function(occ)
+            {
+              var vars = JSON.parse(occ);
+
+              $('#nomes').html('');
+
+              $.each(vars.alunos, function(i, v){
+                $('#nomes').append('<option value="'+vars.alunos[i]+'">');
+              })
+
+              console.log(vars.alunos.length);
+
+             if($('#selectTurma option:selected').html() != '' && vars.alunos.length > 0)
+             {
+              $('#fname').attr('disabled', false);
+             } 
+             else
+             {
+              $('#fname').attr('disabled', true);
+              alert('Esta turma não tem nenhum aluno atribuido.');
+             }
+            }
+          });
+      }
+
       </script>
   </body>
 <html>

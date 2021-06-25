@@ -180,6 +180,12 @@
                       <div class="row justify-content-center mt-1">
                         <span class="p-0">Data: {{ $idOcc->data }}</span>
                       </div>
+
+                      <div class="row justify-content-end mt-1">
+                        @if($idOcc->estado == 'Pendente' && (session('LoggedUser')->cargo != 'Diretor' && session('LoggedUser')->cargo != 'Secretaria'))
+                        <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
+                        @endif
+                      </div>
                     </div>
                   </div>
                     

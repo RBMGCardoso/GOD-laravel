@@ -167,7 +167,7 @@
           <div class="col-auto">
 
           <div class="card mb-2" style="width: 60vw;">
-              <div class="card-header">
+              <div class="card-header headerCard">
                 Minhas Ocorrências
               </div>
 
@@ -220,7 +220,7 @@
                     
             @if(session('LoggedUser')->cargo == 'Diretor' || session('LoggedUser')->cargo == 'Secretaria')
               <div class="card" style="width: 60vw;">
-                <div class="card-header">
+                <div class="card-header headerCard">
                   Outras Ocorrências
                 </div>
 

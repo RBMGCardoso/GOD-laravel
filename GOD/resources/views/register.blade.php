@@ -182,12 +182,6 @@
 
                   <div class="row m-0 pt-4" style="width: 45vw;">
                     <div class="col-12 p-0">
-                      <input class="input-box form-control" type="text" id="telemovel" name="telemovel" placeholder="Telemóvel/Telefone" required>
-                    </div>
-                  </div>
-
-                  <div class="row m-0 pt-4" style="width: 45vw;">
-                    <div class="col-12 p-0">
                       <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email" required>
                     </div>
                   </div>

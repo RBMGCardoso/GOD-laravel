@@ -21,14 +21,72 @@ input:focus, select:focus{
     box-shadow: none;
 }
 
+#pesquisa
+{
+    height:38px !important;
+
+    border: 0;
+    background-color: rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+}
+
+#selectEscola
+{
+    height:38px !important;
+
+    border: 0;
+    border-radius: 0;
+    background-color: rgba(0,0,0,0.05);
+    border-bottom: 1px solid #a0a6ab;
+}
+
+#selectTurma
+{
+    height:38px !important;
+
+    border: 0;
+    border-radius: 0;
+    background-color: rgba(0,0,0,0.05);
+    border-bottom: 1px solid #a0a6ab;
+}
+
+#selectTurma:disabled
+{
+    background-color: rgba(0,0,0,0.25);
+    border-bottom: 1px solid #a0a6ab;
+}
+
 #table-ocorrencias
 {
     width: 60vw;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     background-color: #fff;
 }
 
-th,td,tr
+thead th
 {
-    border: 1px solid black;
+    background-color: #222;
+    color: #ddd;
+    width: auto !important;
+}
+
+.tableHeadLeft
+{
+    border-top-left-radius: 7px !important;
+}
+
+.tableHeadRight
+{
+    border-top-right-radius: 7px !important;
+}
+
+
+.lightRow
+{
+    background-color: #f5f5f5;
+}
+
+.darkRow
+{
+    background-color: #ebebeb;
 }

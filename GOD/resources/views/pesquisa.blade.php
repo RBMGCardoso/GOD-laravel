@@ -192,14 +192,14 @@
         </div>
       </div>
 
-      <table class="text-center mt-3" id="table-ocorrencias" align="center">
+      <table class="text-center mt-3 mb-3" id="table-ocorrencias" align="center">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Nome do aluno</th>
-            <th>Turma</th>
-            <th>Escola</th>
-            <th>Link</th>
+            <th class="tableHeadLeft">ID</th>
+            <th class="tableHeadCenter">Nome do aluno</th>
+            <th class="tableHeadCenter">Turma</th>
+            <th class="tableHeadCenter">Escola</th>
+            <th class="tableHeadRight">Link</th>
           </tr>
         </thead>
 
@@ -238,7 +238,15 @@
             
             $.each(vars.idAluno, function(index, value)
             {
-              rawTableRow = '<tr style="height:50px"><td>'+vars.idAluno[index]+'</td><td>'+vars.nomeAluno[index]+'</td><td>'+vars.turmaAluno[index]+'</td><td>'+vars.escolaAluno[index]+'</td><td><a href="{{ route("perfilAluno", '+idAluno+') }}" target="_blank"><i class="fas fa-external-link-alt"></i></a></td>></tr>'
+              switch (index%2) {
+                case 0:
+                  rawTableRow = '<tr class="lightRow" style="height:40px"><td>'+vars.idAluno[index]+'</td><td>'+vars.nomeAluno[index]+'</td><td>'+vars.turmaAluno[index]+'</td><td>'+vars.escolaAluno[index]+'</td><td><a href="{{ route("perfilAluno", '+idAluno+') }}" target="_blank"><i class="fas fa-external-link-alt"></i></a></td>></tr>'
+                  break;
+
+                case 1:
+                  rawTableRow = '<tr class="darkRow" style="height:40px"><td>'+vars.idAluno[index]+'</td><td>'+vars.nomeAluno[index]+'</td><td>'+vars.turmaAluno[index]+'</td><td>'+vars.escolaAluno[index]+'</td><td><a href="{{ route("perfilAluno", '+idAluno+') }}" target="_blank"><i class="fas fa-external-link-alt"></i></a></td>></tr>'
+                  break;
+              }
               tableRow = rawTableRow.replace('+idAluno+', vars.idAluno[index]);
               
               if($("#selectEscola option:selected").html() != "Todas as escolas") //Verifica se foi selecionada uma escola

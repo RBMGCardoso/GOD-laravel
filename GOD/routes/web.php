@@ -30,6 +30,7 @@ Route::post('check', [UserAuthController::Class, 'check'])->name('auth.check');
 Route::middleware([CheckSession::class])->group(function(){
     Route::get('/ocorrencia', [MainController::Class, 'OcorrenciaPage'])->name('ocorrenciaPage'); //View de criar a ocorrencia
     Route::get('/ocorrenciaNomeCheck', [MainController::Class, 'OcorrenciaNomeCheck'])->name('ocorrenciaNomeCheck'); // AJAX para verificar se o nome do aluno existe
+    Route::get('/ocorrenciaAtualizarAlunos', [MainController::Class, 'OcorrenciaAtualizarAlunos'])->name('ocorrenciaAtualizarAlunos'); // AJAX para verificar se o nome do aluno existe
     Route::post('/ocorrencia', [MainController::Class, 'criarOcorrencia'])->name('ocorrencia.criar'); //Post para enviar a ocorrencia para a DB
 
     Route::get('/dashboard', [DashboardController::Class, 'DashboardPage'])->name('dashboardPage'); //View da dashboard
@@ -54,10 +55,11 @@ Route::middleware([CheckSession::class])->group(function(){
 
             Route::get('ocorrencias', [OcorrenciaController::Class, 'index'])->name('mostrarOcorrencias'); //View da página de pesquisa
 
-            Route::get('ocorrenciasAtualizarTurmas', [OcorrenciaController::Class, 'AtualizarTurmas'])->name('atualizarTurmas'); //Ajax para adicionar turmas á select na pesquisa
             Route::get('ocorrenciasAtualizarAlunos', [OcorrenciaController::Class, 'AtualizarAlunos'])->name('atualizarAlunos'); //Ajax para atualizar os alunos dependendo da pesquisa
         }
     );
+
+    Route::get('ocorrenciasAtualizarTurmas', [OcorrenciaController::Class, 'AtualizarTurmas'])->name('atualizarTurmas'); //Ajax para adicionar turmas á select na pesquisa
 
     Route::get('minhas-ocorrencias', [MainController::Class, 'minhasOcc'])->name('minhasOcc'); //View das ocorrencias criadas pelo utilizador
 

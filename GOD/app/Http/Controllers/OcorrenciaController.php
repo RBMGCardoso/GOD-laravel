@@ -7,6 +7,7 @@ use App\Models\Aluno;
 use App\Models\AlunoTurma;
 use App\Models\Turma;
 use App\Models\Escola;
+use App\Models\Encarregado;
 use Illuminate\Http\Request;
 
 class OcorrenciaController extends Controller
@@ -101,9 +102,16 @@ class OcorrenciaController extends Controller
 
     public function perfilAluno(Aluno $idAluno)
     {
-        //$descricao = Ocorrencia::find($idOcc)->pluck('aluno_id');
-        return view('perfilAluno');
-        //return view('dashboard');
+        $turmaId = AlunoTurma::where('aluno_id', $idAluno->id)->pluck('turma_id')->first();
+        $turma = Turma::where('id', $turmaId)->get()->first();
+
+        $escola = Escola::where('id', $turma->escola_id)->get()->first();
+
+        $encarregado = Encarregado::where('id', $idAluno->eeId)->get()->first();
+
+        $ocorrencias = Ocorrencia::where('aluno_id', $idAluno->id)->get();
+
+        return view('perfilAluno', compact('idAluno', 'turma', 'escola', 'encarregado', 'ocorrencias'));      
     }
 
     /**

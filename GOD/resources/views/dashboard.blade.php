@@ -185,7 +185,7 @@
             <div class="row mb-3">        
               @if(session('LoggedUser')->cargo == 'Diretor' || session('LoggedUser')->cargo == 'Secretaria')
                 <div class="card p-0">
-                  <h5 class="card-header">Ocorrências criadas por mês</h5>
+                  <h5 class="card-header headerCard">Ocorrências criadas por mês</h5>
 
                   <div class="card-body justify-content-center d-flex">
                     <canvas id="myChart" style="height: 300px; max-width: 100%;"></canvas>
@@ -193,7 +193,7 @@
                 </div>
               @elseif (session('LoggedUser')->cargo == 'Diretor de Turma')
                 <div class="card p-0">
-                  <h5 class="card-header">Ocorrências da sua direção de turma</h5>
+                  <h5 class="card-header headerCard">Ocorrências da sua direção de turma</h5>
 
                   <div class="card-body justify-content-center d-flex">
                     <canvas id="myChart2" style="height: 300px; max-width: 100%;"></canvas>
@@ -204,7 +204,7 @@
 
           <div class="row">
             <div class="card p-0 mb-3" id="cardNotifs">
-              <h5 class="card-header">Notificações</h5>
+              <h5 class="card-header headerCard">Notificações</h5>
 
               <div class="card-body">
                 @if ($arrayNot != null)
@@ -228,9 +228,9 @@
           </div>
         </div>
 
-        <div class="col-auto d-flex mt-1 mb-1 me-1 ms-2 ps-0">
-          <div class="card text-dark bg-light" id="ocorrenciasCard" style="max-width: 18rem; height: auto;">
-            <div class="card-header">Estado das Ocorrências</div>
+        <div class="col-auto justify-content-center d-flex mt-1 mb-1 me-1 ms-2 ps-0" id="colOcc">
+          <div class="card text-dark bg-light" id="ocorrenciasCard" style="height: auto;">
+            <div class="card-header headerCard text-center" style="font-weight: 500; color:#fff">Estado das Ocorrências</div>
             <div class="card-body pt-2 pb-1 ps-1 pe-1">   
               <div class="col h-100">
                 <div class="row-auto p-0 m-0">

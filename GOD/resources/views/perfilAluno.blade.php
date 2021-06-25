@@ -169,7 +169,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col">
-                    Nome do Aluno:
+                    Nome do Aluno: <b> {{ $idAluno->nome }} </b>
                   </div>
 
                   <div class="col-auto justify-content-end">
@@ -177,7 +177,7 @@
                   </div>
 
                   <div class="col-auto justify-content-end">
-                    Ano e Turma:
+                    Ano e Turma: {{ $turma->ano }}{{ $turma->codTurma }}
                   </div>
                 </div>
               </div>
@@ -186,29 +186,29 @@
                 <div class="col">
                   <div class="row">
                     <div class="col">
-                      Escola:
+                      Escola: {{ $escola->nome }}
                     </div>
 
                     <div class="col">
-                      Email:
+                      Email: {{ $idAluno->email }}
                     </div>
 
                     <div class="col-auto justify-content-end">
-                      Telemovel:
+                      Telemóvel: {{ $idAluno->telef }}
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="col">
-                      Morada:
+                      Morada: {{ $idAluno->morada }}
                     </div>
 
                     <div class="col">
-                      Concelho:
+                      Concelho: {{ $idAluno->concelho }}
                     </div>
 
                     <div class="col-auto justify-content-end">
-                      Codigo Postal:
+                      Codigo Postal: {{ $idAluno->codpost }}
                     </div>
                   </div>
                 </div>
@@ -217,43 +217,51 @@
 
             <div class="card mb-4" style="width: 60vw;">
               <div class="card-header">
-                <div class="row">
-                  <div class="col">
-                    Nome do Encarregado de Educação:
-                  </div>
-
-                  <div class="col-auto justify-content-end">
-                    Parentesco:
-                  </div>
-                </div>
-              </div>
-
-              <div class="card-body pt-2 pb-2">
-                <div class="col">
+                @if (isset($encarregado))
                   <div class="row">
                     <div class="col">
-                      Email:
-                    </div>
-
-                    <div class="col">
-                      Telemovel:
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col">
-                      Morada:
-                    </div>
-
-                    <div class="col">
-                      Concelho:
+                      Nome do Encarregado de Educação: {{ $encarregado->nome }}
                     </div>
 
                     <div class="col-auto justify-content-end">
-                      Codigo Postal:
+                      Parentesco: {{ $encarregado->parentesco }}
                     </div>
                   </div>
-                </div>
+                @else
+                  Encarregado de Educação
+                @endif
+              </div>
+
+              <div class="card-body pt-2 pb-2">
+                @if (isset($encarregado))
+                  <div class="col">
+                    <div class="row">
+                      <div class="col">
+                        Email: {{ $encarregado->email }}
+                      </div>
+
+                      <div class="col">
+                        Telemóvel: {{ $encarregado->telemovel }}
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col">
+                        Morada: {{ $encarregado->morada }}
+                      </div>
+
+                      <div class="col">
+                        Concelho: {{ $encarregado->concelho }}
+                      </div>
+
+                      <div class="col-auto justify-content-end">
+                        Codigo Postal: {{ $encarregado->codpost }}
+                      </div>
+                    </div>
+                  </div>
+                @else
+                  Este aluno não possui um encarregado de educação atribuido.
+                @endif
               </div>
             </div>
 
@@ -263,28 +271,45 @@
               </div>
 
               <div class="card-body pt-2 pb-2">
-                <a href="">
-                  <div class="row mb-2 mt-2 alert alert-secondary" id="occCard">
-                    <div class="col-auto d-flex align-self-center" style="border-radius:5px; border: 1px solid #555;">
-                      <span style="line-height:160%;"><b>ID:</b></span>
-                    </div>
+                @forelse($ocorrencias as $occ)
+                  <a href="{{ route('pagOcc', $occ) }}">
+                    <div class="row mb-2 mt-2 alert alert-secondary" id="occCard">
+                      <div class="col-auto d-flex align-self-center" style="border-radius:5px; border: 1px solid #555;">
+                        <span style="line-height:160%;"><b>ID: {{ $occ->id }}</b></span>
+                      </div>
 
-                    <div class="col-auto d-flex align-self-center">
-                      <span style="line-height:160%;"></span>
-                    </div>
+                      <div class="col-auto d-flex align-self-center">
+                        <span style="line-height:160%;"></span>
+                      </div>
 
-                    <div class="col d-flex justify-content-end">
-                      <div class="justify-content-center">
-                        <div class="row justify-content-center">
-                          <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
-                        </div>
+                      <div class="col d-flex justify-content-end">
+                        <div class="justify-content-center">
+                          <div class="row justify-content-center">
+                            @switch($occ->estado)
+                              @case('Aceite')
+                                  <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(0,200,0); border: 3px solid rgb(0,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Aceite</span></div> 
+                              @break;
+        
+                              @case('Pendente')       
+                                  <div class="col-auto align-self-center d-flex justify-content-center" style="font-weight: 600; color:white; background-color: rgb(255,200,0); border: 3px solid rgb(255,200,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Pendente</span></div>      
+                              @break;
+        
+                              @case('Recusada')              
+                                  <div class="col-auto  align-self-center d-flex justify-content-center" style="font-weight: 600;color:white; background-color: rgb(255,0,0); border: 3px solid rgb(255,0,0);border-radius: 4px; height:20px; width: 75px; font-size: 12px"><span class="align-self-center">Recusada</span></div>
+                              @break;
+                            @endswitch
+                          </div>
 
-                        <div class="row justify-content-center mt-1" style="font-size: 13.6px">
+                          <div class="row justify-content-center mt-1" style="font-size: 13.6px">
+                            {{ date('d-m-Y', strtotime($occ->data)) }}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                @empty
+                    Este aluno não tem ocorrências.
+                @endforelse
               </div>
             </div>
           </div>
