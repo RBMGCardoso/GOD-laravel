@@ -36,7 +36,7 @@ body
   width:250px;
   height:100vh;
   position: fixed;
-  background-color: #222;
+  background-color: #222 !important;
   transition: 0.4s;
 }
 

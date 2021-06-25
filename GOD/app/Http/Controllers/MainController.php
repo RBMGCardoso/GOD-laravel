@@ -136,7 +136,38 @@ class MainController extends Controller
     public function OcorrenciaPage(Aluno $alunos)
     {
         $alunos = Aluno::all();
-        return view('ocorrencia', compact('alunos'));
+        $escolas = Escola::all();
+        return view('ocorrencia', compact('alunos', 'escolas'));
+    }
+
+    public function OcorrenciaAtualizarAlunos(Request $req)
+    {
+        $escola = Escola::where('id', $req->escola)->pluck('id');
+
+        $turmaAno = Turma::all()->pluck('ano');
+        $turmaCod = Turma::all()->pluck('codTurma');
+
+        for ($i=0; $i < count($turmaAno); $i++) { 
+            if($turmaAno[$i].$turmaCod[$i] == $req->turma)
+            {
+                $turma = Turma::where('id', $i+1)->pluck('id');
+            }
+        }
+
+        $alunoTurma = AlunoTurma::where('turma_id', $turma)->pluck('aluno_id');
+
+        for ($i=0; $i < count($alunoTurma); $i++) { 
+            $alunos[] = Aluno::where('id', $alunoTurma[$i])->pluck('nome');
+        }
+
+        if (isset($alunos)) {
+            $array['alunos'] = $alunos;
+        }
+        else
+        {
+            $array['alunos'] = '';
+        }
+        return json_encode($array);
     }
 
     public function criarOcorrencia(Request $req, Ocorrencia $ocorrencia, MotivoOcorrencia $motivoOcorrencia)
