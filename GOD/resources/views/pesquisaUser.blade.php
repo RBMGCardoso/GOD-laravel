@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-    <link href="{{ url('/css/minhaOccs.css') }}" rel="stylesheet">
+    <link href="{{ url('/css/pesquisaUser.css') }}" rel="stylesheet">
     <link href="{{ url('/css/navbar.css') }}" rel="stylesheet">
 
     <script>
@@ -186,12 +186,12 @@
                         </div>
 
                         <div class="col d-flex justify-content-end align-items-center">
-                            <div class="btn-edit me-2" style="background-color: rgba(49, 218, 16, 0.911); height: 35px; padding: 5px; border-radius: 4px;">
-                                <i class="fas fa-user-edit" style="font-size: 20px; color: white;"></i>
+                            <div class="btn-edit me-2" style="background-color: rgba(49, 218, 16, 0.911); ">
+                                <i class="fas fa-user-edit" id="btn-icons"></i>
                             </div>
 
-                            <div class="btn-edit" style="background-color: rgba(230, 17, 17, 0.945); padding: 5px; height: 35px; border-radius: 4px;">
-                                <i class="fas fa-user-minus" style="font-size: 20px; color: white;"></i>
+                            <div class="btn-edit" style="background-color: rgba(230, 17, 17, 0.945);">
+                                <i class="fas fa-user-minus" id="btn-icons"></i>
                             </div>
                         </div>
                     </div>
