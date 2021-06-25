@@ -419,4 +419,9 @@ class MainController extends Controller
 
         return redirect('dashboard');
     }
+
+    public function pesquisaUser()
+    {
+        return view('pesquisaUser');
+    }
 }

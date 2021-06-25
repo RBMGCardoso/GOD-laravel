@@ -1,0 +1,41 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+a{
+    text-decoration: none;
+}
+
+.full-content
+{
+    transition:0.4s;
+}
+
+.title{
+    background-color: rgba(121, 255, 255, 1);
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+h1{
+    font-weight: 500;
+    color: #f8f8f8;
+}
+
+#occCard:hover
+{
+    cursor: pointer;
+    background-color: #bbb !important;
+}
+
+.btn-edit{
+    height: 35px; 
+    padding: 5px; 
+    border-radius: 4px;
+}
+
+#btn-icons{
+    font-size: 20px; 
+    color: white;
+}
