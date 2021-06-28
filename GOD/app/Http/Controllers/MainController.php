@@ -424,4 +424,9 @@ class MainController extends Controller
     {
         return view('pesquisaUser');
     }
+
+    public function perfilUser()
+    {
+        return view('perfilUser');
+    }
 }

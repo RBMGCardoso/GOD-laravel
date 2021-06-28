@@ -71,6 +71,7 @@ Route::middleware([CheckSession::class])->group(function(){
     Route::get('alunos/{idAluno}', [OcorrenciaController::Class, 'perfilAluno'])->name('perfilAluno'); //View do perfil do aluno
 
     Route::get('pesquisa-user', [MainController::Class, 'pesquisaUser'])->name('pesquisaUser'); // View da pagina de pesquisa do utilizador
+    Route::get('user', [MainController::Class, 'perfilUser'])->name('perfilUser');// View da pagina do utilizador
 
     Route::get('/logout', [UserAuthController::Class, 'logout'])->name('logout');
 });
