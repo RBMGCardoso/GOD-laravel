@@ -458,4 +458,9 @@ class MainController extends Controller
         $user->delete();
         return redirect('pesquisa-user');
     }
+
+    public function perfilUser()
+    {
+        return view('perfilUser');
+    }
 }
