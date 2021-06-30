@@ -21,11 +21,12 @@ class CreateOcorrenciasTable extends Migration
             $table->string('decisao');
             $table->string('frequencia');
             $table->string('comport_inc');
-            $table->string('cod_p');
+            $table->integer('cod_p')->unsigned();
             $table->string('estado');
             $table->string('motivo')->nullable(); //mostra o motivo para a ocorrencia ter sido aceite ou recusada
 
             $table->foreign('aluno_id')->references('id')->on('alunos');
+            $table->foreign('cod_p')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -50,12 +50,16 @@ Route::middleware([CheckSession::class])->group(function(){
             Route::get('registar-escola', [MainController::Class, 'registerEscolas'])->name('registerEscolas'); //View registar escola
             Route::post('registar-escolaPost', [MainController::Class, 'registerEscolasPost'])->name('registerEscolasPost'); //Post registar escola
             
-            Route::get('registar-turma', [MainController::Class, 'registerTurmas'])->name('registerTurmas');
-            Route::post('registar-turmaPost', [MainController::Class, 'registerTurmasPost'])->name('registerTurmasPost');
+            Route::get('registar-turma', [MainController::Class, 'registerTurmas'])->name('registerTurmas'); //View registar turmas
+            Route::post('registar-turmaPost', [MainController::Class, 'registerTurmasPost'])->name('registerTurmasPost'); //Post registar turma
 
             Route::get('ocorrencias', [OcorrenciaController::Class, 'index'])->name('mostrarOcorrencias'); //View da página de pesquisa
 
             Route::get('ocorrenciasAtualizarAlunos', [OcorrenciaController::Class, 'AtualizarAlunos'])->name('atualizarAlunos'); //Ajax para atualizar os alunos dependendo da pesquisa
+        
+            Route::get('atualizarUsers', [MainController::Class, 'AtualizarUsers'])->name('atualizarUsers'); //Ajax para atualizar os utilizadores dependendo da pesquisa
+
+            Route::get('eliminarUser/{user}', [MainController::Class, 'EliminarUser'])->name('eliminarUser'); //Delete user
         }
     );
 

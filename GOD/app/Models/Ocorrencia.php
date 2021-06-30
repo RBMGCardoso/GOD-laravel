@@ -9,6 +9,11 @@ class Ocorrencia extends Model
 {
     use HasFactory;
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'cod_p');
+    }
+
     public function aluno()
     {
         return $this->belongsTo(Aluno::class);

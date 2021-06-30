@@ -131,6 +131,8 @@ class MainController extends Controller
             'aluno_id' => Aluno::all()->reverse()->first()->id,
             'turma_id' => $infoform['escola']
         ]);
+
+        return redirect('dashboard');
     }
 
     public function OcorrenciaPage(Aluno $alunos)
@@ -183,7 +185,7 @@ class MainController extends Controller
                 'frequencia' =>  $req->frequenciaComport,
                 'comport_inc' =>  $req->quantidadeComport,
                 'aluno_id' =>  Aluno::where('nome', '=', $req->input('nome'))->first()->id,
-                'cod_p' =>  session('LoggedUser')->id,
+                'cod_p' =>  User::where('id', '=', session('LoggedUser')->id)->first()->id,
                 'estado' => "Pendente"
             ]);
         
@@ -422,6 +424,38 @@ class MainController extends Controller
 
     public function pesquisaUser()
     {
-        return view('pesquisaUser');
+        $users = User::all();
+        return view('pesquisaUser', compact('users'));
+    }
+
+    public function AtualizarUsers(Request $req)
+    {
+        $search = $req->search;
+
+        $idUserSearch = User::where('name', 'like', '%' . $search . '%')->orderBy('id', 'ASC')->pluck('id');
+        $nomeUserSearch = User::where('name', 'like', '%' . $search . '%')->orderBy('id', 'ASC')->pluck('name');
+        $cargoUserSearch = User::where('name', 'like', '%' . $search . '%')->orderBy('id', 'ASC')->pluck('cargo');
+
+        $array['idUser'] = $idUserSearch;
+        $array['nomeUser'] = $nomeUserSearch;
+        $array['cargoUser'] = $cargoUserSearch;
+
+
+        return json_encode($array);
+    }
+
+    public function EliminarUser(User $user)
+    {
+        $notifications = Notification::where('cod_p', $user->id)->delete();
+        $motivoOcorrencia = MotivoOcorrencia::where('ocorrencia_id')->delete();
+        $ocorrencias = Ocorrencia::where('cod_p', $user->id)->get();
+
+        for ($i=0; $i < count($ocorrencias); $i++) { 
+            $motivoOcorrencia = MotivoOcorrencia::where('ocorrencia_id', $ocorrencias[$i]->id)->delete();
+            $ocorrencias[$i]->delete();
+        }
+
+        $user->delete();
+        return redirect('pesquisa-user');
     }
 }

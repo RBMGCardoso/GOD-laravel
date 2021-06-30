@@ -16,7 +16,7 @@
 .headerCard
 {
     border: 0 !important;
-    background-color: #222;
+    background-color: #222 !important;
     color: #ddd;
     width: auto !important;
     border-top-left-radius: 7px !important;
@@ -33,7 +33,7 @@
     background-color: #eee !important;
 }
 
-@media (max-width: 1160px)
+@media (max-width: 1000px)
 {
     #dataDashboard
     {
@@ -45,15 +45,10 @@
         display: block !important;
     }
 
-    #colOcc
-    {
-        width: unset !important;
-
-    }
-
     #ocorrenciasCard
     {
         max-width: unset !important;
+        width: 87vw !important;
     }
 
 }

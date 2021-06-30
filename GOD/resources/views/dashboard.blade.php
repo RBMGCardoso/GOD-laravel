@@ -470,6 +470,7 @@
                   scales:{
                     y:{
                       beginAtZero: true,
+                      grace: '10%',
                     }
                   }
                 }

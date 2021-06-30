@@ -60,73 +60,76 @@
             </div>
           </a>
           <hr style="width:100%;text-align:left;margin-left:0;margin-bottom:0;color:#fff">
-          <ul class="nav-pills navbar-nav d-flex flex-column w-100">
-            <li class="nav-item w-100">
-              <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-home fa-fw"></i> Início</a>
-            </li>
-
-            <li class="nav-item w-100">
-              <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-plus-square fa-fw"></i> Criar Ocorrência</a>
-            </li>
-
-            @if(session('LoggedUser')->cargo == "Diretor de Turma")
+          <div class="largeScreenButtons">
+            <ul class="nav-pills navbar-nav d-flex flex-column w-100">
               <li class="nav-item w-100">
-                <a href="{{ route('minhaTurma') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-users fa-fw"></i> Direção de turma</a>
-              </li>
-            @endif
-
-            
-            <li class="nav-item w-100">
-              <a href="{{ route('minhasOcc') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-book fa-fw"></i> Minhas Ocorrências</a>
-            </li>    
-            
-            @if(session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
-              <li class="nav-item w-100">
-                <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-search fa-fw"></i> Pesquisar</a>
+                <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-home fa-fw"></i> <span>Início</span></a>
               </li>
 
-              <div class="dropdown nav-item w-100 registar-div" onclick="mudarButton()">
-                <a class="dropdown-toggle nav-link rounded-0 text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  <div class="row me-0">
-                    <div class="col">
-                      <i class="fas fa-user-plus fa-fw"></i> 
-                      Registar 
+              <li class="nav-item w-100">
+                <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-plus-square fa-fw"></i> <span>Criar Ocorrência</span></a>
+              </li>
+
+              @if(session('LoggedUser')->cargo == "Diretor de Turma")
+                <li class="nav-item w-100">
+                  <a href="{{ route('minhaTurma') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-users fa-fw"></i> <span>Direção de turma</span></a>
+                </li>
+              @endif
+
+              
+              <li class="nav-item w-100">
+                <a href="{{ route('minhasOcc') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-book fa-fw"></i> <span>Minhas Ocorrências</span></a>
+              </li>    
+              
+              @if(session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
+                <li class="nav-item w-100">
+                  <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-search fa-fw"></i> <span>Pesquisar</span></a>
+                </li>
+
+                <div class="dropdown nav-item w-100 registar-div" onclick="mudarButton()">
+                  <a class="dropdown-toggle nav-link rounded-0 text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="row me-0">
+                      <div class="col">
+                        <i class="fas fa-user-plus fa-fw"></i> 
+                        <span> Registar </span>
+                      </div>
+
+                      <div class="col d-flex pt-1 justify-content-end">
+                        <i class="fas fa-sort-down w-auto text-right fa-fw" id="dropdown-button"></i>                
+                      </div>
                     </div>
+                  </a>
+                  
 
-                    <div class="col d-flex pt-1 justify-content-end">
-                      <i class="fas fa-sort-down w-auto text-right fa-fw" id="dropdown-button"></i>                
-                    </div>
-                  </div>
-                </a>
-                
+                  <ul class="dropdown-menu p-0 m-0 border-0" aria-labelledby="dropdownMenuButton" style="background-color: transparent;">
+                    <li>
+                      <a href="{{ route('registerPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Utilizador</span></a>
+                    </li>
 
-                <ul class="dropdown-menu p-0 m-0" aria-labelledby="dropdownMenuButton" style="background-color: transparent;">
-                  <li>
-                    <a href="{{ route('registerPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Utilizador</a>
-                  </li>
+                    <li>
+                      <a href="{{ route('registerAlunoPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Aluno</span></a>
+                    </li>
 
-                  <li>
-                    <a href="{{ route('registerAlunoPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Aluno</a>
-                  </li>
+                    <li>
+                      <a href="{{ route('registerTurmas') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Turma</span></a>
+                    </li>
 
-                  <li>
-                    <a href="" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Turma</a>
-                  </li>
-
-                  <li>
-                    <a href="" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> Registar Escola</a>
-                  </li>
-                </ul>
-              </div>
-            @endif     
-          </ul>
+                    <li>
+                      <a href="{{ route('registerEscolas') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Escola</span></a>
+                    </li>
+                  </ul>
+                </div>
+              @endif     
+            </ul>
+          </div>
 
         <div class="profile">
-          <div class="dropup ms-3">
+          <div class="dropup ms-2">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" alt="mdo" width="32" height="32" class="rounded-circle me-2">
-              <strong>{{ session('LoggedUser')->name }}</strong>
+              <strong id="userDetails">{{ session('LoggedUser')->name }}</strong>
             </a>
+
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
               <li><a class="dropdown-item">
                     Cargo: {{ session('LoggedUser')->cargo }}     
@@ -157,50 +160,177 @@
       <script src="./js/sidebars.js"></script>
     </div>
 
-    <div class="row full-content" id="content" style="margin-left: 250px;">
-      <div class="col p-0">
-        <div class="row justify-content-center">
-          <div class="col-auto">
-
-          <div class="card mt-3 mb-2" style="width: 60vw;">
-              <div class="card-header">
-                Utilizadores
+    <div id="overlay" class="justify-content-center align-items-center">
+        <div class="card w-25">
+          <div class="card-header" id="headerCard">Confirmação</div>
+          <div class="card-body p-1" style="height: auto !important;">
+            <div class="col d-flex flex-column p-1">
+              <div class="row-auto p-1">
+                <span id="mensagem"></span>
               </div>
 
-              <div class="card-body pt-2 pb-2">
-                <a href="">
-                    <div class="row mb-2 mt-2 alert alert-secondary" id="occCard">
-                        <div class="col-auto d-flex align-self-center" style="border-radius:5px; border: 1px solid #555;">
-                            <span style="line-height:160%;"><b>ID: </b> 10 </span>
-                        </div>
+              <div class="row w-100 m-0 mt-2 mb-2 d-flex flex-row justify-content-center text-center" >
+                <div class="col ps-1">
+                  <div id="buttonSim" onclick="deleteUser()">Confirmar</div>
+                </div>
 
-                        <div class="col-auto">
-                            <div class="row">
-                                <span style="line-height:160%;">Lulu</span>
-                            </div>
-
-                            <div class="row justify-content-center mt-1" style="font-size: 13.6px">
-                                Cargo
-                            </div>
-                           
-                        </div>
-
-                        <div class="col d-flex justify-content-end align-items-center">
-                            <div class="btn-edit me-2" style="background-color: rgba(49, 218, 16, 0.911); ">
-                                <i class="fas fa-user-edit" id="btn-icons"></i>
-                            </div>
-
-                            <div class="btn-edit" style="background-color: rgba(230, 17, 17, 0.945);">
-                                <i class="fas fa-user-minus" id="btn-icons"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                <div class="col pe-1">
+                  <div id="buttonCancelar" onclick="fecharConfirmation()">Cancelar</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+    </div>
+
+    <div class="row full-content" id="content" style="margin-left: 250px;">
+      <div class="col p-0">
+        <div class="form d-flex justify-content-center mt-3">
+          <div class="row" id="search">
+            <div class="col m-0 p-0">
+              <div class="form-outline">
+                <input type="search" class="form-control rounded-0" id="pesquisa" placeholder="Pesquisar nome do utilizador..."/>
+              </div>
+            </div>
+
+            <div class="col-auto m-0 p-0">
+              <button type="button" class="btn btn-secondary disabled" style="border-radius: 0;">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <table class="text-center mt-3 mb-3" id="table-ocorrencias" align="center">
+            <thead>
+              <tr>
+                <th class="tableHeadLeft">ID</th>
+                <th class="tableHeadCenter">Nome do utilizador</th>
+                <th class="tableHeadCenter">Cargo</th>
+                <th class="tableHeadRight">Opções</th>
+              </tr>
+            </thead>
+
+            <tbody id="table-body">
+            </tbody>
+          </table>
+          <!-- <div class="card mt-3 mb-2" style="width: 60vw;">
+              <div class="card-header" id="headerCard">
+                Utilizadores
+              </div>
+
+              <div class="card-body pt-2 pb-2">
+                @foreach ($users as $user)
+                  <div class="row mb-2 mt-2 alert alert-secondary" id="occCard">
+                      <div class="col-auto d-flex align-self-center" style="border-radius:5px; border: 1px solid #555;">
+                          <span style="line-height:160%;"><b>ID: </b> {{ $user->id }} </span>
+                      </div>
+
+                      <div class="col-auto">
+                          <div class="row-auto">
+                              <span style="line-height:160%;">{{ $user->name }}</span>
+                          </div>
+
+                          <div class="row-auto mt-1" style="font-size: 13.6px">
+                              Cargo: {{ $user->cargo }}
+                          </div>
+                          
+                      </div>
+
+                      <div class="col d-flex justify-content-end align-items-center">
+                          <div class="btn-edit me-2" id="btn-edit" style="background-color: rgba(49, 218, 16, 0.911); ">
+                            <a href=""><i class="fas fa-user-edit" id="btn-icons"></i></a>
+                          </div>
+
+                          <div class="btn-edit" id="btn-delete" style="background-color: rgba(230, 17, 17, 0.945);" onclick="confirmation('{{ $user->name }}', '{{ $user->id }}')">
+                            <i class="fas fa-user-minus" id="btn-icons"></i>
+                          </div>
+                      </div>
+                  </div>
+                @endforeach
+              </div>
+            </div>
+          </div> -->
+        </div>
       </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <script>
+      var idUser;
+
+      $(document).ready(function()
+      {
+        atualizarUsers()
+        $("#pesquisa").keyup(atualizarUsers);
+      })
+
+      function confirmation(nome, id)
+      {
+        $('#overlay').css('display', 'flex');
+        if({{ session('LoggedUser')->id }} != id)
+        {
+          $('#buttonSim').removeAttr('hidden');
+
+          $('#mensagem').html('Tem a certeza que deseja eliminar a conta de <b>'+nome+'</b>? <br /><br />'+
+          'Esta ação irá também eliminar todas as ocorrências criadas por este utilizador e não pode ser revertida.');
+        }
+        else
+        {
+          $('#buttonSim').attr('hidden','hidden');
+
+          $('#mensagem').html('Você não pode eliminar a sua própria conta. <br /><br />'+
+          'Contacte outro utilizador com as mesmas permissões para eliminar a sua conta.');
+        }
+
+        idUser = id;
+      }
+
+      function fecharConfirmation()
+      {
+        $('#overlay').css('display', 'none');
+      }
+
+      function deleteUser() {
+        document.location.href= 'eliminarUser/'+idUser;
+      }
+
+      function atualizarUsers() {
+        $.ajax({
+          type:'GET',
+          url: '{{ route("atualizarUsers") }}',
+          data: { search: $('#pesquisa').val() },
+          success: function(info)
+          {
+            var vars = JSON.parse(info);
+        
+            //limpar table
+            var tableRow = '';
+            $('#table-body').html('');
+
+            
+            $.each(vars.idUser, function(index, value)
+            {
+              switch (index%2) {
+                case 0:
+                  rawTableRow = '<tr class="lightRow" style="height:40px"><td>'+vars.idUser[index]+'</td><td>'+vars.nomeUser[index]+'</td><td>'+vars.cargoUser[index]+'</td><td><a><i class="fas fa-user-edit"></i></a><a class="ms-2" onclick="confirmation(+parametros+)"><i class="fas fa-user-minus"></i></a></td>></tr>'
+                  break;
+
+                case 1:
+                  rawTableRow = '<tr class="darkRow" style="height:40px"><td>'+vars.idUser[index]+'</td><td>'+vars.nomeUser[index]+'</td><td>'+vars.cargoUser[index]+'</td><td><a><i class="fas fa-user-edit"></i></a><a class="ms-2" onclick="confirmation(+parametros+)"><i class="fas fa-user-minus"></i></a></td>></tr>'
+                  break;
+              }
+              tableRow = rawTableRow.replace('+parametros+', "'"+String(vars.nomeUser[index])+"', "+vars.idUser[index]);
+              
+              $('#table-body').append(tableRow);    
+            })
+          }
+        });
+      }
+
+    </script>
   </body>
 </html>
