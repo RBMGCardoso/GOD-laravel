@@ -114,6 +114,28 @@ thead th
     bottom: 0;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+
+    animation-name: overlay;
+    animation-duration: 0.4s;
+    animation-timing-function: ease;
+}
+
+@keyframes overlay
+{
+    from {opacity: 0;}
+    to {opacity: 100;}
+}
+
+@keyframes cardAppear
+{
+    from {top: 50vw;}
+    to {top: 0;}
+}
+
+@keyframes cardDisappear
+{
+    from {top: 0;}
+    to {top: 50vw;}
 }
 
 #headerCard

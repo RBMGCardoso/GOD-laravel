@@ -161,7 +161,7 @@
     </div>
 
     <div id="overlay" class="justify-content-center align-items-center">
-        <div class="card w-25">
+        <div class="card w-25" id="cardConfirm">
           <div class="card-header" id="headerCard">Confirmação</div>
           <div class="card-body p-1" style="height: auto !important;">
             <div class="col d-flex flex-column p-1">
@@ -270,6 +270,9 @@
 
       function confirmation(nome, id)
       {
+        //Animação onde o card sobe
+        document.getElementById('cardConfirm').style.animation = "cardAppear 0.4s linear 1";
+
         $('#overlay').css('display', 'flex');
         if({{ session('LoggedUser')->id }} != id)
         {
@@ -286,12 +289,23 @@
           'Contacte outro utilizador com as mesmas permissões para eliminar a sua conta.');
         }
 
+        $('#')
+
         idUser = id;
       }
 
       function fecharConfirmation()
-      {
-        $('#overlay').css('display', 'none');
+      {  
+        //Animação onde o card desce
+        document.getElementById('cardConfirm').style.animation = "cardDisappear 0.3s linear 1";
+
+        //Volta a esconder o overlay
+        setTimeout(() => {
+          document.getElementById('overlay').style.display = "none";
+        }, 200);
+
+
+       // $('#overlay').css('display', 'none');
       }
 
       function deleteUser() {
