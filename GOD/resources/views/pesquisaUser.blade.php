@@ -16,8 +16,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
+    <!-- Script de overlay de confirmações/avisos -->
+    <script src="{{ asset('js/overlay.js') }}" type="text/javascript"></script>
+
     <link href="{{ url('/css/pesquisaUser.css') }}" rel="stylesheet">
+
     <link href="{{ url('/css/navbar.css') }}" rel="stylesheet">
+    <link href="{{ url('/css/overlay.css') }}" rel="stylesheet">
 
     <script>
       function closeSidebar()
@@ -162,7 +167,7 @@
 
     <div id="overlay" class="justify-content-center align-items-center">
         <div class="card w-25" id="cardConfirm">
-          <div class="card-header" id="headerCard">Confirmação</div>
+          <div class="card-header" id="headerCard"></div>
           <div class="card-body p-1" style="height: auto !important;">
             <div class="col d-flex flex-column p-1">
               <div class="row-auto p-1">
@@ -175,7 +180,7 @@
                 </div>
 
                 <div class="col pe-1">
-                  <div id="buttonCancelar" onclick="fecharConfirmation()">Cancelar</div>
+                  <div id="buttonCancelar" onclick="closeOverlayCard()">Cancelar</div>
                 </div>
               </div>
             </div>
@@ -216,43 +221,6 @@
             <tbody id="table-body">
             </tbody>
           </table>
-          <!-- <div class="card mt-3 mb-2" style="width: 60vw;">
-              <div class="card-header" id="headerCard">
-                Utilizadores
-              </div>
-
-              <div class="card-body pt-2 pb-2">
-                @foreach ($users as $user)
-                  <div class="row mb-2 mt-2 alert alert-secondary" id="occCard">
-                      <div class="col-auto d-flex align-self-center" style="border-radius:5px; border: 1px solid #555;">
-                          <span style="line-height:160%;"><b>ID: </b> {{ $user->id }} </span>
-                      </div>
-
-                      <div class="col-auto">
-                          <div class="row-auto">
-                              <span style="line-height:160%;">{{ $user->name }}</span>
-                          </div>
-
-                          <div class="row-auto mt-1" style="font-size: 13.6px">
-                              Cargo: {{ $user->cargo }}
-                          </div>
-                          
-                      </div>
-
-                      <div class="col d-flex justify-content-end align-items-center">
-                          <div class="btn-edit me-2" id="btn-edit" style="background-color: rgba(49, 218, 16, 0.911); ">
-                            <a href=""><i class="fas fa-user-edit" id="btn-icons"></i></a>
-                          </div>
-
-                          <div class="btn-edit" id="btn-delete" style="background-color: rgba(230, 17, 17, 0.945);" onclick="confirmation('{{ $user->name }}', '{{ $user->id }}')">
-                            <i class="fas fa-user-minus" id="btn-icons"></i>
-                          </div>
-                      </div>
-                  </div>
-                @endforeach
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>
@@ -270,42 +238,18 @@
 
       function confirmation(nome, id)
       {
-        //Animação onde o card sobe
-        document.getElementById('cardConfirm').style.animation = "cardAppear 0.4s linear 1";
-
-        $('#overlay').css('display', 'flex');
         if({{ session('LoggedUser')->id }} != id)
         {
-          $('#buttonSim').removeAttr('hidden');
-
-          $('#mensagem').html('Tem a certeza que deseja eliminar a conta de <b>'+nome+'</b>? <br /><br />'+
+          overlayCard('Confirm', 'Confirmação', 'Tem a certeza que deseja eliminar a conta de <b>'+nome+'</b>? <br /><br />'+
           'Esta ação irá também eliminar todas as ocorrências criadas por este utilizador e não pode ser revertida.');
         }
         else
         {
-          $('#buttonSim').attr('hidden','hidden');
-
-          $('#mensagem').html('Você não pode eliminar a sua própria conta. <br /><br />'+
+          overlayCard('Aviso','Aviso', 'Você não pode eliminar a sua própria conta. <br /><br />'+
           'Contacte outro utilizador com as mesmas permissões para eliminar a sua conta.');
         }
 
-        $('#')
-
         idUser = id;
-      }
-
-      function fecharConfirmation()
-      {  
-        //Animação onde o card desce
-        document.getElementById('cardConfirm').style.animation = "cardDisappear 0.3s linear 1";
-
-        //Volta a esconder o overlay
-        setTimeout(() => {
-          document.getElementById('overlay').style.display = "none";
-        }, 200);
-
-
-       // $('#overlay').css('display', 'none');
       }
 
       function deleteUser() {
@@ -325,24 +269,49 @@
             var tableRow = '';
             $('#table-body').html('');
 
+            var dirTurma;
             
             $.each(vars.idUser, function(index, value)
             {
+              if(vars.dirTurma[index] != '')
+              {
+                dirTurma = '('+vars.dirTurma[index]+')';
+              }
+              else
+              {
+                dirTurma = '';
+              }
+
               switch (index%2) {
                 case 0:
-                  rawTableRow = '<tr class="lightRow" style="height:40px"><td>'+vars.idUser[index]+'</td><td>'+vars.nomeUser[index]+'</td><td>'+vars.cargoUser[index]+'</td><td><a><i class="fas fa-user-edit"></i></a><a class="ms-2" onclick="confirmation(+parametros+)"><i class="fas fa-user-minus"></i></a></td>></tr>'
+                  rawTableRow = '<tr class="lightRow" style="height:40px"><td>'+vars.idUser[index]+'</td><td>'+vars.nomeUser[index]+'</td><td>'+vars.cargoUser[index]+dirTurma+'</td><td><a onclick="editarUser(+idUser+)"><i class="fas fa-user-edit"></i></a><a class="ms-2" onclick="confirmation(+parametros+)"><i class="fas fa-user-minus"></i></a></td>></tr>'
                   break;
 
                 case 1:
-                  rawTableRow = '<tr class="darkRow" style="height:40px"><td>'+vars.idUser[index]+'</td><td>'+vars.nomeUser[index]+'</td><td>'+vars.cargoUser[index]+'</td><td><a><i class="fas fa-user-edit"></i></a><a class="ms-2" onclick="confirmation(+parametros+)"><i class="fas fa-user-minus"></i></a></td>></tr>'
+                  rawTableRow = '<tr class="darkRow" style="height:40px"><td>'+vars.idUser[index]+'</td><td>'+vars.nomeUser[index]+'</td><td>'+vars.cargoUser[index]+dirTurma+'</td><td><a onclick="editarUser(+idUser+)"><i class="fas fa-user-edit"></i></a><a class="ms-2" onclick="confirmation(+parametros+)"><i class="fas fa-user-minus"></i></a></td>></tr>'
                   break;
               }
               tableRow = rawTableRow.replace('+parametros+', "'"+String(vars.nomeUser[index])+"', "+vars.idUser[index]);
-              
+              tableRow = tableRow.replace('+idUser+', vars.idUser[index]);
               $('#table-body').append(tableRow);    
             })
           }
         });
+      }
+
+      function editarUser(info) {
+        var f = document.createElement('form');
+        f.action='{{ route("registerPage") }}';
+        f.method='POST';
+
+        var i=document.createElement('input');
+        i.type='hidden';
+        i.name='idUser';
+        i.value=info;
+        f.appendChild(i);
+
+        document.body.appendChild(f);
+        f.submit();
       }
 
     </script>

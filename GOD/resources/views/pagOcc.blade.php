@@ -16,6 +16,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <!-- Script de overlay de confirmações/avisos -->
+    <script src="{{ asset('js/overlay.js') }}" type="text/javascript"></script>
+    <link href="{{ url('/css/overlay.css') }}" rel="stylesheet">
+
     <link href="{{ url('/css/pagOcc.css') }}" rel="stylesheet">
     <link href="{{ url('/css/navbar.css') }}" rel="stylesheet">
 
@@ -158,6 +164,29 @@
       
       <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
       <script src="./js/sidebars.js"></script>
+    </div>
+
+    <div id="overlay" class="justify-content-center align-items-center">
+        <div class="card w-25" id="cardConfirm">
+          <div class="card-header" id="headerCard"></div>
+          <div class="card-body p-1" style="height: auto !important;">
+            <div class="col d-flex flex-column p-1">
+              <div class="row-auto p-1">
+                <span id="mensagem"></span>
+              </div>
+
+              <div class="row w-100 m-0 mt-2 mb-2 d-flex flex-row justify-content-center text-center" >
+                <div class="col ps-1">
+                  <div id="buttonSim" onclick="">Confirmar</div>
+                </div>
+
+                <div class="col pe-1">
+                  <div id="buttonCancelar" onclick="closeOverlayCard()">Cancelar</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
 
     <div class="row full-content" id="content" style="margin-left: 250px;">
@@ -391,10 +420,10 @@
         {
           if(estado == 0)
           {
-            alert('Por favor selecione se pretende Aceitar ou Recusar a ocorrência.');
+            overlayCard('Aviso','Aviso','Por favor selecione se pretende Aceitar ou Recusar a ocorrência.');
           }else if($('#motivo_est').val() == '')
           {
-            alert('Por favor escreva um motivo para a sua escolha.');
+            overlayCard('Aviso','Aviso','Por favor escreva um motivo para a sua escolha.');
           }
           
         }
@@ -402,10 +431,3 @@
     </script>
   </body>
 </html>
-
-<!--
-  <div class="col form-group">
-                  <label class="form-control" for="motivo_est">Motivo:</label>
-                  <textarea class="form-control" name="motivo_est" id="" cols="30" rows="6"></textarea>
-                </div>
--->

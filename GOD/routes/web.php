@@ -41,7 +41,7 @@ Route::middleware([CheckSession::class])->group(function(){
     Route::get('/dashboardFiltrarOcorrencias', [DashboardController::Class, 'FiltrarOccs'])->name('filtrarOccs'); //AJAX para filtrar ocorrencias
     
     Route::middleware([CheckCargoDiretor::class])->group(function(){ //Middleware de cargos. Apenas diretores e pessoal da secretaria pode acessar estas páginas
-            Route::get('/registar', [MainController::Class, 'RegisterPage'])->name('registerPage'); //View registar utilizador
+            Route::match(array('GET','POST'),'/registar', [MainController::Class, 'RegisterPage'])->name('registerPage'); //View registar utilizador
             Route::post('registarPost', [MainController::Class, 'RegisterUtilizador'])->name('register.utilizador'); //Post para enviar utilizador para a DB
         
             Route::get('/registar-aluno', [MainController::Class, 'RegisterAlunoPage'])->name('registerAlunoPage'); //View registar aluno
@@ -75,7 +75,6 @@ Route::middleware([CheckSession::class])->group(function(){
     Route::get('alunos/{idAluno}', [OcorrenciaController::Class, 'perfilAluno'])->name('perfilAluno'); //View do perfil do aluno
 
     Route::get('pesquisa-user', [MainController::Class, 'pesquisaUser'])->name('pesquisaUser'); // View da pagina de pesquisa do utilizador
-    Route::get('user', [MainController::Class, 'perfilUser'])->name('perfilUser');// View da pagina do utilizador
 
     Route::get('/logout', [UserAuthController::Class, 'logout'])->name('logout');
 });

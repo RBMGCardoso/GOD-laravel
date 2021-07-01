@@ -30,14 +30,26 @@ class MainController extends Controller
         return view('login');
     }
 
-    public function RegisterPage()
+    public function RegisterPage(Request $req)
     {
         $escolas = Escola::all();
-        return view('register', compact('escolas'));
+
+        if(isset($req->idUser))
+        {
+            $user = User::where('id', $req->idUser)->get()->first();
+            return view('register', compact('escolas', 'user'));
+        }
+        else
+        {
+            return view('register', compact('escolas'));
+        }
+
     }
 
     public function RegisterUtilizador(Request $req)
     {
+        $utilizador = User::find($req->idUser);
+
         if($req->cargoUser == "Diretor de Turma")
         {
 
@@ -60,20 +72,43 @@ class MainController extends Controller
             $idTurma = null;
         } 
 
-        for ($i=0; $i < count($dirTurmas); $i++) { 
-            if($dirTurmas[$i] == $idTurma)
-            {
-                return back()->with('JSAlert', 'Já existe um professor que é diretor desta turma. Se acha que isto é um erro contacte a administração do site.');
+        if(isset($dirTurmas))
+        {
+            for ($i=0; $i < count($dirTurmas); $i++) { 
+                if($dirTurmas[$i] == $idTurma)
+                {
+                    return back()->with('JSAlert', 'Já existe um professor que é diretor desta turma. Se acha que isto é um erro contacte a administração do site.');
+                }
             }
         }
 
-        User::insert([
-            'name' => $req->nome,
-            'email' => $req->email,
-            'password' => Hash::make($req->password),
-            'cargo' => $req->cargoUser,
-            'dirTurma' => $idTurma
-        ]);
+        if($utilizador != null)
+        {
+            $utilizador->name = $req->nome;
+            $utilizador->email = $req->email;
+            $utilizador->cargo = $req->cargoUser;
+
+            if($req->password != '')
+            {
+                $utilizador->password = Hash::make($req->password);
+            }
+
+            $utilizador->dirTurma = $idTurma;
+            $utilizador->save();
+            return redirect('dashboard')->with('jsPermissionAlert', 'Informações de utilizador atualizadas com sucesso.');
+        }
+        else
+        {
+            User::insert([
+                'name' => $req->nome,
+                'email' => $req->email,
+                'password' => Hash::make($req->password),
+                'cargo' => $req->cargoUser,
+                'dirTurma' => $idTurma
+            ]);
+            return redirect('dashboard')->with('jsPermissionAlert', 'Utilizador criado com sucesso.');
+        }
+
     }
 
     public function RegisterAlunoPage(Request $request)
@@ -132,7 +167,7 @@ class MainController extends Controller
             'turma_id' => $infoform['escola']
         ]);
 
-        return redirect('dashboard');
+        return redirect('dashboard')->with('jsPermissionAlert', 'Aluno criado com sucesso.');
     }
 
     public function OcorrenciaPage(Aluno $alunos)
@@ -221,7 +256,7 @@ class MainController extends Controller
 
             Mail::to("")->send(new MailSender($details));*/
 
-            return redirect('dashboard');
+            return redirect('dashboard')->with('jsPermissionAlert', 'Ocorrência criada com sucesso. Irá receber uma notificação quando um utilizador superior altere o estado da ocorrência.');
         }
         else
         {
@@ -389,7 +424,7 @@ class MainController extends Controller
             'codPost' => $req->codpost
         ]);
 
-        return redirect('dashboard');
+        return redirect('dashboard')->with('jsPermissionAlert', 'Escola adicionada com sucesso.');
     }
 
     
@@ -419,7 +454,7 @@ class MainController extends Controller
             ]);
         }
 
-        return redirect('dashboard');
+        return redirect('dashboard')->with('jsPermissionAlert', 'Turma adicionada com sucesso.');
     }
 
     public function pesquisaUser()
@@ -435,10 +470,20 @@ class MainController extends Controller
         $idUserSearch = User::where('name', 'like', '%' . $search . '%')->orderBy('id', 'ASC')->pluck('id');
         $nomeUserSearch = User::where('name', 'like', '%' . $search . '%')->orderBy('id', 'ASC')->pluck('name');
         $cargoUserSearch = User::where('name', 'like', '%' . $search . '%')->orderBy('id', 'ASC')->pluck('cargo');
+        $dirTurmaUserSearch = User::where('name', 'like', '%' . $search . '%')->orderBy('id', 'ASC')->pluck('dirTurma');
+
+        for ($i=0; $i < count($dirTurmaUserSearch); $i++) { 
+            $turmaAno = Turma::where('id', $dirTurmaUserSearch[$i])->pluck('ano')->first();
+            $turmaCod = Turma::where('id', $dirTurmaUserSearch[$i])->pluck('codTurma')->first();
+            $turma[] = $turmaAno.$turmaCod;
+        }
+
 
         $array['idUser'] = $idUserSearch;
         $array['nomeUser'] = $nomeUserSearch;
         $array['cargoUser'] = $cargoUserSearch;
+
+        $array['dirTurma'] = $turma;
 
 
         return json_encode($array);
@@ -457,10 +502,5 @@ class MainController extends Controller
 
         $user->delete();
         return redirect('pesquisa-user');
-    }
-
-    public function perfilUser()
-    {
-        return view('perfilUser');
     }
 }

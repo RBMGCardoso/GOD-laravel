@@ -16,6 +16,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <!-- Script de overlay de confirmações/avisos -->
+    <script src="{{ asset('js/overlay.js') }}" type="text/javascript"></script>
+    <link href="{{ url('/css/overlay.css') }}" rel="stylesheet">
+    
     <link href="{{ url('/css/register.css') }}" rel="stylesheet">
     <link href="{{ url('/css/navbar.css') }}" rel="stylesheet">
 
@@ -48,12 +54,6 @@
   </head>
 
   <body>
-    @if(session()->has('JSAlert'))
-      <script>
-          alert("{{ session()->get('JSAlert') }}");
-      </script>
-    @endif
-
     <div class="navbar-div">
       <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
           <a href="{{ route('dashboardPage') }}" class="navbar-brand text-light">
@@ -166,6 +166,35 @@
       <script src="./js/sidebars.js"></script>
     </div>
 
+    <div id="overlay" class="justify-content-center align-items-center">
+        <div class="card w-25" id="cardConfirm">
+          <div class="card-header" id="headerCard"></div>
+          <div class="card-body p-1" style="height: auto !important;">
+            <div class="col d-flex flex-column p-1">
+              <div class="row-auto p-1">
+                <span id="mensagem"></span>
+              </div>
+
+              <div class="row w-100 m-0 mt-2 mb-2 d-flex flex-row justify-content-center text-center" >
+                <div class="col ps-1">
+                  <div id="buttonSim" onclick="">Confirmar</div>
+                </div>
+
+                <div class="col pe-1">
+                  <div id="buttonCancelar" onclick="closeOverlayCard()">Cancelar</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    @if(session()->has('JSAlert'))
+      <script>
+          overlayCard("{{ session()->get('JSAlert') }}");
+      </script>
+    @endif
+
     <div class="row full-content" id="content" style="margin-left: 250px;">
       <div class="col p-0">
         <div class="row title d-flex justify-content-center align-items-center">
@@ -179,26 +208,52 @@
                 <div class="col justify-content-center">
                   <div class="row m-0 pt-4" style="width: 45vw;">
                     <div class="col-12 p-0">
-                      <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Utilizador" required>
+                      @if(!isset($user))
+                        <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Utilizador" required>
+                      @else
+                        <input class="input-box form-control" name="idUser" value="{{ $user->id }}" hidden>
+
+                        <input class="input-box form-control" list="nomes" name="nome" id="fname" autocomplete="off" placeholder="Nome do Utilizador" value="{{$user->name}}" required>
+                      @endif
                     </div>
                   </div>
 
                   <div class="row m-0 pt-4" style="width: 45vw;">
                     <div class="col-12 p-0">
-                      <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email" required>
+                      @if(!isset($user))
+                        <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email" required>
+                      @else
+                        <input class="input-box form-control" type="text" id="email" name="email" placeholder="Email" value="{{ $user->email }}" required>
+                      @endif
                     </div>
                   </div>
 
                   <div class="row m-0 pt-4" style="width: 45vw;">
                     <div class="col-12 p-0">
-                      <input class="input-box form-control" type="password" id="pass" name="password" placeholder="Password" required>
+                      @if(!isset($user))
+                        <input class="input-box form-control" type="password" id="pass" name="password" placeholder="Password" required>
+                      @else
+                        @if (session('LoggedUser')->id == $user->id)
+                          <input class="input-box form-control" type="password" id="pass" name="password" placeholder="Password" required> 
+                        @else
+                          <input class="input-box form-control" type="password" id="pass" name="password" placeholder="Password" disabled>
+                        @endif                    
+                      @endif
                     </div>
                   </div>
 
                   
                   <div class="row m-0 pt-4" style="width: 45vw;">
                     <div class="col-12 p-0">
-                      <input class="input-box form-control" type="password" id="passConfirm" placeholder="Confirme a sua password" required>
+                      @if(!isset($user))
+                        <input class="input-box form-control" type="password" id="passConfirm" placeholder="Confirme a sua password" required>
+                      @else
+                        @if (session('LoggedUser')->id == $user->id)
+                        <input class="input-box form-control" type="password" id="passConfirm" placeholder="Confirme a sua password" required>
+                        @else
+                          <input class="input-box form-control" type="password" id="passConfirm" placeholder="Confirme a sua password" disabled>
+                        @endif  
+                      @endif
                     </div>
                   </div>
 
@@ -278,12 +333,12 @@
         }
         else
         {
-          alert('As passwords não coincidem.');
+          overlayCard('Aviso','Aviso','As passwords não coincidem.');
         }
       }
       else
       {
-        alert('Por favor, preencha todos os campos corretamente');
+        overlayCard('Aviso','Aviso','Por favor, preencha todos os campos corretamente');
       }
     }
 

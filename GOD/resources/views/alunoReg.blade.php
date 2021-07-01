@@ -16,6 +16,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
+    <!-- Script de overlay de confirmações/avisos -->
+    <script src="{{ asset('js/overlay.js') }}" type="text/javascript"></script>
+    <link href="{{ url('/css/overlay.css') }}" rel="stylesheet">
+
     <link href="{{ url('/css/alunoReg.css') }}" rel="stylesheet">
 
     <link href="{{ url('/css/navbar.css') }}" rel="stylesheet">
@@ -161,6 +165,29 @@
       <script src="./js/sidebars.js"></script>
     </div>
 
+    <div id="overlay" class="justify-content-center align-items-center">
+        <div class="card w-25" id="cardConfirm">
+          <div class="card-header" id="headerCard"></div>
+          <div class="card-body p-1" style="height: auto !important;">
+            <div class="col d-flex flex-column p-1">
+              <div class="row-auto p-1">
+                <span id="mensagem"></span>
+              </div>
+
+              <div class="row w-100 m-0 mt-2 mb-2 d-flex flex-row justify-content-center text-center" >
+                <div class="col ps-1">
+                  <div id="buttonSim" onclick="SubmeterForm()">Confirmar</div>
+                </div>
+
+                <div class="col pe-1">
+                  <div id="buttonCancelar" onclick="closeOverlayCard()">Cancelar</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
     <div class="row-auto full-content" id="content" style="margin-left: 250px;">
       <div class="col">
         <div class="row title d-flex justify-content-center align-items-center">
@@ -173,7 +200,7 @@
               <span class="separador w-auto m-0" style="line-height:30px">Dados do Aluno</span>
             </div>
   
-            <form id="myform">
+            <form method="POST" action="{{ route('register.aluno') }}" id="myform">
               <div class="row-auto identification d-flex mt-3">
                 <div class="col">
                   <div class="row m-0" style="width: 60vw;">
@@ -311,48 +338,56 @@
           $("#moradaEE").val() != "" && $("#concelhoEE").val() != "" && $("#ccEE").val() != "")
           {
             var form = $('#myform').serialize();
-            $.ajax({
-                type:'POST',
-                url: '{{ route("register.aluno") }}',
-                data: { info: r, form: form },
-                success: function(occ)
-                {
-                  window.location.href = "{{ route('dashboardPage') }}";
-                }
-                });
+            
+            var i=document.createElement('input');
+            i.type='hidden';
+            i.name='form';
+            i.value=form;
+            $('#myform').append(i);
+
+            var x=document.createElement('input');
+            x.type='hidden';
+            x.name='info';
+            x.value='true';
+            $('#myform').append(x);
+
+            $('#myform').submit();
           }
           else
           {
             if($("#nomeEE").val() == "" && $("#parentesco").val() == "" && $("#telefEE").val() == "" && $("#emailEE").val() == "" &&
             $("#moradaEE").val() == "" && $("#concelhoEE").val() == "" && $("#ccEE").val() == "")
-            {
-              var r = confirm("Tem a certeza que deseja adicionar um aluno sem encarregado de educação?");
-
-              if(r)
-              {
-                var form = $('#myform').serialize();
-
-                $.ajax({
-                type:'POST',
-                url: '{{ route("register.aluno") }}',
-                data: { info: r, form: form },
-                success: function(occ)
-                {
-                  window.location.href = "{{ route('dashboardPage') }}";
-                }
-                });
-              }
+            {             
+              overlayCard('Confirm','Confirmação','Tem a certeza que deseja adicionar um aluno sem encarregado de educação?');
             }
             else
             {
-              alert("Certifique-se que preenche todos os campos do encarregado de educação.");
+              overlayCard('Aviso','Aviso','Certifique-se que preenche todos os campos do encarregado de educação.');
             }
           }
         }
         else
         {
-          alert("Certifique-se que preenche os campos todos.");
+          overlayCard('Aviso','Aviso','Certifique-se que preenche os campos todos.');
         }
+      }
+
+      function SubmeterForm() {
+        var form = $('#myform').serialize();
+
+        var i=document.createElement('input');
+        i.type='hidden';
+        i.name='form';
+        i.value=form;
+        $('#myform').append(i);
+
+        var x=document.createElement('input');
+        x.type='hidden';
+        x.name='info';
+        x.value='true';
+        $('#myform').append(x);
+
+        $('#myform').submit();
       }
 
 
