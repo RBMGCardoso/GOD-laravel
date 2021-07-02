@@ -57,9 +57,12 @@ Route::middleware([CheckSession::class])->group(function(){
 
             Route::get('ocorrenciasAtualizarAlunos', [OcorrenciaController::Class, 'AtualizarAlunos'])->name('atualizarAlunos'); //Ajax para atualizar os alunos dependendo da pesquisa
         
+            Route::get('pesquisa-user', [MainController::Class, 'pesquisaUser'])->name('pesquisaUser'); // View da pagina de pesquisa do utilizador
+            
             Route::get('atualizarUsers', [MainController::Class, 'AtualizarUsers'])->name('atualizarUsers'); //Ajax para atualizar os utilizadores dependendo da pesquisa
 
             Route::get('eliminarUser/{user}', [MainController::Class, 'EliminarUser'])->name('eliminarUser'); //Delete user
+        
         }
     );
 
@@ -73,8 +76,6 @@ Route::middleware([CheckSession::class])->group(function(){
     Route::get('minha-turma', [MainController::Class, 'dirTurma'])->name('minhaTurma'); //View da direção de turma de um diretor de turma
     
     Route::get('alunos/{idAluno}', [OcorrenciaController::Class, 'perfilAluno'])->name('perfilAluno'); //View do perfil do aluno
-
-    Route::get('pesquisa-user', [MainController::Class, 'pesquisaUser'])->name('pesquisaUser'); // View da pagina de pesquisa do utilizador
 
     Route::get('/logout', [UserAuthController::Class, 'logout'])->name('logout');
 });

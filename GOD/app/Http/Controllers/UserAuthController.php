@@ -15,11 +15,6 @@ class UserAuthController extends Controller
 
     public function check(Request $request)
     {       
-        $request->validate([
-            'email'=>'required|email',
-            'password'=>'required|min:5'
-        ]);
-
         $user = User::where('email', '=', $request->email)->first();
         if($user)
         {
@@ -31,10 +26,10 @@ class UserAuthController extends Controller
             }
             else
             {
-                return back()->with('fail','Palavra-Passe incorreta');
+                return back()->with('jsLoginAlert','Palavra-passe incorreta.');
             }
         }else{
-            return back()->with('fail','Este email não corresponde a uma conta.');
+            return back()->with('jsLoginAlert','Este email não corresponde a uma conta.');
         }
     
     }

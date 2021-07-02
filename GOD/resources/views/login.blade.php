@@ -29,12 +29,9 @@
         <div>
           <form method="post" class="form" action="{{ route('auth.check') }}">
             @csrf
-            <input type="text" name="email" class="form-field animation a3" placeholder="Endereço de Email" value="{{ old('email') }}">
-            <span class="text-danger">@error('email') {{ $message }} @enderror</span>
-            <input type="password" name="password" class="form-field animation a4" placeholder="Palavra-passe">
-            <span class="text-danger">@error('password') {{ $message }} @enderror</span>
-            <p class="animation a5"><a href="#">Esqueceu-se da palavra-passe?</a></p>
-            <button value="submit" class="animation a6">ENTRAR</button>
+            <input type="email" name="email" class="form-field animation a3" placeholder="Endereço de Email" required value="{{ old('email') }}">
+            <input type="password" name="password" class="form-field animation a4" placeholder="Palavra-passe" required>
+            <button value="submit" class="animation a6" style="margin-top: 10%">ENTRAR</button>
             <span class="error" align="center"></span>
           </form>
         </div>

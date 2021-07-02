@@ -3,8 +3,14 @@ body{
     overflow-x: hidden;
 }
 
-a{
+#table-body a{
     text-decoration: none;
+    color: #222 !important;
+}
+
+#table-body a:hover
+{
+    color: rgb(90, 147, 180) !important;
 }
 
 .full-content

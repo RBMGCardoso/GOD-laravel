@@ -69,34 +69,39 @@
           <div class="largeScreenButtons">
             <ul class="nav-pills navbar-nav d-flex flex-column w-100">
               <li class="nav-item w-100">
-                <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-home fa-fw"></i> <span>Início</span></a>
+                <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light" id="btn" title="Início"><i class="fa fa-home fa-fw"></i> <span>Início</span></a>
               </li>
 
               <li class="nav-item w-100">
-                <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-plus-square fa-fw"></i> <span>Criar Ocorrência</span></a>
+                <a href="{{ route('ocorrenciaPage') }}" class="nav-link rounded-0 text-light" id="btn" title="Criar Ocorrência"><i class="fa fa-plus-square fa-fw"></i> <span>Criar Ocorrência</span></a>
               </li>
 
               @if(session('LoggedUser')->cargo == "Diretor de Turma")
                 <li class="nav-item w-100">
-                  <a href="{{ route('minhaTurma') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-users fa-fw"></i> <span>Direção de turma</span></a>
+                  <a href="{{ route('minhaTurma') }}" class="nav-link rounded-0 text-light" id="btn" title="Direação de turma"><i class="fas fa-users fa-fw"></i> <span>Direção de turma</span></a>
                 </li>
               @endif
 
               
               <li class="nav-item w-100">
-                <a href="{{ route('minhasOcc') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fas fa-book fa-fw"></i> <span>Minhas Ocorrências</span></a>
+                <a href="{{ route('minhasOcc') }}" class="nav-link rounded-0 text-light" id="btn" title="Minhas Ocorrências"><i class="fas fa-book fa-fw"></i> <span>Minhas Ocorrências</span></a>
               </li>    
               
               @if(session('LoggedUser')->cargo == "Diretor" || session('LoggedUser')->cargo == "Secretaria")
                 <li class="nav-item w-100">
-                  <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light" id="btn"><i class="fa fa-search fa-fw"></i> <span>Pesquisar</span></a>
+                  <a href="{{ route('mostrarOcorrencias') }}" class="nav-link rounded-0 text-light" id="btn" title="Pesquisar"><i class="fa fa-search fa-fw"></i> <span>Pesquisar</span></a>
                 </li>
+
+                <li class="nav-item w-100">
+                  <a href="{{ route('pesquisaUser') }}" class="nav-link rounded-0 text-light" id="btn" title="Pesquisar Utilizador"><i class="fas fa-users"></i> <span>Pesquisar Utilizador</span></a>
+                </li>
+
 
                 <div class="dropdown nav-item w-100 registar-div" onclick="mudarButton()">
                   <a class="dropdown-toggle nav-link rounded-0 text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="row me-0">
                       <div class="col">
-                        <i class="fas fa-user-plus fa-fw"></i> 
+                        <i class="fas fa-user-plus fa-fw" title="Registar"></i> 
                         <span> Registar </span>
                       </div>
 
@@ -108,19 +113,19 @@
                   
 
                   <ul class="dropdown-menu p-0 m-0 border-0" aria-labelledby="dropdownMenuButton" style="background-color: transparent;">
-                    <li>
+                    <li title="Registar Utilizador">
                       <a href="{{ route('registerPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Utilizador</span></a>
                     </li>
 
-                    <li>
+                    <li title="Registar Aluno">
                       <a href="{{ route('registerAlunoPage') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Aluno</span></a>
                     </li>
 
-                    <li>
+                    <li title="Registar Turma">
                       <a href="{{ route('registerTurmas') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Turma</span></a>
                     </li>
 
-                    <li>
+                    <li title="Registar Escola">
                       <a href="{{ route('registerEscolas') }}" class="dropdown-item nav-link rounded-0 text-light" id="btn"><i class="fas fa-plus-square fa-fw"></i> <span>Registar Escola</span></a>
                     </li>
                   </ul>

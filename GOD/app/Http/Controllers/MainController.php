@@ -55,6 +55,7 @@ class MainController extends Controller
 
             $turmas = Turma::all()->where('escola_id', $req->selectEscola)->flatten();
             $dirTurmas = User::where('dirTurma', '!=', 'null')->pluck('dirTurma');
+            $idDirTurmas = User::where('dirTurma', '!=', 'null')->pluck('id');
 
             for ($i=0; $i < count($turmas); $i++) {          
                 try {           
@@ -72,10 +73,15 @@ class MainController extends Controller
             $idTurma = null;
         } 
 
+        if(!isset($idTurma))
+        {
+            return back()->with('JSAlert', 'Ocorreu um erro ao tentar adicionar/editar um utilizador, certifique-se que preencheu todos os campos corretamente.');
+        }
+
         if(isset($dirTurmas))
         {
             for ($i=0; $i < count($dirTurmas); $i++) { 
-                if($dirTurmas[$i] == $idTurma)
+                if($dirTurmas[$i] == $idTurma && $idDirTurmas[$i] != $utilizador->id)
                 {
                     return back()->with('JSAlert', 'Já existe um professor que é diretor desta turma. Se acha que isto é um erro contacte a administração do site.');
                 }
@@ -95,7 +101,15 @@ class MainController extends Controller
 
             $utilizador->dirTurma = $idTurma;
             $utilizador->save();
-            return redirect('dashboard')->with('jsPermissionAlert', 'Informações de utilizador atualizadas com sucesso.');
+
+            if($utilizador->id == session('LoggedUser')->id)
+            {
+                return redirect('logout')->with('jsLoginAlert', 'As suas informações foram atualizadas com sucesso. Por favor, volte a iniciar sessão.');
+            }
+            else
+            {
+                return redirect('dashboard')->with('jsPermissionAlert', 'Informações de utilizador atualizadas com sucesso.');
+            }
         }
         else
         {
