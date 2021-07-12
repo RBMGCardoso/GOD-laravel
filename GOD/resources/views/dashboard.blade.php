@@ -76,7 +76,7 @@
           <div class="largeScreenButtons">
             <ul class="nav-pills navbar-nav d-flex flex-column w-100">
               <li class="nav-item w-100">
-                <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light" id="btn" title="Início"><i class="fa fa-home fa-fw"></i> <span>Início</span></a>
+                <a href="{{ route('dashboardPage') }}" class="nav-link rounded-0 text-light" id="btn" title="Dashboard"><i class="fa fa-home fa-fw"></i> <span>Início</span></a>
               </li>
 
               <li class="nav-item w-100">
